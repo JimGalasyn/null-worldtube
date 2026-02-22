@@ -1887,6 +1887,82 @@ def compute_lithium_isoelectronic(Z_max=10):
     return results
 
 
+def compute_photoionization_hydrogen(Z=1):
+    """
+    Photoionization cross-section for hydrogen-like 1s state.
+
+    Computes Kramers (classical) and Stobbe (exact QM) cross-sections,
+    the Gaunt factor bridging them, and ejected electron properties.
+    NWT interpretation: photon-torus geometric overlap explains the
+    steep cross-section falloff above threshold.
+    """
+    # Get orbital parameters from existing infrastructure
+    orb = compute_hydrogen_orbital(Z, n=1)
+    E_ion = abs(orb['E_n_J'])         # ionization energy (J)
+    omega_0 = E_ion / hbar            # threshold angular frequency
+    f_orbit = orb['f_orbit']          # orbital frequency
+    r_orbit = orb['r_n']             # orbital radius
+    v_orbit = Z * alpha * c           # orbital velocity
+
+    # Photon energy grid: 1.0 to 50x threshold
+    x = np.linspace(1.001, 50.0, 500)  # x = omega/omega_0 = E_photon/E_ion
+    omega = x * omega_0
+    E_photon = x * E_ion
+
+    # --- Kramers (classical) cross-section ---
+    # Standard Kramers result with 1/sqrt(3) factor (Karzas & Latter 1961)
+    sigma_0_K = (64 * np.pi / (3 * np.sqrt(3))) * alpha * a_0**2
+    sigma_K = sigma_0_K / (Z**2 * x**3)
+
+    # --- Stobbe (exact QM) cross-section ---
+    eta = 1.0 / np.sqrt(x - 1)  # Sommerfeld parameter
+    # Coulomb correction factor
+    gamow = np.exp(-4 * eta * np.arctan(1.0 / eta)) / (1 - np.exp(-2 * np.pi * eta))
+    # Stobbe prefactor: 2^9 pi^2 / 3 (exact QM result, Stobbe 1930)
+    sigma_0_S = (2**9 * np.pi**2 / 3) * alpha * a_0**2
+    sigma_S = sigma_0_S / (Z**2 * x**4) * gamow
+
+    # --- Gaunt factor ---
+    gaunt = sigma_S / sigma_K
+
+    # --- Threshold values ---
+    # Stobbe at threshold (eta -> inf): gamow -> exp(-4)
+    sigma_threshold = sigma_0_S * np.exp(-4) / Z**2
+    gaunt_threshold = sigma_threshold / (sigma_0_K / Z**2)
+
+    # --- Angular distribution ---
+    theta = np.linspace(0, 2 * np.pi, 361)
+    # beta=2 for 1s -> epsilon-p transition (linearly polarized light)
+    # dσ/dΩ ∝ cos^2(theta) where theta is angle from polarization axis
+    dσ_polar = np.cos(theta)**2  # normalized angular pattern
+
+    # --- Ejected electron properties ---
+    E_kinetic = E_photon - E_ion  # kinetic energy of ejected electron
+    v_ejected = np.sqrt(2 * E_kinetic / m_e)  # ejected velocity
+    lambda_dB = h_planck / (m_e * v_ejected)  # de Broglie wavelength
+    overlap = np.minimum(lambda_dB / (2 * np.pi * r_orbit), 1.0)  # geometric overlap
+
+    # --- NWT orbital coupling ---
+    omega_ratio_threshold = omega_0 / (2 * np.pi * f_orbit)  # should be 0.5
+    lambda_photon_threshold = 2 * np.pi * c / omega_0
+    dipole_ratio = lambda_photon_threshold / r_orbit  # ~1724
+
+    return {
+        'Z': Z, 'x': x, 'E_photon_eV': E_photon / eV, 'E_ion_eV': E_ion / eV,
+        'sigma_K': sigma_K, 'sigma_S': sigma_S, 'gaunt': gaunt,
+        'sigma_K_cm2': sigma_K * 1e4, 'sigma_S_cm2': sigma_S * 1e4,
+        'sigma_threshold_cm2': sigma_threshold * 1e4,
+        'gaunt_threshold': gaunt_threshold,
+        'theta': theta, 'dσ_polar': dσ_polar,
+        'E_kinetic_eV': E_kinetic / eV, 'v_ejected': v_ejected,
+        'lambda_dB': lambda_dB, 'overlap': overlap,
+        'omega_ratio_threshold': omega_ratio_threshold,
+        'dipole_ratio': dipole_ratio,
+        'f_orbit': f_orbit, 'r_orbit': r_orbit,
+        'omega_0': omega_0,
+    }
+
+
 def print_hydrogen_analysis():
     """
     Full hydrogen atom analysis in the null worldtube model.
@@ -3195,6 +3271,203 @@ def print_hydrogen_analysis():
         print(f"\n  [Lithium visualization saved to {lithium_path}]")
     except Exception as exc:
         print(f"\n  (matplotlib not available for lithium plot: {exc})")
+
+    # Section 14: Hydrogen Photoionization — Photon-Torus Interaction
+    # ==========================================
+    print(f"\n{'='*60}")
+    print(f"  14. HYDROGEN PHOTOIONIZATION: Photon-Torus Interaction")
+    print(f"{'='*60}")
+
+    print(f"""
+  First continuum process: a photon ejects the 1s electron.
+  This is the simplest photoionization — one electron, one photon,
+  exact solution known since Stobbe (1930).
+
+  THRESHOLD CONDITION:
+  The photon must deliver E_ion = 13.6 eV to free the electron.
+  At threshold:
+    - Photon wavelength: 91.2 nm (extreme UV)
+    - Dipole approximation: lambda/r_orbit ~ 1724 (excellent)
+
+  NWT KEY INSIGHT: At threshold, omega_photon/omega_orbit = 1/2.
+  The photon angular frequency is exactly half the orbital angular
+  frequency. The electron completes 2 orbits per photon cycle —
+  a 2:1 resonance that the torus model gives geometric meaning.
+
+  TWO CROSS-SECTIONS:
+    Kramers (classical):  sigma_K ~ omega^-3
+      From accelerating charges in circular orbits.
+      NWT: torus presents a cross-sectional area scaling with orbit.
+
+    Stobbe (exact QM):    sigma_S ~ omega^-7/2 (near threshold)
+      Includes Coulomb wave correction via Sommerfeld parameter.
+      The Gaunt factor g = sigma_S/sigma_K captures the QM correction.
+
+  ANGULAR DISTRIBUTION: cos^2(theta) pattern (beta = 2)
+    s-state -> p-wave ejection. The ejected electron direction is
+    set by the orbital dipole projection onto the photon polarization.""")
+
+    photo = compute_photoionization_hydrogen()
+
+    print(f"\n  --- Key Values at Threshold ---")
+    print(f"  {'Quantity':<35} {'Value':>20}")
+    print(f"  {'-'*35} {'-'*20}")
+    print(f"  {'Threshold cross-section (cm^2)':<35} {photo['sigma_threshold_cm2']:>20.3e}")
+    print(f"  {'NIST reference (cm^2)':<35} {'6.30e-18':>20s}")
+    print(f"  {'Gaunt factor at threshold':<35} {photo['gaunt_threshold']:>20.4f}")
+    print(f"  {'Expected Gaunt (Stobbe)':<35} {'0.7973':>20s}")
+    print(f"  {'omega_photon / omega_orbit':<35} {photo['omega_ratio_threshold']:>20.4f}")
+    print(f"  {'Expected ratio':<35} {'0.5000':>20s}")
+    print(f"  {'Dipole ratio lambda/r_orbit':<35} {photo['dipole_ratio']:>20.1f}")
+    print(f"  {'Ionization energy (eV)':<35} {photo['E_ion_eV']:>20.4f}")
+
+    # Cross-section comparison at selected energies
+    print(f"\n  --- Cross-Section vs Energy (E/E_ion) ---")
+    print(f"  {'E/E_ion':>8}  {'sigma_K (cm^2)':>16}  {'sigma_S (cm^2)':>16}  {'Gaunt':>8}  {'lambda_dB (nm)':>14}")
+    print(f"  {'-'*8}  {'-'*16}  {'-'*16}  {'-'*8}  {'-'*14}")
+
+    sample_x = [1.01, 1.5, 2.0, 5.0, 10.0, 20.0]
+    for sx in sample_x:
+        idx = np.argmin(np.abs(photo['x'] - sx))
+        sK = photo['sigma_K_cm2'][idx]
+        sS = photo['sigma_S_cm2'][idx]
+        g = photo['gaunt'][idx]
+        lam = photo['lambda_dB'][idx] * 1e9  # to nm
+        print(f"  {photo['x'][idx]:>8.2f}  {sK:>16.3e}  {sS:>16.3e}  {g:>8.4f}  {lam:>14.2f}")
+
+    print(f"""
+  ANGULAR DISTRIBUTION:
+    Asymmetry parameter beta = 2 (maximum for dipole transition)
+    Pattern: dσ/dΩ proportional to cos^2(theta)
+    1s -> epsilon-p (s-wave to p-wave ejection)""")
+
+    print(f"""
+  ┌──────────────────────────────────────────────────────────┐
+  │  NWT GEOMETRIC INTERPRETATION                            │
+  │                                                          │
+  │  Above threshold, the ejected electron's de Broglie      │
+  │  wavelength shrinks as photon energy increases.           │
+  │  The "overlap" between the photon's E-field pattern       │
+  │  and the bound torus orbit decreases, explaining the      │
+  │  steep omega^-7/2 falloff (Stobbe) vs omega^-3 (Kramers).│
+  │                                                          │
+  │  At threshold: lambda_dB -> infinity (overlap = 1)        │
+  │  At 10x threshold: lambda_dB ~ 0.1 nm (overlap << 1)     │
+  │  Gaunt peaks near 1.0 at ~5x threshold, then decreases   │
+  └──────────────────────────────────────────────────────────┘""")
+
+    print(f"""
+  ┌──────────────────────────────────────────────────────────┐
+  │  SECTION 14 SUMMARY: Hydrogen Photoionization            │
+  │                                                          │
+  │  • Threshold: sigma = {photo['sigma_threshold_cm2']:.2e} cm^2 (NIST: 6.30e-18)│
+  │  • Gaunt factor: {photo['gaunt_threshold']:.4f} at threshold (Stobbe: 0.7973) │
+  │  • omega_photon/omega_orbit = {photo['omega_ratio_threshold']:.4f} (exact 1/2)         │
+  │  • Dipole ratio: {photo['dipole_ratio']:.0f} (dipole approx excellent)     │
+  │  • Kramers: omega^-3 | Stobbe: ~omega^-7/2              │
+  │  • Angular: cos^2(theta) with beta = 2                   │
+  │                                                          │
+  │  First NWT continuum calculation. Sets framework for      │
+  │  He/Li photoionization where torus geometry is richer.    │
+  └──────────────────────────────────────────────────────────┘""")
+
+    # --- Section 14 Visualization ---
+    try:
+        import matplotlib
+        matplotlib.use('agg')
+        import matplotlib.pyplot as plt
+        from pathlib import Path
+
+        output_dir = Path(__file__).resolve().parent / "output"
+        output_dir.mkdir(exist_ok=True)
+
+        fig = plt.figure(figsize=(14, 12))
+        fig.patch.set_facecolor('white')
+        fig.suptitle('Hydrogen Photoionization: Photon-Torus Interaction',
+                     fontsize=14, fontweight='bold', y=0.98)
+
+        # === Panel 1 (221): Cross-sections log-log ===
+        ax1 = fig.add_subplot(221)
+        ax1.loglog(photo['x'], photo['sigma_K_cm2'], '--', color='#2196F3',
+                   linewidth=2.0, label=r'Kramers $\sigma_K \propto \omega^{-3}$')
+        ax1.loglog(photo['x'], photo['sigma_S_cm2'], '-', color='#F44336',
+                   linewidth=2.0, label=r'Stobbe $\sigma_S$ (exact)')
+
+        # Reference slopes
+        x_ref = photo['x']
+        sigma_ref_3 = photo['sigma_K_cm2'][0] * (x_ref / x_ref[0])**(-3)
+        sigma_ref_35 = photo['sigma_S_cm2'][0] * (x_ref / x_ref[0])**(-3.5)
+        ax1.loglog(x_ref, sigma_ref_3, ':', color='#2196F3', alpha=0.4,
+                   linewidth=1.0, label=r'$\omega^{-3}$ slope')
+        ax1.loglog(x_ref, sigma_ref_35, ':', color='#F44336', alpha=0.4,
+                   linewidth=1.0, label=r'$\omega^{-3.5}$ slope')
+
+        # Threshold marker
+        ax1.axvline(x=1.0, color='#4CAF50', linewidth=1.0, linestyle='--',
+                    alpha=0.7, label='Threshold')
+
+        # Experimental point at threshold
+        ax1.plot(1.0, 6.30e-18, '*', color='#FF9800', markersize=12, zorder=5,
+                 label=r'NIST $6.30\times10^{-18}$ cm$^2$')
+
+        ax1.set_xlabel(r'$E_\gamma / E_{ion}$', fontsize=10)
+        ax1.set_ylabel(r'Cross-section (cm$^2$)', fontsize=10)
+        ax1.set_title('Photoionization Cross-Section', fontsize=11, fontweight='bold')
+        ax1.legend(fontsize=7, loc='upper right')
+        ax1.grid(True, alpha=0.3, which='both')
+        ax1.tick_params(labelsize=8)
+
+        # === Panel 2 (222, polar): Angular distribution ===
+        ax2 = fig.add_subplot(222, polar=True)
+        ax2.plot(photo['theta'], photo['dσ_polar'], '-', color='#F44336',
+                 linewidth=2.0, label=r'$\cos^2\theta$ ($\beta=2$)')
+        ax2.set_title(r'Angular Distribution ($\beta=2$, p-wave)',
+                      fontsize=11, fontweight='bold', pad=15)
+        ax2.legend(fontsize=8, loc='lower right')
+        ax2.tick_params(labelsize=7)
+
+        # === Panel 3 (223): Gaunt factor ===
+        ax3 = fig.add_subplot(223)
+        ax3.plot(photo['x'], photo['gaunt'], '-', color='#9C27B0',
+                 linewidth=2.0, label='Gaunt factor g(E)')
+        ax3.axhline(y=photo['gaunt_threshold'], color='#F44336', linewidth=1.0,
+                    linestyle='--', alpha=0.7,
+                    label=f'Threshold g = {photo["gaunt_threshold"]:.4f}')
+        ax3.axhline(y=1.0, color='#4CAF50', linewidth=1.0, linestyle=':',
+                    alpha=0.7, label='g = 1.0 reference')
+        ax3.set_xlabel(r'$E_\gamma / E_{ion}$', fontsize=10)
+        ax3.set_ylabel('Gaunt factor', fontsize=10)
+        ax3.set_title('Gaunt Factor: Stobbe / Kramers', fontsize=11, fontweight='bold')
+        ax3.legend(fontsize=7, loc='lower right')
+        ax3.set_xlim(1, 50)
+        ax3.set_ylim(0.4, 1.1)
+        ax3.grid(True, alpha=0.3)
+        ax3.tick_params(labelsize=8)
+
+        # === Panel 4 (224): De Broglie overlap ===
+        ax4 = fig.add_subplot(224)
+        ax4.plot(photo['x'], photo['overlap'], '-', color='#FF9800',
+                 linewidth=2.0, label=r'$\lambda_{dB} / 2\pi r_{orbit}$')
+        ax4.axhline(y=1.0, color='#4CAF50', linewidth=1.0, linestyle=':',
+                    alpha=0.5, label='Full overlap')
+        ax4.set_xlabel(r'$E_\gamma / E_{ion}$', fontsize=10)
+        ax4.set_ylabel('Geometric overlap', fontsize=10)
+        ax4.set_title('De Broglie Overlap (NWT Interpretation)',
+                      fontsize=11, fontweight='bold')
+        ax4.legend(fontsize=7, loc='upper right')
+        ax4.set_xlim(1, 50)
+        ax4.set_ylim(0, 1.1)
+        ax4.grid(True, alpha=0.3)
+        ax4.tick_params(labelsize=8)
+
+        plt.tight_layout(rect=[0, 0, 1, 0.96])
+        photo_path = output_dir / "hydrogen_photoionization.png"
+        plt.savefig(photo_path, dpi=150, bbox_inches='tight',
+                    facecolor='white', edgecolor='none')
+        plt.close(fig)
+        print(f"\n  [Photoionization visualization saved to {photo_path}]")
+    except Exception as exc:
+        print(f"\n  (matplotlib not available for photoionization plot: {exc})")
 
 
 # =========================================================================
