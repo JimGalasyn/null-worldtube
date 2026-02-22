@@ -39,6 +39,8 @@ def main():
                         help='Dissipative decay dynamics: saddles, bifurcations, strange attractors')
     parser.add_argument('--neutrino', action='store_true',
                         help='Neutrino masses from twist-wave dispersion on the torus')
+    parser.add_argument('--anim-ionization', action='store_true', dest='anim_ionization',
+                        help='Animation: hydrogen photoionization (outputs GIF)')
     parser.add_argument('--R', type=float, default=1.0, help='Major radius in units of λ_C')
     parser.add_argument('--r', type=float, default=0.1, help='Minor radius in units of λ_C')
     parser.add_argument('--p', type=int, default=1, help='Toroidal winding number')
@@ -123,6 +125,11 @@ def main():
     if args.neutrino:
         from .neutrinos import print_neutrino_analysis
         print_neutrino_analysis()
+        return
+
+    if args.anim_ionization:
+        from .anim_ionization import run_animation
+        run_animation()
         return
 
     # Default: basic analysis with given torus parameters
