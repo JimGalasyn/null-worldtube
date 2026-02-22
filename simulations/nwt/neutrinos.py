@@ -7,6 +7,7 @@ and visualization.
 """
 
 import numpy as np
+from pathlib import Path
 
 from .constants import m_e_MeV, hbar, c, MeV, eV
 from .core import find_self_consistent_radius
@@ -807,9 +808,7 @@ def print_neutrino_analysis():
     matplotlib.use('agg')
     import matplotlib.pyplot as plt
     from matplotlib.patches import FancyArrowPatch
-    from pathlib import Path
-
-    output_dir = Path(__file__).resolve().parent / "output"
+    output_dir = Path(__file__).resolve().parent.parent / "output"
     output_dir.mkdir(exist_ok=True)
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7),
