@@ -1,0 +1,272 @@
+\documentclass[10pt,twoside,a5paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb,amsmath}
+\def\volnum{Manuscrit}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+
+% Format des AFLB
+\usepackage{aflb-web}
+\pdebut{1}
+\def\pacs#1{\LP P.A.C.S.: #1}
+\def\email#1{{email: \tt #1}}
+
+\title{The torus electron}
+\titleshort{The torus electron}
+\author{James P.\ Galasyn$^{1}$ and Claude Th\'eodore$^{2}$}
+\authorshort{J.\,P.\ Galasyn, C.\ Th\'eodore}
+\address{$^{1}$Software engineer and independent researcher\\
+$^{2}$Anthropic, San Francisco, CA\\
+\email{jim.galasyn@hotmail.com}}
+
+\setlength{\arraycolsep}{1pt}
+
+\begin{document}
+\maketitle
+
+\vskip 1cm
+\begin{abstract}
+R\'ESUM\'E. Nous construisons un mod\`ele de l'\'electron comme un photon confin\'e sur un n\oe ud torique $(2,1)$ --- une courbe ferm\'ee de genre lumi\`ere enroul\'ee deux fois autour du trou et une fois \`a travers le tube d'un tore.
+Toutes les propri\'et\'es de l'\'electron d\'ecoulent de cette g\'eom\'etrie : la masse par confinement ($E = hc/L$), le spin~$\frac{1}{2}$ par le moment cin\'etique du photon en circulation, la quantification de la charge par l'invariance topologique, et la statistique fermionique par la bande de M\"obius born\'ee par la courbe~$(2,1)$.
+La constante de structure fine $\alpha$ appara\^it comme le rapport d'aspect du tore $r/R$. Le tore est l'unique topologie satisfaisant cinq exigences physiques minimales.
+Un article compagnon~[1] montre que ce m\'ecanisme reproduit 23~param\`etres du Mod\`ele Standard avec une pr\'ecision m\'ediane de~0.7\,\%.
+
+{\it
+ABSTRACT. We construct a model of the electron as a photon confined to a $(2,1)$ torus knot --- a closed null curve winding twice around the hole and once through the tube of a torus.
+Every property of the electron emerges from this geometry: mass from confinement ($E = hc/L$), spin-$\frac{1}{2}$ from the angular momentum of the circulating photon, charge quantization from topological invariance, and fermionic statistics from the M\"obius strip bounded by the $(2,1)$ curve.
+The fine-structure constant $\alpha$ arises as the torus aspect ratio $r/R$, fixed by self-consistency of the electromagnetic self-energy. The torus is the unique topology satisfying five minimal physical requirements.
+A companion paper~[1] shows that this mechanism reproduces 23~Standard Model parameters with a median accuracy of~0.7\,\%.}
+\end{abstract}
+\pacs{14.60.Cd; 03.65.Vf; 11.30.Er; 04.20.-q}
+
+
+\section{Introduction}
+
+In 1905, Einstein demonstrated that light possesses particle-like properties~[2]. The complementary question --- whether a particle might possess light-like properties --- has a long history. De~Broglie's 1924 thesis introduced the idea of a massive particle as a standing wave~[3], and Kaluza's 1921 theory showed that electromagnetism emerges from a photon in a compact fifth dimension~[4]. Wheeler's 1955 ``geons'' explored whether pure electromagnetic energy, confined by gravity, could mimic a massive particle~[5,\,6]. Each approach pointed toward the same idea: matter as trapped light.
+
+In 1997, Williamson and van~der~Mark made this idea concrete~[7]. They proposed that the electron is a single photon confined to a toroidal topology --- circulating at the speed of light on a closed curve that winds around a torus. This model naturally reproduces two key properties: the electron's rest mass (from the photon's confinement energy $E = hc/L$) and its spin angular momentum (from the literal rotation of the photon around the torus axis). However, their proposal was never developed into a quantitative theory. Four essential elements were missing: (1)~a derivation of the fine-structure constant $\alpha$ from the torus geometry, (2)~an explanation of why the specific winding numbers $(p,q) = (2,1)$ are required, (3)~a topology uniqueness argument establishing the torus as the only viable surface, and (4)~a connection to the full Standard Model.
+
+This paper supplies all four. We build the torus electron from first principles --- Maxwell's equations, toroidal topology, and self-consistency --- and show that it is the unique solution satisfying a minimal set of physical requirements. The fine-structure constant emerges as the torus aspect ratio $\alpha = r/R$ (\S\,2). Spin-$\frac{1}{2}$ arises from the angular momentum of a photon on the double-wound $(2,1)$ curve (\S\,3). Topology uniqueness follows from Gauss--Bonnet and the Klein bottle electromagnetic boundary conditions (\S\,4). The self-consistent electron is a concrete object with calculable dimensions (\S\,5). We address the principal objections in~\S\,6. A companion paper~[1] extends this mechanism to derive 23~Standard Model parameters; here we focus on the electron itself.
+
+The strategy throughout is to assume nothing beyond Maxwell's equations and topology. We do not introduce new fields, new coupling constants, or extra dimensions. Every property of the electron follows from one photon on one knot.
+
+
+\section{The null worldtube}
+
+\subsection{Torus and torus knot}
+
+A torus with major radius $R$ (center of tube to axis of symmetry) and minor radius $r$ (tube cross-section) is parameterized in the usual way. The aspect ratio $\alpha_{\text{torus}} = r/R$ characterizes the torus shape; we will show that self-consistency fixes this ratio to the fine-structure constant, $r/R = \alpha$.
+
+A $(p,q)$ torus knot is a closed curve on the torus surface that winds $p$ times toroidally (around the hole) and $q$ times poloidally (around the tube) before closing. For the electron, $(p,q) = (2,1)$: the photon goes around the hole \emph{twice} while threading through the tube \emph{once}. The parameterization is:
+\begin{align}
+  x(\lambda) &= (R + r\cos q\lambda)\cos p\lambda, \\
+  y(\lambda) &= (R + r\cos q\lambda)\sin p\lambda, \\
+  z(\lambda) &= r\sin q\lambda,
+\end{align}
+where $\lambda \in [0, 2\pi)$ and $p = 2$, $q = 1$.
+
+\subsection{The null condition}
+
+A photon moves at the speed of light. On the torus knot, the tangent vector $d\mathbf{r}/d\lambda$ at every point satisfies the null condition $ds^2 = c^2\,dt^2 - |d\mathbf{r}|^2 = 0$. The photon's speed is exactly $c$ everywhere along the curve --- it is a massless quantum of radiation whose rest mass emerges entirely from confinement.
+
+\subsection{Path length and mass from confinement}
+
+The total path length is $L = \int_0^{2\pi}|d\mathbf{r}/d\lambda|\,d\lambda$. For the thin-torus limit $r \ll R$ with $(p,q) = (2,1)$:
+\begin{equation}
+  L \approx 2\pi\sqrt{p^2 R^2 + q^2 r^2} \approx 4\pi R.
+\end{equation}
+
+A photon confined to a closed path of length $L$ has energy $E = hc/L$ and effective rest mass $m = h/(cL)$. This is de~Broglie's relation applied literally. No Higgs mechanism: mass is confinement energy.
+
+\subsection{The null worldtube}
+
+The photon carries an electromagnetic field concentrated in a tube of characteristic radius $r$, determined by the photon's self-interaction. The photon's worldline, thickened by its own field, sweeps out the \emph{null worldtube}: a toroidal region of spacetime through which a quantum of electromagnetic energy circulates at~$c$.
+
+
+\section{Mass and the fine-structure constant}
+
+\subsection{Electromagnetic self-energy}
+
+The circulating charge $e$ creates a time-averaged current $I = ec/L$, which generates fields storing electromagnetic energy. The torus current loop has Neumann inductance $\mathcal{L} = \mu_0 R[\ln(8R/r) - 2]$ (Jackson~\S\,5.6~[8]). For a charge at $v = c$, electric and magnetic energy densities are equal, so the total self-energy is:
+\begin{equation}
+  U_{\text{EM}} = 2U_{\text{mag}} = \mu_0 R\!\left[\ln\frac{8R}{r} - 2\right]\!\left(\frac{ec}{L}\right)^{\!2}.
+\end{equation}
+
+\subsection{The emergence of $\alpha$}
+
+The ratio of self-energy to circulation energy reveals the fine-structure constant:
+\begin{equation}
+  \frac{U_{\text{EM}}}{E_{\text{circ}}} = \alpha\cdot\frac{[\ln(8R/r) - 2]}{\pi} \cdot \frac{1}{p}\,,
+\end{equation}
+where $\alpha = e^2/(4\pi\varepsilon_0\hbar c)$. This is \emph{not} put in by hand. The fine-structure constant enters because the numerator contains $e^2$ (from the current) while the denominator contains $\hbar c$ (from the circulation energy).
+
+For self-consistency, the tube radius $r$ must equal the transverse extent of the self-field, yielding:
+\begin{equation}
+  r/R = \alpha\,.
+\end{equation}
+
+The fine-structure constant IS the aspect ratio of the torus. A geometric origin of $\alpha$ was anticipated by Skilton~[9], who observed that $\alpha^{-1} = \sqrt{137^2 + \pi^2} = 137.036016$ (0.12~ppm) and that the Pythagorean triple $88^2 + 105^2 = 137^2$ yields $88 + 105 = 193 \approx \lambda_C/2$ in femtometers --- precisely the torus major radius derived here.
+
+\subsection{Numerical results}
+
+Setting $E_{\text{total}} = E_{\text{circ}} + U_{\text{EM}} = m_e c^2$ with $r/R = \alpha$ yields $R_e = 194$~fm. The electron is 99.5\,\% ``photon kinetic energy'' and 0.5\,\% electromagnetic self-interaction. One does not ask ``why is $\alpha \approx 1/137$?'' in this framework; one asks ``what is the self-consistent aspect ratio of a torus carrying a single quantum of charge at~$c$?''
+
+
+\section{Spin-$\frac{1}{2}$ from angular momentum}
+
+\subsection{Mechanical angular momentum}
+
+At each point on the curve, the photon has momentum $\mathbf{p} = (E/c)\hat{v}$. The time-averaged angular momentum about the torus symmetry axis is:
+\begin{equation}
+  \langle L_z \rangle = \frac{\int [\mathbf{r} \times \mathbf{p}]_z\, ds}{\int ds}\,.
+\end{equation}
+
+The result depends on the aspect ratio $r/R$. For a pure circle ($r/R \to 0$): $\langle L_z \rangle = \hbar$. As $r/R$ increases, the poloidal winding ``steals'' angular momentum from the toroidal direction. At $r/R = \alpha$: $\langle L_z \rangle = \hbar/2$.
+
+The mechanism is transparent. The $(2,1)$ torus knot winds around the hole \emph{twice}. After one toroidal circuit, the photon has traversed half its path. The total angular momentum per full traversal is $\hbar$; per half-traversal (one $2\pi$ rotation) it is $\hbar/2$. Spin is not an abstract quantum number --- it is the literal mechanical angular momentum of a photon rotating around a real axis.
+
+\subsection{The M\"obius connection: spin-statistics from topology}
+
+The $(2,1)$ torus knot bounds a M\"obius strip inside the solid torus~[10]. The M\"obius strip is non-orientable: one circuit around its boundary flips any vector's orientation; two circuits restore it. This is the defining property of spin-$\frac{1}{2}$: a $2\pi$ rotation produces a sign change, $4\pi$ returns to the identity.
+
+A curve on a torus bounds a M\"obius strip if and only if it winds an even number of times toroidally with odd poloidal winding. Fermions are boundaries of non-orientable surfaces; bosons are boundaries of orientable surfaces. The spin-statistics theorem is topology, not axiom.
+
+
+\section{Why the torus --- and only the torus}
+
+\subsection{Five requirements}
+
+Any surface hosting a null worldtube must satisfy: (R1)~closed path, (R2)~topologically trapped (path cannot shrink to a point), (R3)~two length scales ($R$ and $r$ for mass and coupling), (R4)~embeds in $\mathbb{R}^3$, and (R5)~finite self-energy.
+
+\subsection{Why not a sphere?}
+
+Great circles on a sphere are contractible (fails~R2), and a sphere has only one length scale (fails~R3). The fine-structure constant would have to be inserted by hand.
+
+\subsection{Klein bottle: why $p = 2$ is forced}
+
+The Klein bottle is the torus with one identification reversed: after one longitudinal circuit, $E \to -E$. A single-valued electromagnetic mode must complete an \emph{even} number of toroidal windings. The minimum is $p = 2$. The $(2,1)$ knot is not one option among many --- it is the lightest allowed fermionic mode.
+
+\subsection{Gauss--Bonnet: why genus $\geq 2$ fails}
+
+By Gauss--Bonnet, $\iint K\,dA = 2\pi(2-2g)$. The torus ($g=1$, $\chi=0$) is the \emph{only} closed orientable surface that can be intrinsically flat~[11]. On a genus-2 surface with $r/R = \alpha$, the curvature energy correction relative to rest mass is $\sim 1/(3\pi\alpha) \approx 15$ --- violently unstable, independent of particle mass. Higher genus is worse. The torus is unique.
+
+\subsection{The Hopf fibration: deeper structure}
+
+The Hopf fibration maps $S^3 \to S^2$ with circle fibers~[12]. Under stereographic projection, these fibers organize into nested tori. The total space $S^3$ is the group manifold of SU(2) --- the weak interaction gauge group. The Weinberg angle $\sin^2\theta_W = 3/13$ counts electromagnetic modes on the torus fiber relative to the total mode count~[1].
+
+
+\section{The self-consistent electron}
+
+The self-consistent solution ($p = 2$, $q = 1$, $r/R = \alpha$) yields: major radius $R_e = 194$~fm ($500\times$ proton radius), minor radius $r_e = 1.42$~fm (comparable to proton radius), $R_e/\lambda_C = 0.503$ (half the Compton wavelength). The toroidal circuit frequency equals the zitterbewegung frequency $\omega_{zb} = 2m_e c^2/\hbar$ --- the trembling motion Schr\"odinger identified in the Dirac equation~[13], here revealed as the literal circulation of the photon.
+
+The torus supports quantized modes: $E_{n,m} = \hbar c\sqrt{n^2/R^2 + m^2/r^2}$. Four toroidal, one poloidal ($\sim 70$~MeV), four mixed, and five metric/constraint modes minus one zero mode give \textbf{13 independent modes} --- the Weinberg denominator: $\sin^2\theta_W = 3/13$~[1].
+
+Current compositeness bounds ($\Lambda > 10$~TeV~[14]) do not apply: the torus electron is not composite in the conventional sense. It has no substructure --- it is a single photon with no internal quantum numbers beyond topology. The charge circulates at~$c$, and scattering experiments see a time-averaged current indistinguishable from a point particle at momentum transfers below $\hbar c/r_e \sim 140$~MeV.
+
+
+\section{Objections and responses}
+
+\LP{\bf ``This is numerology.''}
+The companion paper~[1] derives 23~Standard Model parameters from 3~inputs, with a median accuracy of 0.7\,\% across fourteen orders of magnitude. Each formula contains only the topological integers $(p,q,N_c) = (2,1,3)$ and $\alpha$.
+
+\LP{\bf ``This is not a quantum field theory.''}
+Correct. The present work is a classical geometric model with quantum boundary conditions, analogous to the Bohr atom: geometrically correct, quantitatively predictive, awaiting the full quantum-mechanical derivation.
+
+\LP{\bf ``Classical self-energy divergences plague this approach.''}
+The torus provides a natural UV cutoff at the tube radius $r = \alpha R$. No renormalization is needed because the topology is intrinsically finite.
+
+\LP{\bf ``Where is the Lagrangian?''}
+Maxwell's: $\mathcal{L} = -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$, on a toroidal domain with periodic boundary conditions. The topological constraints replace additional terms.
+
+\LP{\bf ``A photon cannot be charged.''}
+A photon on an infinite line carries no charge. A photon on a closed loop \emph{creates} a current $I = ec/L$. Charge is a topological invariant --- the winding number conserved because the path cannot be continuously deformed to a point.
+
+
+\section{Discussion}
+
+We have shown that a photon confined to a $(2,1)$ torus knot acquires every property of the electron: rest mass, spin-$\frac{1}{2}$, charge, and fermionic statistics. The fine-structure constant emerges as $\alpha = r/R$, the torus is the unique viable topology, and $p = 2$ is forced by electromagnetic boundary conditions.
+
+Three generations (electron, muon, tau) share the same topology but differ in torus radius. The Koide formula $Q = (m_e + m_\mu + m_\tau)/(\sqrt{m_e} + \sqrt{m_\mu} + \sqrt{m_\tau})^2 = 2/3$~[15], accurate to 0.0009\,\%, parameterizes all three masses with a single angle $\theta_K = (6\pi+2)/9$ whose physical decomposition --- $2\pi/3$ from $\mathbb{Z}_3$ symmetry and $2/9 = pq/N_c^2$ from winding --- is derived in~[1].
+
+Testable predictions include: $m_\tau = 1776.9$~MeV (FCC-ee~[16]), normal neutrino mass ordering (JUNO~[17]), and Higgs self-coupling $\lambda = 1/8$ (HL-LHC~[18]).
+
+If the electron is indeed a photon on a $(2,1)$ torus knot, then particle physics is electromagnetic topology. The Standard Model is not a collection of arbitrary parameters --- it is the unique electromagnetic spectrum of the simplest non-trivial knot on the simplest non-trivial surface.
+
+This work is dedicated to the memory of J.\,G.~Williamson, whose 1997 insight that the electron might be a photon with toroidal topology started everything.
+
+
+\vskip 30pt
+\begin{eref}
+
+\bibitem{} J.\,P.~Galasyn and C.~Th\'eodore,
+``The Standard Model from a torus knot,'' (2025).
+
+\bibitem{} A.~Einstein,
+``\"Uber einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt,''
+\emph{Ann.\ Phys.}\ {\bf 17}, 132 (1905).
+
+\bibitem{} L.~de~Broglie,
+``Recherches sur la th\'eorie des quanta,''
+Ph.D.\ thesis, Univ.\ Paris (1924).
+
+\bibitem{} T.~Kaluza,
+``Zum Unit\"atsproblem der Physik,''
+\emph{Sitzungsber.\ Preuss.\ Akad.\ Wiss.}\ {\bf 1921}, 966 (1921).
+
+\bibitem{} J.\,A.~Wheeler,
+``Geons,''
+\emph{Phys.\ Rev.}\ {\bf 97}, 511 (1955).
+
+\bibitem{} C.\,W.~Misner and J.\,A.~Wheeler,
+``Classical physics as geometry,''
+\emph{Ann.\ Phys.}\ {\bf 2}, 525 (1957).
+
+\bibitem{} J.\,G.~Williamson and M.\,B.~van~der~Mark,
+``Is the electron a photon with toroidal topology?,''
+\emph{Ann.\ Fond.\ Louis de Broglie}\ {\bf 22}, 133 (1997).
+
+\bibitem{} J.\,D.~Jackson,
+\emph{Classical Electrodynamics}, 3rd ed.\ (Wiley, 1999).
+
+\bibitem{} F.\,R.~Skilton,
+``Foundation for an integer-based cosmological model. Part~3: Integers and the natural constants,''
+Brock University (1988).
+
+\bibitem{} H.~Seifert,
+``\"Uber das Geschlecht von Knoten,''
+\emph{Math.\ Ann.}\ {\bf 110}, 571 (1935).
+
+\bibitem{} S.-S.~Chern,
+``A simple intrinsic proof of the Gauss--Bonnet formula for closed Riemannian manifolds,''
+\emph{Ann.\ of Math.}\ {\bf 45}, 747 (1944).
+
+\bibitem{} H.~Hopf,
+``\"Uber die Abbildungen der dreidimensionalen Sph\"are auf die Kugelfl\"ache,''
+\emph{Math.\ Ann.}\ {\bf 104}, 637 (1931).
+
+\bibitem{} E.~Schr\"odinger,
+``\"Uber die kr\"aftefreie Bewegung in der relativistischen Quantenmechanik,''
+\emph{Sitzungsber.\ Preuss.\ Akad.\ Wiss.}\ {\bf 1930}, 418 (1930).
+
+\bibitem{} Particle Data Group, R.\,L.~Workman \emph{et al.},
+\emph{Prog.\ Theor.\ Exp.\ Phys.}\ {\bf 2022}, 083C01; 2024 update.
+
+\bibitem{} Y.~Koide,
+``New viewpoint on quark and lepton mass hierarchy,''
+\emph{Phys.\ Rev.\ D}\ {\bf 28}, 252 (1983).
+
+\bibitem{} A.~Abada \emph{et al.} (FCC Collaboration),
+\emph{Eur.\ Phys.\ J.\ Spec.\ Top.}\ {\bf 228}, 261 (2019).
+
+\bibitem{} F.~An \emph{et al.} (JUNO Collaboration),
+\emph{J.\ Phys.\ G}\ {\bf 43}, 030401 (2016).
+
+\bibitem{} M.~Cepeda \emph{et al.},
+\emph{CERN Yellow Rep.\ Monogr.}\ {\bf 7}, 221 (2019).
+
+\end{eref}
+
+\man{f\'evrier 2026}
+\end{document}

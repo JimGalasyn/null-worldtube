@@ -1,0 +1,132 @@
+
+% Fichier de style pour les Annales de la Fondation Louis de Broglie
+% 05/12/13
+% fref -> frenchref à cause de "fancyref"
+% 250401 avec A5paper
+
+
+% fontes pour les en-tetes
+\def\eightrm{\rm\footnotesize}
+\def\ninebf{\bf\small}
+
+% fontes pour les titres
+\def\ftitreun{\bf\large}
+\def\fauteur{\sc}
+\def\ftitredeux{\bf}
+\def\ftitretrois{\sl}
+
+% Compatibilité anciennes conventions AFLB
+\def\SH#1\par{\section*{#1\setlength{\baselineskip}{12pt}}}
+%\def\text#1{\hbox{\ #1\ }}
+\let\FN=\footnote
+\let\LP=\noindent 
+
+%% --------- redefinition des en-tetes
+%%
+%% les textes sont dans \auteur, \titre et \titreabreg
+%%
+\def\volaflb{{\eightrm Annales de la Fondation Louis de Broglie, \volnum}}
+\pagestyle{myheadings}
+\markboth{\volaflb}{\volaflb}
+\def\pdebut#1{\setcounter{page}{#1}}
+
+% ---------- redefinition des Sections
+%
+%\makeatletter
+\def\section{\@startsection {section}{1}{\z@}{-6pt plus -1ex minus 
+ -.2ex}{4pt}{\ftitreun\setlength{\baselineskip}{12pt}}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-4pt plus -1ex minus 
+ -.2ex}{4pt}{\ftitredeux\setlength{\baselineskip}{12pt}}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus 
+ -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\sl}}
+\def\paragraph{\@startsection
+ {paragraph}{4}{\z@}{3.25ex plus 1ex minus .2ex}{-1em}{\normalsize\bf}}
+\def\subparagraph{\@startsection
+ {subparagraph}{4}{\parindent}{3.25ex plus 1ex minus 
+ .2ex}{-1em}{\normalsize\sl}}
+%\makeatother
+
+%% ------------ Dimensions
+%%
+ %pour le papier
+\setlength{\hoffset}{0in}
+\setlength{\voffset}{0in}
+\setlength{\oddsidemargin}{-6mm}
+\setlength{\evensidemargin}{-6mm}
+
+\vsize=16.7cm
+\hsize=11cm
+\voffset=-2.15cm
+\baselineskip=12pt plus .3pt minus .5pt
+\parskip=3pt plus 2pt minus 1pt
+\tolerance=1000
+\hfuzz=3pt
+\textwidth=11 cm
+\textheight=\vsize
+
+% ------------------- Ensemble de l'en-tete --------------
+%
+\renewcommand{\author}[1]{\def\auteur{#1}}
+\newcommand{\authorshort}[1]{\def\auteurabreg{#1}}
+\renewcommand{\title}[1]{\def\titre{#1}}
+\newcommand{\titleshort}[1]{\def\titreabreg{#1}}
+\newcommand{\address}[1]{\def\adresse{#1}}
+\authorshort{\auteur}
+\titleshort{\titre}
+%
+
+
+\renewcommand{\maketitle}{
+\vbox to 5cm{
+\vglue 24pt plus 12pt minus 12pt\begin{center}
+{\ftitreun\titre}\setlength{\baselineskip}{18pt}\par
+\vglue 12pt plus 6pt minus 3pt%
+{\fauteur\baselineskip 12pt \auteur 
+\vglue12pt plus 6pt minus 3pt}
+\small\baselineskip 11pt\adresse 
+\end{center}
+\vfill}
+\markboth{{\bf\auteurabreg}}{{\bf\titreabreg}}
+}
+% ----------------------- Exergue ------------------------
+\long\def\exergue#1{{
+\small\it\baselineskip=10pt\leftskip=5cm\parindent=0pt
+#1 \par}}
+%
+
+%
+% ------------------------ Resume ------------------------
+% 
+\def\abstract{\bigbreak\bgroup\narrower\small
+\baselineskip=10pt plus .2pt \parindent 0pt}
+\def\endabstract{\par\egroup\bigbreak}
+
+% --------------------- References -----------------------
+% Environnement références
+\newenvironment{frenchref}{
+\renewcommand\refname{R\'ef\'erences}
+\begin{thebibliography}{99}
+\setlength\itemsep {-3pt}
+\small}{\end{thebibliography}}
+% id en anglais
+\newenvironment{eref}{
+\renewcommand\refname{References}
+\begin{thebibliography}{99}
+\setlength\itemsep {-3pt}
+\small}{\end{thebibliography}}
+% ------------------ Date reception -----------------------
+%
+\outer\def\man#1{\medskip
+\noindent{\it (Manuscrit re\c cu le #1)}}
+%
+
+% Macros possibles
+\def\eqalign#1{\setlength{\arraycolsep}{.2em}
+\renewcommand{\arraystretch}{1.5}
+\begin{array}{rl}
+#1\end{array}}
+%-------------------- Figures -----------------------------
+\long\def\Fig#1#2{{\small
+{\bf Figure #1. }#2\par}}
+
+%\makeatother
