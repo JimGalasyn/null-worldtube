@@ -39,6 +39,8 @@ def main():
                         help='Dissipative decay dynamics: saddles, bifurcations, strange attractors')
     parser.add_argument('--neutrino', action='store_true',
                         help='Neutrino masses from twist-wave dispersion on the torus')
+    parser.add_argument('--borromean', action='store_true',
+                        help='Borromean resonance: 3-torus linking energy and proton mass')
     parser.add_argument('--anim-ionization', action='store_true', dest='anim_ionization',
                         help='Animation: hydrogen photoionization (outputs GIF)')
     parser.add_argument('--R', type=float, default=1.0, help='Major radius in units of λ_C')
@@ -125,6 +127,11 @@ def main():
     if args.neutrino:
         from .neutrinos import print_neutrino_analysis
         print_neutrino_analysis()
+        return
+
+    if args.borromean:
+        from .borromean import print_borromean_analysis
+        print_borromean_analysis()
         return
 
     if args.anim_ionization:
