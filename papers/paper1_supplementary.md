@@ -60,7 +60,11 @@ The (2,1) knot winds twice toroidally for every poloidal circuit. Under 2π coor
 
 ## S4. Topology Uniqueness
 
-The torus (genus 1) is the simplest closed orientable surface supporting non-contractible loops. The (2,1) knot is the simplest torus knot producing spin-½ with broken p↔q symmetry:
+The torus (genus 1) is the simplest closed orientable surface supporting non-contractible loops. The (2,1) knot is the simplest torus knot producing spin-½ with broken p↔q symmetry.
+
+**Terminological note.** In standard knot theory, a (p,q) torus knot with p=1 or q=1 is the unknot — it is topologically trivial when embedded in ℝ³. We use "torus knot" to refer to the closed geodesic on the torus surface, whose geometric properties (winding number, path length, self-energy) are the relevant features of the framework, independent of its embedding in ℝ³. The (2,1) curve is non-trivial as a geodesic on the torus even though it is trivial as a knot in ambient space.
+
+The candidates are:
 - (1,0): integer spin (boson)
 - (1,1): spin-½ but p=q symmetric
 - **(2,1): spin-½, minimal asymmetric fermionic knot**
@@ -154,7 +158,7 @@ $$m_\tau = \frac{p^2(p^2+q^2)}{N_c(2N_c+1)}\ \alpha\ \Lambda = \frac{20}{21}\alp
 - Numerator: 20 = p²(p²+q²) = 4×5 (toroidal area × knot metric)
 - Denominator: 21 = N_c(2N_c+1) = 3×7 (color × extended group dimension)
 
-This is one of the most precise predictions in the model (6 ppm).
+This is one of the most precise predictions in the model (6 ppm). The factor 2N_c+1 = 7 corresponds to the dimension of the fundamental representation of SO(2N_c+1) = SO(7); its appearance in the lepton anchor mass warrants further investigation.
 
 ### S7.5 Inter-generation ratios
 
@@ -170,7 +174,7 @@ The charm-to-top ratio IS the fine-structure constant. The strange-to-bottom rat
 
 ### S8.1 Mode counting on the torus
 
-The (2,1) torus knot admits 13 independent electromagnetic modes:
+We conjecture that the (2,1) torus knot admits 13 independent electromagnetic modes (a rigorous derivation from the spectral geometry is deferred to future work):
 - p² = 4 toroidal modes
 - q² = 1 poloidal mode
 - p²q² = 4 mixed (toroidal-poloidal) modes
@@ -182,13 +186,13 @@ Of these, 3 couple to the poloidal (weak isospin) sector, giving:
 
 $$\sin^2\theta_W = \frac{3}{13} \quad (\text{PDG: } 0.23122,\ 0.19\%\ \text{error})$$
 
-### S8.2 Strong coupling from crossing number
+### S8.2 Strong coupling from winding enhancement
 
-The (2,1) torus knot has crossing number c = 2p − 1 = 3. The strong coupling enhancement is:
+The strong coupling enhancement p⁴ = 16 is observed to connect the electromagnetic and strong scales:
 
 $$\alpha_s = p^4 \alpha = 16\alpha = \frac{16}{137.036} = 0.11676 \quad (\text{PDG: } 0.1179 \pm 0.0009)$$
 
-Physical interpretation: the linking enhancement goes as (crossing number)² ≈ p⁴ for the torus knot family.
+A rigorous derivation of the p⁴ enhancement from the torus winding geometry is an open problem. We note that p⁴ = (p²)² and p² = 4 counts the toroidal modes, suggesting the enhancement arises from a squared toroidal mode coupling.
 
 ### S8.3 Higgs boson mass
 
@@ -303,12 +307,13 @@ DESI+Planck bound: Σm_ν < 64 meV [10]. Oscillation floor: 59.0 meV. Prediction
 
 ## S12. Input Counting and Parameter Independence
 
-### S12.1 Three inputs
+### S12.1 Four inputs
 
-The model requires exactly three measured inputs:
+The model requires four measured inputs:
 1. **α = 1/137.036** — the fine-structure constant (claimed to emerge as r/R, but used numerically as input)
 2. **m_e = 0.51100 MeV** — the electron mass (sets the fundamental torus radius)
 3. **m_μ = 105.658 MeV** — the muon mass (sets the lepton Koide scale S)
+4. **Λ_tube = ℏc/(αR_p) = 255.7 GeV** — the tube energy scale, set by the proton torus radius R_p. Since R_p depends on the proton mass m_p, which is not derived within this framework, Λ_tube is an independent input. Deriving Λ_tube from (α, m_e, m_μ) alone — i.e., reducing the input count to three — requires a first-principles calculation of the proton mass from the torus knot topology. This is an open problem and a priority for future work.
 
 ### S12.2 Three topological integers
 
@@ -318,15 +323,13 @@ The model requires exactly three measured inputs:
 
 ### S12.3 Derived quantities
 
-From these six numbers (3 measured + 3 topological), all 23 predictions follow through:
-- Λ_tube = ℏc/(αR_p), where R_p is the self-consistent proton torus radius
+From these seven numbers (4 measured + 3 topological), all 23 predictions follow through:
 - θ_K = (6π+2)/9 from (p,q,N_c)
 - θ(q_em) = (6π + 2/(1+3|q|))/9 from charge
 - All coefficients: 2/3, √5, 20/21, 3/13, 16, 2/9, π−2, etc. — pure functions of (p,q,N_c)
 
 ### S12.4 What is NOT an input
 
-- Λ_tube — derived from α and R_p
 - sin²θ_W, α_s — predicted
 - v, m_H, m_W, m_Z — predicted
 - All CKM and PMNS parameters — predicted
@@ -344,7 +347,7 @@ From these six numbers (3 measured + 3 topological), all 23 predictions follow t
 | SO(10) GUT | Gauge + partial Yukawa | ~15–20 | Partially |
 | A₄ flavor symmetry [4] | Neutrino mixing | ~8 | TBM only |
 | String landscape [3] | None specific | 10⁵⁰⁰ vacua | No |
-| **Torus knot (this work)** | **23** | **3 + 3 integers** | **Yes** |
+| **Torus knot (this work)** | **23** | **4 + 3 integers** | **Yes** |
 
 ---
 

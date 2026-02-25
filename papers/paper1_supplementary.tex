@@ -95,7 +95,11 @@ The $(2,1)$ knot winds twice toroidally for every poloidal circuit. Under $2\pi$
 \section{S4. Topology Uniqueness}
 \label{sec:S4}
 
-The torus (genus~1) is the simplest closed orientable surface supporting non-contractible loops. The $(2,1)$ knot is the simplest torus knot producing spin-$\tfrac{1}{2}$ with broken $p\leftrightarrow q$ symmetry:
+The torus (genus~1) is the simplest closed orientable surface supporting non-contractible loops. The $(2,1)$ knot is the simplest torus knot producing spin-$\tfrac{1}{2}$ with broken $p\leftrightarrow q$ symmetry.
+
+\paragraph{Terminological note.} In standard knot theory, a $(p,q)$ torus knot with $p=1$ or $q=1$ is the unknot --- it is topologically trivial when embedded in $\mathbb{R}^3$. We use ``torus knot'' to refer to the closed geodesic on the torus surface, whose geometric properties (winding number, path length, self-energy) are the relevant features of the framework, independent of its embedding in $\mathbb{R}^3$. The $(2,1)$ curve is non-trivial as a geodesic on the torus even though it is trivial as a knot in ambient space.
+
+The candidates are:
 \begin{itemize}
   \item $(1,0)$: integer spin (boson)
   \item $(1,1)$: spin-$\tfrac{1}{2}$ but $p=q$ symmetric
@@ -231,7 +235,7 @@ The factor $\sqrt{5} = \sqrt{p^2+q^2}$ is the geodesic length of the $(2,1)$ tor
   \item Denominator: $21 = N_c(2N_c+1) = 3\times 7$ (color $\times$ extended group dimension)
 \end{itemize}
 
-This is one of the most precise predictions in the model (6~ppm).
+This is one of the most precise predictions in the model (6~ppm). The factor $2N_c+1 = 7$ corresponds to the dimension of the fundamental representation of $\mathrm{SO}(2N_c+1) = \mathrm{SO}(7)$; its appearance in the lepton anchor mass warrants further investigation.
 
 \subsection{S7.5 Inter-generation ratios}
 
@@ -248,7 +252,7 @@ The charm-to-top ratio IS the fine-structure constant. The strange-to-bottom rat
 
 \subsection{S8.1 Mode counting on the torus}
 
-The $(2,1)$ torus knot admits 13 independent electromagnetic modes:
+We conjecture that the $(2,1)$ torus knot admits 13 independent electromagnetic modes (a rigorous derivation from the spectral geometry is deferred to future work):
 \begin{itemize}
   \item $p^2 = 4$ toroidal modes
   \item $q^2 = 1$ poloidal mode
@@ -263,14 +267,14 @@ Of these, 3 couple to the poloidal (weak isospin) sector, giving:
   \sin^2\theta_W = \frac{3}{13} \quad (\text{PDG: } 0.23122,\ 0.19\%\ \text{error}).
 \end{equation}
 
-\subsection{S8.2 Strong coupling from crossing number}
+\subsection{S8.2 Strong coupling from winding enhancement}
 
-The $(2,1)$ torus knot has crossing number $c = 2p - 1 = 3$. The strong coupling enhancement is:
+The strong coupling enhancement $p^4 = 16$ is observed to connect the electromagnetic and strong scales:
 \begin{equation}
   \alpha_s = p^4 \alpha = 16\alpha = \frac{16}{137.036} = 0.11676 \quad (\text{PDG: } 0.1179 \pm 0.0009).
 \end{equation}
 
-Physical interpretation: the linking enhancement goes as $(\text{crossing number})^2 \approx p^4$ for the torus knot family.
+A rigorous derivation of the $p^4$ enhancement from the torus winding geometry is an open problem. We note that $p^4 = (p^2)^2$ and $p^2 = 4$ counts the toroidal modes, suggesting the enhancement arises from a squared toroidal mode coupling.
 
 \subsection{S8.3 Higgs boson mass}
 
@@ -416,13 +420,14 @@ DESI+Planck bound: $\Sigma m_\nu < 64$~meV~\cite{desi2024}. Oscillation floor: 5
 \section{S12. Input Counting and Parameter Independence}
 \label{sec:S12}
 
-\subsection{S12.1 Three inputs}
+\subsection{S12.1 Four inputs}
 
-The model requires exactly three measured inputs:
+The model requires four measured inputs:
 \begin{enumerate}
   \item $\alpha = 1/137.036$ --- the fine-structure constant (claimed to emerge as $r/R$, but used numerically as input)
   \item $m_e = 0.51100$~MeV --- the electron mass (sets the fundamental torus radius)
   \item $m_\mu = 105.658$~MeV --- the muon mass (sets the lepton Koide scale $S$)
+  \item $\Lambda_{\text{tube}} = \hbar c/(\alpha R_p) = 255.7$~GeV --- the tube energy scale, set by the proton torus radius $R_p$. Since $R_p$ depends on the proton mass $m_p$, which is not derived within this framework, $\Lambda_{\text{tube}}$ is an independent input. Deriving $\Lambda_{\text{tube}}$ from $(\alpha, m_e, m_\mu)$ alone --- i.e., reducing the input count to three --- requires a first-principles calculation of the proton mass from the torus knot topology. This is an open problem and a priority for future work.
 \end{enumerate}
 
 \subsection{S12.2 Three topological integers}
@@ -435,9 +440,8 @@ The model requires exactly three measured inputs:
 
 \subsection{S12.3 Derived quantities}
 
-From these six numbers (3 measured $+$ 3 topological), all 23 predictions follow through:
+From these seven numbers (4 measured $+$ 3 topological), all 23 predictions follow through:
 \begin{itemize}
-  \item $\Lambda_{\text{tube}} = \hbar c/(\alpha R_p)$, where $R_p$ is the self-consistent proton torus radius
   \item $\theta_K = (6\pi+2)/9$ from $(p,q,N_c)$
   \item $\theta(q_{\text{em}}) = (6\pi + 2/(1+3|q|))/9$ from charge
   \item All coefficients: $2/3$, $\sqrt{5}$, $20/21$, $3/13$, $16$, $2/9$, $\pi-2$, etc.\ --- pure functions of $(p,q,N_c)$
@@ -446,7 +450,6 @@ From these six numbers (3 measured $+$ 3 topological), all 23 predictions follow
 \subsection{S12.4 What is NOT an input}
 
 \begin{itemize}
-  \item $\Lambda_{\text{tube}}$ --- derived from $\alpha$ and $R_p$
   \item $\sin^2\theta_W$, $\alpha_s$ --- predicted
   \item $v$, $m_H$, $m_W$, $m_Z$ --- predicted
   \item All CKM and PMNS parameters --- predicted
@@ -469,7 +472,7 @@ SU(5) GUT~\cite{georgi1974} & Gauge unification & ${\sim}24$ & Partially \\
 SO(10) GUT & Gauge + partial Yukawa & ${\sim}15$--20 & Partially \\
 $A_4$ flavor symmetry~\cite{ma2001} & Neutrino mixing & ${\sim}8$ & TBM only \\
 String landscape~\cite{bousso2000} & None specific & $10^{500}$ vacua & No \\
-\textbf{Torus knot (this work)} & \textbf{23} & \textbf{3 + 3 integers} & \textbf{Yes} \\
+\textbf{Torus knot (this work)} & \textbf{23} & \textbf{4 + 3 integers} & \textbf{Yes} \\
 \bottomrule
 \end{tabular}
 \caption{Comparison of parameter-reduction frameworks.}
