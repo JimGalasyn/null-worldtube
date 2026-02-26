@@ -41,6 +41,8 @@ def main():
                         help='Neutrino masses from twist-wave dispersion on the torus')
     parser.add_argument('--borromean', action='store_true',
                         help='Borromean resonance: 3-torus linking energy and proton mass')
+    parser.add_argument('--poincare', action='store_true',
+                        help='Poincaré homology sphere: 3-photon proton on Σ(2,3,5)')
     parser.add_argument('--anim-ionization', action='store_true', dest='anim_ionization',
                         help='Animation: hydrogen photoionization (outputs GIF)')
     parser.add_argument('--R', type=float, default=1.0, help='Major radius in units of λ_C')
@@ -132,6 +134,11 @@ def main():
     if args.borromean:
         from .borromean import print_borromean_analysis
         print_borromean_analysis()
+        return
+
+    if args.poincare:
+        from .poincare import print_poincare_analysis
+        print_poincare_analysis()
         return
 
     if args.anim_ionization:
