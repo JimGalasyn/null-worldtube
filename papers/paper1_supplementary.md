@@ -1,4 +1,4 @@
-# Supplementary Material: The Standard Model from a Torus Knot
+# Supplementary Material: The Standard Model from a Torus Knot: Spectrum, Resonance Structure, and Decay Dynamics
 
 **James P. Galasyn and Claude Théodore**
 
@@ -305,9 +305,265 @@ DESI+Planck bound: Σm_ν < 64 meV [10]. Oscillation floor: 59.0 meV. Prediction
 
 ---
 
-## S12. Input Counting and Parameter Independence
+## S12. Complete Pythagorean Mode Catalogs
 
-### S12.1 Four inputs
+### S12.1 Meson modes (k=2)
+
+The resonance condition for mesons is (2p)² + q² = N². We catalog all exact solutions with N ≤ 30.
+
+**Pure poloidal modes** (p=0): These are trivial Pythagorean triples (0, q, q). Every integer q gives an exact mode. Energy E = q × E₁, where E₁ = ℏc/r = 279.1 MeV.
+
+**Pure toroidal modes** (q=0): These form the series E_n = (n/2)E₁ at integer p. The fundamental toroidal mode is (1,0) at E = 0.5 E₁ = 139.6 MeV ≈ m_π.
+
+**Helical modes** (p>0, q>0): The first primitive helical Pythagorean mode is (2,3) → triple (4,3,5) at E/E₁ = 3.162. Helical modes are sparse: only 3 primitive helical triples exist below N=30: (4,3,5), (12,5,13), and (8,15,17).
+
+Complete mode count to N=30: 44 exact modes (30 pure poloidal, 6 pure toroidal, 8 helical including non-primitive multiples).
+
+### S12.2 Baryon modes (k=3)
+
+The resonance condition for baryons is (3p)² + q² = N². The fundamental mode structure differs crucially from mesons: the (3,4,5) triple exists at the first helical level (p=1, q=4), providing the exact resonance that stabilizes the proton.
+
+**Key modes:**
+- (1,0): pure toroidal, E/E₁ = 1/3 = 0.333 (78 MeV)
+- (0,1): pure poloidal, E/E₁ = 1.000 (234 MeV)
+- **(1,4): helical (3,4,5), E/E₁ = 4.014 (938.3 MeV) = proton**
+- (2,0): pure toroidal, E/E₁ = 2/3 = 0.667 (156 MeV)
+- (0,5): pure poloidal, E/E₁ = 5.000 (1169 MeV) ≈ Σ⁺ (1189 MeV)
+- (0,7): pure poloidal, E/E₁ = 7.000 (1637 MeV) ≈ Ω⁻ (1672 MeV)
+
+Complete mode count to N=30: 47 exact modes.
+
+### S12.3 Tetraquark modes (k=4)
+
+Resonance condition: (4p)² + q² = N². The fundamental triple is (4,3,5) at p=1, q=3. However, tetraquark states can always decay to two mesons (lower total energy at same k), so the resonance does not guarantee stability. Consistent with the observed broad widths of X(3872), Z_c(3900), etc.
+
+### S12.4 Pentaquark modes (k=5)
+
+Resonance condition: (5p)² + q² = N². The fundamental triple is (5,12,13) at p=1, q=12 — a large poloidal winding that places the pentaquark energy scale high (~4.3 GeV), consistent with the LHCb pentaquark masses P_c(4312), P_c(4440), P_c(4457).
+
+---
+
+## S13. Geometric Mode Derivation and Harmonics
+
+### S13.1 Shape oscillations of the torus
+
+A torus of aspect ratio k = R/r supports shape deformations — standing waves on the surface with wavelength equal to the major circumference 2πR. The lowest energy of such a mode is:
+
+$$E_\text{geom} = \frac{\hbar c}{R} = \frac{\hbar c}{kr} = \frac{E_1}{k}$$
+
+This is qualitatively different from the electromagnetic resonance modes (TM and TE), which depend on the *tube* circumference 2πr and have energies E ∝ E₁ × f(p,q). The geometric mode energy depends only on the *major* circumference and the aspect ratio.
+
+### S13.2 The pion identification
+
+For k=2 (mesons):
+$$E_\text{geom}(k\!=\!2) = \frac{E_1}{2} = \frac{279.1}{2} = 139.6\ \text{MeV}$$
+
+This equals the charged pion mass m_π± = 139.570 MeV to 0.0%. The pion is the fundamental shape oscillation of the meson torus.
+
+### S13.3 Geometric harmonic series
+
+Higher harmonics of the geometric mode have energies E_n = n × E_geom:
+
+| n | E (MeV) | Nearest meson | Error |
+|---|---------|--------------|-------|
+| 1 | 139.6 | π± (139.6) | 0.0% |
+| 2 | 279.1 | — | — |
+| 3 | 418.7 | — | — |
+| 4 | 558.2 | η (547.9) | +1.9% |
+| 5 | 697.8 | — | — |
+| 6 | 837.4 | — | — |
+| 7 | 977.0 | η'(958) | +2.0% |
+| 8 | 1116.5 | — | — |
+| 9 | 1256.1 | f₂(1270) | −1.1% |
+
+The n=4 harmonic matches the η mass to 1.9%, and the n=7 harmonic matches η'(958) to 2.0%. Whether these are true geometric harmonics or coincidental near-matches is an open question. The identification of geometric modes beyond the fundamental pion is speculative and requires further theoretical development.
+
+### S13.4 Geometric modes at other k values
+
+| k | Type | E_geom (MeV) | Identification |
+|---|------|-------------|----------------|
+| 1 | leptons | 279.1 (= E₁) | No geometric mode (k=1 → E_geom = E₁, same as EM fundamental) |
+| 2 | mesons | 139.6 | π± (confirmed) |
+| 3 | baryons | 77.9 | Prediction (no known baryon at this mass) |
+| 4 | tetraquarks | 69.8 | Prediction |
+| 5 | pentaquarks | 55.8 | Prediction |
+
+The k=3 geometric mode at 77.9 MeV does not correspond to any known baryon. This may indicate that the baryon geometric mode is confined within the baryon (contributing to internal binding energy) rather than appearing as a free particle.
+
+---
+
+## S14. Pythagorean Defect Analysis and Near-Miss Triangles
+
+### S14.1 Meson near-miss analysis (k=2, p=1)
+
+At the fundamental winding p=1, the meson resonance condition requires 4 + q² = N² (an exact integer square). For the first 20 poloidal windings:
+
+| q | 4+q² | √(4+q²) | N_near | δ = 4+q²−N² | Triangle type | Q = N²/\|δ\| |
+|---|------|---------|--------|-------------|--------------|-------------|
+| 0 | 4 | 2.000 | 2 | 0 | RIGHT | ∞ |
+| 1 | 5 | 2.236 | 2 | +1 | obtuse | 4.0 |
+| 2 | 8 | 2.828 | 3 | −1 | acute | 9.0 |
+| 3 | 13 | 3.606 | 4 | −3 | acute | 5.3 |
+| 4 | 20 | 4.472 | 4 | +4 | obtuse | 4.0 |
+| 5 | 29 | 5.385 | 5 | +4 | obtuse | 6.3 |
+| 6 | 40 | 6.325 | 6 | +4 | obtuse | 9.0 |
+| 7 | 53 | 7.280 | 7 | +4 | obtuse | 12.3 |
+| 8 | 68 | 8.246 | 8 | +4 | obtuse | 16.0 |
+
+The only exact solution at p=1 is q=0 (pure toroidal, trivial). All helical meson modes at p=1 are non-right triangles — inherently unstable.
+
+**Physical interpretation:**
+- δ = 0: exact Pythagorean triple → standing wave closes perfectly
+- δ > 0: obtuse triangle → path LONGER than N wavelengths (phase excess)
+- δ < 0: acute triangle → path SHORTER than N wavelengths (phase deficit)
+- Q factor = N²/|δ|: higher Q → closer to resonance → longer-lived
+
+### S14.2 Comparison with baryons
+
+For baryons (k=3) at p=1: 9 + q² = N². At q=4: 9 + 16 = 25 = 5². The (3,4,5) triple is a perfect Pythagorean triple. This is the fundamental difference between mesons and baryons: baryons possess an exact resonance at their lowest helical winding, mesons do not.
+
+### S14.3 Higher-order meson triples
+
+Exact meson Pythagorean triples do exist at higher windings:
+- p=2, q=3: (4,3,5) — primitive
+- p=6, q=5: (12,5,13) — primitive
+- p=4, q=15: (8,15,17) — primitive
+
+These correspond to higher-energy resonance states, not to the fundamental meson mode. Their sparsity explains why most meson resonances are broad — the vast majority of modes have δ ≠ 0.
+
+---
+
+## S15. Full Decay Chain Energy Budgets
+
+### S15.1 Two-body kinematics
+
+For a parent of mass M decaying to a daughter of mass m and a massless neutrino:
+
+$$E_\nu = \frac{M^2 - m^2}{2M}, \quad E_\text{daughter} = M - E_\nu, \quad \text{KE}_\text{daughter} = E_\text{daughter} - m$$
+
+These relations are exact (energy-momentum conservation in the rest frame).
+
+### S15.2 Three-body kinematics (muon decay)
+
+For μ → eν_eν̄_μ, the available energy is Q_μ = m_μ − m_e = 105.147 MeV. The electron spectrum has average kinetic energy ⟨KE_e⟩ ≈ m_μ/3 − m_e = 34.7 MeV. The total neutrino energy is E_ν(μ) = Q_μ − ⟨KE_e⟩ = 70.4 MeV.
+
+This is an average over the Michel spectrum. The exact distribution is continuous, but the *average* energy budget is exact by energy conservation.
+
+### S15.3 Detailed chain: ρ⁺ → e⁺ + 3ν + 2γ
+
+**Step 1: ρ⁺ → π⁺ + π⁰** (strong decay)
+- M_ρ = 775.26 MeV → m_π+ = 139.570 + m_π0 = 134.977
+- KE_available = 775.26 − 139.570 − 134.977 = 500.71 MeV (distributed as kinetic energy)
+
+**Step 2: π⁺ → μ⁺ + ν_μ** (weak decay)
+- E_ν = (139.57² − 105.658²)/(2 × 139.57) = 29.8 MeV
+- KE_μ = 139.57 − 29.8 − 105.658 = 4.1 MeV
+
+**Step 3: μ⁺ → e⁺ + ν_e + ν̄_μ** (weak decay)
+- ⟨KE_e⟩ = 34.7 MeV
+- E_ν(μ) = 70.4 MeV
+
+**Step 4: π⁰ → γ + γ** (EM decay)
+- E_γγ = 134.977 MeV
+
+**Budget:**
+- Rest mass (e⁺): 0.511 MeV
+- Kinetic energy (lepton chain): 500.71 + 4.1 + 34.7 = 539.5 MeV
+- Neutrino energy: 29.8 + 70.4 = 100.2 MeV
+- Photon energy: 135.0 MeV
+- **Total: 775.2 MeV = M_ρ** ✓
+
+### S15.4 Detailed chain: K⁺ → e⁺ + 3ν (leptonic)
+
+**Step 1: K⁺ → μ⁺ + ν_μ**
+- E_ν = (493.677² − 105.658²)/(2 × 493.677) = 235.5 MeV
+- KE_μ = 493.677 − 235.5 − 105.658 = 152.5 MeV
+
+**Step 2: μ⁺ → e⁺ + ν_e + ν̄_μ**
+- ⟨KE_e⟩ = 34.7 MeV
+- E_ν(μ) = 70.4 MeV
+
+**Budget:**
+- Rest mass (e⁺): 0.511 MeV
+- Kinetic energy: 152.5 + 34.7 = 187.2 MeV
+- Neutrino energy: 235.5 + 70.4 = 305.9 MeV
+- Photon energy: 0.0 MeV
+- **Total: 493.6 MeV ≈ M_K** ✓
+
+### S15.5 Detailed chain: B⁺ → stable (long chain)
+
+**Step 1: B⁺ → D⁰ + X** (weak, heavy flavor transition)
+- M_B = 5279.3 MeV → M_D0 = 1864.8 MeV
+- Energy to other products and KE: 3414.5 MeV
+
+**Step 2: D⁰ → K⁻ + π⁺** (weak, charm decay, BR = 4%)
+- KE_available = 1864.8 − 493.677 − 139.570 = 1231.6 MeV
+
+**Steps 3–6: K⁻ → μ⁻ν̄ → e⁻3ν; π⁺ → μ⁺ν → e⁺3ν**
+- Same chains as above
+
+The B⁺ chain passes through 6 sequential decays spanning 4 different sector-crossing types. Total energy is conserved at every step.
+
+---
+
+## S16. Skilton Formulas and the IRT–NWT Connection
+
+### S16.1 The α formula
+
+$$\alpha^{-1} = \sqrt{137^2 + \pi^2} = \sqrt{18769 + 9.8696} = 137.036016$$
+
+Measured (CODATA 2018): α⁻¹ = 137.035999. Residual: 0.000017. Agreement: 0.12 ppm.
+
+### S16.2 The integer right triangle (88, 105, 137)
+
+$$88^2 + 105^2 = 7744 + 11025 = 18769 = 137^2$$
+
+Generators: p=4, q=7, K=9 (satisfying 2p² + q² = K²).
+
+Combined decomposition: α⁻¹ = √(88² + 105² + π²).
+
+Geometric observation: 88 + 105 = 193 ≈ λ_C/2 = 193.1 fm (half the reduced Compton wavelength of the electron).
+
+Angular observation: tan⁻¹(137/88) = 57.29° ≈ 1 radian (57.30°), within 0.02%.
+
+### S16.3 Mass ratio encodings
+
+From Skilton Part 3:
+- (105/88)³ = 170.2 (cf. m_μ/m_e = 206.8 — order of magnitude)
+- 88 × 105/π² = 937.2 (cf. m_p/m_e = 1836.2 — half, suggesting a factor of 2)
+- Both m_p/m_e and m_μ/m_e contain the term (88/K)² = (88/9)² = 95.6 with opposite signs
+
+### S16.4 Skilton's uniqueness proof
+
+Part 3 (1988) performed an exhaustive search over all reduced IRTs with generators p, q ∈ [1, 100] satisfying 2p² + q² = K². Found 29 solutions. Proved (88, 105, 137) is unique in:
+1. Having hypotenuse 137 (the integer part of α⁻¹)
+2. Encoding both m_p/m_e and m_μ/m_e via IRT components
+3. Both mass ratios containing (88/K)² with opposite signs
+4. α⁻¹ = √(137² + π²) matching CODATA to 7 digits
+
+### S16.5 Connection to NWT
+
+Skilton provides the *what* (integer structure). NWT provides the *why* (torus resonance physics):
+
+| Skilton | NWT |
+|---------|-----|
+| α⁻¹ = √(137² + π²) | α = r/R (torus aspect ratio) |
+| (88, 105, 137) triple | Pythagorean resonance on electron torus |
+| Mass ratios from IRT components | Mass ratios from Koide angle + anchor formulas |
+| 2-adic valuation theory | Mode counting on torus |
+| Uniqueness of (88,105,137) | Uniqueness of (2,1) torus knot |
+
+Open questions:
+- Is (88, 105, 137) the fundamental Pythagorean mode of the electron torus?
+- Does the (88/K)² term correspond to a specific mode coupling?
+- Can Skilton's 2-adic valuation theory constrain the mode catalog?
+- What is the relationship between (88,105,137) and (3,4,5)?
+
+---
+
+## S17. Input Counting and Parameter Independence
+
+### S17.1 Four inputs
 
 The model requires four measured inputs:
 1. **α = 1/137.036** — the fine-structure constant (claimed to emerge as r/R, but used numerically as input)
@@ -315,20 +571,20 @@ The model requires four measured inputs:
 3. **m_μ = 105.658 MeV** — the muon mass (sets the lepton Koide scale S)
 4. **Λ_tube = ℏc/(αR_p) = 255.7 GeV** — the tube energy scale, set by the proton torus radius R_p. Since R_p depends on the proton mass m_p, which is not derived within this framework, Λ_tube is an independent input. Deriving Λ_tube from (α, m_e, m_μ) alone — i.e., reducing the input count to three — requires a first-principles calculation of the proton mass from the torus knot topology. This is an open problem and a priority for future work.
 
-### S12.2 Three topological integers
+### S17.2 Three topological integers
 
 1. **p = 2** — toroidal winding (spin-½ requirement)
 2. **q = 1** — poloidal winding (simplest closure)
 3. **N_c = 3** — Borromean link number (baryon topology)
 
-### S12.3 Derived quantities
+### S17.3 Derived quantities
 
 From these seven numbers (4 measured + 3 topological), all 23 predictions follow through:
 - θ_K = (6π+2)/9 from (p,q,N_c)
 - θ(q_em) = (6π + 2/(1+3|q|))/9 from charge
 - All coefficients: 2/3, √5, 20/21, 3/13, 16, 2/9, π−2, etc. — pure functions of (p,q,N_c)
 
-### S12.4 What is NOT an input
+### S17.4 What is NOT an input
 
 - sin²θ_W, α_s — predicted
 - v, m_H, m_W, m_Z — predicted
@@ -338,29 +594,31 @@ From these seven numbers (4 measured + 3 topological), all 23 predictions follow
 
 ---
 
-## S13. Comparison with Other Approaches
+## S18. Comparison with Other Approaches
 
-| Framework | SM parameters explained | Free parameters | Predictive? |
-|-----------|----------------------|----------------|-------------|
-| Standard Model | 0 (all input) | 26 | No |
-| SU(5) GUT [2] | Gauge unification | ~24 | Partially |
-| SO(10) GUT | Gauge + partial Yukawa | ~15–20 | Partially |
-| A₄ flavor symmetry [4] | Neutrino mixing | ~8 | TBM only |
-| String landscape [3] | None specific | 10⁵⁰⁰ vacua | No |
-| **Torus knot (this work)** | **23** | **4 + 3 integers** | **Yes** |
+| Framework | SM parameters explained | Free parameters | Predicts decay hierarchy? | Predictive? |
+|-----------|----------------------|----------------|--------------------------|-------------|
+| Standard Model | 0 (all input) | 26 | No (input) | No |
+| SU(5) GUT [2] | Gauge unification | ~24 | No | Partially |
+| SO(10) GUT | Gauge + partial Yukawa | ~15–20 | No | Partially |
+| A₄ flavor symmetry [4] | Neutrino mixing | ~8 | No | TBM only |
+| String landscape [3] | None specific | 10⁵⁰⁰ vacua | No | No |
+| **Torus knot (this work)** | **23** | **4 + 3 integers** | **Yes** | **Yes** |
 
 ---
 
-## S14. Computational Verification
+## S19. Computational Verification
 
 All predictions are reproducible from the open-source simulation code:
 
 ```bash
-python3 -m simulations.nwt --koide      # Lepton Koide analysis
-python3 -m simulations.nwt --quarks     # Quark mass predictions + EW/CKM/PMNS
-python3 -m simulations.nwt --neutrino   # Neutrino masses and mixing
-python3 -m simulations.nwt --self-energy # α emergence
-python3 -m simulations.nwt --find-radii # Self-consistent torus radii
+python3 -m simulations.nwt --koide        # Lepton Koide analysis
+python3 -m simulations.nwt --quarks       # Quark mass predictions + EW/CKM/PMNS
+python3 -m simulations.nwt --neutrino     # Neutrino masses and mixing
+python3 -m simulations.nwt --self-energy  # α emergence
+python3 -m simulations.nwt --find-radii   # Self-consistent torus radii
+python3 -m simulations.nwt --pythagorean  # Pythagorean mode catalogs + decay chains
+python3 -m simulations.nwt --skilton      # Skilton analysis
 ```
 
 No fitting routines or optimization are used. All predictions are computed from closed-form expressions evaluated at the geometric angle.
