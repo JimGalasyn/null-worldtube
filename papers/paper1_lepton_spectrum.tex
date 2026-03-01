@@ -29,7 +29,7 @@
 \maketitle
 
 \begin{abstract}
-We derive all parameters of the Standard Model --- nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix --- from a single geometric object: a photon confined to a $(2,1)$ torus knot. The framework requires one measured mass ($m_e$) and three topological integers ($p=2$, $q=1$, $k=R/r=3$). The fine-structure constant $\alpha$ follows from Skilton's integer right triangle $(88, 105, 137)$, whose generators $(11, 4)$ are NWT quantum numbers (Paper~4). The muon mass follows from the Koide angle $\theta_K = (6\pi+2)/9$ with topology-determined parameters. The tube energy scale $\Lambda_{\text{tube}}$ follows from the Lenz formula $m_p/m_e = 6\pi^5 = 2k \times \pi^{p^2+q^2}$. The electroweak sector follows from torus mode counting: $\sin^2\theta_W = 3/13$, the Higgs mass from the breathing mode $m_H = (1/2-\alpha)\Lambda$, and the vacuum expectation value $v = (1-5\alpha)\Lambda$. The CKM phase is the knot deficit angle $\delta_{CP} = \pi-2$. The PMNS solar angle shares the Weinberg denominator: $\sin^2\theta_{12} = 4/13$. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7\%. The Standard Model is geometry.
+We derive all parameters of the Standard Model --- nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix --- from a single geometric object: a photon confined to a $(2,1)$ torus knot. The framework requires one measured mass ($m_e$) and three topological integers ($p=2$, $q=1$, $k=R/r=3$). The fine-structure constant $\alpha$ follows from Skilton's integer right triangle $(88, 105, 137)$, whose generators $(11, 4)$ are null worldtube (NWT) quantum numbers (Paper~3). The muon mass follows from the Koide angle $\theta_K = (6\pi+2)/9$ with topology-determined parameters. The tube energy scale $\Lambda_{\text{tube}}$ follows from the Lenz formula $m_p/m_e = 6\pi^5 = 2k \times \pi^{p^2+q^2}$. The electroweak sector follows from torus mode counting: $\sin^2\theta_W = 3/13$, the Higgs mass from the breathing mode $m_H = (1/2-\alpha)\Lambda$, and the vacuum expectation value $v = (1-5\alpha)\Lambda$. The CKM phase is the knot deficit angle $\delta_{CP} = \pi-2$. The PMNS solar angle shares the Weinberg denominator: $\sin^2\theta_{12} = 4/13$. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7\%. The Standard Model is geometry.
 \end{abstract}
 
 %----------------------------------------------------------------------
@@ -38,7 +38,7 @@ We derive all parameters of the Standard Model --- nine charged fermion masses, 
 
 The Standard Model of particle physics contains 26 free parameters: 9 charged fermion masses, 3 gauge couplings, 2 Higgs sector parameters, 4 CKM mixing parameters, 3 neutrino masses, 4 PMNS mixing parameters, and the QCD vacuum angle~\cite{pdg2022}. These parameters are measured, not derived. Despite five decades of effort --- grand unification~\cite{georgi1974}, string theory~\cite{bousso2000}, discrete flavor symmetries~\cite{ma2001} --- no framework has derived them from a smaller set of inputs.
 
-We present such a framework. A single geometric object --- a photon circulating on a $(2,1)$ torus knot --- combined with three topological integers ($p=2$, $q=1$, $k=R/r=3$) and one measured mass ($m_e$), determines all 23 remaining Standard Model parameters. The three quantities previously treated as additional inputs --- $\alpha$, $m_\mu$, and $\Lambda_{\text{tube}}$ --- are now derivable from the integers alone (Paper~4). The median prediction error is 0.7\%.
+We present such a framework. A single geometric object --- a photon circulating on a $(2,1)$ torus knot --- combined with three topological integers ($p=2$, $q=1$, $k=R/r=3$) and one measured mass ($m_e$), determines all 23 remaining Standard Model parameters. The three quantities previously treated as additional inputs --- $\alpha$, $m_\mu$, and $\Lambda_{\text{tube}}$ --- are now derivable from the integers alone (Paper~3). The median prediction error is 0.7\%.
 
 The key results are:
 \begin{itemize}
@@ -49,9 +49,9 @@ The key results are:
   \item The Higgs mass is the breathing mode: $m_H = (1/2 - \alpha)\Lambda_{\text{tube}}$
 \end{itemize}
 
-These are not fits. Each formula contains only the integers $(p,q,N_c)$, the coupling $\alpha$, and the tube energy scale $\Lambda_{\text{tube}} = \hbar c/(\alpha R_p)$. The derivation chain is:
+These are not fits. Each formula contains only the integers $(p,q,k)$, the coupling $\alpha$, and the tube energy scale $\Lambda_{\text{tube}} = \hbar c/(\alpha R_p)$. The derivation chain is:
 \begin{equation}
-  (2,1)\ \text{knot} + N_c\!=\!3 \xrightarrow{\alpha = r/R} m_e \xrightarrow{\theta_K} \text{9 masses} \xrightarrow{\text{modes}} \text{gauge sector} \xrightarrow{\text{Koide}} \text{mixing matrices}
+  (2,1)\ \text{knot} + k\!=\!3 \xrightarrow{\alpha = r/R} m_e \xrightarrow{\theta_K} \text{9 masses} \xrightarrow{\text{modes}} \text{gauge sector} \xrightarrow{\text{Koide}} \text{mixing matrices}
   \label{eq:chain}
 \end{equation}
 
@@ -96,12 +96,12 @@ This single energy scale, combined with the topological integers and $\alpha$, g
 
 \subsection{The Koide angle}
 
-The three-generation structure arises from $N_c = 3$: baryons form Borromean links of three torus knots, imposing $\mathbb{Z}_3$ symmetry on the vacuum. The Koide angle is:
+The three-generation structure arises from the torus aspect ratio $k = R/r = 3$: three harmonic modes of the $k=3$ cavity impose $\mathbb{Z}_3$ symmetry on the vacuum. The Koide angle is:
 \begin{equation}
-  \theta_K = \frac{p}{N_c}\left(\pi + \frac{q}{N_c}\right) = \frac{6\pi + 2}{9} = 2.31662~\text{rad},
+  \theta_K = \frac{p}{k}\left(\pi + \frac{q}{k}\right) = \frac{6\pi + 2}{9} = 2.31662~\text{rad},
   \label{eq:koide-angle}
 \end{equation}
-decomposing as $2\pi/3$ ($\mathbb{Z}_3$ base symmetry) $+$ $2/9$ (winding correction $pq/N_c^2$). This matches the empirical fit from PDG masses to 0.00005\%~\cite{koide1983}.
+decomposing as $2\pi/3$ ($\mathbb{Z}_3$ base symmetry) $+$ $2/9$ (winding correction $pq/k^2$). This matches the empirical fit from PDG masses to 0.00005\%~\cite{koide1983}.
 
 Masses follow from $\sqrt{m_i} = (S/3)(1 + \sqrt{2}\cos(\theta_K + 2\pi i/3))$. The Koide ratio $Q = 2/3$ is automatic.
 
@@ -113,15 +113,15 @@ The angle generalizes to quarks through the fractional electric charge:
   \label{eq:quark-koide}
 \end{equation}
 
-Borromean linking reduces the angle: the denominator $1 + 3|q_{\text{em}}|$ counts charge channels in the linking topology. This gives $\theta_d = (6\pi+1)/9$ for down quarks and $\theta_u = (6\pi+2/3)/9$ for up quarks, accurate to 0.85\% and 0.41\% respectively.
+The aspect ratio $k=3$ reduces the angle: the denominator $1 + 3|q_{\text{em}}|$ counts charge channels in the harmonic mode structure. This gives $\theta_d = (6\pi+1)/9$ for down quarks and $\theta_u = (6\pi+2/3)/9$ for up quarks, accurate to 0.85\% and 0.41\% respectively.
 
 \subsection{Anchor masses}
 
 The heaviest fermion in each sector is anchored to $\Lambda_{\text{tube}}$ by torus knot invariants:
 \begin{align}
-  m_t &= \frac{p}{N_c}\Lambda = \frac{2}{3}\Lambda \quad (1.3\%), \label{eq:mt} \\
+  m_t &= \frac{p}{k}\Lambda = \frac{2}{3}\Lambda \quad (1.3\%), \label{eq:mt} \\
   m_b &= \sqrt{p^2+q^2}\;\alpha\Lambda = \sqrt{5}\;\alpha\Lambda \quad (0.2\%), \label{eq:mb} \\
-  m_\tau &= \frac{p^2(p^2+q^2)}{N_c(2N_c+1)}\;\alpha\Lambda = \frac{20}{21}\alpha\Lambda \quad (0.001\%). \label{eq:mtau}
+  m_\tau &= \frac{p^2(p^2+q^2)}{k(2k+1)}\;\alpha\Lambda = \frac{20}{21}\alpha\Lambda \quad (0.001\%). \label{eq:mtau}
 \end{align}
 
 The top quark couples directly to the tube geometry ($\alpha^0$). The bottom and tau couple through the electromagnetic self-energy ($\alpha^1$), with coefficients from the knot geodesic length $\sqrt{5}$ and the surface-area/group-order ratio $20/21$.
@@ -130,7 +130,7 @@ The top quark couples directly to the tube geometry ($\alpha^0$). The bottom and
 
 \begin{table}[h]
 \centering
-\caption{All nine charged fermion masses. Inputs: $\alpha$, $m_e$, $m_\mu$.}
+\caption{All nine charged fermion masses from one measured mass ($m_e$) and topological integers ($p=2$, $q=1$, $k=3$). $\alpha$ and $m_\mu$ are derivable from the integers (Paper~3).}
 \label{tab:nine-masses}
 \begin{tabular}{@{}llccc@{}}
 \toprule
@@ -149,7 +149,7 @@ $t$ & $(2/3)\Lambda$ & 170\,447 & $172\,760 \pm 300$ & 1.3\% \\
 \end{tabular}
 
 \medskip
-\small $^*$Within PDG uncertainty band. All predictions use only $(p,q,N_c) = (2,1,3)$, $\alpha$, and $\Lambda_{\text{tube}}$.
+\small $^*$Within PDG uncertainty band. All predictions use only $(p,q,k) = (2,1,3)$, $\alpha$, and $\Lambda_{\text{tube}}$.
 \end{table}
 
 %----------------------------------------------------------------------
@@ -212,7 +212,7 @@ The leading mixing angle is the Koide winding correction itself:
   \label{eq:cabibbo}
 \end{equation}
 
-The Cabibbo angle \emph{is} $pq/N_c^2 = 2/9$ radians --- the same term that shifts $\theta_K$ from the pure $\mathbb{Z}_3$ value.
+The Cabibbo angle \emph{is} $pq/k^2 = 2/9$ radians --- the same term that shifts $\theta_K$ from the pure $\mathbb{Z}_3$ value.
 
 \subsection{Higher-order CKM elements}
 
@@ -251,17 +251,17 @@ That $\sin^2\theta_W = 3/13$ and $\sin^2\theta_{12} = 4/13$ arise from the \emph
 \subsection{Atmospheric angle}
 
 \begin{equation}
-  \sin^2\theta_{23} = \frac{p^2+q^2}{N_c^2} = \frac{5}{9} = 0.5556 \quad (\text{measured: } 0.561,\ 1.0\%).
+  \sin^2\theta_{23} = \frac{p^2+q^2}{k^2} = \frac{5}{9} = 0.5556 \quad (\text{measured: } 0.561,\ 1.0\%).
   \label{eq:atmospheric}
 \end{equation}
 
-The numerator is the knot metric $p^2+q^2 = 5$; the denominator is $N_c^2 = 9$.
+The numerator is the knot metric $p^2+q^2 = 5$; the denominator is $k^2 = 9$.
 
 \subsection{Reactor angle}
 
 The reactor angle measures the Koide phase mismatch between charged lepton and neutrino sectors:
 \begin{equation}
-  \sin^2\theta_{13} = \frac{(\theta_\nu - \theta_K)^2}{N_c} = \frac{\Delta\theta^2}{3} = 0.0218 \quad (\text{measured: } 0.0220,\ 0.6\%).
+  \sin^2\theta_{13} = \frac{(\theta_\nu - \theta_K)^2}{k} = \frac{\Delta\theta^2}{3} = 0.0218 \quad (\text{measured: } 0.0220,\ 0.6\%).
   \label{eq:reactor}
 \end{equation}
 
@@ -280,7 +280,7 @@ Normal mass ordering ($m_1 \approx 0$) is required by the extended Koide structu
 
 \begin{table}[h]
 \centering
-\caption{All 23 predictions from 1 mass ($m_e$) and 3 integers ($p=2$, $q=1$, $k=R/r=3$). The former inputs $\alpha$, $m_\mu$, $\Lambda_{\text{tube}}$ are derivable from the integers (Paper~4).}
+\caption{All 23 predictions from 1 mass ($m_e$) and 3 integers ($p=2$, $q=1$, $k=R/r=3$). The former inputs $\alpha$, $m_\mu$, $\Lambda_{\text{tube}}$ are derivable from the integers (Paper~3).}
 \label{tab:scorecard}
 \small
 \begin{tabular}{@{}clllc@{}}
@@ -348,7 +348,7 @@ The formulas are derived from the torus knot topology but not yet from a complet
 \section{Conclusion}
 \label{sec:conclusion}
 
-The Standard Model has 26 parameters. We have shown that 23 of them follow from Maxwell's equations on a $(2,1)$ torus knot, given one measured input ($m_e$) and three topological integers ($p=2$, $q=1$, $k=R/r=3$). The three quantities previously treated as inputs --- $\alpha$, $m_\mu$, and $\Lambda_{\text{tube}}$ --- are now derivable from the integers alone (Paper~4). Every coefficient is a function of the three integers. The median prediction error is 0.7\% across quantities spanning fourteen orders of magnitude.
+The Standard Model has 26 parameters. We have shown that 23 of them follow from Maxwell's equations on a $(2,1)$ torus knot, given one measured input ($m_e$) and three topological integers ($p=2$, $q=1$, $k=R/r=3$). The three quantities previously treated as inputs --- $\alpha$, $m_\mu$, and $\Lambda_{\text{tube}}$ --- are now derivable from the integers alone (Paper~3). Every coefficient is a function of the three integers. The median prediction error is 0.7\% across quantities spanning fourteen orders of magnitude.
 
 The question ``why these parameters?'' reduces to ``why this knot?'' --- and the $(2,1)$ torus knot is the simplest closed curve that produces spin-$\tfrac{1}{2}$ and breaks $p\leftrightarrow q$ symmetry. The aspect ratio $k=R/r=3$ is the lowest value admitting a Pythagorean resonance $(3,4,5)$, making the proton the unique stable baryon. There is nothing to tune. The Standard Model is not a collection of arbitrary constants. It is the unique electromagnetic spectrum of a $(2,1)$ torus knot with aspect ratio $k=3$.
 

@@ -9,7 +9,7 @@
 
 ## Abstract
 
-We derive all parameters of the Standard Model — nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix — from a single geometric object: a photon confined to a (2,1) torus knot. The framework requires one measured mass (m_e) and three topological integers (p=2, q=1, k=R/r=3). The fine-structure constant α follows from Skilton's integer right triangle (88, 105, 137), whose generators (11, 4) are NWT quantum numbers (Paper 4 [ref]). The muon mass follows from the Koide angle θ_K = (6π+2)/9 with topology-determined parameters. The tube energy scale Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The electroweak sector follows from torus mode counting: sin²θ_W = 3/13, the Higgs mass from the breathing mode m_H = (1/2−α)Λ, and the vacuum expectation value v = (1−5α)Λ. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7%.
+We derive all parameters of the Standard Model — nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix — from a single geometric object: a photon confined to a (2,1) torus knot. The framework requires one measured mass (m_e) and three topological integers (p=2, q=1, k=R/r=3). The fine-structure constant α follows from Skilton's integer right triangle (88, 105, 137), whose generators (11, 4) are null worldtube (NWT) quantum numbers (Paper 3 [ref]). The muon mass follows from the Koide angle θ_K = (6π+2)/9 with topology-determined parameters. The tube energy scale Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The electroweak sector follows from torus mode counting: sin²θ_W = 3/13, the Higgs mass from the breathing mode m_H = (1/2−α)Λ, and the vacuum expectation value v = (1−5α)Λ. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7%.
 
 The same geometry determines the dynamics. A generalized Pythagorean resonance condition (kp)² + q² = N² on the unwrapped torus, where k = R/r is the aspect ratio, classifies all composite particles: k=1 leptons, k=2 mesons, k=3 baryons, k=4 tetraquarks, k=5 pentaquarks. The (3,4,5) Pythagorean triple at k=3 makes the proton the unique stable baryon; the absence of any fundamental triple at k=2 makes all mesons unstable. A four-sector taxonomy — TM modes (visible matter), TE modes (dark matter), geometric modes (pions), and open surfaces (neutrinos) — explains the three-timescale decay hierarchy: strong (10⁻²³ s), electromagnetic (10⁻¹⁷ s), weak (10⁻⁸ s).
 
@@ -21,7 +21,7 @@ Complete decay chains for seven representative mesons, traced from initial state
 
 The Standard Model of particle physics contains 26 free parameters: 9 charged fermion masses, 3 gauge couplings, 2 Higgs sector parameters, 4 CKM mixing parameters, 3 neutrino masses, 4 PMNS mixing parameters, and the QCD vacuum angle [1]. These parameters are measured, not derived. Despite five decades of effort — grand unification [2], string theory [3], discrete flavor symmetries [4] — no framework has derived them from a smaller set of inputs.
 
-We present such a framework. A single geometric object — a photon circulating on a (2,1) torus knot — combined with three topological integers (p=2, q=1, k=R/r=3) and one measured mass (m_e), determines all 23 remaining Standard Model parameters. The three quantities previously treated as additional inputs — α, m_μ, and Λ_tube — are now derivable from the integers alone (Paper 4 [ref]). The median prediction error is 0.7%.
+We present such a framework. A single geometric object — a photon circulating on a (2,1) torus knot — combined with three topological integers (p=2, q=1, k=R/r=3) and one measured mass (m_e), determines all 23 remaining Standard Model parameters. The three quantities previously treated as additional inputs — α, m_μ, and Λ_tube — are now derivable from the integers alone (Paper 3 [ref]). The median prediction error is 0.7%.
 
 The key static results are:
 - The fine-structure constant α emerges as the torus aspect ratio r/R
@@ -34,7 +34,7 @@ But does the same geometry determine the dynamics? We show that it does. A gener
 
 The derivation chain is:
 
-$$\text{(2,1) knot} + N_c\!=\!3 \xrightarrow{\alpha = r/R} m_e \xrightarrow{\theta_K} \text{9 masses} \xrightarrow{\text{mode counting}} \text{gauge sector} \xrightarrow{\text{Pythagorean condition}} \text{resonance catalog} \xrightarrow{\text{sector crossing}} \text{decay dynamics}$$
+$$\text{(2,1) knot} + k\!=\!3 \xrightarrow{\alpha = r/R} m_e \xrightarrow{\theta_K} \text{9 masses} \xrightarrow{\text{mode counting}} \text{gauge sector} \xrightarrow{\text{Pythagorean condition}} \text{resonance catalog} \xrightarrow{\text{sector crossing}} \text{decay dynamics}$$
 
 ---
 
@@ -66,7 +66,7 @@ The proton torus radius R_p defines the electroweak scale:
 
 $$\Lambda_\text{tube} = \frac{\hbar c}{\alpha R_p} = 255.7\ \text{GeV}$$
 
-This single energy scale, combined with the topological integers and α, generates all mass predictions in the model. Section VII.D–E shows that m_p can be derived from (α, m_e, N_c) alone via Cornell potential minimization, yielding 945.7 MeV (0.8% error). This makes Λ_tube derivable rather than independent, reducing the effective input count from four to three. The derivation uses two variational coefficients (3/2 for kinetic energy, 2 for Coulomb) that are not yet derived from NWT dynamics — see Section XI for caveats.
+This single energy scale, combined with the topological integers and α, generates all mass predictions in the model. Section VII.D–E shows that m_p can be derived from (α, m_e, k) alone via Cornell potential minimization, yielding 945.7 MeV (0.8% error). This makes Λ_tube derivable rather than independent, reducing the effective input count from four to three. The derivation uses two variational coefficients (3/2 for kinetic energy, 2 for Coulomb) that are not yet derived from NWT dynamics — see Section XI for caveats.
 
 ---
 
@@ -74,11 +74,11 @@ This single energy scale, combined with the topological integers and α, generat
 
 ### A. The Koide angle
 
-The three-generation structure arises from N_c = 3: baryons form Borromean links of three torus knots, imposing Z₃ symmetry on the vacuum. The Koide angle is:
+The three-generation structure arises from the torus aspect ratio k = R/r = 3: three harmonic modes of the k=3 cavity impose Z₃ symmetry on the vacuum. The Koide angle is:
 
-$$\theta_K = \frac{p}{N_c}\left(\pi + \frac{q}{N_c}\right) = \frac{6\pi + 2}{9} = 2.31662\ \text{rad}$$
+$$\theta_K = \frac{p}{k}\left(\pi + \frac{q}{k}\right) = \frac{6\pi + 2}{9} = 2.31662\ \text{rad}$$
 
-decomposing as 2π/3 (Z₃ base symmetry) + 2/9 (winding correction pq/N_c²). This matches the empirical fit from PDG masses to 0.00005% [6].
+decomposing as 2π/3 (Z₃ base symmetry) + 2/9 (winding correction pq/k²). This matches the empirical fit from PDG masses to 0.00005% [6].
 
 Masses follow from √m_i = (S/3)(1 + √2 cos(θ_K + 2πi/3)). The Koide ratio Q = 2/3 is automatic.
 
@@ -88,23 +88,23 @@ The angle generalizes to quarks through the fractional electric charge:
 
 $$\theta = \frac{6\pi + \frac{2}{1 + 3|q_\text{em}|}}{9}$$
 
-Borromean linking reduces the angle: the denominator 1 + 3|q_em| counts charge channels in the linking topology. This gives θ_d = (6π+1)/9 for down quarks and θ_u = (6π+2/3)/9 for up quarks, accurate to 0.85% and 0.41% respectively.
+The aspect ratio k=3 reduces the angle: the denominator 1 + 3|q_em| counts charge channels in the harmonic mode structure. This gives θ_d = (6π+1)/9 for down quarks and θ_u = (6π+2/3)/9 for up quarks, accurate to 0.85% and 0.41% respectively.
 
 ### C. Anchor masses
 
 The heaviest fermion in each sector is anchored to Λ_tube by torus knot invariants:
 
-$$m_t = \frac{p}{N_c}\Lambda = \frac{2}{3}\Lambda \quad (1.3\%)$$
+$$m_t = \frac{p}{k}\Lambda = \frac{2}{3}\Lambda \quad (1.3\%)$$
 
 $$m_b = \sqrt{p^2\!+\!q^2}\ \alpha\Lambda = \sqrt{5}\ \alpha\Lambda \quad (0.2\%)$$
 
-$$m_\tau = \frac{p^2(p^2\!+\!q^2)}{N_c(2N_c\!+\!1)}\ \alpha\Lambda = \frac{20}{21}\alpha\Lambda \quad (0.001\%)$$
+$$m_\tau = \frac{p^2(p^2\!+\!q^2)}{k(2k\!+\!1)}\ \alpha\Lambda = \frac{20}{21}\alpha\Lambda \quad (0.001\%)$$
 
 The top quark couples directly to the tube geometry (α⁰). The bottom and tau couple through the electromagnetic self-energy (α¹), with coefficients from the knot geodesic length √5 and the surface-area/group-order ratio 20/21.
 
 ### D. Nine-mass table
 
-**Table I.** All nine charged fermion masses. Inputs: α, m_e, m_μ.
+**Table I.** All nine charged fermion masses from one measured mass (m_e) and topological integers (p=2, q=1, k=3). α and m_μ are derivable from the integers (Paper 3 [ref]).
 
 | Particle | Formula chain | Predicted (MeV) | Measured (MeV) | Error |
 |----------|--------------|----------------|----------------|-------|
@@ -118,7 +118,7 @@ The top quark couples directly to the tube geometry (α⁰). The bottom and tau 
 | b | √5 αΛ | 4172 | 4180 ± 30 | 0.2% |
 | t | (2/3)Λ | 170447 | 172760 ± 300 | 1.3% |
 
-*Within PDG uncertainty band. All predictions use only (p,q,N_c) = (2,1,3), α, and Λ_tube.
+*Within PDG uncertainty band. All predictions use only (p,q,k) = (2,1,3), α, and Λ_tube.
 
 ---
 
@@ -166,7 +166,7 @@ The Cabibbo angle is the Koide winding correction itself:
 
 $$V_{us} = \sin\frac{2}{9} = 0.2214 \quad (\text{measured: } 0.2243,\ 1.3\%)$$
 
-The Cabibbo angle *is* pq/N_c² = 2/9 radians — the same term that shifts θ_K from the pure Z₃ value. Higher-order CKM elements:
+The Cabibbo angle *is* pq/k² = 2/9 radians — the same term that shifts θ_K from the pure Z₃ value. Higher-order CKM elements:
 
 $$V_{cb} = \frac{|\Delta B|}{p^2\!+\!q^2} = \frac{|\Delta B|}{5} = 0.0429 \quad (\text{measured: } 0.0408,\ 5.1\%)$$
 
@@ -184,9 +184,9 @@ $$\sin^2\theta_{12} = \frac{p^2}{13} = \frac{4}{13} = 0.3077 \quad (\text{measur
 
 That sin²θ_W = 3/13 and sin²θ₁₂ = 4/13 arise from the *same* torus mode structure is a non-trivial consistency check.
 
-$$\sin^2\theta_{23} = \frac{p^2\!+\!q^2}{N_c^2} = \frac{5}{9} = 0.5556 \quad (\text{measured: } 0.561,\ 1.0\%)$$
+$$\sin^2\theta_{23} = \frac{p^2\!+\!q^2}{k^2} = \frac{5}{9} = 0.5556 \quad (\text{measured: } 0.561,\ 1.0\%)$$
 
-$$\sin^2\theta_{13} = \frac{(\theta_\nu - \theta_K)^2}{N_c} = \frac{\Delta\theta^2}{3} = 0.0218 \quad (\text{measured: } 0.0220,\ 0.6\%)$$
+$$\sin^2\theta_{13} = \frac{(\theta_\nu - \theta_K)^2}{k} = \frac{\Delta\theta^2}{3} = 0.0218 \quad (\text{measured: } 0.0220,\ 0.6\%)$$
 
 $$\delta_\text{CP}^\nu = \pi \quad (\text{measured: } 177° \pm 20°,\ 1.7\%)$$
 
@@ -196,13 +196,13 @@ Normal mass ordering (m₁ ≈ 0) is required by the extended Koide structure.
 
 ## V. Complete Static Scorecard
 
-**Table II.** All 23 predictions from 4 inputs (α, m_e, m_μ, Λ_tube) and 3 integers (p=2, q=1, N_c=3).
+**Table II.** All 23 predictions from 1 mass (m_e) and 3 integers (p=2, q=1, k=R/r=3). The former inputs α, m_μ, Λ_tube are derivable from the integers (Paper 3 [ref]).
 
 | # | Parameter | Formula | Predicted | Measured | Error |
 |---|-----------|---------|----------|---------|-------|
 | | **Masses** | | | | |
 | 1 | m_τ | (20/21)αΛ | 1776.9 MeV | 1776.86 ± 0.12 | 0.001% |
-| 2 | m_t | (p/N_c)Λ | 170.4 GeV | 172.76 ± 0.30 | 1.3% |
+| 2 | m_t | (p/k)Λ | 170.4 GeV | 172.76 ± 0.30 | 1.3% |
 | 3 | m_b | √5 αΛ | 4172 MeV | 4180 ± 30 | 0.2% |
 | 4 | m_c | Koide(θ_u) | 1265 MeV | 1270 ± 20 | 0.4% |
 | 5 | m_s | Koide(θ_d) | 94.1 MeV | 93.4 ± 0.8 | 0.7% |
@@ -230,7 +230,7 @@ Normal mass ordering (m₁ ≈ 0) is required by the extended Koide structure.
 
 **Median error: 0.7%. Maximum: 9.3% (m_u, within PDG uncertainty). RMS: 2.6%.**
 
-The 23 static predictions of Table II establish that the (2,1) torus knot geometry encodes the Standard Model spectrum. Moreover, the tube energy scale Λ_tube — previously a fourth input — is now derivable: the proton mass follows from (α, m_e, N_c) via Cornell potential minimization (Section VII.D–E), yielding m_p = 945.7 MeV (0.8%). With this derivation, the effective inputs reduce to three (α, m_e, m_μ), with the caveat that two variational coefficients are not yet first-principles (Section XI).
+The 23 static predictions of Table II establish that the (2,1) torus knot geometry encodes the Standard Model spectrum. Moreover, the tube energy scale Λ_tube — previously a fourth input — is now derivable: the proton mass follows from (α, m_e, k) via Cornell potential minimization (Section VII.D–E), yielding m_p = 945.7 MeV (0.8%). With this derivation, the effective inputs reduce to one mass (m_e) and three integers (p=2, q=1, k=3), with the caveat that two variational coefficients are not yet first-principles (Section XI). See Paper 3 [ref] for the complete derivation chain.
 
 But a spectrum alone does not rule out coincidence. A stronger test is dynamics: does the same geometry determine *how* particles decay? The answer, developed in Sections VI–IX, is yes.
 
@@ -371,9 +371,9 @@ Selection rules follow from the sector-crossing type:
 
 The pion mass m_π = 2m_e/α = 140.1 MeV (Section VI.C) connects to the QCD string tension through the adjoint Casimir:
 
-$$\sigma = \frac{N_c^2\, m_\pi^2}{\hbar c} = \frac{9 \times (140.05)^2}{197.33} = 894.6\ \text{MeV/fm}$$
+$$\sigma = \frac{k^2\, m_\pi^2}{\hbar c} = \frac{9 \times (140.05)^2}{197.33} = 894.6\ \text{MeV/fm}$$
 
-Lattice QCD gives σ ≈ 900 MeV/fm (equivalently √σ ≈ 420 MeV). Error: 0.6%. The N_c² factor is the adjoint Casimir for SU(N_c). This produces the correct string tension but the geometric derivation from torus linking topology — *why* the adjoint rather than fundamental Casimir — is not yet established.
+Lattice QCD gives σ ≈ 900 MeV/fm (equivalently √σ ≈ 420 MeV). Error: 0.6%. The k² factor is the adjoint Casimir for SU(k). This produces the correct string tension but the geometric derivation from torus topology — *why* the adjoint rather than fundamental Casimir — is not yet established.
 
 ### E. The proton mass
 
@@ -387,9 +387,9 @@ $$m_p = 2\sqrt{\sigma\,\hbar c\left(\frac{3}{2} - 2\alpha_s\right)} = 945.7\ \te
 
 Observed: 938.3 MeV. Error: 0.8%. In closed form:
 
-$$\frac{m_p}{m_e} = \frac{4N_c}{\alpha}\sqrt{\frac{3}{2} - 32\alpha} = 1850.6$$
+$$\frac{m_p}{m_e} = \frac{4k}{\alpha}\sqrt{\frac{3}{2} - 32\alpha} = 1850.6$$
 
-The energy budget: kinetic 560 MeV (59%), Coulomb −87 MeV (−9%), string 473 MeV (50%). The kinetic coefficient 3/2 is a variational estimate (not NWT-derived), and the Coulomb coefficient 2 needs geometric justification from torus linking. These two coefficients are the remaining gap — see Section XI. Full derivation in Supplementary S17.
+The energy budget: kinetic 560 MeV (59%), Coulomb −87 MeV (−9%), string 473 MeV (50%). The kinetic coefficient 3/2 is a variational estimate (not NWT-derived), and the Coulomb coefficient 2 needs geometric justification from torus topology. These two coefficients are the remaining gap — see Section XI. Full derivation in Supplementary S17.
 
 ---
 
@@ -545,7 +545,7 @@ A geometric observation: 88 + 105 = 193 ≈ λ_C/2 = 193.1 fm, where λ_C is the
 
 Skilton found the *what*: integer right triangles encode the fundamental constants, with (88, 105, 137) being uniquely determined. The null worldtube framework provides the *why*: Pythagorean triples are the standing-wave resonance condition on a torus. The equation (kp)² + q² = N² selects which modes can exist as stable particles. The (88, 105, 137) triple and the (3, 4, 5) triple are both manifestations of the same principle: the geometry of a torus selects integer right triangles as allowed harmonics.
 
-Crucially, the generators of the (88, 105, 137) triple are (p_s, q_s) = (11, 4), satisfying a = p_s² − q_s² = 105, b = 2p_s q_s = 88, c = p_s² + q_s² = 137. These generators are NWT quantum numbers: p_s = 2k + p² + q² = 2(3) + 4 + 1 = 11 and q_s = p² = 4. This identification makes α derivable from the three topological integers alone — no measurement required. Given α⁻¹ = √(c² + π²) = √(137² + π²) = 137.036016 (0.12 ppm from CODATA), the fine-structure constant follows purely from (p, q, k) = (2, 1, 3). See Paper 4 [ref] for the full derivation.
+Crucially, the generators of the (88, 105, 137) triple are (p_s, q_s) = (11, 4), satisfying a = p_s² − q_s² = 105, b = 2p_s q_s = 88, c = p_s² + q_s² = 137. These generators are NWT quantum numbers: p_s = 2k + p² + q² = 2(3) + 4 + 1 = 11 and q_s = p² = 4. This identification makes α derivable from the three topological integers alone — no measurement required. Given α⁻¹ = √(c² + π²) = √(137² + π²) = 137.036016 (0.12 ppm from CODATA), the fine-structure constant follows purely from (p, q, k) = (2, 1, 3). See Paper 3 [ref] for the full derivation.
 
 ### D. Bibliographic record
 
@@ -572,7 +572,7 @@ No previous framework has derived all Standard Model parameters from a geometric
 | String landscape [3] | None specific | 10⁵⁰⁰ vacua | No | No |
 | **Torus knot (this work)** | **23** | **1 + 3 integers†** | **Yes** | **Yes** |
 
-†The single measured input is m_e. The three remaining former inputs — α, m_μ, and Λ_tube — are derivable from the topological integers (p=2, q=1, k=3): α from Skilton's integer right triangle with NWT generators, m_μ from the topology-determined Koide angle, and Λ_tube from the Lenz formula m_p/m_e = 6π⁵ = 2k × π^(p²+q²). See Paper 4 [ref] for the complete derivation chain.
+†The single measured input is m_e. The three remaining former inputs — α, m_μ, and Λ_tube — are derivable from the topological integers (p=2, q=1, k=3): α from Skilton's integer right triangle with NWT generators, m_μ from the topology-determined Koide angle, and Λ_tube from the Lenz formula m_p/m_e = 6π⁵ = 2k × π^(p²+q²). See Paper 3 [ref] for the complete derivation chain.
 
 Several internal consistencies support the framework:
 
@@ -594,7 +594,7 @@ Several internal consistencies support the framework:
 
 ## XII. Conclusion
 
-The Standard Model has 26 parameters. We have shown that 23 of them follow from Maxwell's equations on a (2,1) torus knot, given one measured input (m_e) and three topological integers (p=2, q=1, k=R/r=3). The three quantities previously treated as inputs — α, m_μ, and Λ_tube — are now derivable: α follows from Skilton's integer right triangle whose generators are NWT quantum numbers (Section X.C); m_μ follows from the Koide formula with topology-determined angle; and Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, structurally explained as 2k × π^(p²+q²) (Paper 4 [ref]). Every coefficient is a function of the three integers. The median prediction error is 0.7% across quantities spanning fourteen orders of magnitude.
+The Standard Model has 26 parameters. We have shown that 23 of them follow from Maxwell's equations on a (2,1) torus knot, given one measured input (m_e) and three topological integers (p=2, q=1, k=R/r=3). The three quantities previously treated as inputs — α, m_μ, and Λ_tube — are now derivable: α follows from Skilton's integer right triangle whose generators are NWT quantum numbers (Section X.C); m_μ follows from the Koide formula with topology-determined angle; and Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, structurally explained as 2k × π^(p²+q²) (Paper 3 [ref]). Every coefficient is a function of the three integers. The median prediction error is 0.7% across quantities spanning fourteen orders of magnitude.
 
 The same geometry determines the dynamics. The Pythagorean resonance condition (kp)² + q² = N² classifies all composite particles by aspect ratio, explains proton stability through the (3,4,5) triple, and accounts for universal meson instability through the absence of any fundamental triple at k=2. A four-sector taxonomy — TM, TE, geometric, and open — generates the three-timescale decay hierarchy from three types of sector crossing. Complete decay chains for seven representative mesons conserve energy at every step. The framework does not merely assign parameters — it predicts which particles are stable, which decay channels are available, and how energy flows through the cascade to stable endpoints.
 

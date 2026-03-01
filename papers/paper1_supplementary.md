@@ -81,11 +81,11 @@ Holds to 0.0009% with PDG masses [1]. Q = 2/3 is automatic in the parameterizati
 
 ### S5.2 Geometric derivation
 
-$$\theta_K = \frac{p}{N_c}\left(\pi + \frac{q}{N_c}\right) = \frac{2}{3}\left(\pi + \frac{1}{3}\right) = \frac{6\pi + 2}{9}$$
+$$\theta_K = \frac{p}{k}\left(\pi + \frac{q}{k}\right) = \frac{2}{3}\left(\pi + \frac{1}{3}\right) = \frac{6\pi + 2}{9}$$
 
 Decomposition:
-- 2π/3: Z₃ generation symmetry from Borromean link
-- 2/9 = pq/N_c²: toroidal-poloidal coupling through 3×3 interaction matrix
+- 2π/3: Z₃ generation symmetry from k=3 harmonic modes
+- 2/9 = pq/k²: toroidal-poloidal coupling through k×k interaction matrix
 
 Geometric value: 2.316617 rad. Fitted value: 2.316616 rad. Agreement: 0.00005%.
 
@@ -113,11 +113,11 @@ $$\theta = \frac{6\pi + \frac{2}{1 + 3|q_\text{em}|}}{9}$$
 | Down | 1/3 | (6π+1)/9 | 1.000 | 0.992 | 0.85% |
 | Up | 2/3 | (6π+2/3)/9 | 0.667 | 0.669 | 0.41% |
 
-Physical interpretation: Borromean linking reduces the Koide angle. As linking increases (|q| → 1), the angle approaches 2π/3.
+Physical interpretation: the k=3 aspect ratio reduces the Koide angle. As |q_em| increases (stronger coupling to the k=3 cavity modes), the angle approaches 2π/3.
 
 ### S6.2 Hierarchy parameter
 
-$$B^2 = 2(1 + C_F q_\text{em}^2), \quad C_F = \frac{N_c^2 - 1}{2N_c} = \frac{4}{3}$$
+$$B^2 = 2(1 + C_F q_\text{em}^2), \quad C_F = \frac{k^2 - 1}{2k} = \frac{4}{3}$$
 
 | Sector | B² predicted | B² fitted | Error |
 |--------|-------------|-----------|-------|
@@ -125,7 +125,7 @@ $$B^2 = 2(1 + C_F q_\text{em}^2), \quad C_F = \frac{N_c^2 - 1}{2N_c} = \frac{4}{
 | Down | 2.296 | 2.389 | 3.9% |
 | Up | 3.185 | 3.094 | 2.9% |
 
-The SU(3) Casimir C_F appears because color interactions enhance mass splitting.
+The SU(k) Casimir C_F appears because the k=3 harmonic mode interactions enhance mass splitting.
 
 ### S6.3 Scale invariance
 
@@ -141,9 +141,9 @@ $$\Lambda_\text{tube} = \frac{\hbar c}{\alpha R_p} = 255.67\ \text{GeV}$$
 
 ### S7.2 Top quark — geometric coupling (α⁰)
 
-$$m_t = \frac{p}{N_c}\Lambda = \frac{2}{3} \times 255{,}670 = 170{,}447\ \text{MeV} \quad (\text{PDG: } 172{,}760,\ -1.3\%)$$
+$$m_t = \frac{p}{k}\Lambda = \frac{2}{3} \times 255{,}670 = 170{,}447\ \text{MeV} \quad (\text{PDG: } 172{,}760,\ -1.3\%)$$
 
-The top quark couples directly to the tube energy. The coefficient p/N_c = 2/3 is the toroidal winding divided by color.
+The top quark couples directly to the tube energy. The coefficient p/k = 2/3 is the toroidal winding divided by the aspect ratio.
 
 ### S7.3 Bottom quark — knot geodesic × EM (α¹)
 
@@ -153,12 +153,12 @@ The factor √5 = √(p²+q²) is the geodesic length of the (2,1) torus knot on
 
 ### S7.4 Tau lepton — surface area / group order × EM (α¹)
 
-$$m_\tau = \frac{p^2(p^2+q^2)}{N_c(2N_c+1)}\ \alpha\ \Lambda = \frac{20}{21}\alpha\Lambda = 1{,}776.9\ \text{MeV} \quad (\text{PDG: } 1{,}776.86,\ +0.001\%)$$
+$$m_\tau = \frac{p^2(p^2+q^2)}{k(2k+1)}\ \alpha\ \Lambda = \frac{20}{21}\alpha\Lambda = 1{,}776.9\ \text{MeV} \quad (\text{PDG: } 1{,}776.86,\ +0.001\%)$$
 
 - Numerator: 20 = p²(p²+q²) = 4×5 (toroidal area × knot metric)
-- Denominator: 21 = N_c(2N_c+1) = 3×7 (color × extended group dimension)
+- Denominator: 21 = k(2k+1) = 3×7 (aspect ratio × extended group dimension)
 
-This is one of the most precise predictions in the model (6 ppm). The factor 2N_c+1 = 7 corresponds to the dimension of the fundamental representation of SO(2N_c+1) = SO(7); its appearance in the lepton anchor mass warrants further investigation.
+This is one of the most precise predictions in the model (6 ppm). The factor 2k+1 = 7 corresponds to the dimension of the fundamental representation of SO(2k+1) = SO(7); its appearance in the lepton anchor mass warrants further investigation.
 
 ### S7.5 Inter-generation ratios
 
@@ -166,7 +166,7 @@ $$m_c/m_t \approx \alpha \quad (0.7\%\ \text{error})$$
 
 $$m_s/m_b \approx 3\alpha \quad (2.1\%\ \text{error})$$
 
-The charm-to-top ratio IS the fine-structure constant. The strange-to-bottom ratio is α × N_c.
+The charm-to-top ratio IS the fine-structure constant. The strange-to-bottom ratio is α × k.
 
 ---
 
@@ -228,7 +228,7 @@ The up-type and down-type Koide angles differ by:
 
 $$\Delta\theta_{ud} = \theta_d - \theta_u = \frac{1}{27}\ \text{rad}$$
 
-This mismatch, amplified by the color factor 2N_c = 6, gives the Cabibbo angle:
+This mismatch, amplified by the factor 2k = 6, gives the Cabibbo angle:
 
 $$\theta_C = 6\Delta\theta_{ud} = \frac{6}{27} = \frac{2}{9}\ \text{rad} = 12.73°$$
 
@@ -268,9 +268,9 @@ The same 13-mode denominator as sin²θ_W = 3/13. The numerator p² = 4 counts t
 
 ### S10.2 Atmospheric angle from knot metric
 
-$$\sin^2\theta_{23} = \frac{p^2+q^2}{N_c^2} = \frac{5}{9} = 0.5556 \quad (\text{PDG: } 0.561)$$
+$$\sin^2\theta_{23} = \frac{p^2+q^2}{k^2} = \frac{5}{9} = 0.5556 \quad (\text{PDG: } 0.561)$$
 
-Numerator: knot metric p²+q² = 5. Denominator: N_c² = 9.
+Numerator: knot metric p²+q² = 5. Denominator: k² = 9.
 
 ### S10.3 Reactor angle from phase mismatch
 
@@ -563,7 +563,7 @@ Open questions:
 
 ## S17. Proton Mass Derivation
 
-The proton mass was previously an input to the framework through Λ_tube = ℏc/(αR_p). This section derives m_p from (α, m_e, N_c) alone, via a five-step chain that connects the electron mass to the QCD string tension and Cornell potential.
+The proton mass was previously an input to the framework through Λ_tube = ℏc/(αR_p). This section derives m_p from (α, m_e, k) alone, via a five-step chain that connects the electron mass to the QCD string tension and Cornell potential.
 
 ### S17.1 Five-step chain overview
 
@@ -571,11 +571,11 @@ The derivation proceeds:
 
 1. **Pion scale**: Λ_π = m_e/α = 70.0 MeV (confinement energy per quark)
 2. **Pion mass**: m_π = 2Λ_π = 140.1 MeV (0.34% error)
-3. **String tension**: σ = N_c² m_π²/ℏc = 894.6 MeV/fm (0.6% vs lattice)
+3. **String tension**: σ = k² m_π²/ℏc = 894.6 MeV/fm (0.6% vs lattice)
 4. **Strong coupling**: α_s = 16α = 0.1168 (already derived in S8.2)
 5. **Cornell minimization**: m_p = 2√(σℏc(3/2 − 2α_s)) = 945.7 MeV (0.8% error)
 
-Closed form: m_p/m_e = (4N_c/α)√(3/2 − 32α) = 1850.6 (observed: 1836.2).
+Closed form: m_p/m_e = (4k/α)√(3/2 − 32α) = 1850.6 (observed: 1836.2).
 
 ### S17.2 Pion scale Λ_π = m_e/α
 
@@ -595,19 +595,19 @@ Observed: m_π± = 139.57 MeV (PDG). Error: 0.34%.
 
 This identification — m_π = 2m_e/α — is the geometric mode assignment already established in the NWT framework. The pion mass emerges as E₁/k = 139.6 MeV in the Pythagorean resonance analysis (Section VI of the main text), providing an independent cross-check.
 
-### S17.4 String tension σ = N_c² m_π²/ℏc
+### S17.4 String tension σ = k² m_π²/ℏc
 
-The QCD string tension connects the pion mass to the confining flux tube energy density. In SU(N_c) gauge theory, the string tension scales with the adjoint Casimir as N_c²:
+The QCD string tension connects the pion mass to the confining flux tube energy density. In SU(k) gauge theory (where k = R/r = 3 plays the role of the number of colors), the string tension scales with the adjoint Casimir as k²:
 
-$$\sigma = \frac{N_c^2\, m_\pi^2}{\hbar c} = \frac{9 \times (140.05)^2}{197.33} = 894.6\ \text{MeV/fm}$$
+$$\sigma = \frac{k^2\, m_\pi^2}{\hbar c} = \frac{9 \times (140.05)^2}{197.33} = 894.6\ \text{MeV/fm}$$
 
 Lattice QCD: σ ≈ 900 MeV/fm (equivalently √σ ≈ 420 MeV, or σ ≈ 0.18 GeV²). Error: 0.6%.
 
-**Caveat**: The N_c² scaling is the adjoint Casimir factor for SU(N_c). It produces the correct string tension to 0.6%, but the geometric derivation from torus linking topology — *why* the adjoint rather than fundamental Casimir governs the flux tube — is not yet established.
+**Caveat**: The k² scaling is the adjoint Casimir factor for SU(k). It produces the correct string tension to 0.6%, but the geometric derivation from torus topology — *why* the adjoint rather than fundamental Casimir governs the flux tube — is not yet established.
 
 ### S17.5 Strong coupling α_s = 16α
 
-The strong coupling constant α_s = 16α = 0.1168 was derived in S8.2 from flux threading through N_c² = 9 adjoint gluon channels with geometric enhancement factor 16/9. At the Z mass scale, the observed value is α_s(M_Z) = 0.1179 ± 0.0009 (PDG), giving 1.0% agreement.
+The strong coupling constant α_s = 16α = 0.1168 was derived in S8.2 from flux threading through k² = 9 adjoint gluon channels with geometric enhancement factor 16/9. At the Z mass scale, the observed value is α_s(M_Z) = 0.1179 ± 0.0009 (PDG), giving 1.0% agreement.
 
 This is not a new input — it was already available from the quark sector analysis (see `--quarks` in the simulation).
 
@@ -641,27 +641,27 @@ Observed: m_p = 938.272 MeV. Error: 0.8%.
 
 ### S17.7 Closed-form mass ratio
 
-Substituting σ = N_c² m_π²/ℏc and m_π = 2m_e/α into the energy minimum E_min = 2√(σ ℏc (3/2 − 2α_s)):
+Substituting σ = k² m_π²/ℏc and m_π = 2m_e/α into the energy minimum E_min = 2√(σ ℏc (3/2 − 2α_s)):
 
-$$\frac{m_p}{m_e} = \frac{4N_c}{\alpha}\sqrt{\frac{3}{2} - 32\alpha} = 1850.6$$
+$$\frac{m_p}{m_e} = \frac{4k}{\alpha}\sqrt{\frac{3}{2} - 32\alpha} = 1850.6$$
 
 Observed: m_p/m_e = 1836.15. Error: 0.8%.
 
-This is a closed-form expression for the proton-to-electron mass ratio in terms of (α, N_c) and two variational coefficients (3/2 and 2). If these coefficients can be derived from NWT dynamics, the mass ratio becomes a pure function of α and N_c.
+This is a closed-form expression for the proton-to-electron mass ratio in terms of (α, k) and two variational coefficients (3/2 and 2). If these coefficients can be derived from NWT dynamics, the mass ratio becomes a pure function of α and k.
 
 ### S17.8 Honest caveats
 
 1. **Kinetic coefficient 3/2**: This is a standard variational estimate for three quarks in a confining potential, not derived from NWT dynamics. A proper NWT derivation would compute the kinetic energy from the torus knot field modes on the baryon (k=3) surface.
 
-2. **Coulomb coefficient 2**: The factor of 2 in 2α_s needs geometric justification from the torus linking topology. In QCD, the color-Coulomb potential between quarks involves the quadratic Casimir C_F = (N_c² − 1)/(2N_c) = 4/3, but the factor 2 in our expression is chosen to match the baryon Y-string geometry, not derived from first principles.
+2. **Coulomb coefficient 2**: The factor of 2 in 2α_s needs geometric justification from the torus topology. In QCD, the color-Coulomb potential between quarks involves the quadratic Casimir C_F = (k² − 1)/(2k) = 4/3, but the factor 2 in our expression is chosen to match the baryon Y-string geometry, not derived from first principles.
 
-3. **N_c² adjoint Casimir**: The string tension σ = N_c² m_π²/ℏc uses the adjoint Casimir N_c² rather than the fundamental Casimir. This gives 0.6% agreement with lattice QCD, but the geometric reason — why adjoint rather than fundamental governs the confining flux tube in torus topology — is not established.
+3. **k² adjoint Casimir**: The string tension σ = k² m_π²/ℏc uses the adjoint Casimir k² rather than the fundamental Casimir. This gives 0.6% agreement with lattice QCD, but the geometric reason — why adjoint rather than fundamental governs the confining flux tube in torus topology — is not established.
 
 4. **R_min ≠ charge radius**: The Cornell minimum R_min = 0.53 fm is smaller than the proton charge radius 0.875 fm. This is expected (the charge distribution extends beyond the energy minimum), but the quantitative relationship is not derived.
 
 5. **m_π = 2m_e/α**: This geometric mode identification is already secure within the NWT framework. It is the strongest link in the chain, independently confirmed by the Pythagorean resonance analysis.
 
-The net assessment: the proton mass can be expressed as a closed-form function of (α, m_e, N_c) with two variational coefficients (3/2 and 2). The result is 0.8% accurate. Fully deriving those coefficients from NWT dynamics would close the last gap between the framework and a complete first-principles prediction.
+The net assessment: the proton mass can be expressed as a closed-form function of (α, m_e, k) with two variational coefficients (3/2 and 2). The result is 0.8% accurate. Fully deriving those coefficients from NWT dynamics would close the last gap between the framework and a complete first-principles prediction.
 
 ---
 
@@ -675,8 +675,8 @@ The model requires one primary measured input:
 
 The three quantities previously treated as additional inputs are now derivable from the topological integers (p=2, q=1, k=R/r=3):
 
-- **α**: Skilton's formula α⁻¹ = √(137² + π²) = 137.036016 (0.12 ppm), where 137 = p_s² + q_s² with generators p_s = 2k + p² + q² = 11 and q_s = p² = 4 — these are NWT quantum numbers. See Paper 4 [ref].
-- **m_μ**: The Koide angle θ_K = (6π+2)/9 is a function of (p, q, k), so given m_e, the Koide relation determines m_μ = 105.658 MeV (0.001% error). See Paper 4 [ref].
+- **α**: Skilton's formula α⁻¹ = √(137² + π²) = 137.036016 (0.12 ppm), where 137 = p_s² + q_s² with generators p_s = 2k + p² + q² = 11 and q_s = p² = 4 — these are NWT quantum numbers. See Paper 3 [ref].
+- **m_μ**: The Koide angle θ_K = (6π+2)/9 is a function of (p, q, k), so given m_e, the Koide relation determines m_μ = 105.658 MeV (0.001% error). See Paper 3 [ref].
 - **Λ_tube**: The Lenz formula m_p/m_e = 6π⁵ (0.002% error) is structurally explained as 2k × π^(p²+q²). Given m_e, this yields m_p → R_p → Λ_tube. The Cornell potential derivation (Section S17) provides an independent route yielding m_p = 945.7 MeV (0.8% error).
 
 Dimensional analysis requires at least one dimensionful input — m_e sets the absolute scale from which all other masses follow.
@@ -699,7 +699,7 @@ From these four numbers (1 measured + 3 topological), all 23 predictions follow 
    - θ(q_em) = (6π + 2/(1+3|q|))/9 from charge
    - All coefficients: 2/3, √5, 20/21, 3/13, 16, 2/9, π−2, etc. — pure functions of (p,q,k)
 
-See Paper 4 [ref] for the complete derivation of steps 1–3.
+See Paper 3 [ref] for the complete derivation of steps 1–3.
 
 ### S18.4 What is NOT an input
 
@@ -722,7 +722,7 @@ See Paper 4 [ref] for the complete derivation of steps 1–3.
 | String landscape [3] | None specific | 10⁵⁰⁰ vacua | No | No |
 | **Torus knot (this work)** | **23** | **1 + 3 integers†** | **Yes** | **Yes** |
 
-†The single measured input is m_e. The former inputs α, m_μ, and Λ_tube are derivable from the topological integers (p=2, q=1, k=3). See Paper 4 [ref] and Section S18.1.
+†The single measured input is m_e. The former inputs α, m_μ, and Λ_tube are derivable from the topological integers (p=2, q=1, k=3). See Paper 3 [ref] and Section S18.1.
 
 ---
 

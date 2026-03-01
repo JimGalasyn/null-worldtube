@@ -9,13 +9,13 @@
 
 ## Abstract
 
-Paper 1 derived 23 Standard Model parameters from four inputs (α, m_e, m_μ, Λ_tube) and three topological integers (p=2, q=1, N_c=3). We show that three of those four inputs — α, m_μ, and Λ_tube — are themselves derivable from the three topological integers (p=2, q=1, k=R/r=3) and a single measured mass m_e. The fine-structure constant follows from Skilton's integer right triangle (88, 105, 137), whose generators (11, 4) we identify as NWT quantum numbers: p_s = 2k + p² + q² = 11, q_s = p² = 4. The muon mass follows from the Koide formula with topology-determined angle and hierarchy parameter. The proton mass — and hence Λ_tube — follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The complete derivation chain from (2, 1, 3) + m_e to all 23 SM parameters requires no free parameters beyond one mass scale.
+Paper 1 derived 23 Standard Model parameters from four inputs (α, m_e, m_μ, Λ_tube) and three topological integers (p=2, q=1, k=3). We show that three of those four inputs — α, m_μ, and Λ_tube — are themselves derivable from the three topological integers (p=2, q=1, k=R/r=3) and a single measured mass m_e. The fine-structure constant follows from Skilton's integer right triangle (88, 105, 137), whose generators (11, 4) we identify as null worldtube (NWT) quantum numbers: p_s = 2k + p² + q² = 11, q_s = p² = 4. The muon mass follows from the Koide formula with topology-determined angle θ_K = (6π+2)/9. The proton mass — and hence Λ_tube — follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The complete derivation chain from (2, 1, 3) + m_e to all 23 SM parameters requires no free parameters beyond one mass scale.
 
 ---
 
 ## I. Introduction
 
-Paper 1 [1] demonstrated that 23 Standard Model parameters — nine charged fermion masses, three gauge couplings, two Higgs sector parameters, four CKM mixing parameters, and five neutrino parameters — follow from a single geometric object: a photon confined to a (2,1) torus knot. That derivation required four measured inputs (α, m_e, m_μ, Λ_tube) and three topological integers (p=2, q=1, N_c=3).
+Paper 1 [1] demonstrated that 23 Standard Model parameters — nine charged fermion masses, three gauge couplings, two Higgs sector parameters, four CKM mixing parameters, and five neutrino parameters — follow from a single geometric object: a photon confined to a (2,1) torus knot. That derivation required four measured inputs (α, m_e, m_μ, Λ_tube) and three topological integers (p=2, q=1, k=3).
 
 The natural question is whether the inputs themselves can be derived. If so, how many are truly independent?
 
@@ -49,7 +49,7 @@ The (2,1) torus knot is the unique minimal fermionic knot. No simpler topology p
 
 ### B. The aspect ratio k = R/r = 3
 
-The third integer is the torus aspect ratio k = R/r, where R is the major radius and r the minor radius. In Paper 1, this appeared as N_c = 3, interpreted as the Borromean linking number (baryon topology). We now reinterpret it as the aspect ratio of the torus itself.
+The third integer is the torus aspect ratio k = R/r, where R is the major radius and r the minor radius. In Paper 1, this appeared as N_c = 3, interpreted as the number of colors. We now reinterpret it as the aspect ratio of the torus itself — the physical origin of why N_c = 3 in QCD.
 
 The aspect ratio classifies particles by internal structure:
 
@@ -73,7 +73,7 @@ The reinterpretation of k as aspect ratio rather than linking number changes the
 
 ### A. Skilton's formula
 
-F. Ray Skilton, in three papers published in the proceedings of the Annual Pittsburgh Conference on Modeling and Simulation (1986–1988) [5,6,7], established an integer-based framework for the fundamental constants. His central result:
+F. Ray Skilton, in three papers published in the proceedings of the Annual Pittsburgh Conference on Modeling and Simulation (1986–1988) [3,4,5], established an integer-based framework for the fundamental constants. His central result:
 
 $$\alpha^{-1} = \sqrt{137^2 + \pi^2} = 137.036016$$
 
@@ -140,11 +140,11 @@ In Part 3 (1988), Skilton performed an exhaustive computer search over all reduc
 
 ### A. The Koide formula
 
-The Koide formula [8] relates the three charged lepton masses:
+The Koide formula [6] relates the three charged lepton masses:
 
 $$Q = \frac{m_e + m_\mu + m_\tau}{(\sqrt{m_e} + \sqrt{m_\mu} + \sqrt{m_\tau})^2} = \frac{2}{3}$$
 
-This holds to 0.0009% with PDG masses. The parametric form is:
+This holds to 0.0009% with PDG masses [2]. The parametric form is:
 
 $$\sqrt{m_i} = \frac{S}{3}\left(1 + \sqrt{2}\cos\left(\theta_K + \frac{2\pi i}{3}\right)\right)$$
 
@@ -154,14 +154,12 @@ where S is the mass scale and θ_K is the Koide angle. Q = 2/3 is automatic in t
 
 Paper 1 derived the Koide angle from the torus knot topology:
 
-$$\theta_K = \frac{p}{N_c}\left(\pi + \frac{q}{N_c}\right) = \frac{6\pi + 2}{9} = 2.31662\ \text{rad}$$
+$$\theta_K = \frac{p}{k}\left(\pi + \frac{q}{k}\right) = \frac{6\pi + 2}{9} = 2.31662\ \text{rad}$$
 
-With the reinterpretation k = N_c = 3, the same formula applies. The decomposition is:
+With k = 3, the decomposition is:
 
 - **2π/3**: the Z₃ base symmetry from the k=3 aspect ratio (three harmonic modes)
 - **2/9 = pq/k²**: the toroidal-poloidal coupling through the k×k interaction matrix
-
-The 6π comes from 2p × q × k = 2(2)(1)(3) = 12 half-windings giving 12 × π/2 = 6π in the angle. The 2 comes from the (p,q) asymmetry: p − q = 1 contributes 2/(p+q)... The 9 is k² × (p+q)/k = 9 from the k²-fold mode coupling with (p+q)/k normalization. More compactly: 9 = (p+q)² × k = 9.
 
 ### C. m_μ as derived quantity
 
@@ -185,7 +183,7 @@ Paper 1 treated m_μ as an input only because θ_K appeared to be an empirical f
 
 ### A. The Lenz formula
 
-Friedrich Lenz, in a 1951 letter to Physical Review [9], noted:
+Friedrich Lenz, in a 1951 letter to Physical Review [7], noted:
 
 $$\frac{m_p}{m_e} \approx 6\pi^5 = 1836.118$$
 
@@ -241,7 +239,7 @@ Paper 1 (Section VII.D–E and Supplementary S17) provides an independent deriva
 
 $$m_p = 2\sqrt{\sigma\,\hbar c\left(\frac{3}{2} - 2\alpha_s\right)} = 945.7\ \text{MeV} \quad (0.8\%\ \text{error})$$
 
-where σ = N_c² m_π²/ℏc = 894.6 MeV/fm and α_s = 16α. This route uses two variational coefficients (3/2 and 2) not yet derived from NWT dynamics. The Lenz route is more direct and more accurate (0.002% vs 0.8%), but the Cornell route has the advantage of illuminating the energy budget (kinetic 59%, Coulomb −9%, string 50%).
+where σ = k² m_π²/ℏc = 894.6 MeV/fm and α_s = 16α. This route uses two variational coefficients (3/2 and 2) not yet derived from NWT dynamics. The Lenz route is more direct and more accurate (0.002% vs 0.8%), but the Cornell route has the advantage of illuminating the energy budget (kinetic 59%, Coulomb −9%, string 50%).
 
 ---
 
@@ -325,7 +323,7 @@ Several links in the derivation chain require further theoretical development:
 
 3. **The Lenz decomposition**: 6π⁵ = 2k × π^(p²+q²) is verified numerically and the physical interpretation (harmonic modes × phase space) is compelling, but a rigorous derivation from the torus wave equation — showing that the proton-to-electron mass ratio must equal this product — requires more work.
 
-4. **The 0.12 ppm residual**: The Skilton α formula has a residual of 1.7 × 10⁻⁵ relative to CODATA. This may be a higher-order correction from radiative effects (the Lamb shift, anomalous magnetic moment, etc.) or may indicate that the formula is approximate. Whether the residual is structurally meaningful or coincidental is unknown.
+4. **The 0.12 ppm residual**: The Skilton α formula has an absolute residual of 0.000017 (0.12 ppm) from CODATA. This may be a higher-order correction from radiative effects (the Lamb shift, anomalous magnetic moment, etc.) or may indicate that the formula is approximate. Whether the residual is structurally meaningful or coincidental is unknown.
 
 5. **Quark mass hierarchy**: The quark Koide extension uses a hierarchy parameter B² that is approximate at the ~3% level. Deriving B² from (p, q, k) with the same precision as the lepton sector remains open.
 
@@ -352,20 +350,14 @@ The question "why these 26 parameters?" reduces to "why this knot?" — and the 
 
 [1] J. P. Galasyn and C. Théodore, "The Standard Model from a Torus Knot: Spectrum, Resonance Structure, and Decay Dynamics," Paper 1 in this series (2026).
 
-[2] J. P. Galasyn and C. Théodore, "The Torus Electron: Electromagnetic Self-Energy, Geodesic Curvature, and the Fine-Structure Constant," Paper 2 in this series (2026).
+[2] Particle Data Group, R. L. Workman *et al.*, "Review of particle physics," *Prog. Theor. Exp. Phys.* **2022**, 083C01 (2022); 2024 update.
 
-[3] J. P. Galasyn and C. Théodore, "AI–Human Collaboration in Theoretical Physics: A Case Study in Torus Knot Cosmology," Paper 3 in this series (2026).
+[3] F. R. Skilton, "Foundation for an integer-based cosmological model," *Proc. 17th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 17, Part 1, pp. 295–300 (1986).
 
-[4] Particle Data Group, R. L. Workman *et al.*, "Review of particle physics," *Prog. Theor. Exp. Phys.* **2022**, 083C01 (2022); 2024 update.
+[4] F. R. Skilton, "Foundation for an integer-based cosmological model, Part 2 — Evenness," *Proc. 18th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 18, Part 5, pp. 1623–1630 (1987).
 
-[5] F. R. Skilton, "Foundation for an integer-based cosmological model," *Proc. 17th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 17, Part 1, pp. 295–300 (1986).
+[5] F. R. Skilton, "Foundation for an integer-based cosmological model, Part 3 — Integers and the natural constants," *Proc. 19th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 19, Part 1, pp. 9–12 (1988).
 
-[6] F. R. Skilton, "Foundation for an integer-based cosmological model, Part 2 — Evenness," *Proc. 18th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 18, Part 5, pp. 1623–1630 (1987).
+[6] Y. Koide, "New viewpoint on quark and lepton mass hierarchy," *Phys. Rev. D* **28**, 252 (1983).
 
-[7] F. R. Skilton, "Foundation for an integer-based cosmological model, Part 3 — Integers and the natural constants," *Proc. 19th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 19, Part 1, pp. 9–12 (1988).
-
-[8] Y. Koide, "New viewpoint on quark and lepton mass hierarchy," *Phys. Rev. D* **28**, 252 (1983).
-
-[9] F. Lenz, "The ratio of proton and electron masses," *Phys. Rev.* **82**, 554 (1951).
-
-[10] R. H. Parker *et al.*, "Measurement of the fine-structure constant as a test of the Standard Model," *Science* **360**, 191 (2018).
+[7] F. Lenz, "The ratio of proton and electron masses," *Phys. Rev.* **82**, 554 (1951).
