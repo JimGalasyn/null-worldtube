@@ -1,67 +1,45 @@
 # Simulations
 
-Physics and mathematical simulations organized by research project.
+Null Worldtube Theory: simulation and analysis code.
 
-## Directory Structure
+## Main Code
 
 ```
 simulations/
-├── koide/          # Koide formula, Lorenz attractors, mass predictions
-│   ├── output/     # Generated plots and animations
-│   └── *.py
-├── williamson/     # Williamson pivot field, torus topology, EM confinement
-│   ├── output/     # Generated plots and animations
-│   ├── *.py
-│   └── shadertoy_pivot.glsl
-├── nwt_fdtd.py             # Null worldtube FDTD (active — do not reorganize)
-├── nwt_fdtd_kn.py          # NWT with Kerr-Newman metric
-├── null_worldtube.py        # Null worldtube core simulation
-├── null_worldtube_diagrams.py
-└── nwt_*.png               # NWT output files
+├── null_worldtube.py           # Main NWT simulation (~19,500 lines, all analyses)
+├── nonlinear_permittivity.py   # Nonlinear permittivity / Born-Infeld analysis
+├── plot_settling_spectrum.py   # Settling spectrum visualization
+├── output/                     # Generated output files
+└── archive/                    # Earlier modular code (nwt/, koide/, williamson/, FDTD)
 ```
 
-## Koide Simulations
+## Usage
 
-Explores the Koide formula and its connection to chaotic dynamics:
-- `plot_koide_lorenz_attractor.py` — Lorenz attractor with Koide mass ratios
-- `acid_test_lineshapes.py` — Line shape analysis
-- `quantum_koide_lineshapes.py` — Quantum Koide predictions
-- `plot_attractor_bands.py`, `plot_basin_boundaries.py`, `plot_bifurcation.py` — Dynamical systems analysis
-- `plot_decay_phase_space.py`, `plot_mass_asymmetry.py`, `plot_return_map.py` — Phase space studies
-- `anim_annihilation.py`, `anim_phase_decay.py` — Animations
+```bash
+# Core analyses referenced in Paper 1
+python3 simulations/null_worldtube.py --koide          # Lepton Koide analysis
+python3 simulations/null_worldtube.py --quarks         # Quark masses + EW/CKM/PMNS
+python3 simulations/null_worldtube.py --neutrino       # Neutrino masses and mixing
+python3 simulations/null_worldtube.py --self-energy    # Alpha emergence
+python3 simulations/null_worldtube.py --find-radii     # Self-consistent torus radii
 
-## Williamson Pivot Field
+# Analyses referenced in Paper 3
+python3 simulations/null_worldtube.py --skilton         # Skilton's alpha formula
+python3 simulations/null_worldtube.py --junction        # Junction conditions / geodesic curvature
+python3 simulations/null_worldtube.py --gravity         # Self-consistent radii, Cornell potential
+python3 simulations/null_worldtube.py --proton-mass     # Proton mass derivation
 
-Implements the extended Maxwell equations from Williamson's "A new theory of light and matter" (FFP14, 2014).
-
-**Core idea:** Standard Maxwell equations + scalar pivot field P:
+# Additional analyses
+python3 simulations/null_worldtube.py --hydrogen        # Hydrogen atom model
+python3 simulations/null_worldtube.py --weinberg        # Weinberg angle / electroweak
+python3 simulations/null_worldtube.py --dark-matter     # Dark matter candidates
+python3 simulations/null_worldtube.py --topology        # Topology survey
+python3 simulations/null_worldtube.py --einstein        # Kerr-Newman geometry
+python3 simulations/null_worldtube.py --pythagorean     # Pythagorean resonances
+python3 simulations/null_worldtube.py --transmission-line  # Transmission line model
 ```
-∂B/∂t = -∇×E              (Faraday, unchanged)
-∂E/∂t = ∇×B - ∇P          (Ampere + pivot gradient)
-∂P/∂t = -∇·E              (pivot evolution — NEW)
-```
 
-- `williamson_pivot.py` / `williamson_pivot_3d.py` — Core simulations (1D and 3D)
-- `williamson_torus.py` — Toroidal topology analysis
-- `williamson_braided.py`, `williamson_nested.py` — Braided and nested configurations
-- `williamson_nonlinear.py`, `williamson_radial.py` — Nonlinear and radial studies
-- `williamson_charge_golden.py` — Charge quantization via golden ratio
-- `williamson_lorentz.py` — Lorentz contraction of torus solutions
-- `williamson_variational.py` — Variational approach
-- `anim_torus_knots.py`, `anim_precession.py`, `anim_photon_*.py` — Animations
-- `shadertoy_pivot.glsl` — GPU real-time visualization (see ShaderToy setup below)
-
-### ShaderToy Setup
-
-1. Go to https://www.shadertoy.com/new
-2. Click **"+ Add Buffer"** to create **Buffer A**
-3. In **Buffer A** tab: paste `BUFFER A` section, set iChannel0 → Buffer A
-4. In **Image** tab: paste `IMAGE` section, set iChannel0 → Buffer A
-5. Press play. Click to add EM pulses.
-
-## Null Worldtube (NWT)
-
-Active research — files remain in simulations root. FDTD implementation of null worldtube geometry.
+Run with `--help` for the full list of flags.
 
 ## Requirements
 
@@ -69,8 +47,11 @@ Active research — files remain in simulations root. FDTD implementation of nul
 numpy matplotlib scipy
 ```
 
-## References
+## Archive
 
-- Koide, Y. "New view of quark and lepton mass hierarchy", Phys. Rev. D 28, 252 (1983)
-- Williamson, J.G. "A new theory of light and matter", PoS (FFP14) 2014
-- Williamson, J.G. & van der Mark, M.B. "Is the electron a photon with toroidal topology?", Ann. Fond. L. de Broglie 22, 133 (1997)
+The `archive/` directory contains earlier code:
+- `nwt/` — Modular Python package (refactored from the monolith, Feb 2025)
+- `koide/` — Koide formula explorations, Lorenz attractors, phase space
+- `williamson/` — Williamson pivot field simulations
+- `nwt_fdtd.py`, `nwt_fdtd_kn.py` — FDTD implementations
+- Various `.png` output files from earlier runs
