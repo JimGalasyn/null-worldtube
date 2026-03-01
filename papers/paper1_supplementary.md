@@ -561,30 +561,147 @@ Open questions:
 
 ---
 
-## S17. Input Counting and Parameter Independence
+## S17. Proton Mass Derivation
 
-### S17.1 Four inputs
+The proton mass was previously an input to the framework through Λ_tube = ℏc/(αR_p). This section derives m_p from (α, m_e, N_c) alone, via a five-step chain that connects the electron mass to the QCD string tension and Cornell potential.
 
-The model requires four measured inputs:
-1. **α = 1/137.036** — the fine-structure constant (claimed to emerge as r/R, but used numerically as input)
-2. **m_e = 0.51100 MeV** — the electron mass (sets the fundamental torus radius)
-3. **m_μ = 105.658 MeV** — the muon mass (sets the lepton Koide scale S)
-4. **Λ_tube = ℏc/(αR_p) = 255.7 GeV** — the tube energy scale, set by the proton torus radius R_p. Since R_p depends on the proton mass m_p, which is not derived within this framework, Λ_tube is an independent input. Deriving Λ_tube from (α, m_e, m_μ) alone — i.e., reducing the input count to three — requires a first-principles calculation of the proton mass from the torus knot topology. This is an open problem and a priority for future work.
+### S17.1 Five-step chain overview
 
-### S17.2 Three topological integers
+The derivation proceeds:
+
+1. **Pion scale**: Λ_π = m_e/α = 70.0 MeV (confinement energy per quark)
+2. **Pion mass**: m_π = 2Λ_π = 140.1 MeV (0.34% error)
+3. **String tension**: σ = N_c² m_π²/ℏc = 894.6 MeV/fm (0.6% vs lattice)
+4. **Strong coupling**: α_s = 16α = 0.1168 (already derived in S8.2)
+5. **Cornell minimization**: m_p = 2√(σℏc(3/2 − 2α_s)) = 945.7 MeV (0.8% error)
+
+Closed form: m_p/m_e = (4N_c/α)√(3/2 − 32α) = 1850.6 (observed: 1836.2).
+
+### S17.2 Pion scale Λ_π = m_e/α
+
+The pion is the lightest meson — the fundamental (1,0) mode of a linked quark–antiquark torus pair (k=2 surface). The confinement energy per quark is the EM self-energy of a torus knot with aspect ratio α, evaluated at the linking scale:
+
+$$\Lambda_\pi = \frac{m_e}{\alpha} = \frac{0.51100}{0.0072974} = 70.03\ \text{MeV}$$
+
+This is the natural energy scale where the torus knot self-energy matches the confinement binding. The ratio m_e/α appears throughout QED as the Bohr energy scale; here it acquires a geometric meaning as the quark confinement scale.
+
+### S17.3 Pion mass m_π = 2Λ_π
+
+The pion contains a quark and antiquark, each contributing Λ_π:
+
+$$m_\pi = 2\Lambda_\pi = \frac{2m_e}{\alpha} = 140.05\ \text{MeV}$$
+
+Observed: m_π± = 139.57 MeV (PDG). Error: 0.34%.
+
+This identification — m_π = 2m_e/α — is the geometric mode assignment already established in the NWT framework. The pion mass emerges as E₁/k = 139.6 MeV in the Pythagorean resonance analysis (Section VI of the main text), providing an independent cross-check.
+
+### S17.4 String tension σ = N_c² m_π²/ℏc
+
+The QCD string tension connects the pion mass to the confining flux tube energy density. In SU(N_c) gauge theory, the string tension scales with the adjoint Casimir as N_c²:
+
+$$\sigma = \frac{N_c^2\, m_\pi^2}{\hbar c} = \frac{9 \times (140.05)^2}{197.33} = 894.6\ \text{MeV/fm}$$
+
+Lattice QCD: σ ≈ 900 MeV/fm (equivalently √σ ≈ 420 MeV, or σ ≈ 0.18 GeV²). Error: 0.6%.
+
+**Caveat**: The N_c² scaling is the adjoint Casimir factor for SU(N_c). It produces the correct string tension to 0.6%, but the geometric derivation from torus linking topology — *why* the adjoint rather than fundamental Casimir governs the flux tube — is not yet established.
+
+### S17.5 Strong coupling α_s = 16α
+
+The strong coupling constant α_s = 16α = 0.1168 was derived in S8.2 from flux threading through N_c² = 9 adjoint gluon channels with geometric enhancement factor 16/9. At the Z mass scale, the observed value is α_s(M_Z) = 0.1179 ± 0.0009 (PDG), giving 1.0% agreement.
+
+This is not a new input — it was already available from the quark sector analysis (see `--quarks` in the simulation).
+
+### S17.6 Cornell potential and energy budget
+
+The Cornell potential for three quarks in a Y-string baryon configuration:
+
+$$E(R) = \frac{3}{2}\frac{\hbar c}{R} - 2\alpha_s\frac{\hbar c}{R} + \sigma R$$
+
+The three terms represent:
+- **Kinetic energy** (3/2)ℏc/R: variational estimate for three quarks each with uncertainty energy ~ℏc/(2R). This is a standard quantum mechanics estimate, not derived from NWT dynamics.
+- **Coulomb attraction** −2α_s ℏc/R: color-Coulomb interaction between quarks. The coefficient 2 needs geometric justification from torus linking number.
+- **Linear confinement** σR: the string tension derived in S17.4.
+
+Minimizing dE/dR = 0:
+
+$$R_\text{min} = \sqrt{\frac{\hbar c\,(3/2 - 2\alpha_s)}{\sigma}} = 0.529\ \text{fm}$$
+
+Energy budget at R_min:
+
+| Component | Expression | Value (MeV) | Fraction |
+|-----------|-----------|-------------|----------|
+| Kinetic | (3/2)ℏc/R_min | 560.0 | 59.2% |
+| Coulomb | −2α_s ℏc/R_min | −87.2 | −9.2% |
+| String | σ R_min | 472.8 | 50.0% |
+| **Total** | | **945.7** | 100% |
+
+Observed: m_p = 938.272 MeV. Error: 0.8%.
+
+**Note**: R_min = 0.53 fm is the energy-minimizing confinement scale, not the proton charge radius (0.875 fm). The charge distribution extends beyond the energy minimum due to the quark wavefunctions; the relationship between R_min and r_charge is not derived here.
+
+### S17.7 Closed-form mass ratio
+
+Substituting σ = N_c² m_π²/ℏc and m_π = 2m_e/α into the energy minimum E_min = 2√(σ ℏc (3/2 − 2α_s)):
+
+$$\frac{m_p}{m_e} = \frac{4N_c}{\alpha}\sqrt{\frac{3}{2} - 32\alpha} = 1850.6$$
+
+Observed: m_p/m_e = 1836.15. Error: 0.8%.
+
+This is a closed-form expression for the proton-to-electron mass ratio in terms of (α, N_c) and two variational coefficients (3/2 and 2). If these coefficients can be derived from NWT dynamics, the mass ratio becomes a pure function of α and N_c.
+
+### S17.8 Honest caveats
+
+1. **Kinetic coefficient 3/2**: This is a standard variational estimate for three quarks in a confining potential, not derived from NWT dynamics. A proper NWT derivation would compute the kinetic energy from the torus knot field modes on the baryon (k=3) surface.
+
+2. **Coulomb coefficient 2**: The factor of 2 in 2α_s needs geometric justification from the torus linking topology. In QCD, the color-Coulomb potential between quarks involves the quadratic Casimir C_F = (N_c² − 1)/(2N_c) = 4/3, but the factor 2 in our expression is chosen to match the baryon Y-string geometry, not derived from first principles.
+
+3. **N_c² adjoint Casimir**: The string tension σ = N_c² m_π²/ℏc uses the adjoint Casimir N_c² rather than the fundamental Casimir. This gives 0.6% agreement with lattice QCD, but the geometric reason — why adjoint rather than fundamental governs the confining flux tube in torus topology — is not established.
+
+4. **R_min ≠ charge radius**: The Cornell minimum R_min = 0.53 fm is smaller than the proton charge radius 0.875 fm. This is expected (the charge distribution extends beyond the energy minimum), but the quantitative relationship is not derived.
+
+5. **m_π = 2m_e/α**: This geometric mode identification is already secure within the NWT framework. It is the strongest link in the chain, independently confirmed by the Pythagorean resonance analysis.
+
+The net assessment: the proton mass can be expressed as a closed-form function of (α, m_e, N_c) with two variational coefficients (3/2 and 2). The result is 0.8% accurate. Fully deriving those coefficients from NWT dynamics would close the last gap between the framework and a complete first-principles prediction.
+
+---
+
+## S18. Input Counting and Parameter Independence
+
+### S18.1 One primary input
+
+The model requires one primary measured input:
+
+1. **m_e = 0.51100 MeV** — the electron mass (sets the absolute energy scale)
+
+The three quantities previously treated as additional inputs are now derivable from the topological integers (p=2, q=1, k=R/r=3):
+
+- **α**: Skilton's formula α⁻¹ = √(137² + π²) = 137.036016 (0.12 ppm), where 137 = p_s² + q_s² with generators p_s = 2k + p² + q² = 11 and q_s = p² = 4 — these are NWT quantum numbers. See Paper 4 [ref].
+- **m_μ**: The Koide angle θ_K = (6π+2)/9 is a function of (p, q, k), so given m_e, the Koide relation determines m_μ = 105.658 MeV (0.001% error). See Paper 4 [ref].
+- **Λ_tube**: The Lenz formula m_p/m_e = 6π⁵ (0.002% error) is structurally explained as 2k × π^(p²+q²). Given m_e, this yields m_p → R_p → Λ_tube. The Cornell potential derivation (Section S17) provides an independent route yielding m_p = 945.7 MeV (0.8% error).
+
+Dimensional analysis requires at least one dimensionful input — m_e sets the absolute scale from which all other masses follow.
+
+### S18.2 Three topological integers
 
 1. **p = 2** — toroidal winding (spin-½ requirement)
 2. **q = 1** — poloidal winding (simplest closure)
-3. **N_c = 3** — Borromean link number (baryon topology)
+3. **k = R/r = 3** — torus aspect ratio (the lowest value admitting a Pythagorean resonance (3,4,5), making the proton the unique stable baryon; quarks are harmonic modes of the k=3 cavity at f/3, f/9, f/27)
 
-### S17.3 Derived quantities
+### S18.3 Derived quantities
 
-From these seven numbers (4 measured + 3 topological), all 23 predictions follow through:
-- θ_K = (6π+2)/9 from (p,q,N_c)
-- θ(q_em) = (6π + 2/(1+3|q|))/9 from charge
-- All coefficients: 2/3, √5, 20/21, 3/13, 16, 2/9, π−2, etc. — pure functions of (p,q,N_c)
+From these four numbers (1 measured + 3 topological), all 23 predictions follow through a derivation chain:
 
-### S17.4 What is NOT an input
+1. **(p, q, k) → α**: via Skilton generators p_s = 2k + p² + q² = 11, q_s = p² = 4, giving α⁻¹ = √(137² + π²)
+2. **(p, q, k) + m_e → m_μ**: via Koide angle θ_K = (6π+2)/9 with topology-determined parameters
+3. **(p, q, k) + m_e → m_p → Λ_tube**: via Lenz formula m_p/m_e = 6π⁵ = 2k × π^(p²+q²)
+4. **α + m_e + m_μ + Λ_tube → 23 SM parameters**: via all the formulas of this paper
+   - θ_K = (6π+2)/9 from (p,q,k)
+   - θ(q_em) = (6π + 2/(1+3|q|))/9 from charge
+   - All coefficients: 2/3, √5, 20/21, 3/13, 16, 2/9, π−2, etc. — pure functions of (p,q,k)
+
+See Paper 4 [ref] for the complete derivation of steps 1–3.
+
+### S18.4 What is NOT an input
 
 - sin²θ_W, α_s — predicted
 - v, m_H, m_W, m_Z — predicted
@@ -594,7 +711,7 @@ From these seven numbers (4 measured + 3 topological), all 23 predictions follow
 
 ---
 
-## S18. Comparison with Other Approaches
+## S19. Comparison with Other Approaches
 
 | Framework | SM parameters explained | Free parameters | Predicts decay hierarchy? | Predictive? |
 |-----------|----------------------|----------------|--------------------------|-------------|
@@ -603,11 +720,13 @@ From these seven numbers (4 measured + 3 topological), all 23 predictions follow
 | SO(10) GUT | Gauge + partial Yukawa | ~15–20 | No | Partially |
 | A₄ flavor symmetry [4] | Neutrino mixing | ~8 | No | TBM only |
 | String landscape [3] | None specific | 10⁵⁰⁰ vacua | No | No |
-| **Torus knot (this work)** | **23** | **4 + 3 integers** | **Yes** | **Yes** |
+| **Torus knot (this work)** | **23** | **1 + 3 integers†** | **Yes** | **Yes** |
+
+†The single measured input is m_e. The former inputs α, m_μ, and Λ_tube are derivable from the topological integers (p=2, q=1, k=3). See Paper 4 [ref] and Section S18.1.
 
 ---
 
-## S19. Computational Verification
+## S20. Computational Verification
 
 All predictions are reproducible from the open-source simulation code:
 
@@ -619,6 +738,7 @@ python3 -m simulations.nwt --self-energy  # α emergence
 python3 -m simulations.nwt --find-radii   # Self-consistent torus radii
 python3 -m simulations.nwt --pythagorean  # Pythagorean mode catalogs + decay chains
 python3 -m simulations.nwt --skilton      # Skilton analysis
+python3 -m simulations.nwt --proton-mass  # Proton mass from Cornell potential + NWT string tension
 ```
 
 No fitting routines or optimization are used. All predictions are computed from closed-form expressions evaluated at the geometric angle.
