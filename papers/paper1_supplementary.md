@@ -420,7 +420,7 @@ The only exact solution at p=1 is q=0 (pure toroidal, trivial). All helical meso
 
 ### S14.2 Comparison with baryons
 
-For baryons (k=3) at p=1: 9 + q² = N². At q=4: 9 + 16 = 25 = 5². The (3,4,5) triple is a perfect Pythagorean triple. This is the fundamental difference between mesons and baryons: baryons possess an exact resonance at their lowest helical winding, mesons do not.
+For baryons (k=3) at p=1: 9 + q² = N². At q=4: 9 + 16 = 25 = 5². The (3,4,5) triple is a perfect Pythagorean triple. This is the fundamental difference between mesons and baryons: baryons possess an exact resonance at their lowest helical winding; mesons do not.
 
 ### S14.3 Higher-order meson triples
 

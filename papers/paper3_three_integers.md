@@ -117,7 +117,7 @@ The Skilton formula adds π² under the square root:
 
 $$\alpha^{-1} = \sqrt{c^2 + \pi^2} = \sqrt{137^2 + \pi^2}$$
 
-The π² correction arises from the poloidal winding: q = 1 contributes one factor of π per toroidal transit (the circumference of the tube cross-section), and p = 2 toroidal transits give two such contributions. The total phase correction is (qπ)^p... but more precisely, the correction is simply π² because the photon traverses two poloidal half-circuits, each contributing a phase of π. The squared correction reflects the energy (which goes as phase²).
+The π² correction arises from the poloidal winding: q = 1 contributes one factor of π per toroidal transit (the circumference of the tube cross-section), and p = 2 toroidal transits give two such contributions. The total phase correction is (qπ)^p... but more precisely, the correction is simply π² because the photon traverses two poloidal half-circuits, each contributing a phase of π. The squared correction reflects the energy, which goes as phase².
 
 ### E. Verification
 
@@ -183,7 +183,7 @@ Paper 1 treated m_μ as an input only because θ_K appeared to be an empirical f
 
 ### A. The Lenz formula
 
-Friedrich Lenz, in a 1951 letter to Physical Review [7], noted:
+Friedrich Lenz, in a 1951 letter to *Physical Review* [7], noted:
 
 $$\frac{m_p}{m_e} \approx 6\pi^5 = 1836.118$$
 
@@ -323,7 +323,7 @@ Several links in the derivation chain require further theoretical development:
 
 3. **The Lenz decomposition**: 6π⁵ = 2k × π^(p²+q²) is verified numerically and the physical interpretation (harmonic modes × phase space) is compelling, but a rigorous derivation from the torus wave equation — showing that the proton-to-electron mass ratio must equal this product — requires more work.
 
-4. **The 0.12 ppm residual**: The Skilton α formula has an absolute residual of 0.000017 (0.12 ppm) from CODATA. This may be a higher-order correction from radiative effects (the Lamb shift, anomalous magnetic moment, etc.) or may indicate that the formula is approximate. Whether the residual is structurally meaningful or coincidental is unknown.
+4. **The 0.12 ppm residual**: The Skilton α formula has an absolute residual of 0.000017 (0.12 ppm) from CODATA. This may be a higher-order correction from radiative effects (the Lamb shift, anomalous magnetic moment, *etc.*) or may indicate that the formula is approximate. Whether the residual is structurally meaningful or coincidental is unknown.
 
 5. **Quark mass hierarchy**: The quark Koide extension uses a hierarchy parameter B² that is approximate at the ~3% level. Deriving B² from (p, q, k) with the same precision as the lepton sector remains open.
 

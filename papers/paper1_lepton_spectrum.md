@@ -9,7 +9,7 @@
 
 ## Abstract
 
-We derive all parameters of the Standard Model — nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix — from a single geometric object: a photon confined to a (2,1) torus knot. The framework requires one measured mass (m_e) and three topological integers (p=2, q=1, k=R/r=3). The fine-structure constant α follows from Skilton's integer right triangle (88, 105, 137), whose generators (11, 4) are null worldtube (NWT) quantum numbers (Paper 3 [ref]). The muon mass follows from the Koide angle θ_K = (6π+2)/9 with topology-determined parameters. The tube energy scale Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The electroweak sector follows from torus mode counting: sin²θ_W = 3/13, the Higgs mass from the breathing mode m_H = (1/2−α)Λ, and the vacuum expectation value v = (1−5α)Λ. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7%.
+We derive all parameters of the Standard Model — nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix — from a single geometric object: a photon confined to a (2,1) torus knot. This framework, which we name "null worldtube" (NWT), requires one measured mass (m_e) and three topological integers (p=2, q=1, k=R/r=3). The fine-structure constant α follows from Skilton's integer right triangle (88, 105, 137), whose generators (11, 4) are NWT quantum numbers (Paper 3 [ref]). The muon mass follows from the Koide angle θ_K = (6π+2)/9 with topology-determined parameters. The tube energy scale Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The electroweak sector follows from torus mode counting: sin²θ_W = 3/13, the Higgs mass from the breathing mode m_H = (1/2−α)Λ, and the vacuum expectation value v = (1−5α)Λ. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7%.
 
 The same geometry determines the dynamics. A generalized Pythagorean resonance condition (kp)² + q² = N² on the unwrapped torus, where k = R/r is the aspect ratio, classifies all composite particles: k=1 leptons, k=2 mesons, k=3 baryons, k=4 tetraquarks, k=5 pentaquarks. The (3,4,5) Pythagorean triple at k=3 makes the proton the unique stable baryon; the absence of any fundamental triple at k=2 makes all mesons unstable. A four-sector taxonomy — TM modes (visible matter), TE modes (dark matter), geometric modes (pions), and open surfaces (neutrinos) — explains the three-timescale decay hierarchy: strong (10⁻²³ s), electromagnetic (10⁻¹⁷ s), weak (10⁻⁸ s).
 
@@ -30,7 +30,7 @@ The key static results are:
 - The CKM CP phase is the knot deficit: δ_CP = π − 2
 - The Higgs mass is the breathing mode: m_H = (1/2 − α)Λ_tube
 
-But does the same geometry determine the dynamics? We show that it does. A generalized Pythagorean resonance condition on the unwrapped torus classifies all composite particles, explains proton stability and universal meson instability, and generates the three-timescale decay hierarchy. Complete decay chains for representative mesons conserve energy at every step to 0.0%. This is the argument that the framework is not numerology: numerological coincidences do not conserve energy through multi-step decay chains.
+But does the same geometry determine the dynamics? We show that it does. A generalized Pythagorean resonance condition on the unwrapped torus classifies all composite particles, explains proton stability and universal meson instability, and generates the three-timescale decay hierarchy. Complete decay chains for representative mesons conserve energy at every step to 0.0%. The NWT framework is not numerology: numerological coincidences do not conserve energy through multi-step decay chains.
 
 The derivation chain is:
 
@@ -263,9 +263,9 @@ The aspect ratio k classifies the particle type by internal structure:
 
 The physical interpretation is immediate:
 
-- **k=3 (baryons):** The (3,4,5) triple at the fundamental winding p=1 provides an exact resonance. The proton's standing wave closes perfectly — it is **stable**.
-- **k=2 (mesons):** There is *no* Pythagorean triple at p=1. Every fundamental meson mode has a phase defect. All mesons are **inherently unstable**.
 - **k=1 (leptons):** No triple, but stability is topological — the (2,1) torus knot cannot be continuously deformed to a simpler curve without cutting the surface.
+- **k=2 (mesons):** There is *no* Pythagorean triple at p=1. Every fundamental meson mode has a phase defect. All mesons are **inherently unstable**.
+- **k=3 (baryons):** The (3,4,5) triple at the fundamental winding p=1 provides an exact resonance. The proton's standing wave closes perfectly — it is **stable**.
 - **k=4 (tetraquarks):** The (4,3,5) triple exists, but tetraquarks can always decay to two mesons (lower energy), so the resonance does not guarantee stability.
 - **k=5 (pentaquarks):** The (5,12,13) triple provides an exact resonance, consistent with the observed narrow pentaquark states at LHCb.
 - **k=6 (hexaquarks):** The (6,8,10) triple exists but is non-primitive (a multiple of (3,4,5)). Like tetraquarks, hexaquarks can always decay to two baryons, so the resonance does not confer stability.
@@ -435,7 +435,7 @@ The pattern is clear: **all** δ = 0 modes decay weakly or electromagnetically (
 
 When δ = 0, strong decay is forbidden — the wave closes perfectly and there is no phase leakage. The only available decay channels require a *topology change*: the torus surface must tear (weak decay, producing a neutrino) or annihilate (EM decay, producing photons). These processes are governed by G_F and α² respectively, both much weaker than the strong coupling, explaining the long lifetimes.
 
-We note that the defect-lifetime relationship is qualitative: it correctly predicts the *hierarchy* (which mesons decay strongly vs. weakly) but does not yet yield quantitative lifetimes. Converting the quality factor Q = N²/|δ| to a precise lifetime requires the mode-to-mode coupling constants at sector boundaries, which remain an open problem. We present the defect as governing the hierarchy, not as a precision calculator.
+We note that the defect-lifetime relationship is qualitative: it correctly predicts the *hierarchy* (which mesons decay strongly *vs.* weakly) but does not yet yield quantitative lifetimes. Converting the quality factor Q = N²/|δ| to a precise lifetime requires the mode-to-mode coupling constants at sector boundaries, which remains an open problem. We present the defect as governing the hierarchy, not as a precision calculator.
 
 ---
 
