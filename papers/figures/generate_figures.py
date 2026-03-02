@@ -677,6 +677,198 @@ def figure5_torus_modes():
 
 
 # ═══════════════════════════════════════════════════════════════════
+# FIGURE 6: Pythagorean Resonance on the Unwrapped Torus
+# ═══════════════════════════════════════════════════════════════════
+
+def figure6_pythagorean_resonance():
+    """Pythagorean resonance condition: (kp)² + q² = N² on the unwrapped torus.
+
+    Two panels compare the meson (k=2) and baryon (k=3) sectors.
+    Quarter-circles at integer radii N show where exact resonances live.
+    A lattice point ON a circle means the standing wave closes perfectly;
+    a point between circles means a phase defect and finite lifetime.
+    """
+    fig, axes = plt.subplots(1, 2, figsize=(7.0, 3.8))
+
+    theta_arc = np.linspace(0, np.pi / 2, 200)
+
+    # ── Panel (a): k=2, mode (1,1) → legs (2,1), N = √5 ≈ 2.24 ──
+    ax = axes[0]
+    kp, qm = 2, 1
+    N_exact = np.sqrt(kp**2 + qm**2)   # √5
+    N_lo = int(np.floor(N_exact))       # 2
+    N_hi = int(np.ceil(N_exact))        # 3
+    gmax = 4
+
+    # Shaded annular "gap" between N=2 and N=3
+    from matplotlib.patches import Polygon as MplPolygon
+    theta_fill = np.linspace(0, np.pi / 2, 200)
+    inner = np.column_stack([N_lo * np.cos(theta_fill), N_lo * np.sin(theta_fill)])
+    outer = np.column_stack([N_hi * np.cos(theta_fill), N_hi * np.sin(theta_fill)])
+    gap_verts = np.vstack([inner, outer[::-1]])
+    gap_patch = MplPolygon(gap_verts, closed=True, facecolor='#ffebee',
+                           edgecolor='none', alpha=0.6, zorder=0)
+    ax.add_patch(gap_patch)
+
+    # Light grid lines
+    for i in range(gmax + 1):
+        ax.axhline(i, color='#f0f0f0', linewidth=0.3, zorder=0)
+        ax.axvline(i, color='#f0f0f0', linewidth=0.3, zorder=0)
+
+    # Lattice points
+    for i in range(gmax + 1):
+        for j in range(gmax + 1):
+            ax.plot(i, j, '.', color='#cccccc', markersize=2, zorder=1)
+
+    # Quarter-circles at integer radii
+    for N in range(1, gmax + 1):
+        if N == N_lo or N == N_hi:
+            ax.plot(N * np.cos(theta_arc), N * np.sin(theta_arc),
+                    color='#ef9a9a', linewidth=0.8, linestyle='--', zorder=2)
+        else:
+            ax.plot(N * np.cos(theta_arc), N * np.sin(theta_arc),
+                    color='#e0e0e0', linewidth=0.4, zorder=1)
+
+    # Right triangle
+    ax.plot([0, kp], [0, 0], color=C_FERMION, linewidth=1.5, zorder=3)
+    ax.plot([kp, kp], [0, qm], color=C_GAUGE, linewidth=1.5, zorder=3)
+    ax.plot([0, kp], [0, qm], color='#666666', linewidth=1.5,
+            linestyle='--', zorder=3)
+
+    # Right-angle marker
+    sq = 0.18
+    ax.plot([kp - sq, kp - sq, kp], [0, sq, sq],
+            color='#999999', linewidth=0.5, zorder=3)
+
+    # Endpoint: × (misses all circles)
+    ax.plot(kp, qm, 'x', color=C_FERMION, markersize=10,
+            markeredgewidth=2.0, zorder=5)
+
+    # Leg labels
+    ax.text(kp / 2, -0.18, r'$kp = 2$', ha='center', va='top',
+            fontsize=9, color=C_FERMION)
+    ax.text(kp + 0.18, qm / 2, r'$q = 1$', ha='left', va='center',
+            fontsize=9, color=C_GAUGE)
+
+    # Hypotenuse label
+    angle_deg = np.degrees(np.arctan2(qm, kp))
+    ax.text(kp / 2 - 0.15, qm / 2 + 0.18,
+            r'$\sqrt{5} \approx 2.24$',
+            ha='center', va='bottom', fontsize=8, color='#666666',
+            rotation=angle_deg)
+
+    # Circle radius labels
+    ax.text(N_lo + 0.08, 0.15, r'$N\!=\!2$', fontsize=6.5,
+            color='#ef9a9a', ha='left')
+    ax.text(N_hi + 0.08, 0.15, r'$N\!=\!3$', fontsize=6.5,
+            color='#ef9a9a', ha='left')
+
+    # Defect and particle labels
+    ax.text(kp + 0.22, qm + 0.22, r'$\delta = 1$', fontsize=9,
+            color=C_FERMION, fontweight='bold', ha='left')
+    ax.text(gmax - 0.1, gmax - 0.1, r'K$^\pm$  mode',
+            fontsize=8, color='#888888', ha='right', va='top',
+            style='italic')
+
+    ax.set_xlim(-0.3, gmax + 0.3)
+    ax.set_ylim(-0.5, gmax + 0.3)
+    ax.set_aspect('equal')
+    ax.set_xlabel(r'Toroidal  $kp$', fontsize=9)
+    ax.set_ylabel(r'Poloidal  $q$', fontsize=9)
+    ax.set_title(r'(a)  Meson ($k\!=\!2$): phase defect',
+                 fontsize=10, pad=8)
+    ax.set_xticks(range(gmax + 1))
+    ax.set_yticks(range(gmax + 1))
+
+    # ── Panel (b): k=3, mode (1,4) → legs (3,4), N = 5 exactly ──
+    ax = axes[1]
+    kp, qm = 3, 4
+    N_exact = 5
+    gmax = 6
+
+    # Light grid lines
+    for i in range(gmax + 1):
+        ax.axhline(i, color='#f0f0f0', linewidth=0.3, zorder=0)
+        ax.axvline(i, color='#f0f0f0', linewidth=0.3, zorder=0)
+
+    # Lattice points
+    for i in range(gmax + 1):
+        for j in range(gmax + 1):
+            ax.plot(i, j, '.', color='#cccccc', markersize=2, zorder=1)
+
+    # Quarter-circles at integer radii
+    for N in range(1, gmax + 1):
+        if N == N_exact:
+            ax.plot(N * np.cos(theta_arc), N * np.sin(theta_arc),
+                    color='#a5d6a7', linewidth=1.8, zorder=2)
+        else:
+            ax.plot(N * np.cos(theta_arc), N * np.sin(theta_arc),
+                    color='#e0e0e0', linewidth=0.4, zorder=1)
+
+    # Right triangle
+    ax.plot([0, kp], [0, 0], color=C_FERMION, linewidth=1.5, zorder=3)
+    ax.plot([kp, kp], [0, qm], color=C_GAUGE, linewidth=1.5, zorder=3)
+    ax.plot([0, kp], [0, qm], color=C_CKM, linewidth=2.0, zorder=3)
+
+    # Right-angle marker
+    sq = 0.22
+    ax.plot([kp - sq, kp - sq, kp], [0, sq, sq],
+            color='#999999', linewidth=0.5, zorder=3)
+
+    # Endpoint: filled circle ON the N=5 circle
+    ax.plot(kp, qm, 'o', color=C_CKM, markersize=8,
+            markeredgecolor='white', markeredgewidth=0.5, zorder=5)
+
+    # Leg labels
+    ax.text(kp / 2, -0.18, r'$kp = 3$', ha='center', va='top',
+            fontsize=9, color=C_FERMION)
+    ax.text(kp + 0.22, qm / 2, r'$q = 4$', ha='left', va='center',
+            fontsize=9, color=C_GAUGE)
+
+    # Hypotenuse label
+    angle_deg = np.degrees(np.arctan2(qm, kp))
+    ax.text(kp / 2 - 0.35, qm / 2 + 0.4, r'$N = 5$',
+            ha='center', va='bottom', fontsize=10, color=C_CKM,
+            fontweight='bold', rotation=angle_deg)
+
+    # Circle label
+    ax.text(N_exact + 0.12, 0.25, r'$N\!=\!5$', fontsize=7,
+            color='#2e7d32', ha='left')
+
+    # Defect and particle labels
+    ax.text(kp + 0.22, qm + 0.3, r'$\delta = 0$', fontsize=9,
+            color=C_CKM, fontweight='bold', ha='left')
+    ax.text(gmax - 0.1, gmax - 0.1,
+            r'proton: $(3,4,5)$',
+            fontsize=8, color='#888888', ha='right', va='top',
+            style='italic')
+
+    ax.set_xlim(-0.3, gmax + 0.3)
+    ax.set_ylim(-0.5, gmax + 0.3)
+    ax.set_aspect('equal')
+    ax.set_xlabel(r'Toroidal  $kp$', fontsize=9)
+    ax.set_ylabel(r'Poloidal  $q$', fontsize=9)
+    ax.set_title(r'(b)  Baryon ($k\!=\!3$): exact resonance',
+                 fontsize=10, pad=8)
+    ax.set_xticks(range(gmax + 1))
+    ax.set_yticks(range(gmax + 1))
+
+    # ── Bottom equation ──
+    fig.text(0.5, -0.04,
+             r'Resonance condition:  $(kp)^2 + q^2 = N^2$'
+             r'$\quad\longrightarrow\quad$'
+             r'integer $N$ $=$ exact closure (stable)',
+             ha='center', fontsize=9)
+
+    fig.tight_layout(w_pad=2.5)
+
+    path = os.path.join(OUTDIR, 'figure6_pythagorean_resonance.png')
+    fig.savefig(path, dpi=300, bbox_inches='tight', facecolor='white')
+    plt.close(fig)
+    print(f"  Saved: {path}")
+
+
+# ═══════════════════════════════════════════════════════════════════
 # Main
 # ═══════════════════════════════════════════════════════════════════
 
@@ -687,6 +879,7 @@ FIGURES = {
     '3':  ('Figure 3: Derivation chain',    figure3_derivation_chain),
     '4':  ('Figure 4: Koide sphere',        figure4_koide_sphere),
     '5':  ('Figure 5: Torus modes',         figure5_torus_modes),
+    '6':  ('Figure 6: Pythagorean resonance', figure6_pythagorean_resonance),
 }
 
 if __name__ == '__main__':
