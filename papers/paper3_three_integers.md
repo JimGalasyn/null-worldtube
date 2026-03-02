@@ -89,11 +89,11 @@ The generators of any primitive Pythagorean triple (a, b, c) satisfy:
 
 $$a = p_s^2 - q_s^2, \quad b = 2p_s q_s, \quad c = p_s^2 + q_s^2$$
 
-For (105, 88, 137): the generators are (p_s, q_s) = (11, 4), since:
+For (88, 105, 137): the generators are (p_s, q_s) = (11, 4), since:
 
-- a = 11² − 4² = 121 − 16 = 105
-- b = 2 × 11 × 4 = 88
-- c = 11² + 4² = 121 + 16 = 137
+- b = 2 p_s q_s = 2 × 11 × 4 = 88
+- a = p_s² − q_s² = 121 − 16 = 105
+- c = p_s² + q_s² = 121 + 16 = 137
 
 ### C. The NWT identification
 
@@ -117,7 +117,7 @@ The Skilton formula adds π² under the square root:
 
 $$\alpha^{-1} = \sqrt{c^2 + \pi^2} = \sqrt{137^2 + \pi^2}$$
 
-The π² correction arises from the poloidal winding: q = 1 contributes one factor of π per toroidal transit (the circumference of the tube cross-section), and p = 2 toroidal transits give two such contributions. The total phase correction is (qπ)^p... but more precisely, the correction is simply π² because the photon traverses two poloidal half-circuits, each contributing a phase of π. The squared correction reflects the energy, which goes as phase².
+The π² correction arises from the poloidal winding: q = 1 contributes one factor of π per toroidal transit (the circumference of the tube cross-section), and p = 2 toroidal transits give two such contributions. The total phase correction is $(q\pi)^p = \pi^2$: the photon traverses two poloidal half-circuits, each contributing a phase of π. The squared correction reflects the energy, which goes as phase².
 
 ### E. Verification
 
@@ -128,7 +128,7 @@ The π² correction arises from the poloidal winding: q = 1 contributes one fact
 | Residual | 0.000017 |
 | Relative error | 1.2 × 10⁻⁷ (0.12 ppm) |
 
-This is the first structural derivation of the fine-structure constant from topology. Previous numerological relationships (Eddington's 136, Wyler's formula) required ad hoc constructions. Here, 137 emerges as c = p_s² + q_s² from the generators of the unique Pythagorean triple associated with the (2,1) knot on a k=3 torus.
+This is the first structural derivation of the fine-structure constant from topology. Previous numerological relationships (Eddington's 136 [8], Wyler's formula [9]) required ad hoc constructions. Here, 137 emerges as c = p_s² + q_s² from the generators of the unique Pythagorean triple associated with the (2,1) knot on a k=3 torus.
 
 ### F. Uniqueness
 
@@ -289,7 +289,7 @@ on a torus with aspect ratio r/R = α. A true geodesic on the torus surface woul
 
 ### B. Israel junction conditions
 
-The junction conditions for a null shell on the torus surface reduce to the Young-Laplace equation — a balance between electromagnetic radiation pressure and surface tension:
+The Israel junction conditions [10] for a null shell on the torus surface reduce to the Young-Laplace equation [11,12] — a balance between electromagnetic radiation pressure and surface tension:
 
 $$[K_{ab}] = 8\pi G\, S_{ab}$$
 
@@ -361,3 +361,13 @@ The question "why these 26 parameters?" reduces to "why this knot?" — and the 
 [6] Y. Koide, "New viewpoint on quark and lepton mass hierarchy," *Phys. Rev. D* **28**, 252 (1983).
 
 [7] F. Lenz, "The ratio of proton and electron masses," *Phys. Rev.* **82**, 554 (1951).
+
+[8] A. S. Eddington, "The charge of an electron," *Proc. R. Soc. A* **122**, 358 (1929).
+
+[9] A. Wyler, "L'espace symétrique du groupe des équations de Maxwell," *C. R. Acad. Sci. Paris* **269**, 743 (1969).
+
+[10] W. Israel, "Singular hypersurfaces and thin shells in general relativity," *Nuovo Cimento B* **44**, 1 (1966).
+
+[11] T. Young, "An essay on the cohesion of fluids," *Phil. Trans. R. Soc. Lond.* **95**, 65 (1805).
+
+[12] P. S. Laplace, "Supplément au dixième livre du Traité de mécanique céleste," in *Traité de Mécanique Céleste*, Vol. 4 (Courcier, 1805).

@@ -9,7 +9,7 @@
 
 ## Abstract
 
-We derive all parameters of the Standard Model — nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix — from a single geometric object: a photon confined to a (2,1) torus knot. This framework, which we name "null worldtube" (NWT), requires one measured mass (m_e) and three topological integers (p=2, q=1, k=R/r=3). The fine-structure constant α follows from Skilton's integer right triangle (88, 105, 137), whose generators (11, 4) are NWT quantum numbers (Paper 3 [ref]). The muon mass follows from the Koide angle θ_K = (6π+2)/9 with topology-determined parameters. The tube energy scale Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The electroweak sector follows from torus mode counting: sin²θ_W = 3/13, the Higgs mass from the breathing mode m_H = (1/2−α)Λ, and the vacuum expectation value v = (1−5α)Λ. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7%.
+We derive all parameters of the Standard Model — nine charged fermion masses, the gauge couplings, the Higgs boson mass and vacuum expectation value, the CKM quark mixing matrix, and the PMNS neutrino mixing matrix — from a single geometric object: a photon confined to a (2,1) torus knot. This framework, which we name "null worldtube" (NWT), requires one measured mass (m_e) and three topological integers (p=2, q=1, k=R/r=3). The fine-structure constant α follows from Skilton's integer right triangle (88, 105, 137) [16–18], whose generators (11, 4) are NWT quantum numbers (Paper 3 [ref]). The muon mass follows from the Koide angle θ_K = (6π+2)/9 with topology-determined parameters. The tube energy scale Λ_tube follows from the Lenz formula m_p/m_e = 6π⁵, now structurally explained as 2k × π^(p²+q²). The electroweak sector follows from torus mode counting: sin²θ_W = 3/13, the Higgs mass from the breathing mode m_H = (1/2−α)Λ, and the vacuum expectation value v = (1−5α)Λ. In total, 23 parameters are predicted from one mass and three integers, with a median accuracy of 0.7%.
 
 The same geometry determines the dynamics. A generalized Pythagorean resonance condition (kp)² + q² = N² on the unwrapped torus, where k = R/r is the aspect ratio, classifies all composite particles: k=1 leptons, k=2 mesons, k=3 baryons, k=4 tetraquarks, k=5 pentaquarks. The (3,4,5) Pythagorean triple at k=3 makes the proton the unique stable baryon; the absence of any fundamental triple at k=2 makes all mesons unstable. A four-sector taxonomy — TM modes (visible matter), TE modes (dark matter), geometric modes (pions), and open surfaces (neutrinos) — explains the three-timescale decay hierarchy: strong (10⁻²³ s), electromagnetic (10⁻¹⁷ s), weak (10⁻⁸ s).
 
@@ -19,7 +19,7 @@ Complete decay chains for seven representative mesons, traced from initial state
 
 ## I. Introduction
 
-The Standard Model of particle physics contains 26 free parameters: 9 charged fermion masses, 3 gauge couplings, 2 Higgs sector parameters, 4 CKM mixing parameters, 3 neutrino masses, 4 PMNS mixing parameters, and the QCD vacuum angle [1]. These parameters are measured, not derived. Despite five decades of effort — grand unification [2], string theory [3], discrete flavor symmetries [4] — no framework has derived them from a smaller set of inputs.
+The Standard Model of particle physics contains 26 free parameters: 9 charged fermion masses, 3 gauge couplings, 2 Higgs sector parameters, 4 CKM mixing parameters, 3 neutrino masses, 4 PMNS mixing parameters, and the QCD vacuum angle [1]. These parameters are measured, not derived. Despite five decades of effort — grand unification [2], string theory [3], discrete flavor symmetries [4,7] — no framework has derived them from a smaller set of inputs.
 
 We present such a framework. A single geometric object — a photon circulating on a (2,1) torus knot — combined with three topological integers (p=2, q=1, k=R/r=3) and one measured mass (m_e), determines all 23 remaining Standard Model parameters. The three quantities previously treated as additional inputs — α, m_μ, and Λ_tube — are now derivable from the integers alone (Paper 3 [ref]). The median prediction error is 0.7%.
 
@@ -46,7 +46,7 @@ A (p,q) torus knot winds p times around the torus hole (toroidal) and q times ar
 
 > ¹In standard knot theory, a (p,q) torus knot with p=1 or q=1 is the unknot. We use "torus knot" to refer to the closed geodesic on the torus surface, whose geometric properties (winding number, path length, self-energy) are the relevant features of the framework, independent of its topological embedding class in ℝ³.
 
-A photon confined to a closed path of length L on a torus with major radius R and minor radius r has circulation energy E_circ = 2πℏc/L. Its time-averaged current I = ec/L generates electromagnetic self-energy:
+A photon confined to a closed path of length L on a torus with major radius R and minor radius r has circulation energy E_circ = 2πℏc/L. Its time-averaged current I = ec/L generates electromagnetic self-energy [12]:
 
 $$U_\text{EM} = \mu_0 R\left[\ln\frac{8R}{r} - 2\right]\left(\frac{ec}{L}\right)^2$$
 
@@ -138,7 +138,7 @@ The strong coupling is the electromagnetic coupling enhanced by the fourth power
 
 $$\alpha_s(m_Z) = p^4\alpha = 16\alpha = 0.11676 \quad (\text{measured: } 0.1179 \pm 0.0009,\ 0.97\%)$$
 
-Both coupling predictions are compared at m_Z. RG running between Λ_tube and m_Z is a sub-percent effect, within the model's current accuracy.
+Both coupling predictions are compared at m_Z. Renormalization group (RG) running between Λ_tube and m_Z is a sub-percent effect, within the model's current accuracy.
 
 ### C. Higgs sector
 
@@ -152,7 +152,11 @@ $$v = (1 - (p^2\!+\!q^2)\alpha)\Lambda = (1 - 5\alpha)\Lambda = 246.34\ \text{Ge
 
 ### D. W and Z boson masses
 
-With v and sin²θ_W determined, the gauge boson masses follow from standard electroweak relations:
+With v and sin²θ_W determined, the gauge boson masses follow from standard electroweak relations [15]:
+
+$$m_W = \frac{1}{2}gv, \quad m_Z = \frac{m_W}{\cos\theta_W}$$
+
+where $g^2 \sin^2\theta_W = 4\pi\alpha$. Evaluating:
 
 $$m_W = 80.4\ \text{GeV} \quad (\text{measured: } 80.37,\ 0.0\%)$$
 
@@ -178,7 +182,7 @@ $$\delta_\text{CP} = \pi - p = \pi - 2 = 1.1416\ \text{rad} \quad (\text{measure
 
 ### F. PMNS neutrino mixing
 
-The solar neutrino mixing angle shares the same mode-counting denominator as the Weinberg angle:
+The solar neutrino mixing angle shares the same mode-counting denominator as the Weinberg angle [13]:
 
 $$\sin^2\theta_{12} = \frac{p^2}{13} = \frac{4}{13} = 0.3077 \quad (\text{measured: } 0.307,\ 0.2\%)$$
 
@@ -257,18 +261,18 @@ The aspect ratio k classifies the particle type by internal structure:
 | 1 | leptons | no (k²=1) | NONE | topological |
 | 2 | mesons | no (k²=4) | NONE | **NO** |
 | 3 | baryons | yes (k²=9) | **(3,4,5)** | **YES** |
-| 4 | tetraquarks | yes (k²=16) | (4,3,5) | no (decays to 2 mesons) |
+| 4 | tetraquarks | yes (k²=16) | (4,3,5) | metastable |
 | 5 | pentaquarks | yes (k²=25) | (5,12,13) | resonance |
-| 6 | hexaquarks | yes (k²=36) | (6,8,10) | no (decays to 2 baryons) |
+| 6 | hexaquarks | yes (k²=36) | (6,8,10) | metastable |
 
 The physical interpretation is immediate:
 
 - **k=1 (leptons):** No triple, but stability is topological — the (2,1) torus knot cannot be continuously deformed to a simpler curve without cutting the surface.
 - **k=2 (mesons):** There is *no* Pythagorean triple at p=1. Every fundamental meson mode has a phase defect. All mesons are **inherently unstable**.
 - **k=3 (baryons):** The (3,4,5) triple at the fundamental winding p=1 provides an exact resonance. The proton's standing wave closes perfectly — it is **stable**.
-- **k=4 (tetraquarks):** The (4,3,5) triple exists, but tetraquarks can always decay to two mesons (lower energy), so the resonance does not guarantee stability.
+- **k=4 (tetraquarks):** The (4,3,5) triple exists, but tetraquarks can always decay to two mesons (lower energy), making them metastable — resonance-stabilized but with available lower-energy channels.
 - **k=5 (pentaquarks):** The (5,12,13) triple provides an exact resonance, consistent with the observed narrow pentaquark states at LHCb.
-- **k=6 (hexaquarks):** The (6,8,10) triple exists but is non-primitive (a multiple of (3,4,5)). Like tetraquarks, hexaquarks can always decay to two baryons, so the resonance does not confer stability.
+- **k=6 (hexaquarks):** The (6,8,10) triple exists but is non-primitive (a multiple of (3,4,5)). Like tetraquarks, hexaquarks are metastable: they can always decay to two baryons despite their exact resonance.
 
 ### C. Meson mode catalog
 
@@ -429,7 +433,7 @@ The Pythagorean defect governs the *hierarchy* of meson decay rates: modes with 
 | η'(958) | (3,3) | −4 | strong | 3.20 × 10⁻²¹ |
 | φ(1020) | (4,3) | −8 | strong | 1.55 × 10⁻²² |
 
-The pattern is clear: **all** δ = 0 modes decay weakly or electromagnetically (τ ≥ 10⁻²¹ s), while **all** δ ≠ 0 modes decay strongly (τ ≤ 10⁻²¹ s). The defect determines which decay channels are available.
+The pattern is clear: all δ = 0 modes decay weakly or electromagnetically (τ ≥ 10⁻²¹ s), while all |δ| ≥ 4 modes decay strongly (τ ≤ 10⁻²¹ s). The K± (|δ| = 1) is the borderline case: its defect is the smallest non-zero value, producing a quality factor too high for rapid phase leakage, and it decays weakly. The defect magnitude determines which decay channels are available.
 
 ### C. Weak decays from topology change
 
@@ -525,7 +529,7 @@ We note that the three-body muon decay step uses average energies for the daught
 
 F. Ray Skilton, Professor of Computer Science at Brock University, published three papers in the proceedings of the Annual Pittsburgh Conference on Modeling and Simulation (1986–1988) establishing an integer-based framework for the fundamental constants [16,17,18]. His central result:
 
-$$\alpha^{-1} = \sqrt{137^2 + \pi^2} = 137.036016 \quad (\text{measured: } 137.035999,\ 0.12\ \text{ppm})$$
+$$\alpha^{-1} = \sqrt{137^2 + \pi^2} = 137.036016 \quad (\text{measured: } 137.035999\ [11],\ 0.12\ \text{ppm})$$
 
 This formula has *zero* free parameters and agrees with CODATA to 1 part in 8 million.
 
@@ -568,7 +572,7 @@ No previous framework has derived all Standard Model parameters from a geometric
 | Standard Model | 0 (all input) | 26 | No (input) | No |
 | SU(5) GUT [2] | Gauge unification | ~24 | No | Partially |
 | SO(10) GUT | Gauge + partial Yukawa | ~15–20 | No | Partially |
-| A₄ flavor symmetry [4] | Neutrino mixing | ~8 | No | TBM only |
+| A₄ flavor symmetry [4,7] | Neutrino mixing | ~8 | No | TBM only [14] |
 | String landscape [3] | None specific | 10⁵⁰⁰ vacua | No | No |
 | **Torus knot (this work)** | **23** | **1 + 3 integers†** | **Yes** | **Yes** |
 
@@ -587,6 +591,8 @@ Several internal consistencies support the framework:
 9. The proton mass (945.7 MeV, 0.8%) follows from the same α_s = 16α that predicts sin²θ_W and the same pion mode that appears in Section VI.C — no new parameters.
 
 **Testable predictions.** (i) m_τ = 1776.9 MeV at FCC-ee precision (0.03 MeV) [8]. (ii) Normal neutrino mass ordering at JUNO [9]. (iii) δ_CP^ν = π at Hyper-Kamiokande. (iv) Σm_ν = 59 meV, near the cosmological floor [10]. (v) Geometric harmonics at n × 139.6 MeV on the k=2 torus (the n=4 harmonic at 558 MeV matches the η to 1.9%). (vi) Pentaquark narrow widths from (5,12,13) exact Pythagorean resonance.
+
+**Code availability.** All numerical calculations and verification code are available at https://github.com/JimGalasyn/null-worldtube.
 
 **Known limitations.** (i) The proton mass derivation (Section VII.D–E) uses two variational coefficients — 3/2 for the kinetic energy and 2 for the Coulomb factor — that are not yet derived from NWT dynamics. These are the remaining gap between "derivable" and "derived." (ii) The mode-counting conjecture (13 modes on the torus) lacks a rigorous spectral-geometry derivation. (iii) The defect-lifetime relationship correctly orders the decay hierarchy but does not yet yield quantitative lifetimes — the sector-crossing coupling constants remain an open problem. (iv) Some mode assignments at similar energies have ambiguity (e.g., different anchor choices give slightly different spectra). (v) The quark hierarchy parameter B² is approximate at ~3%. (vi) The V_cb prediction (5.1%) is the least precise of the CKM elements. These define the program for future work.
 
@@ -639,6 +645,8 @@ The question "why these parameters?" reduces to "why this knot?" — and the (2,
 [17] F. R. Skilton, "Foundation for an integer-based cosmological model, Part 2 — Evenness," *Proc. 18th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 18, Part 5, pp. 1623–1630 (1987).
 
 [18] F. R. Skilton, "Foundation for an integer-based cosmological model, Part 3 — Integers and the natural constants," *Proc. 19th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 19, Part 1, pp. 9–12 (1988).
+
+[19] L. Michel, "Interaction between four half-spin particles and the decay of the μ-meson," *Proc. Phys. Soc. A* **63**, 514 (1950).
 
 ---
 

@@ -123,7 +123,7 @@ The generators of any primitive Pythagorean triple $(a, b, c)$ satisfy:
   a = p_s^2 - q_s^2, \quad b = 2p_s q_s, \quad c = p_s^2 + q_s^2
 \end{equation}
 
-For $(105, 88, 137)$: the generators are $(p_s, q_s) = (11, 4)$, since $a = 11^2 - 4^2 = 105$, $b = 2 \times 11 \times 4 = 88$, and $c = 11^2 + 4^2 = 137$.
+For $(88, 105, 137)$: the generators are $(p_s, q_s) = (11, 4)$, since $b = 2 p_s q_s = 88$, $a = p_s^2 - q_s^2 = 105$, and $c = p_s^2 + q_s^2 = 137$.
 
 \subsection{The NWT identification}
 
@@ -149,7 +149,7 @@ The Skilton formula adds $\pi^2$ under the square root:
   \alpha^{-1} = \sqrt{c^2 + \pi^2} = \sqrt{137^2 + \pi^2}
 \end{equation}
 
-The $\pi^2$ correction arises from the poloidal winding: $q = 1$ contributes one factor of $\pi$ per toroidal transit (the circumference of the tube cross-section), and $p = 2$ toroidal transits give two such contributions. The correction is $\pi^2$ because the photon traverses two poloidal half-circuits, each contributing a phase of~$\pi$. The squared correction reflects the energy (which goes as phase$^2$).
+The $\pi^2$ correction arises from the poloidal winding: $q = 1$ contributes one factor of $\pi$ per toroidal transit (the circumference of the tube cross-section), and $p = 2$ toroidal transits give two such contributions. The correction is $\pi^2$ because the photon traverses two poloidal half-circuits, each contributing a phase of~$\pi$. The squared correction reflects the energy, which goes as phase$^2$.
 
 \subsection{Verification}
 
@@ -167,7 +167,7 @@ Relative error & $1.2 \times 10^{-7}$ (0.12~ppm) \\
 \end{tabular}
 \end{table}
 
-This is the first structural derivation of the fine-structure constant from topology. Previous numerological relationships (Eddington's 136, Wyler's formula) required ad hoc constructions. Here, 137 emerges as $c = p_s^2 + q_s^2$ from the generators of the unique Pythagorean triple associated with the $(2,1)$ knot on a $k=3$ torus.
+This is the first structural derivation of the fine-structure constant from topology. Previous numerological relationships (Eddington's 136~\cite{eddington1929}, Wyler's formula~\cite{wyler1969}) required ad hoc constructions. Here, 137 emerges as $c = p_s^2 + q_s^2$ from the generators of the unique Pythagorean triple associated with the $(2,1)$ knot on a $k=3$ torus.
 
 \subsection{Uniqueness}
 
@@ -228,7 +228,7 @@ Paper~1 treated $m_\mu$ as an input only because $\theta_K$ appeared to be an em
 
 \subsection{The Lenz formula}
 
-Friedrich Lenz, in a 1951 letter to Physical Review~\cite{lenz1951}, noted:
+Friedrich Lenz, in a 1951 letter to \emph{Physical Review}~\cite{lenz1951}, noted:
 \begin{equation}
   \frac{m_p}{m_e} \approx 6\pi^5 = 1836.118
   \label{eq:lenz}
@@ -357,7 +357,7 @@ on a torus with aspect ratio $r/R = \alpha$. A true geodesic on the torus surfac
 
 \subsection{Israel junction conditions}
 
-The junction conditions for a null shell on the torus surface reduce to the Young-Laplace equation --- a balance between electromagnetic radiation pressure and surface tension:
+The Israel junction conditions~\cite{israel1966} for a null shell on the torus surface reduce to the Young-Laplace equation~\cite{young1805,laplace1805} --- a balance between electromagnetic radiation pressure and surface tension:
 \begin{equation}
   [K_{ab}] = 8\pi G\, S_{ab}
 \end{equation}
@@ -391,7 +391,7 @@ Several links in the derivation chain require further theoretical development:
 
   \item \textbf{The Lenz decomposition}: $6\pi^5 = 2k \times \pi^{p^2+q^2}$ is verified numerically and the physical interpretation (harmonic modes $\times$ phase space) is compelling, but a rigorous derivation from the torus wave equation --- showing that the proton-to-electron mass ratio must equal this product --- requires more work.
 
-  \item \textbf{The 0.12~ppm residual}: The Skilton $\alpha$ formula has an absolute residual of 0.000017 (0.12~ppm) from CODATA. This may be a higher-order correction from radiative effects (the Lamb shift, anomalous magnetic moment, etc.)\ or may indicate that the formula is approximate. Whether the residual is structurally meaningful or coincidental is unknown.
+  \item \textbf{The 0.12~ppm residual}: The Skilton $\alpha$ formula has an absolute residual of 0.000017 (0.12~ppm) from CODATA. This may be a higher-order correction from radiative effects (the Lamb shift, anomalous magnetic moment, \emph{etc.})\ or may indicate that the formula is approximate. Whether the residual is structurally meaningful or coincidental is unknown.
 
   \item \textbf{Quark mass hierarchy}: The quark Koide extension uses a hierarchy parameter $B^2$ that is approximate at the ${\sim}3\%$ level. Deriving $B^2$ from $(p, q, k)$ with the same precision as the lepton sector remains open.
 \end{enumerate}
@@ -416,7 +416,7 @@ The $(2,1)$ torus knot is the simplest topology producing spin-$\tfrac{1}{2}$ fe
 The question ``why these 26 parameters?'' reduces to ``why this knot?'' --- and the answer is: $(2,1)$ is the simplest fermion, $k=3$ is the first stable baryon, and $m_e$ is the scale of the universe. There is nothing else to explain.
 
 %----------------------------------------------------------------------
-\begin{thebibliography}{7}
+\begin{thebibliography}{12}
 
 \bibitem{paper1}
 J.~P.~Galasyn and C.~Th\'eodore,
@@ -455,6 +455,31 @@ Y.~Koide,
 F.~Lenz,
 ``The ratio of proton and electron masses,''
 \emph{Phys.\ Rev.}\ \textbf{82}, 554 (1951).
+
+\bibitem{eddington1929}
+A.~S.~Eddington,
+``The charge of an electron,''
+\emph{Proc.\ R.\ Soc.\ A}\ \textbf{122}, 358 (1929).
+
+\bibitem{wyler1969}
+A.~Wyler,
+``L'espace sym\'etrique du groupe des \'equations de Maxwell,''
+\emph{C.\ R.\ Acad.\ Sci.\ Paris}\ \textbf{269}, 743 (1969).
+
+\bibitem{israel1966}
+W.~Israel,
+``Singular hypersurfaces and thin shells in general relativity,''
+\emph{Nuovo Cimento B}\ \textbf{44}, 1 (1966).
+
+\bibitem{young1805}
+T.~Young,
+``An essay on the cohesion of fluids,''
+\emph{Phil.\ Trans.\ R.\ Soc.\ Lond.}\ \textbf{95}, 65 (1805).
+
+\bibitem{laplace1805}
+P.~S.~Laplace,
+``Suppl\'ement au dixi\`eme livre du Trait\'e de m\'ecanique c\'eleste,''
+in \emph{Trait\'e de M\'ecanique C\'eleste}, Vol.~4 (Courcier, 1805).
 
 \end{thebibliography}
 

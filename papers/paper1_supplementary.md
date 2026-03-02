@@ -447,7 +447,7 @@ These relations are exact (energy-momentum conservation in the rest frame).
 
 For μ → eν_eν̄_μ, the available energy is Q_μ = m_μ − m_e = 105.147 MeV. The electron spectrum has average kinetic energy ⟨KE_e⟩ ≈ m_μ/3 − m_e = 34.7 MeV. The total neutrino energy is E_ν(μ) = Q_μ − ⟨KE_e⟩ = 70.4 MeV.
 
-This is an average over the Michel spectrum. The exact distribution is continuous, but the *average* energy budget is exact by energy conservation.
+This is an average over the Michel spectrum [19]. The exact distribution is continuous, but the *average* energy budget is exact by energy conservation.
 
 ### S15.3 Detailed chain: ρ⁺ → e⁺ + 3ν + 2γ
 
@@ -583,7 +583,7 @@ The pion is the lightest meson — the fundamental (1,0) mode of a linked quark�
 
 $$\Lambda_\pi = \frac{m_e}{\alpha} = \frac{0.51100}{0.0072974} = 70.03\ \text{MeV}$$
 
-This is the natural energy scale where the torus knot self-energy matches the confinement binding. The ratio m_e/α appears throughout QED as the Bohr energy scale; here it acquires a geometric meaning as the quark confinement scale.
+This is the natural energy scale where the torus knot self-energy matches the confinement binding. The ratio m_e/α appears throughout QED as the Bohr energy scale [12]; here it acquires a geometric meaning as the quark confinement scale.
 
 ### S17.3 Pion mass m_π = 2Λ_π
 
