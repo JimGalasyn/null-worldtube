@@ -8,7 +8,9 @@ An electron is a photon confined to a (2,1) torus knot. The worldtube of this ci
 |---|-------|------|
 | 1 | The Standard Model from a Torus Knot | `papers/paper1_lepton_spectrum` |
 | 1S | Supplementary Material | `papers/paper1_supplementary` |
-| 2 | The Torus Electron | (published separately) |
+| 2 | The Torus Electron | `papers/paper2_torus_electron` |
+| 2A | Annales de la Fondation Louis de Broglie submission | `papers/paper2_annales` |
+| 2S | Supplementary Material | `papers/paper2_supplementary` |
 | 3 | Three Integers and a Mass: Deriving the Standard Model Input Set | `papers/paper3_three_integers` |
 | — | On Human–AI Collaboration in Theoretical Physics | `papers/paper_collaboration` |
 
@@ -33,25 +35,44 @@ Median error across all 23 predictions: ~1%.
 ## Simulation
 
 ```bash
-python3 simulations/null_worldtube.py --help      # all available analyses
-python3 simulations/null_worldtube.py --koide      # lepton Koide analysis
-python3 simulations/null_worldtube.py --quarks     # quark masses + EW/CKM/PMNS
-python3 simulations/null_worldtube.py --skilton    # α derivation from integers
-python3 simulations/null_worldtube.py --junction   # junction conditions
+cd simulations
+python3 -m nwt --help              # all available analyses
+python3 -m nwt --koide             # lepton Koide analysis
+python3 -m nwt --quarks            # quark masses + EW/CKM/PMNS
+python3 -m nwt --skilton           # α derivation from integers
+python3 -m nwt --junction          # junction conditions
+python3 -m nwt --pair-creation     # pair creation field analysis
+python3 -m nwt --thevenin          # Thevenin impedance matching
+python3 -m nwt --settling-spectrum # Kelvin wave soft photon spectrum
 ```
 
-Requires: `numpy`, `matplotlib`, `scipy`
+The backward-compat entry point `python3 null_worldtube.py --flag` also works.
+
+Requires: `numpy`. Optional: `scipy` (decay dynamics, neutrino), `matplotlib` (figure generation).
 
 ## Repository Structure
 
 ```
 null-worldtube/
-├── papers/                        # LaTeX sources and PDFs
+├── papers/                            # LaTeX sources and PDFs
 ├── simulations/
-│   ├── null_worldtube.py          # Main simulation (all analyses)
-│   ├── nonlinear_permittivity.py  # Born-Infeld / nonlinear permittivity
-│   ├── plot_settling_spectrum.py  # Settling spectrum visualization
-│   └── archive/                   # Earlier modular code
+│   ├── nwt/                           # Main analysis package
+│   │   ├── __main__.py                # CLI parsing + lazy-import dispatch
+│   │   ├── constants.py               # Physical constants, TorusParams
+│   │   ├── core.py                    # Torus geometry, self-energy, resonance
+│   │   ├── fields.py                  # Casimir, greybody, torus EM fields, LC circuit
+│   │   ├── particles.py               # Basic analysis, find-radii, pair-production
+│   │   ├── hydrogen.py                # H/He/Li orbital dynamics
+│   │   ├── transitions.py             # Photon emission/absorption
+│   │   ├── hadrons.py                 # Quarks, mesons, baryons, proton mass
+│   │   ├── orbit.py                   # Kerr-Newman, Einstein, junction conditions
+│   │   ├── pair_creation.py           # Euler-Heisenberg, Schwinger, gradient
+│   │   ├── settling.py                # Transmission line, Kelvin waves, Thevenin
+│   │   └── analyses.py                # Standalone analyses (Skilton, Koide, ...)
+│   ├── null_worldtube.py              # Backward-compat shim → nwt.main()
+│   ├── nonlinear_permittivity.py      # Born-Infeld / nonlinear permittivity
+│   ├── plot_settling_spectrum.py      # Settling spectrum visualization
+│   └── archive/                       # Earlier modular code
 └── README.md
 ```
 
