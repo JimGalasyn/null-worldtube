@@ -9,6 +9,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{microtype}
 \usepackage{xcolor}
+\usepackage{graphicx}
 
 \hypersetup{
   colorlinks=true,
@@ -54,6 +55,14 @@ These are not fits. Each formula contains only the integers $(p,q,k)$, the coupl
   (2,1)\ \text{knot} + k\!=\!3 \xrightarrow{\alpha = r/R} m_e \xrightarrow{\theta_K} \text{9 masses} \xrightarrow{\text{modes}} \text{gauge sector} \xrightarrow{\text{Koide}} \text{mixing matrices}
   \label{eq:chain}
 \end{equation}
+Figure~\ref{fig:chain} illustrates this derivation chain, showing how each sector follows from the previous one.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/figure3_derivation_chain.png}
+\caption{Derivation chain of the torus knot framework. Starting from the $(2,1)$ knot with aspect ratio $k=3$, the fine-structure constant $\alpha = r/R$ determines the electron mass. The Koide formula then generates all nine charged fermion masses. Torus mode counting yields the gauge sector, and Koide eigenstates on the generation sphere determine the CKM and PMNS mixing matrices. Boxes are colored by sector.}
+\label{fig:chain}
+\end{figure*}
 
 %----------------------------------------------------------------------
 \section{The Geometric Framework}
@@ -61,7 +70,14 @@ These are not fits. Each formula contains only the integers $(p,q,k)$, the coupl
 
 \subsection{Photon on a torus knot}
 
-A $(p,q)$ torus knot winds $p$ times around the torus hole (toroidal) and $q$ times around the tube (poloidal).\footnote{In standard knot theory, a $(p,q)$ torus knot with $p=1$ or $q=1$ is the unknot. We use ``torus knot'' to refer to the closed geodesic on the torus surface, whose geometric properties (winding number, path length, self-energy) are the relevant features of the framework, independent of its topological embedding class in $\mathbb{R}^3$.} For $(p,q) = (2,1)$, the double toroidal winding requires $4\pi$ to return to the starting point, yielding spin-$\tfrac{1}{2}$ --- a geometric origin for fermionic statistics~\cite{williamson1997}.
+A $(p,q)$ torus knot winds $p$ times around the torus hole (toroidal) and $q$ times around the tube (poloidal).\footnote{In standard knot theory, a $(p,q)$ torus knot with $p=1$ or $q=1$ is the unknot. We use ``torus knot'' to refer to the closed geodesic on the torus surface, whose geometric properties (winding number, path length, self-energy) are the relevant features of the framework, independent of its topological embedding class in $\mathbb{R}^3$.} For $(p,q) = (2,1)$, the double toroidal winding requires $4\pi$ to return to the starting point, yielding spin-$\tfrac{1}{2}$ --- a geometric origin for fermionic statistics~\cite{williamson1997}. The geometry is shown in Fig.~\ref{fig:torus-knot}.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure1_torus_knot.png}
+\caption{The $(2,1)$ torus knot on a transparent torus surface. A photon circulates twice toroidally and once poloidally, requiring $4\pi$ rotation to close --- the geometric origin of spin-$\tfrac{1}{2}$. $R$ is the major radius, $r$ the minor radius, and $\alpha = r/R$ the fine-structure constant. Arrows indicate the current direction $I = ec/L$.}
+\label{fig:torus-knot}
+\end{figure}
 
 A photon confined to a closed path of length $L$ on a torus with major radius $R$ and minor radius $r$ has circulation energy $E_{\text{circ}} = 2\pi\hbar c/L$. Its time-averaged current $I = ec/L$ generates electromagnetic self-energy:
 \begin{equation}
@@ -103,7 +119,14 @@ The three-generation structure arises from the torus aspect ratio $k = R/r = 3$:
 \end{equation}
 decomposing as $2\pi/3$ ($\mathbb{Z}_3$ base symmetry) $+$ $2/9$ (winding correction $pq/k^2$). This matches the empirical fit from PDG masses to 0.00005\%~\cite{koide1983}.
 
-Masses follow from $\sqrt{m_i} = (S/3)(1 + \sqrt{2}\cos(\theta_K + 2\pi i/3))$. The Koide ratio $Q = 2/3$ is automatic.
+Masses follow from $\sqrt{m_i} = (S/3)(1 + \sqrt{2}\cos(\theta_K + 2\pi i/3))$. The Koide ratio $Q = 2/3$ is automatic. The three mass eigenstates correspond to unit vectors on a generation sphere (Fig.~\ref{fig:koide-sphere}), separated by $120^\circ$ in azimuth ($\mathbb{Z}_3$ symmetry) with polar angles determined by $\theta_K$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure4_koide_sphere.png}
+\caption{Koide generation sphere. Three mass eigenstates $\sqrt{m_i}$ are represented as unit vectors with $120^\circ$ azimuthal separation ($\mathbb{Z}_3$ symmetry). The Koide angle $\theta_K = (6\pi+2)/9$ determines the polar angles. The equatorial projections show the resulting mass ratios.}
+\label{fig:koide-sphere}
+\end{figure}
 
 \subsection{Quark Koide extension}
 
@@ -158,11 +181,18 @@ $t$ & $(2/3)\Lambda$ & 170\,447 & $172\,760 \pm 300$ & 1.3\% \\
 
 \subsection{Weinberg angle from mode counting}
 
-We conjecture that the torus supports 13 independent electromagnetic modes: $p^2 = 4$ toroidal, $q^2 = 1$ poloidal, $p^2q^2 = 4$ mixed, and $p^2+q^2 = 5$ from the knot metric, minus 1 zero mode ($4+1+4+5-1 = 13$). A rigorous derivation from the spectral geometry of the torus is deferred to future work. Of these, 3 couple to the poloidal (weak) sector:
+We conjecture that the torus supports 13 independent electromagnetic modes: $p^2 = 4$ toroidal, $q^2 = 1$ poloidal, $p^2q^2 = 4$ mixed, and $p^2+q^2 = 5$ from the knot metric, minus 1 zero mode ($4+1+4+5-1 = 13$). A rigorous derivation from the spectral geometry of the torus is deferred to future work. The mode structure is shown in Fig.~\ref{fig:torus-modes}. Of these, 3 couple to the poloidal (weak) sector:
 \begin{equation}
   \sin^2\theta_W = \frac{3}{13} = 0.23077 \quad (\text{measured: } 0.23122,\ 0.19\%).
   \label{eq:weinberg}
 \end{equation}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure5_torus_modes.png}
+\caption{The 13 electromagnetic modes on the $(2,1)$ torus. Blue: 10 EM-coupled modes (4~toroidal, 1~poloidal, 1~mixed, 4~metric, minus the zero mode). Green: 3~weak-coupled mixed modes. The ratio of weak to total modes gives the Weinberg angle: $\sin^2\theta_W = 3/13 \approx 0.231$.}
+\label{fig:torus-modes}
+\end{figure}
 
 This prediction is compared to the $\overline{\text{MS}}$ value at the $Z$ pole (0.23122). Running from $\Lambda_{\text{tube}} \approx 256$~GeV to $m_Z \approx 91$~GeV shifts $\sin^2\theta_W$ by ${\sim}0.001$ in the Standard Model, comparable to the prediction error.
 
@@ -323,6 +353,22 @@ Normal mass ordering ($m_1 \approx 0$) is required by the extended Koide structu
 \medskip
 \small \textbf{Median error: 0.7\%. Maximum: 9.3\% ($m_u$, within PDG uncertainty). RMS: 2.6\%.}
 \end{table}
+
+The predictions are visualized as predicted-vs-measured scatter plots in Figs.~\ref{fig:masses} and~\ref{fig:dimensionless}. All 11 mass and energy-scale predictions fall on the $y = x$ line across five orders of magnitude, with a median error of 0.4\% (Fig.~\ref{fig:masses}). The 10 dimensionless parameters --- mixing angles, CP phases, and coupling constants --- achieve a median error of 1.0\% (Fig.~\ref{fig:dimensionless}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure2a_masses.png}
+\caption{Predicted vs.\ measured masses and energy scales. Main panel: log-log scatter spanning $m_u \approx 2$~MeV to $v \approx 246$~GeV. Inset: the electroweak cluster ($m_W$, $m_Z$, $m_H$, $m_t$, $v$) resolved in GeV. Bottom: error distribution for the mass sector (median 0.4\%).}
+\label{fig:masses}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/figure2b_dimensionless.png}
+\caption{Predicted vs.\ measured dimensionless parameters. Main panel: linear scatter from $V_{ub} \approx 0.004$ to $\delta_{CP}^\nu = \pi$. Inset: the small-value cluster resolved ($V_{ub}$, $\sin^2\theta_{13}$, $V_{cb}$, $\alpha_s$, $V_{us}$, $\sin^2\theta_W$, $\sin^2\theta_{12}$). Bottom: error distribution for dimensionless parameters (median 1.0\%).}
+\label{fig:dimensionless}
+\end{figure}
 
 %----------------------------------------------------------------------
 \section{Discussion}
