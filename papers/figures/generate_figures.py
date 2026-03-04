@@ -62,29 +62,38 @@ C_TORUS   = '#1565c0'   # torus wireframe
 # FIGURE 1: The (2,1) Torus Knot
 # ═══════════════════════════════════════════════════════════════════
 
-def figure1_torus_knot():
-    """3D rendering of the (2,1) torus knot on a transparent torus."""
-    fig = plt.figure(figsize=(3.4, 3.0))
-    ax = fig.add_subplot(111, projection='3d')
+def _draw_torus_knot_panel(ax, R, r, p, q, cmap, color_lo, color_hi,
+                           gap_frac=0.0, N=2000, lw=2.0,
+                           show_annotations=False, show_arrows=False):
+    """Draw a (p,q) torus knot on a 3D axes with optional gap and annotations.
 
-    R, r = 1.0, 0.25  # slightly exaggerated r/R for visibility
-    p, q = 2, 1
-    N = 2000
+    gap_frac: fraction of 2π to leave as a gap (0 = closed, 0.04 = 4% gap).
+    """
+    torus_color = C_TORUS
 
-    # Knot curve
-    lam = np.linspace(0, 2 * np.pi, N)
+    # Knot curve (with optional gap)
+    if gap_frac > 0:
+        lam = np.linspace(gap_frac * 2 * np.pi, (1 - gap_frac) * 2 * np.pi, N)
+    else:
+        lam = np.linspace(0, 2 * np.pi, N)
     theta = p * lam
     phi = q * lam
     x_k = (R + r * np.cos(phi)) * np.cos(theta)
     y_k = (R + r * np.cos(phi)) * np.sin(theta)
     z_k = r * np.sin(phi)
 
-    # Draw knot with color gradient showing circulation
-    cmap = plt.cm.Reds
-    colors = cmap(np.linspace(0.35, 0.95, N))
+    # Color gradient
+    colors = cmap(np.linspace(color_lo, color_hi, N))
     for i in range(N - 1):
         ax.plot([x_k[i], x_k[i+1]], [y_k[i], y_k[i+1]], [z_k[i], z_k[i+1]],
-                color=colors[i], linewidth=2.0, alpha=0.9)
+                color=colors[i], linewidth=lw, alpha=0.9)
+
+    # Gap endpoint markers
+    if gap_frac > 0:
+        ax.plot([x_k[0]], [y_k[0]], [z_k[0]], 'o', color=colors[0],
+                markersize=4, zorder=5)
+        ax.plot([x_k[-1]], [y_k[-1]], [z_k[-1]], 'o', color=colors[-1],
+                markersize=4, zorder=5)
 
     # Torus wireframe
     u = np.linspace(0, 2 * np.pi, 50)
@@ -93,48 +102,95 @@ def figure1_torus_knot():
     X = (R + r * np.cos(V)) * np.cos(U)
     Y = (R + r * np.cos(V)) * np.sin(U)
     Z = r * np.sin(V)
-    ax.plot_surface(X, Y, Z, alpha=0.04, color=C_TORUS, linewidth=0)
-    ax.plot_wireframe(X, Y, Z, alpha=0.12, color=C_TORUS, linewidth=0.25,
+    ax.plot_surface(X, Y, Z, alpha=0.04, color=torus_color, linewidth=0)
+    ax.plot_wireframe(X, Y, Z, alpha=0.12, color=torus_color, linewidth=0.25,
                       rstride=3, cstride=3)
 
-    # Radius annotations — R arrow along the equatorial plane
-    arrow_theta = np.pi * 0.15
-    ax.plot([0, R * np.cos(arrow_theta)],
-            [0, R * np.sin(arrow_theta)],
-            [0, 0], 'k-', linewidth=0.8)
-    ax.text(0.45 * np.cos(arrow_theta) - 0.05,
-            0.45 * np.sin(arrow_theta) + 0.1,
-            0.05, r'$R$', fontsize=10, ha='center', color='black')
+    if show_annotations:
+        # R arrow
+        arrow_theta = np.pi * 0.15
+        ax.plot([0, R * np.cos(arrow_theta)],
+                [0, R * np.sin(arrow_theta)],
+                [0, 0], 'k-', linewidth=0.8)
+        ax.text(0.45 * np.cos(arrow_theta) - 0.05,
+                0.45 * np.sin(arrow_theta) + 0.1,
+                0.05, r'$R$', fontsize=9, ha='center', color='black')
+        # r arrow
+        r_theta = 0.0
+        cx, cy = R * np.cos(r_theta), R * np.sin(r_theta)
+        ax.plot([cx, cx + r], [cy, cy], [0, 0], 'k-', linewidth=0.8)
+        ax.text(cx + r * 0.5, cy + 0.08, 0.07, r'$r$', fontsize=9,
+                ha='center', color='black')
+        # α label
+        ax.text2D(0.02, 0.02, r'$\alpha = r/R$', transform=ax.transAxes,
+                  fontsize=8, color='#444444')
 
-    # r arrow — from torus center circle outward at the front
-    r_theta = 0.0
-    cx, cy = R * np.cos(r_theta), R * np.sin(r_theta)
-    ax.plot([cx, cx + r], [cy, cy], [0, 0], 'k-', linewidth=0.8)
-    ax.text(cx + r * 0.5, cy + 0.08, 0.07, r'$r$', fontsize=10,
-            ha='center', color='black')
+    if show_arrows:
+        arrow_indices = np.linspace(100, N - 100, 6, dtype=int)
+        for idx in arrow_indices:
+            dx = x_k[idx+5] - x_k[idx-5]
+            dy = y_k[idx+5] - y_k[idx-5]
+            dz = z_k[idx+5] - z_k[idx-5]
+            norm = np.sqrt(dx**2 + dy**2 + dz**2)
+            ax.quiver(x_k[idx], y_k[idx], z_k[idx],
+                      dx/norm, dy/norm, dz/norm,
+                      length=0.08, color='black', arrow_length_ratio=0.6,
+                      linewidth=0.6)
 
-    # α = r/R label
-    ax.text2D(0.02, 0.02, r'$\alpha = r/R$', transform=ax.transAxes,
-              fontsize=9, color='#444444')
+    return x_k, y_k, z_k
 
-    # Current direction arrows along knot (triangular markers)
-    arrow_indices = np.linspace(100, N - 100, 6, dtype=int)
-    for idx in arrow_indices:
-        dx = x_k[idx+5] - x_k[idx-5]
-        dy = y_k[idx+5] - y_k[idx-5]
-        dz = z_k[idx+5] - z_k[idx-5]
-        norm = np.sqrt(dx**2 + dy**2 + dz**2)
-        ax.quiver(x_k[idx], y_k[idx], z_k[idx],
-                  dx/norm, dy/norm, dz/norm,
-                  length=0.08, color='black', arrow_length_ratio=0.6,
-                  linewidth=0.6)
 
-    ax.view_init(elev=25, azim=30)
-    ax.set_xlim(-1.5, 1.5)
-    ax.set_ylim(-1.5, 1.5)
-    ax.set_zlim(-0.6, 0.6)
-    ax.set_axis_off()
-    ax.set_title('(2,1) torus knot', fontsize=10, pad=-5)
+def figure1_torus_knot():
+    """Multi-panel figure: electron, K± meson phase defect, proton resonance."""
+    fig = plt.figure(figsize=(7.0, 4.0))
+    gs = gridspec.GridSpec(2, 2, width_ratios=[3, 2.5], hspace=0.02, wspace=0.0)
+
+    # ── (a) Electron (2,1) — left panel, spans both rows ──
+    ax_a = fig.add_subplot(gs[:, 0], projection='3d')
+    _draw_torus_knot_panel(ax_a, R=1.0, r=0.25, p=2, q=1,
+                           cmap=plt.cm.Reds, color_lo=0.35, color_hi=0.95,
+                           show_annotations=True, show_arrows=True)
+    ax_a.view_init(elev=25, azim=30)
+    ax_a.set_xlim(-1.5, 1.5)
+    ax_a.set_ylim(-1.5, 1.5)
+    ax_a.set_zlim(-0.6, 0.6)
+    ax_a.set_box_aspect([1, 1, 0.4])
+    ax_a.set_axis_off()
+    ax_a.set_title(r'(a)  Electron $(2,1)$', fontsize=9, pad=-8)
+
+    # ── (b) K± meson — phase defect ──
+    # Mode (1,1) at k=2 → effective (2,1) on fatter torus r=0.5
+    # 2²+1²=5, √5≈2.24 — not integer → gap
+    ax_b = fig.add_subplot(gs[0, 1], projection='3d')
+    _draw_torus_knot_panel(ax_b, R=1.0, r=0.5, p=2, q=1,
+                           cmap=plt.cm.Oranges, color_lo=0.25, color_hi=0.90,
+                           gap_frac=0.06, lw=2.2)
+    ax_b.view_init(elev=20, azim=220)
+    bnd = 1.55
+    ax_b.set_xlim(-bnd, bnd)
+    ax_b.set_ylim(-bnd, bnd)
+    ax_b.set_zlim(-0.65, 0.65)
+    ax_b.set_box_aspect([1, 1, 0.42])
+    ax_b.set_axis_off()
+    ax_b.set_title(r'(b)  K$^\pm$ — phase defect', fontsize=8, pad=-8)
+
+    # ── (c) Proton — (3,4,5) Pythagorean resonance ──
+    # Mode (1,4) at k=3 → effective (3,4) on thinner torus r=1/3
+    # 3²+4²=5² — perfect closure
+    ax_c = fig.add_subplot(gs[1, 1], projection='3d')
+    _draw_torus_knot_panel(ax_c, R=1.0, r=1/3, p=3, q=4,
+                           cmap=plt.cm.Greens, color_lo=0.30, color_hi=0.90,
+                           gap_frac=0.0, lw=1.8)
+    ax_c.view_init(elev=25, azim=30)
+    bnd_c = 1.45
+    ax_c.set_xlim(-bnd_c, bnd_c)
+    ax_c.set_ylim(-bnd_c, bnd_c)
+    ax_c.set_zlim(-0.5, 0.5)
+    ax_c.set_box_aspect([1, 1, 0.35])
+    ax_c.set_axis_off()
+    ax_c.set_title(r'(c)  Proton — $(3,4,5)$ resonance', fontsize=8, pad=-8)
+    ax_c.text2D(0.50, 0.02, r'$3^2+4^2=5^2$', transform=ax_c.transAxes,
+                fontsize=8, ha='center', color='#2e7d32')
 
     path = os.path.join(OUTDIR, 'figure1_torus_knot.png')
     fig.savefig(path, dpi=300, bbox_inches='tight', facecolor='white')
@@ -549,11 +605,18 @@ def figure4_koide_sphere():
     ax.plot(np.cos(eq_t), np.sin(eq_t), np.zeros_like(eq_t),
             color='#999999', linewidth=0.5, linestyle='--', alpha=0.5)
 
-    # Draw the three Koide vectors
+    # Draw the three Koide vectors as line segments
     for i, (vx, vy, vz) in enumerate(vectors):
-        ax.quiver(0, 0, 0, vx, vy, vz, color=colors_v[i],
-                  arrow_length_ratio=0.08, linewidth=1.5)
-        ax.text(vx * 1.15, vy * 1.15, vz * 1.15, gen_labels[i],
+        ax.plot([0, vx], [0, vy], [0, vz],
+                color=colors_v[i], linewidth=2, solid_capstyle='round')
+        label_r = 1.30 if i < 2 else 1.15  # push m1, m2 labels further out
+        lx, ly, lz = vx * label_r, vy * label_r, vz * label_r
+        if i == 0:  # m1: nudge down and away from arrow
+            lz -= 0.15
+        if i == 1:  # m2: nudge upper-right
+            lx += 0.08
+            lz += 0.08
+        ax.text(lx, ly, lz, gen_labels[i],
                 fontsize=9, color=colors_v[i], ha='center', va='center')
         # Project onto equatorial plane
         ax.plot([vx, vx], [vy, vy], [0, vz],
@@ -561,21 +624,49 @@ def figure4_koide_sphere():
         ax.scatter([vx], [vy], [0], color=colors_v[i], s=10, alpha=0.5,
                    zorder=5)
 
+    # Radial lines from center to equatorial projections (for m2, m3)
+    for i in [1, 2]:  # m2 (blue), m3 (green)
+        vx, vy, vz = vectors[i]
+        ax.plot([0, vx], [0, vy], [0, 0],
+                color=colors_v[i], linewidth=0.5, linestyle=':', alpha=0.5)
+
     # Z3 symmetry arc on equatorial plane
     arc_t = np.linspace(0, 2 * np.pi / 3, 30)
     r_arc = 0.35
     ax.plot(r_arc * np.cos(arc_t), r_arc * np.sin(arc_t),
             np.zeros_like(arc_t), color='#666666', linewidth=0.6)
-    ax.text(0.28, 0.22, 0.0, r'$120°$', fontsize=7, color='#666666')
+    # Place 120° label at midpoint of arc, pushed outward
+    arc_mid = len(arc_t) // 2
+    ax.text(r_arc * np.cos(arc_t[arc_mid]) * 1.3 - 0.18,
+            r_arc * np.sin(arc_t[arc_mid]) * 1.3,
+            -0.04, r'$120°$', fontsize=7, color='#666666')
 
-    # theta_K annotation
+    # theta_K: dashed z-axis and arc from z-axis to m3 vector
+    ax.plot([0, 0], [0, 0], [0, 1.1], color='#888888', linewidth=0.5,
+            linestyle='--', alpha=0.6)
+    # Arc from z-axis to m3 in the plane containing both
+    vx3, vy3, vz3 = vectors[2]
+    polar3 = np.arccos(vz3)  # polar angle of m3
+    azimuth3 = np.arctan2(vy3, vx3)
+    r_tk = 0.45  # arc radius
+    arc_polar = np.linspace(0, polar3, 30)
+    arc_x = r_tk * np.sin(arc_polar) * np.cos(azimuth3)
+    arc_y = r_tk * np.sin(arc_polar) * np.sin(azimuth3)
+    arc_z = r_tk * np.cos(arc_polar)
+    ax.plot(arc_x, arc_y, arc_z, color=C_CKM, linewidth=0.6)
+    # Label at arc midpoint
+    mid = len(arc_polar) // 2
+    ax.text(arc_x[mid] + 0.06, arc_y[mid] + 0.06, arc_z[mid],
+            r'$\theta_K$', fontsize=8, color=C_CKM)
+    # Keep the equation in the corner
     ax.text2D(0.02, 0.95, r'$\theta_K = \frac{6\pi + 2}{9}$',
               transform=ax.transAxes, fontsize=9, color='black')
 
-    ax.view_init(elev=20, azim=35)
+    ax.view_init(elev=20, azim=330)
     ax.set_xlim(-1.2, 1.2)
     ax.set_ylim(-1.2, 1.2)
     ax.set_zlim(-1.2, 1.2)
+    ax.set_box_aspect([1, 1, 1])
     ax.set_axis_off()
     ax.set_title('Koide generation sphere', fontsize=10, pad=-5)
 
@@ -592,8 +683,8 @@ def figure4_koide_sphere():
 def figure5_torus_modes():
     """Schematic grid of the 13 EM modes on the torus."""
     fig, ax = plt.subplots(figsize=(3.4, 4.0))
-    ax.set_xlim(-0.8, 5.8)
-    ax.set_ylim(-2.5, 5.8)
+    ax.set_xlim(-1.5, 5.1)
+    ax.set_ylim(-1.5, 5.8)
     ax.axis('off')
 
     ax.set_title('Electromagnetic modes on the torus', fontsize=10, pad=8)
@@ -649,28 +740,19 @@ def figure5_torus_modes():
     for i, (n, m) in enumerate([(1, -1), (2, 1), (2, -1)]):
         draw_cell(1.9 + i * 1.1, y, f'$n={n}$\n$m={m}$', C_WEAK, 'weak')
 
-    # Row 4: Metric modes — 5 modes
+    # Row 4: Zero mode (subtracted)
     y = 1.5
-    ax.text(-0.3, y, 'Metric', fontsize=8, ha='right', va='center',
-            fontweight='bold', color='#333333')
-    metric_labels = [r'$g_{tt}$', r'$g_{\theta\theta}$',
-                     r'$g_{\phi\phi}$', r'$g_{t\theta}$', r'$g_{t\phi}$']
-    for i, ml in enumerate(metric_labels):
-        draw_cell(0.8 + i * 1.1, y, ml, C_METRIC)
-
-    # Row 5: Zero mode (subtracted)
-    y = 0.5
     ax.text(-0.3, y, 'Zero', fontsize=8, ha='right', va='center',
             fontweight='bold', color='#333333')
     draw_cell(0.8, y, '$n=0$\n$m=0$', C_ZERO, r'$-1$')
 
     # Summary equation at bottom (two lines — matplotlib mathtext lacks \underbrace)
-    ax.text(2.7, -0.9,
+    ax.text(1.8, 0.1,
             r'$10\;\mathrm{(EM)} + 3\;\mathrm{(weak)} = 13\;\mathrm{modes}$',
             ha='center', va='center', fontsize=9,
             bbox=dict(boxstyle='round,pad=0.3', facecolor='#f5f5f5',
                       edgecolor='#999999', linewidth=0.5))
-    ax.text(2.7, -1.6,
+    ax.text(1.8, -0.6,
             r'$\sin^2\!\theta_W = 3\,/\,13 \approx 0.231$',
             ha='center', va='center', fontsize=10, fontweight='bold',
             bbox=dict(boxstyle='round,pad=0.25', facecolor='#e8f5e9',
@@ -679,11 +761,11 @@ def figure5_torus_modes():
     # Legend — horizontal row above the grid
     legend_items = [
         (C_EM, 'EM (10)'), (C_WEAK, 'Weak (3)'),
-        (C_METRIC, 'Metric (5)'), (C_ZERO, 'Zero (−1)')
+        (C_ZERO, 'Zero (−1)')
     ]
     legend_y = 5.4
-    legend_start = 0.0
     legend_spacing = 1.45
+    legend_start = 1.8 - (len(legend_items) - 1) * legend_spacing / 2
     for i, (color, label) in enumerate(legend_items):
         bx = legend_start + i * legend_spacing
         ax.add_patch(FancyBboxPatch((bx - 0.12, legend_y - 0.1), 0.24, 0.2,
