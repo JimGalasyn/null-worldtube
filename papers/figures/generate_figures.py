@@ -193,12 +193,20 @@ def _add_error_histogram(ax, subset_data):
     present_sectors = sorted(set(s for _, _, _, s in subset_data),
                              key=list(SECTOR_COLORS.keys()).index)
     bins = np.linspace(0, 10, 21)
+    stacked_errors = []
+    stacked_colors = []
+    stacked_labels = []
     for sec in present_sectors:
         sec_errors = [abs(p - m) / m * 100
                       for _, p, m, s in subset_data if s == sec and m != 0]
         if sec_errors:
-            ax.hist(sec_errors, bins=bins, color=SECTOR_COLORS[sec], alpha=0.6,
-                    label=SECTOR_LABELS[sec], edgecolor='white', linewidth=0.3)
+            stacked_errors.append(sec_errors)
+            stacked_colors.append(SECTOR_COLORS[sec])
+            stacked_labels.append(SECTOR_LABELS[sec])
+    if stacked_errors:
+        ax.hist(stacked_errors, bins=bins, color=stacked_colors,
+                label=stacked_labels, stacked=True,
+                edgecolor='white', linewidth=0.3)
     if errors:
         median_err = np.median(errors)
         ax.axvline(median_err, color='black', linewidth=1.0, linestyle='--',
@@ -206,6 +214,7 @@ def _add_error_histogram(ax, subset_data):
     ax.set_xlabel('|Error| (%)')
     ax.set_ylabel('Count')
     ax.set_xlim(0, 10)
+    ax.yaxis.set_major_locator(matplotlib.ticker.MaxNLocator(integer=True))
     ax.legend(fontsize=7, loc='upper right', framealpha=0.8, edgecolor='none')
 
 
@@ -238,12 +247,12 @@ def figure2a_masses():
     # Label well-separated points directly
     ew_labels = {r'$m_t$', r'$v$', r'$m_H$', r'$m_W$', r'$m_Z$'}
     offsets_mass = {
-        r'$m_u$':    (-0.30, 0.0),
+        r'$m_u$':    (-0.15, 0.0),
         r'$m_d$':    (0.10, -0.18),
         r'$m_s$':    (0.10, 0.08),
-        r'$m_c$':    (-0.26, 0.06),
-        r'$m_\tau$': (0.10, 0.08),
-        r'$m_b$':    (0.10, -0.10),
+        r'$m_c$':    (-0.15, 0.06),
+        r'$m_\tau$': (0.15, 0.0),
+        r'$m_b$':    (0.15, 0.0),
     }
     for label, pred, meas, sector in masses:
         if label in ew_labels:
@@ -257,7 +266,7 @@ def figure2a_masses():
                     ha='left' if dx > 0 else 'right', va='center')
 
     # Zoomed inset for electroweak cluster — positioned in the empty center
-    ax_ins = ax.inset_axes([0.30, 0.12, 0.48, 0.38])
+    ax_ins = ax.inset_axes([0.35, 0.12, 0.48, 0.38])
     ew_masses = [(l, p, m, s) for l, p, m, s in masses if l in ew_labels]
     for label, pred, meas, sector in ew_masses:
         ax_ins.scatter(meas, pred, c=SECTOR_COLORS[sector], s=28,
@@ -269,30 +278,40 @@ def figure2a_masses():
     ax_ins.set_yscale('log')
     ax_ins.set_xlim(ins_lo, ins_hi)
     ax_ins.set_ylim(ins_lo, ins_hi)
-    ax_ins.tick_params(labelsize=0)  # hide ticks — labels provide context
+    ax_ins.tick_params(which='both', labelsize=5.5)
+    ax_ins.set_xticks([1e5, 2e5, 3e5])
+    ax_ins.set_yticks([1e5, 2e5, 3e5])
+    ax_ins.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax_ins.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     for spine in ax_ins.spines.values():
         spine.set_linewidth(0.5)
         spine.set_color('#888888')
 
     ew_offsets = {
-        r'$m_t$': (0.05, 0.05),
+        r'$m_t$': (0.04, 0.0),
         r'$v$':   (0.05, -0.05),
-        r'$m_H$': (-0.10, -0.04),
-        r'$m_W$': (-0.10, 0.04),
-        r'$m_Z$': (0.05, -0.04),
+        r'$m_H$': (-0.04, 0.0),
+        r'$m_W$': (-0.01, 0.06),
+        r'$m_Z$': (0.04, 0.0),
     }
+    no_callout_inset = {r'$m_H$', r'$m_W$'}
     for label, pred, meas, sector in ew_masses:
         dx, dy = ew_offsets.get(label, (0.05, 0.0))
+        kwargs = dict(fontsize=7.5, color=SECTOR_COLORS[sector],
+                      ha='left' if dx > 0 else 'right', va='center')
+        if label not in no_callout_inset:
+            kwargs['arrowprops'] = dict(arrowstyle='-', color='#cccccc',
+                                        lw=0.3, shrinkA=1, shrinkB=1)
         ax_ins.annotate(label,
                         xy=(meas, pred),
                         xytext=(10**(np.log10(meas) + dx),
                                 10**(np.log10(pred) + dy)),
-                        fontsize=7.5, color=SECTOR_COLORS[sector],
-                        ha='left' if dx > 0 else 'right', va='center',
-                        arrowprops=dict(arrowstyle='-', color='#cccccc',
-                                        lw=0.3, shrinkA=1, shrinkB=1))
+                        **kwargs)
 
-    ax.indicate_inset_zoom(ax_ins, edgecolor='#999999', linewidth=0.5, alpha=0.5)
+    rect, connectors = ax.indicate_inset_zoom(ax_ins, edgecolor='#999999', linewidth=0.5, alpha=0.5)
+    for conn in connectors:
+        if conn is not None:
+            conn.set_linewidth(0.5)
 
     # Legend
     for sec in ['fermion', 'gauge']:
@@ -334,8 +353,8 @@ def figure2b_dimensionless():
 
     # Label well-separated points directly
     direct_labels = {
-        r'$\delta_{CP}$':         (0.12, -0.12),
-        r'$\sin^2\!\theta_{23}$': (0.12, -0.15),
+        r'$\delta_{CP}$':         (-0.12, 0.12),
+        r'$\sin^2\!\theta_{23}$': (-0.15, 0.30),
         r'$\delta_{CP}^\nu$':     (-0.35, -0.12),
     }
     for label, pred, meas, sector in dimless:
@@ -347,10 +366,11 @@ def figure2b_dimensionless():
                         fontsize=7.5, color=SECTOR_COLORS[sector],
                         ha='left' if dx > 0 else 'right', va='center',
                         arrowprops=dict(arrowstyle='-', color='#cccccc',
-                                        lw=0.3) if abs(dx) > 0.2 else None)
+                                        lw=0.3, shrinkA=1, shrinkB=1)
+                        if abs(dx) + abs(dy) > 0.2 else None)
 
     # Zoomed inset for the small-value cluster
-    ax_ins = ax.inset_axes([0.30, 0.08, 0.62, 0.44])
+    ax_ins = ax.inset_axes([0.38, 0.08, 0.60, 0.44])
     small_dimless = [(l, p, m, s) for l, p, m, s in dimless if m < 0.35]
     for label, pred, meas, sector in small_dimless:
         ax_ins.scatter(meas, pred, c=SECTOR_COLORS[sector], s=28,
@@ -369,13 +389,13 @@ def figure2b_dimensionless():
         spine.set_color('#888888')
 
     inset_offsets = {
-        r'$\sin^2\!\theta_W$':    (0.06, -0.035),
-        r'$\alpha_s$':            (0.06,  0.025),
-        r'$V_{us}$':              (-0.10,  0.035),
-        r'$V_{cb}$':              (0.06, -0.02),
-        r'$V_{ub}$':              (0.05,  0.02),
-        r'$\sin^2\!\theta_{13}$': (0.06, -0.012),
-        r'$\sin^2\!\theta_{12}$': (-0.12, -0.035),
+        r'$\sin^2\!\theta_W$':    (0.04, -0.03),
+        r'$\alpha_s$':            (0.06,  0.0),
+        r'$V_{us}$':              (-0.10,  0.05),
+        r'$V_{cb}$':              (0.06,  0.0),
+        r'$V_{ub}$':              (-0.06,  0.03),
+        r'$\sin^2\!\theta_{13}$': (0.06, -0.02),
+        r'$\sin^2\!\theta_{12}$': (-0.06, -0.02),
     }
     for label, pred, meas, sector in small_dimless:
         if label in inset_offsets:
@@ -388,7 +408,10 @@ def figure2b_dimensionless():
                             arrowprops=dict(arrowstyle='-', color='#cccccc',
                                             lw=0.3, shrinkA=1, shrinkB=1))
 
-    ax.indicate_inset_zoom(ax_ins, edgecolor='#999999', linewidth=0.5, alpha=0.5)
+    rect, connectors = ax.indicate_inset_zoom(ax_ins, edgecolor='#999999', linewidth=0.5, alpha=0.5)
+    for conn in connectors:
+        if conn is not None:
+            conn.set_linewidth(0.5)
 
     # Legend
     for sec in ['gauge', 'ckm', 'pmns']:
