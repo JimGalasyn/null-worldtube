@@ -713,22 +713,23 @@ def figure4_koide_sphere():
 # ═══════════════════════════════════════════════════════════════════
 
 def figure5_torus_modes():
-    """Schematic grid of the 13 EM modes on the torus."""
-    fig, ax = plt.subplots(figsize=(3.4, 4.0))
-    ax.set_xlim(-1.5, 5.1)
-    ax.set_ylim(-1.5, 5.8)
+    """Schematic grid of the 13 EM modes on the torus.
+
+    Mode counting (from supplementary S8.1):
+      p²=4 toroidal + q²=1 poloidal + p²q²=4 mixed + (p²+q²)=5 metric − 1 zero = 13
+    EM (10) = 4 toroidal + 1 poloidal + 4 mixed + 1 metric
+    Weak (3) = 3 metric modes that couple to poloidal (weak isospin) sector
+    Zero (−1) = gauge d.o.f. subtracted from metric
+    """
+    fig, ax = plt.subplots(figsize=(3.4, 5.2))
+    ax.set_xlim(-1.5, 5.7)
+    ax.set_ylim(-1.8, 6.8)
     ax.axis('off')
 
     ax.set_title('Electromagnetic modes on the torus', fontsize=10, pad=8)
 
-    # Mode categories
-    # EM modes (10 total): 4 toroidal + 1 poloidal + 4 mixed + 1 metric-like
-    # Weak-coupled (3): specific modes → sin²θ_W = 3/13
-    # Plus 5 metric modes - 1 zero mode = 4 additional
-
     C_EM = '#bbdefb'      # blue — EM modes
     C_WEAK = '#c8e6c9'    # green — weak modes
-    C_METRIC = '#fff9c4'  # yellow — metric modes
     C_ZERO = '#f5f5f5'    # gray — zero mode
 
     cell_w, cell_h = 0.85, 0.70
@@ -750,54 +751,74 @@ def figure5_torus_modes():
             ax.text(x, y, label,
                     ha='center', va='center', fontsize=text_size)
 
-    # Row 1: Toroidal modes (n=1..4, m=0) — EM
-    y = 4.5
+    # Row 1: Toroidal modes (p²=4, m=0) — all EM
+    y = 5.5
     ax.text(-0.3, y, 'Toroidal', fontsize=8, ha='right', va='center',
             fontweight='bold', color='#333333')
+    ax.text(-0.3, y - 0.22, r'$p^2\!=\!4$', fontsize=6, ha='right',
+            va='center', color='#888888')
     for i, n in enumerate([1, 2, 3, 4]):
         draw_cell(0.8 + i * 1.1, y, f'$n={n}$\n$m=0$', C_EM)
 
-    # Row 2: Poloidal mode (n=0, m=1) — EM
-    y = 3.5
+    # Row 2: Poloidal mode (q²=1) — EM
+    y = 4.5
     ax.text(-0.3, y, 'Poloidal', fontsize=8, ha='right', va='center',
             fontweight='bold', color='#333333')
+    ax.text(-0.3, y - 0.22, r'$q^2\!=\!1$', fontsize=6, ha='right',
+            va='center', color='#888888')
     draw_cell(0.8, y, '$n=0$\n$m=1$', C_EM)
 
-    # Row 3: Mixed modes (n·m ≠ 0) — 1 EM + 3 weak
-    y = 2.5
+    # Row 3: Mixed modes (p²q²=4) — all EM
+    y = 3.5
     ax.text(-0.3, y, 'Mixed', fontsize=8, ha='right', va='center',
             fontweight='bold', color='#333333')
-    draw_cell(0.8, y, '$n=1$\n$m=1$', C_EM)
-    # Three weak-coupled mixed modes
-    for i, (n, m) in enumerate([(1, -1), (2, 1), (2, -1)]):
-        draw_cell(1.9 + i * 1.1, y, f'$n={n}$\n$m={m}$', C_WEAK, 'weak')
+    ax.text(-0.3, y - 0.22, r'$p^2 q^2\!=\!4$', fontsize=6, ha='right',
+            va='center', color='#888888')
+    for i, (n, m) in enumerate([(1, 1), (1, -1), (2, 1), (2, -1)]):
+        draw_cell(0.8 + i * 1.1, y, f'$n={n}$\n$m={m}$', C_EM)
 
-    # Row 4: Zero mode (subtracted)
-    y = 1.5
-    ax.text(-0.3, y, 'Zero', fontsize=8, ha='right', va='center',
+    # Row 4: Knot-metric modes (p²+q²=5) — 1 EM + 3 weak + 1 zero
+    y = 2.5
+    ax.text(-0.3, y, 'Metric', fontsize=8, ha='right', va='center',
             fontweight='bold', color='#333333')
-    draw_cell(0.8, y, '$n=0$\n$m=0$', C_ZERO, r'$-1$')
+    ax.text(-0.3, y - 0.22, r'$p^2\!+\!q^2\!=\!5$', fontsize=6, ha='right',
+            va='center', color='#888888')
+    for i, (label, color, sub) in enumerate([
+            ('$g_1$', C_EM, None), ('$g_2$', C_WEAK, 'weak'),
+            ('$g_3$', C_WEAK, 'weak'), ('$g_4$', C_WEAK, 'weak'),
+            ('$g_0$', C_ZERO, r'$-1$')]):
+        draw_cell(0.8 + i * 1.0, y, label, color, sub)
 
-    # Summary equation at bottom (two lines — matplotlib mathtext lacks \underbrace)
-    ax.text(1.8, 0.1,
+    # Summary equation at bottom
+    ax.text(2.1, 1.0,
             r'$10\;\mathrm{(EM)} + 3\;\mathrm{(weak)} = 13\;\mathrm{modes}$',
             ha='center', va='center', fontsize=9,
             bbox=dict(boxstyle='round,pad=0.3', facecolor='#f5f5f5',
                       edgecolor='#999999', linewidth=0.5))
-    ax.text(1.8, -0.6,
+    ax.text(2.1, 0.1,
             r'$\sin^2\!\theta_W = 3\,/\,13 \approx 0.231$',
             ha='center', va='center', fontsize=10, fontweight='bold',
             bbox=dict(boxstyle='round,pad=0.25', facecolor='#e8f5e9',
                       edgecolor='#999999', linewidth=0.5))
+
+    # Tally annotations on right side
+    ax.text(5.3, 5.5, '4', fontsize=8, ha='center', va='center',
+            color=C_GAUGE, fontweight='bold')
+    ax.text(5.3, 4.5, '1', fontsize=8, ha='center', va='center',
+            color=C_GAUGE, fontweight='bold')
+    ax.text(5.3, 3.5, '4', fontsize=8, ha='center', va='center',
+            color=C_GAUGE, fontweight='bold')
+    ax.text(5.3, 2.5, '5', fontsize=8, ha='center', va='center',
+            color='#666666', fontweight='bold')
 
     # Legend — horizontal row above the grid
     legend_items = [
         (C_EM, 'EM (10)'), (C_WEAK, 'Weak (3)'),
         (C_ZERO, 'Zero (−1)')
     ]
-    legend_y = 5.4
+    legend_y = 6.4
     legend_spacing = 1.45
-    legend_start = 1.8 - (len(legend_items) - 1) * legend_spacing / 2
+    legend_start = 2.1 - (len(legend_items) - 1) * legend_spacing / 2
     for i, (color, label) in enumerate(legend_items):
         bx = legend_start + i * legend_spacing
         ax.add_patch(FancyBboxPatch((bx - 0.12, legend_y - 0.1), 0.24, 0.2,
