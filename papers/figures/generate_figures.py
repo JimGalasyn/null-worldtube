@@ -320,6 +320,13 @@ def figure2a_masses():
     ax.set_ylabel('Predicted (MeV)')
     ax.set_title('Masses and energy scales', fontsize=10, pad=6)
     ax.set_aspect('equal')
+    # Force matching ticks on both axes
+    from matplotlib.ticker import LogLocator, NullFormatter
+    loc = LogLocator(base=10, numticks=10)
+    ax.xaxis.set_major_locator(LogLocator(base=10, numticks=10))
+    ax.yaxis.set_major_locator(LogLocator(base=10, numticks=10))
+    ax.xaxis.set_minor_formatter(NullFormatter())
+    ax.yaxis.set_minor_formatter(NullFormatter())
 
     # Label well-separated points directly
     ew_labels = {r'$m_t$', r'$v$', r'$m_H$', r'$m_W$', r'$m_Z$'}
@@ -427,6 +434,10 @@ def figure2b_dimensionless():
     ax.set_ylabel('Predicted')
     ax.set_title('Dimensionless parameters', fontsize=10, pad=6)
     ax.set_aspect('equal')
+    # Force matching ticks on both axes
+    ticks_d = [0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+    ax.set_xticks(ticks_d)
+    ax.set_yticks(ticks_d)
 
     # Label well-separated points directly
     direct_labels = {
