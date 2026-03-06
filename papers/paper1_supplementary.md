@@ -675,8 +675,8 @@ The model requires one primary measured input:
 
 The three quantities previously treated as additional inputs are now derivable from the topological integers (p=2, q=1, k=R/r=3):
 
-- **α**: Skilton's formula α⁻¹ = √(137² + π²) = 137.036016 (0.12 ppm), where 137 = p_s² + q_s² with generators p_s = 2k + p² + q² = 11 and q_s = p² = 4 — these are NWT quantum numbers. See Paper 3 [ref].
-- **m_μ**: The Koide angle θ_K = (6π+2)/9 is a function of (p, q, k), so given m_e, the Koide relation determines m_μ = 105.658 MeV (0.001% error). See Paper 3 [ref].
+- **α**: Skilton's formula α⁻¹ = √(137² + π²) = 137.036016 (0.12 ppm), where 137 = p_s² + q_s² with generators p_s = 2k + p² + q² = 11 and q_s = p² = 4 — these are NWT quantum numbers. See Paper 2 [ref].
+- **m_μ**: The Koide angle θ_K = (6π+2)/9 is a function of (p, q, k), so given m_e, the Koide relation determines m_μ = 105.658 MeV (0.001% error). See Paper 2 [ref].
 - **Λ_tube**: The Lenz formula m_p/m_e = 6π⁵ (0.002% error) is structurally explained as 2k × π^(p²+q²). Given m_e, this yields m_p → R_p → Λ_tube. The Cornell potential derivation (Section S17) provides an independent route yielding m_p = 945.7 MeV (0.8% error).
 
 Dimensional analysis requires at least one dimensionful input — m_e sets the absolute scale from which all other masses follow.
@@ -699,7 +699,7 @@ From these four numbers (1 measured + 3 topological), all 23 predictions follow 
    - θ(q_em) = (6π + 2/(1+3|q|))/9 from charge
    - All coefficients: 2/3, √5, 20/21, 3/13, 16, 2/9, π−2, etc. — pure functions of (p,q,k)
 
-See Paper 3 [ref] for the complete derivation of steps 1–3.
+See Paper 2 [ref] for the complete derivation of steps 1–3.
 
 ### S18.4 What is NOT an input
 
@@ -722,7 +722,7 @@ See Paper 3 [ref] for the complete derivation of steps 1–3.
 | String landscape [3] | None specific | 10⁵⁰⁰ vacua | No | No |
 | **Torus knot (this work)** | **23** | **1 + 3 integers†** | **Yes** | **Yes** |
 
-†The single measured input is m_e. The former inputs α, m_μ, and Λ_tube are derivable from the topological integers (p=2, q=1, k=3). See Paper 3 [ref] and Section S18.1.
+†The single measured input is m_e. The former inputs α, m_μ, and Λ_tube are derivable from the topological integers (p=2, q=1, k=3). See Paper 2 [ref] and Section S18.1.
 
 ---
 
