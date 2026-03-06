@@ -301,11 +301,16 @@ The correction $5\alpha = (p^2+q^2)\alpha$ involves the knot metric. This is one
 
 \subsection{S8.5 W and Z boson masses}
 
-From $v$ and $\sin^2\theta_W$ via standard electroweak relations:
-\begin{itemize}
-  \item $m_W = 80.4$~GeV (PDG 80.37, 0.0\%)
-  \item $m_Z = 91.6$~GeV (PDG 91.19, 0.5\%)
-\end{itemize}
+From $v$ and $\sin^2\theta_W$ via the Weinberg--Salam mass relations:
+\begin{align}
+  m_W &= \frac{v}{2}\,\frac{e(m_Z)}{\sin\theta_W}, \label{eq:mW}\\[4pt]
+  m_Z &= \frac{m_W}{\cos\theta_W}, \label{eq:mZ}
+\end{align}
+where $e(m_Z) = \sqrt{4\pi\alpha(m_Z)}$ is the running electromagnetic coupling at the $Z$ scale ($\alpha(m_Z)^{-1} \approx 127.9$). Substituting the NWT predictions $v = 246.34$~GeV and $\sin^2\theta_W = 3/13$:
+\begin{align}
+  m_W &= 80.4~\text{GeV} \quad (\text{PDG: } 80.37,\ 0.0\%), \\
+  m_Z &= 91.6~\text{GeV} \quad (\text{PDG: } 91.19,\ 0.5\%).
+\end{align}
 
 %----------------------------------------------------------------------
 \section{S9. CKM Matrix Derivation}
@@ -429,9 +434,9 @@ The model requires one primary measured input:
 
 The three quantities previously treated as additional inputs are now derivable from the topological integers $(p{=}2,\, q{=}1,\, k{=}R/r{=}3)$:
 \begin{itemize}
-  \item \textbf{$\alpha$}: Skilton's formula $\alpha^{-1} = \sqrt{137^2 + \pi^2} = 137.036016$ (0.12~ppm), where $137 = p_s^2 + q_s^2$ with generators $p_s = 2k + p^2 + q^2 = 11$ and $q_s = p^2 = 4$ --- these are NWT quantum numbers. See Paper~3~[ref].
-  \item \textbf{$m_\mu$}: The Koide angle $\theta_K = (6\pi+2)/9$ is a function of $(p,q,k)$, so given $m_e$, the Koide relation determines $m_\mu = 105.658$~MeV (0.001\% error). See Paper~3~[ref].
-  \item \textbf{$\Lambda_{\text{tube}}$}: The Lenz formula $m_p/m_e = 6\pi^5$ (0.002\% error) is structurally explained as $2k \times \pi^{p^2+q^2}$. Given $m_e$, this yields $m_p \to R_p \to \Lambda_{\text{tube}}$. See Paper~3~[ref].
+  \item \textbf{$\alpha$}: Skilton's formula $\alpha^{-1} = \sqrt{137^2 + \pi^2} = 137.036016$ (0.12~ppm), where $137 = p_s^2 + q_s^2$ with generators $p_s = 2k + p^2 + q^2 = 11$ and $q_s = p^2 = 4$ --- these are NWT quantum numbers. See Paper~3~\cite{galasyn2026c}.
+  \item \textbf{$m_\mu$}: The Koide angle $\theta_K = (6\pi+2)/9$ is a function of $(p,q,k)$, so given $m_e$, the Koide relation determines $m_\mu = 105.658$~MeV (0.001\% error). See Paper~3~\cite{galasyn2026c}.
+  \item \textbf{$\Lambda_{\text{tube}}$}: The Lenz formula $m_p/m_e = 6\pi^5$ (0.002\% error) is structurally explained as $2k \times \pi^{p^2+q^2}$. Given $m_e$, this yields $m_p \to R_p \to \Lambda_{\text{tube}}$. See Paper~3~\cite{galasyn2026c}.
 \end{itemize}
 
 Dimensional analysis requires at least one dimensionful input --- $m_e$ sets the absolute scale from which all other masses follow.
@@ -459,7 +464,7 @@ From these four numbers (1 measured $+$ 3 topological), all 23 predictions follo
   \item All coefficients: $2/3$, $\sqrt{5}$, $20/21$, $3/13$, $16$, $2/9$, $\pi-2$, etc.\ --- pure functions of $(p,q,k)$
 \end{itemize}
 
-See Paper~3~[ref] for the complete derivation of steps 1--3.
+See Paper~3~\cite{galasyn2026c} for the complete derivation of steps 1--3.
 
 \subsection{S12.4 What is NOT an input}
 
@@ -497,7 +502,7 @@ String landscape~\cite{bousso2000} & None specific & $10^{500}$ vacua & No \\
 \section{S14. Computational Verification}
 \label{sec:S14}
 
-All predictions are reproducible from the open-source simulation code:
+All predictions are reproducible from the open-source simulation code, available at \url{https://github.com/JimGalasyn/null-worldtube}:
 \begin{verbatim}
 python3 -m simulations.nwt --koide      # Lepton Koide analysis
 python3 -m simulations.nwt --quarks     # Quark masses + EW/CKM/PMNS
@@ -539,6 +544,11 @@ H.~Georgi and S.~L.~Glashow,
 E.~Ma and G.~Rajasekaran,
 ``Softly broken $A_4$ symmetry for nearly degenerate neutrino masses,''
 \emph{Phys.\ Rev.\ D}\ \textbf{64}, 113012 (2001).
+
+\bibitem{galasyn2026c}
+J.~Galasyn,
+``Three integers and a mass: Deriving the Standard Model input set,''
+NWT Paper~3 (2026).
 
 \bibitem{bousso2000}
 R.~Bousso and J.~Polchinski,
