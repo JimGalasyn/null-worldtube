@@ -19,6 +19,13 @@ A pivotal moment came when Jim recalled obscure papers by **F. Ray Skilton**, a 
 
 In February 2026, Jim located physical copies in the stacks of the University of Washington Engineering Library, in conference proceedings volumes with crumbling bindings. NWT provides the theoretical explanation for why Skilton's formula works: the generators of his Pythagorean triple are the torus quantum numbers (p, q, k) = (2, 1, 3).
 
+Skilton's papers — possibly the only surviving copies — have been scanned and are [available in the GitHub repo](https://github.com/JimGalasyn/null-worldtube/tree/main/papers/Skilton).
+
+**Skilton references:**
+- Skilton, F.R. "Foundation for an integer-based cosmological model." *Proc. 17th Annual Pittsburgh Conf. on Modeling and Simulation*, Vol. 17, Part 1 (1986), pp. 295-300. ([scans](https://github.com/JimGalasyn/null-worldtube/tree/main/papers/Skilton/Foundation%20for%20an%20integer-based%20cosmological%20model%20-%20Part%201))
+- Skilton, F.R. "Foundation for an integer-based cosmological model — Part 2: Evenness." *Proc. 18th Annual Pittsburgh Conf.*, Vol. 18, Part 5 (1987), pp. 1623-1630. ([scans](https://github.com/JimGalasyn/null-worldtube/tree/main/papers/Skilton/Foundation%20for%20an%20integer-based%20cosmological%20model%20-%20Part%202))
+- Skilton, F.R. "Foundation for an integer-based cosmological model — Part 3: Integers and the Natural Constants." *Proc. 19th Annual Pittsburgh Conf.*, Vol. 19, Part 1 (1988), pp. 9-12. ([scans](https://github.com/JimGalasyn/null-worldtube/tree/main/papers/Skilton/Foundation%20for%20an%20integer-based%20cosmological%20model%20-%20Part%203))
+
 ## How to Cite
 
 If you use or reference this work, please cite the papers:
