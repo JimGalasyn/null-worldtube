@@ -106,61 +106,43 @@ def _draw_torus_knot_panel(ax, R, r, p, q, cmap, color_lo, color_hi,
     ax.plot_wireframe(X, Y, Z, alpha=0.12, color=torus_color, linewidth=0.25,
                       rstride=3, cstride=3)
 
-    if show_annotations:
-        # R arrow
-        arrow_theta = np.pi * 0.15
-        ax.plot([0, R * np.cos(arrow_theta)],
-                [0, R * np.sin(arrow_theta)],
-                [0, 0], 'k-', linewidth=0.8)
-        ax.text(0.45 * np.cos(arrow_theta) - 0.05,
-                0.45 * np.sin(arrow_theta) + 0.1,
-                0.05, r'$R$', fontsize=9, ha='center', color='black')
-        # r arrow
-        r_theta = 0.0
-        cx, cy = R * np.cos(r_theta), R * np.sin(r_theta)
-        ax.plot([cx, cx + r], [cy, cy], [0, 0], 'k-', linewidth=0.8)
-        ax.text(cx + r * 0.5, cy + 0.08, 0.07, r'$r$', fontsize=9,
-                ha='center', color='black')
-        # α label
-        ax.text2D(0.02, 0.02, r'$\alpha = r/R$', transform=ax.transAxes,
-                  fontsize=8, color='#444444')
+    # (R, r annotations now handled by 2D cross-section inset)
 
     if show_arrows:
-        arrow_indices = np.linspace(100, N - 100, 6, dtype=int)
+        arrow_indices = np.linspace(150, N - 150, 5, dtype=int)
         for idx in arrow_indices:
-            dx = x_k[idx+5] - x_k[idx-5]
-            dy = y_k[idx+5] - y_k[idx-5]
-            dz = z_k[idx+5] - z_k[idx-5]
+            step = 20
+            dx = x_k[idx+step] - x_k[idx-step]
+            dy = y_k[idx+step] - y_k[idx-step]
+            dz = z_k[idx+step] - z_k[idx-step]
             norm = np.sqrt(dx**2 + dy**2 + dz**2)
             ax.quiver(x_k[idx], y_k[idx], z_k[idx],
                       dx/norm, dy/norm, dz/norm,
-                      length=0.08, color='black', arrow_length_ratio=0.6,
-                      linewidth=0.6)
+                      length=0.22, color='black', arrow_length_ratio=0.45,
+                      linewidth=1.2)
 
     return x_k, y_k, z_k
 
 
 def figure1_torus_knot():
-    """Multi-panel figure: electron, K± meson phase defect, proton resonance."""
-    fig = plt.figure(figsize=(7.0, 4.0))
-    gs = gridspec.GridSpec(2, 2, width_ratios=[3, 2.5], hspace=0.02, wspace=0.0)
+    """Multi-panel figure: electron, cross-section, K± phase defect, proton."""
+    fig = plt.figure(figsize=(7.0, 5.8))
+    gs = gridspec.GridSpec(2, 2, height_ratios=[4, 2], hspace=0.06, wspace=0.02)
 
-    # ── (a) Electron (2,1) — left panel, spans both rows ──
-    ax_a = fig.add_subplot(gs[:, 0], projection='3d')
+    # ── (a) Electron (2,1) — top left ──
+    ax_a = fig.add_subplot(gs[0, 0], projection='3d')
     _draw_torus_knot_panel(ax_a, R=1.0, r=0.25, p=2, q=1,
                            cmap=plt.cm.Reds, color_lo=0.35, color_hi=0.95,
-                           show_annotations=True, show_arrows=True)
+                           show_arrows=True)
     ax_a.view_init(elev=25, azim=30)
-    ax_a.set_xlim(-1.5, 1.5)
-    ax_a.set_ylim(-1.5, 1.5)
-    ax_a.set_zlim(-0.6, 0.6)
-    ax_a.set_box_aspect([1, 1, 0.4])
+    ax_a.set_xlim(-1.15, 1.15)
+    ax_a.set_ylim(-1.15, 1.15)
+    ax_a.set_zlim(-0.32, 0.32)
+    ax_a.set_box_aspect([1, 1, 0.28])
     ax_a.set_axis_off()
     ax_a.set_title(r'(a)  Electron $(2,1)$', fontsize=9, pad=-8)
 
-    # ── (b) K± meson — phase defect ──
-    # Mode (1,1) at k=2 → effective (2,1) on fatter torus r=0.5
-    # 2²+1²=5, √5≈2.24 — not integer → gap
+    # ── (b) K± meson — phase defect — top right ──
     ax_b = fig.add_subplot(gs[0, 1], projection='3d')
     _draw_torus_knot_panel(ax_b, R=1.0, r=0.5, p=2, q=1,
                            cmap=plt.cm.Oranges, color_lo=0.25, color_hi=0.90,
@@ -172,11 +154,50 @@ def figure1_torus_knot():
     ax_b.set_zlim(-0.65, 0.65)
     ax_b.set_box_aspect([1, 1, 0.42])
     ax_b.set_axis_off()
-    ax_b.set_title(r'(b)  K$^\pm$ — phase defect', fontsize=8, pad=-8)
+    ax_b.set_title(r'(b)  K$^\pm$ — phase defect', fontsize=9, pad=-8)
 
-    # ── (c) Proton — (3,4,5) Pythagorean resonance ──
-    # Mode (1,4) at k=3 → effective (3,4) on thinner torus r=1/3
-    # 3²+4²=5² — perfect closure
+    # ── Cross-section diagram — bottom left ──
+    ax_xs = fig.add_subplot(gs[1, 0])
+    R_d, r_d = 1.0, 0.35  # exaggerated r for clarity
+
+    # Symmetry axis (dashed vertical line)
+    ax_xs.plot([0, 0], [-0.6, 0.6], color='#aaaaaa', linewidth=0.5,
+               linestyle='--', zorder=0)
+
+    # Two tube cross-sections
+    for sign in [-1, 1]:
+        circle = plt.Circle((sign * R_d, 0), r_d, fill=True,
+                             facecolor=C_TORUS, alpha=0.10,
+                             edgecolor=C_TORUS, linewidth=1.2, zorder=2)
+        ax_xs.add_patch(circle)
+
+    # R arrow: origin to right circle center
+    ax_xs.annotate('', xy=(R_d - 0.02, 0), xytext=(0.02, 0),
+                   arrowprops=dict(arrowstyle='<->', color='black', lw=0.8))
+    ax_xs.text(R_d / 2, 0.10, r'$R$', fontsize=9, ha='center', va='bottom',
+               color='black')
+
+    # r arrow: right circle center upward to edge
+    ax_xs.annotate('', xy=(R_d, r_d - 0.02), xytext=(R_d, 0.02),
+                   arrowprops=dict(arrowstyle='<->', color=C_FERMION, lw=0.8))
+    ax_xs.text(R_d + 0.10, r_d / 2, r'$r$', fontsize=9, ha='left',
+               va='center', color=C_FERMION)
+
+    # Center marker
+    ax_xs.plot(0, 0, '+', color='#999999', markersize=6, markeredgewidth=0.6)
+
+    # α = r/R label
+    ax_xs.text(0.0, -0.58, r'$\alpha = r/R$', fontsize=9, ha='center',
+               va='top', color='#444444')
+
+    ax_xs.set_xlim(-1.65, 1.65)
+    ax_xs.set_ylim(-0.70, 0.60)
+    ax_xs.set_aspect('equal')
+    ax_xs.axis('off')
+    ax_xs.set_title('Meridional cross-section', fontsize=8, color='#666666',
+                     pad=4)
+
+    # ── (c) Proton — (3,4,5) resonance — bottom right ──
     ax_c = fig.add_subplot(gs[1, 1], projection='3d')
     _draw_torus_knot_panel(ax_c, R=1.0, r=1/3, p=3, q=4,
                            cmap=plt.cm.Greens, color_lo=0.30, color_hi=0.90,
@@ -188,7 +209,7 @@ def figure1_torus_knot():
     ax_c.set_zlim(-0.5, 0.5)
     ax_c.set_box_aspect([1, 1, 0.35])
     ax_c.set_axis_off()
-    ax_c.set_title(r'(c)  Proton — $(3,4,5)$ resonance', fontsize=8, pad=-8)
+    ax_c.set_title(r'(c)  Proton — $(3,4,5)$ resonance', fontsize=9, pad=-8)
     ax_c.text2D(0.50, 0.02, r'$3^2+4^2=5^2$', transform=ax_c.transAxes,
                 fontsize=8, ha='center', color='#2e7d32')
 
