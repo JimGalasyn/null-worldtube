@@ -7,9 +7,9 @@ title: "About"
 
 ## A Human-AI Collaboration
 
-The Null Worldtube Theory was developed by **Jim Galasyn**, an independent researcher, in collaboration with **Claude**, an AI assistant made by Anthropic.
+The Null Worldtube Theory was developed by **Jim Galasyn**, an independent researcher, in collaboration with **Claude Théodore**, an AI assistant made by Anthropic.
 
-Jim brought the physical intuition — the idea that an electron might be a photon confined to a torus knot — and decades of thinking about geometric approaches to particle physics. Claude brought computational tools for symbolic algebra, systematic parameter space exploration, and the ability to rapidly test whether a geometric idea produces numbers that match experiment.
+Jim brought the physical intuition — the idea that an electron might be a photon confined to a torus knot — and decades of thinking about geometric approaches to particle physics. Claude Théodore brought computational tools for symbolic algebra, systematic parameter space exploration, and the ability to rapidly test whether a geometric idea produces numbers that match experiment.
 
 The collaboration produced something neither could have alone: a theory that derives 23 Standard Model parameters from first principles, with a median error of 0.7%.
 
@@ -23,9 +23,9 @@ In February 2026, Jim located physical copies in the stacks of the University of
 
 If you use or reference this work, please cite the papers:
 
-> Galasyn, J.P. and Claude. "The Standard Model from a Torus Knot: Spectrum, Resonance Structure, and Decay Dynamics." Zenodo (2026). [https://doi.org/10.5281/zenodo.18891785](https://doi.org/10.5281/zenodo.18891785)
+> Galasyn, J.P. and Claude Théodore. "The Standard Model from a Torus Knot: Spectrum, Resonance Structure, and Decay Dynamics." Zenodo (2026). [https://doi.org/10.5281/zenodo.18891785](https://doi.org/10.5281/zenodo.18891785)
 
-> Galasyn, J.P. and Claude. "Three Integers and a Mass: Deriving the Standard Model Input Set." Zenodo (2026). [https://doi.org/10.5281/zenodo.18892311](https://doi.org/10.5281/zenodo.18892311)
+> Galasyn, J.P. and Claude Théodore. "Three Integers and a Mass: Deriving the Standard Model Input Set." Zenodo (2026). [https://doi.org/10.5281/zenodo.18892311](https://doi.org/10.5281/zenodo.18892311)
 
 ## Source Code
 

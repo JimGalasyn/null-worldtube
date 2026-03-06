@@ -9,7 +9,7 @@ title: "Papers"
 
 **Full title:** *The Standard Model from a Torus Knot: Spectrum, Resonance Structure, and Decay Dynamics*
 
-James P. Galasyn and Claude
+James P. Galasyn and Claude Théodore
 
 The founding paper of Null Worldtube Theory. Starting from the idea that an electron is a photon confined to a (2,1) torus knot with aspect ratio k=3, we derive 23 of the 26 free parameters of the Standard Model — all quark and lepton masses, the Higgs boson mass and vacuum expectation value, the Weinberg angle, the strong coupling constant, CKM and PMNS mixing matrices, and neutrino masses. The paper also develops a Pythagorean resonance condition that explains why protons are stable and all mesons decay, and verifies energy conservation across seven complete meson decay chains.
 
@@ -21,7 +21,7 @@ The founding paper of Null Worldtube Theory. Starting from the idea that an elec
 
 **Full title:** *Three Integers and a Mass: Deriving the Standard Model Input Set*
 
-James P. Galasyn and Claude
+James P. Galasyn and Claude Théodore
 
 Paper 1 took three inputs as given: the fine-structure constant &alpha;, the muon mass, and the tube energy scale. This companion paper shows that all three are themselves derivable from the torus quantum numbers (p, q, k) = (2, 1, 3), reducing the complete input set to **three integers and one mass** (the electron mass). It connects the theory to F. Ray Skilton's forgotten 1980s derivation of &alpha; from a Pythagorean triple, revealing that Skilton's generators are the torus quantum numbers in disguise.
 
