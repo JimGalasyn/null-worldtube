@@ -721,9 +721,9 @@ def figure5_torus_modes():
     Weak (3) = 3 metric modes that couple to poloidal (weak isospin) sector
     Zero (−1) = gauge d.o.f. subtracted from metric
     """
-    fig, ax = plt.subplots(figsize=(3.4, 5.2))
+    fig, ax = plt.subplots(figsize=(3.4, 4.5))
     ax.set_xlim(-1.5, 6.0)
-    ax.set_ylim(-1.8, 6.8)
+    ax.set_ylim(-0.6, 6.8)
     ax.axis('off')
 
     ax.set_title('Electromagnetic modes on the torus', fontsize=10, pad=8)
