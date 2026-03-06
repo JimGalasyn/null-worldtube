@@ -784,8 +784,8 @@ def figure5_torus_modes():
     ax.text(-0.3, y - 0.22, r'$p^2\!+\!q^2\!=\!5$', fontsize=6, ha='right',
             va='center', color='#888888')
     for i, (label, color, sub) in enumerate([
-            ('$g_1$', C_EM, None), ('$g_2$', C_WEAK, 'weak'),
-            ('$g_3$', C_WEAK, 'weak'), ('$g_4$', C_WEAK, 'weak'),
+            ('$g_1$', C_EM, r'$\gamma$'), ('$g_2$', C_WEAK, r'$W^+$'),
+            ('$g_3$', C_WEAK, r'$W^-$'), ('$g_4$', C_WEAK, r'$Z$'),
             ('$g_0$', C_ZERO, r'$-1$')]):
         draw_cell(0.8 + i * 1.0, y, label, color, sub)
 
@@ -801,12 +801,12 @@ def figure5_torus_modes():
             bbox=dict(boxstyle='round,pad=0.25', facecolor='#e8f5e9',
                       edgecolor='#999999', linewidth=0.5))
 
-    # Tally annotations on right side
-    ax.text(5.6, 5.5, '4', fontsize=8, ha='center', va='center',
+    # Tally annotations on right side (count + particle)
+    ax.text(5.6, 5.5, r'4 $\gamma$', fontsize=8, ha='center', va='center',
             color=C_GAUGE, fontweight='bold')
-    ax.text(5.6, 4.5, '1', fontsize=8, ha='center', va='center',
+    ax.text(5.6, 4.5, r'1 $\gamma$', fontsize=8, ha='center', va='center',
             color=C_GAUGE, fontweight='bold')
-    ax.text(5.6, 3.5, '4', fontsize=8, ha='center', va='center',
+    ax.text(5.6, 3.5, r'4 $\gamma$', fontsize=8, ha='center', va='center',
             color=C_GAUGE, fontweight='bold')
     ax.text(5.6, 2.5, '5', fontsize=8, ha='center', va='center',
             color='#666666', fontweight='bold')
