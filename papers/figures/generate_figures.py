@@ -722,7 +722,7 @@ def figure5_torus_modes():
     Zero (−1) = gauge d.o.f. subtracted from metric
     """
     fig, ax = plt.subplots(figsize=(3.4, 5.2))
-    ax.set_xlim(-1.5, 5.7)
+    ax.set_xlim(-1.5, 6.0)
     ax.set_ylim(-1.8, 6.8)
     ax.axis('off')
 
@@ -802,13 +802,13 @@ def figure5_torus_modes():
                       edgecolor='#999999', linewidth=0.5))
 
     # Tally annotations on right side
-    ax.text(5.3, 5.5, '4', fontsize=8, ha='center', va='center',
+    ax.text(5.6, 5.5, '4', fontsize=8, ha='center', va='center',
             color=C_GAUGE, fontweight='bold')
-    ax.text(5.3, 4.5, '1', fontsize=8, ha='center', va='center',
+    ax.text(5.6, 4.5, '1', fontsize=8, ha='center', va='center',
             color=C_GAUGE, fontweight='bold')
-    ax.text(5.3, 3.5, '4', fontsize=8, ha='center', va='center',
+    ax.text(5.6, 3.5, '4', fontsize=8, ha='center', va='center',
             color=C_GAUGE, fontweight='bold')
-    ax.text(5.3, 2.5, '5', fontsize=8, ha='center', va='center',
+    ax.text(5.6, 2.5, '5', fontsize=8, ha='center', va='center',
             color='#666666', fontweight='bold')
 
     # Legend — horizontal row above the grid
