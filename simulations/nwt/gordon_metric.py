@@ -1332,7 +1332,67 @@ def compute_nonlocal_potential(N_r=1000, N_q=800):
     }
 
 
-def compute_nonlocal_self_energy(R, r_tube, p=2, q_wind=1, N_q=2000):
+def compute_tube_form_factors(q_grid, r_tube):
+    """
+    Compute tube cross-section form factors for four physical models.
+
+    The tube form factor F_tube(q) determines how the finite tube
+    radius r_tube cuts off high-momentum modes in the self-energy
+    integral. Different models for the charge distribution in the
+    cross-section give very different UV behavior:
+
+    1. Gaussian:      F = exp(-q²r²/4)         → exponential suppression
+    2. Hard cylinder: F = 2J₁(qr)/(qr)         → ~1/(qr)^(3/2) power-law
+    3. Surface ring:  F = J₀(qr)               → ~1/√(qr) power-law
+    4. Thin wire:     F = 1                     → no cutoff (UV divergent)
+
+    The NWT model has the charge circulating on the tube SURFACE,
+    making the surface ring (J₀) the most physical choice.
+
+    Parameters
+    ----------
+    q_grid : ndarray
+        Momentum grid points (m⁻¹).
+    r_tube : float
+        Tube radius (m).
+
+    Returns
+    -------
+    dict with F_tube arrays for each model and their |F|² values.
+    """
+    from scipy.special import j0, j1
+
+    qr = q_grid * r_tube
+
+    # 1. Gaussian: charge smeared as Gaussian across cross-section
+    F_gaussian = np.exp(-qr**2 / 4.0)
+
+    # 2. Hard cylinder: charge uniform across cross-section (radius r)
+    # F = 2J₁(qr)/(qr) — the Airy disk function
+    F_cylinder = np.where(qr > 1e-6, 2.0 * j1(qr) / qr, 1.0 - qr**2 / 8.0)
+
+    # 3. Surface ring: charge on the tube surface (NWT boundary)
+    # F = J₀(qr) — the zeroth Bessel function
+    F_surface = j0(qr)
+
+    # 4. Thin wire: no transverse structure
+    F_wire = np.ones_like(q_grid)
+
+    return {
+        'gaussian': F_gaussian,
+        'cylinder': F_cylinder,
+        'surface': F_surface,
+        'wire': F_wire,
+        'gaussian_sq': F_gaussian**2,
+        'cylinder_sq': F_cylinder**2,
+        'surface_sq': F_surface**2,
+        'wire_sq': F_wire**2,
+        'qr': qr,
+    }
+
+
+def compute_nonlocal_self_energy(R, r_tube, p=2, q_wind=1, N_q=2000,
+                                  tube_model='surface'):
     """
     Compute the electromagnetic self-energy of the torus using
     momentum-space screening with full Π(q²).
@@ -1340,21 +1400,16 @@ def compute_nonlocal_self_energy(R, r_tube, p=2, q_wind=1, N_q=2000):
     The torus is a ring of charge e at major radius R with tube
     radius r_tube. The self-energy is:
 
-    U_E = (e²/(4π² ε₀)) ∫₀^∞ dq [sin(qR)/(qR)]² × exp(-q²r²/2)
+    U_E = (e²/(4π² ε₀)) ∫₀^∞ dq [sin(qR)/(qR)]² × |F_tube(q)|²
 
-    The charge form factor [sin(qR)/(qR)]² is the angle-averaged
-    Fourier transform of a ring at radius R, and exp(-q²r²/2) is the
-    Gaussian tube smearing.
+    The ring form factor [sin(qR)/(qR)]² is the angle-averaged
+    Fourier transform of a ring at radius R.
 
-    Without the tube: U_E = k_e e²/(2R)  (electrostatic self-energy of a ring)
-    With the tube: adds the ln(8R/r) factor.
+    F_tube(q) depends on the charge distribution in the tube cross-section.
+    Four models are computed; the most physical for NWT is 'surface'
+    (charge on the null worldtube boundary → J₀(qr)).
 
     The magnetic self-energy at v=c equals the electric, so U_total = 2 × U_E.
-
-    With vacuum polarization:
-    U_screened = (e²/(4π² ε₀)) ∫₀^∞ dq [sin(qR)/(qR)]² × exp(-q²r²/2)/(1-Π(q²))
-
-    The anti-screening (Π > 0) INCREASES the self-energy.
 
     Parameters
     ----------
@@ -1364,16 +1419,20 @@ def compute_nonlocal_self_energy(R, r_tube, p=2, q_wind=1, N_q=2000):
         Winding numbers.
     N_q : int
         Number of momentum grid points.
+    tube_model : str
+        Which tube form factor to use as primary: 'gaussian', 'cylinder',
+        'surface', or 'wire'. Default 'surface' (charge on tube boundary).
 
     Returns
     -------
-    dict with bare and screened self-energies.
+    dict with bare and screened self-energies for all four models.
     """
     lambda_C_bar = hbar / (m_e * c)
 
     # Momentum grid: from well below 1/R to well above 1/r_tube
+    # For J₀ and J₁ form factors, need many oscillation periods above 1/r
     q_min = 0.01 / R
-    q_max = 200.0 / r_tube
+    q_max = 500.0 / r_tube  # extend further for power-law tails
     q_grid = np.logspace(np.log10(q_min), np.log10(q_max), N_q)
     q2_grid = q_grid**2
 
@@ -1383,29 +1442,50 @@ def compute_nonlocal_self_energy(R, r_tube, p=2, q_wind=1, N_q=2000):
     # Ring charge form factor (angle-averaged)
     qR = q_grid * R
     F_ring = np.where(qR > 1e-6, np.sin(qR) / qR, 1.0 - qR**2 / 6.0)
+    F_ring_sq = F_ring**2
 
-    # Tube smearing: Gaussian profile with RMS width r_tube
-    qr = q_grid * r_tube
-    F_tube = np.exp(-qr**2 / 2.0)
-
-    # Combined form factor squared
-    F2 = F_ring**2 * F_tube**2
+    # All four tube form factors
+    tube_ff = compute_tube_form_factors(q_grid, r_tube)
 
     # Self-energy integrand:
-    # U_E = (e²/(4π² ε₀)) ∫ dq F²(q)
+    # U_E = (e²/(4π² ε₀)) ∫ dq F_ring²(q) × F_tube²(q)
     prefactor = e_charge**2 / (4.0 * np.pi**2 * eps0)
 
-    integrand_bare = F2
-    integrand_screened = F2 / (1.0 - Pi)
+    models = {}
+    for name in ['gaussian', 'cylinder', 'surface', 'wire']:
+        F2 = F_ring_sq * tube_ff[name + '_sq']
 
-    U_E_bare = prefactor * np.trapz(integrand_bare, q_grid)
-    U_E_screened = prefactor * np.trapz(integrand_screened, q_grid)
+        integrand_bare = F2
+        integrand_screened = F2 / (1.0 - Pi)
 
-    # Magnetic self-energy equals electric at v = c (equipartition)
-    # Total self-energy = 2 × U_E
-    U_bare = 2.0 * U_E_bare
-    U_screened = 2.0 * U_E_screened
-    delta_U = U_screened - U_bare
+        U_E_bare = prefactor * np.trapz(integrand_bare, q_grid)
+        U_E_screened = prefactor * np.trapz(integrand_screened, q_grid)
+
+        U_bare = 2.0 * U_E_bare       # E + B (equipartition at v=c)
+        U_screened = 2.0 * U_E_screened
+        delta_U = U_screened - U_bare
+
+        models[name] = {
+            'F_tube': tube_ff[name],
+            'F_tube_sq': tube_ff[name + '_sq'],
+            'F2': F2,
+            'U_E_bare_J': U_E_bare,
+            'U_bare_J': U_bare,
+            'U_bare_MeV': U_bare / MeV,
+            'U_bare_keV': U_bare / MeV * 1000,
+            'U_screened_J': U_screened,
+            'U_screened_MeV': U_screened / MeV,
+            'U_screened_keV': U_screened / MeV * 1000,
+            'delta_U_J': delta_U,
+            'delta_U_keV': delta_U / MeV * 1000,
+            'Pi_correction_pct': delta_U / U_bare * 100 if U_bare > 0 else np.inf,
+            'dU_dq_bare': 2.0 * prefactor * integrand_bare,
+            'dU_dq_screened': 2.0 * prefactor * integrand_screened,
+            'dU_dq_correction': 2.0 * prefactor * (integrand_screened - integrand_bare),
+        }
+
+    # Primary model
+    primary = models[tube_model]
 
     # Local EH self-energy for comparison
     eh_self = compute_effective_self_energy(R, r_tube, p, q_wind)
@@ -1414,11 +1494,6 @@ def compute_nonlocal_self_energy(R, r_tube, p=2, q_wind=1, N_q=2000):
     params_local = TorusParams(R=R, r=r_tube, p=p, q=q_wind)
     se_flat = compute_self_energy(params_local)
 
-    # Spectral density: dU/dq (for analysis of where the correction lives)
-    dU_dq_bare = 2.0 * prefactor * integrand_bare
-    dU_dq_screened = 2.0 * prefactor * integrand_screened
-    dU_dq_correction = dU_dq_screened - dU_dq_bare
-
     # Analytic check: bare ring self-energy without tube = k_e e²/(2R)
     U_ring_analytic = k_e * e_charge**2 / (2.0 * R)
 
@@ -1426,25 +1501,29 @@ def compute_nonlocal_self_energy(R, r_tube, p=2, q_wind=1, N_q=2000):
         'q_grid': q_grid,
         'q2_grid': q2_grid,
         'Pi': Pi,
-        'F2': F2,
         'F_ring': F_ring,
-        'F_tube': F_tube,
-        'U_E_bare_J': U_E_bare,
-        'U_E_bare_MeV': U_E_bare / MeV,
-        'U_bare_J': U_bare,
-        'U_bare_MeV': U_bare / MeV,
-        'U_screened_J': U_screened,
-        'U_screened_MeV': U_screened / MeV,
-        'delta_U_J': delta_U,
-        'delta_U_MeV': delta_U / MeV,
-        'delta_U_keV': delta_U / MeV * 1000,
+        'tube_ff': tube_ff,
+        'models': models,
+        'primary_model': tube_model,
+        # Primary model results (for backward compatibility)
+        'F2': primary['F2'],
+        'F_tube': primary['F_tube'],
+        'U_E_bare_J': primary['U_E_bare_J'],
+        'U_E_bare_MeV': primary['U_E_bare_J'] / MeV,
+        'U_bare_J': primary['U_bare_J'],
+        'U_bare_MeV': primary['U_bare_MeV'],
+        'U_screened_J': primary['U_screened_J'],
+        'U_screened_MeV': primary['U_screened_MeV'],
+        'delta_U_J': primary['delta_U_J'],
+        'delta_U_MeV': primary['delta_U_J'] / MeV,
+        'delta_U_keV': primary['delta_U_keV'],
         'U_ring_analytic_J': U_ring_analytic,
         'U_ring_analytic_MeV': U_ring_analytic / MeV,
         'U_Neumann_MeV': se_flat['U_total_MeV'],
         'U_EH_local_MeV': eh_self['U_self_eff_MeV'],
-        'dU_dq_bare': dU_dq_bare,
-        'dU_dq_screened': dU_dq_screened,
-        'dU_dq_correction': dU_dq_correction,
+        'dU_dq_bare': primary['dU_dq_bare'],
+        'dU_dq_screened': primary['dU_dq_screened'],
+        'dU_dq_correction': primary['dU_dq_correction'],
         'lambda_C_bar': lambda_C_bar,
         'R': R,
         'r_tube': r_tube,
@@ -1511,6 +1590,131 @@ def compute_full_nonlocal_energy_budget(R, r_tube, p=2, q_wind=1):
         'm_e_MeV': m_e_MeV,
         'gordon': gordon,
         'nonlocal_se': nonlocal_se,
+    }
+
+
+# ════════════════════════════════════════════════════════════════════
+# Step 8b: Knot self-interaction — full Neumann integral over (p,q) knot
+# ════════════════════════════════════════════════════════════════════
+
+def compute_knot_neumann_inductance(R, r_tube, p=2, q=1, N=2000):
+    """
+    Compute the full Neumann inductance of a (p,q) torus knot by
+    numerical double integration over the actual knot path.
+
+    L = (μ₀/4π) ∮∮ (dl₁ · dl₂) / |r₁ - r₂|
+
+    This includes BOTH the self-inductance of each pass AND the
+    mutual inductance between different passes of the knot. The
+    single-ring formula L = μ₀R[ln(8R/r) - 2] misses the mutual
+    interaction entirely.
+
+    For a (2,1) knot, the charge winds twice around the torus.
+    At each toroidal cross-section there are two current elements
+    on opposite sides of the tube (separated by ~2r). Their mutual
+    inductance can be a large fraction of the self-inductance when
+    r << R.
+
+    The divergence at |r₁ - r₂| → 0 (self-interaction of a thin wire)
+    is regularized by replacing |r₁ - r₂| with max(|r₁ - r₂|, r_tube)
+    — the wire has finite thickness.
+
+    Parameters
+    ----------
+    R, r_tube : float
+        Torus radii (m).
+    p, q : int
+        Winding numbers.
+    N : int
+        Number of points on the knot curve.
+
+    Returns
+    -------
+    dict with L_knot, comparison to single-ring, and decomposition
+    into self and mutual contributions.
+    """
+    params = TorusParams(R=R, r=r_tube, p=p, q=q)
+
+    # Get the full knot path
+    lam, xyz, dxyz, ds_dlam = torus_knot_curve(params, N)
+    dlam = 2.0 * np.pi / N
+
+    # dl vectors: tangent × dλ
+    dl = dxyz * dlam  # (N, 3) array of path elements
+
+    # Full Neumann double integral:
+    # L = (μ₀/4π) Σᵢ Σⱼ (dlᵢ · dlⱼ) / max(|rᵢ - rⱼ|, r_tube)
+    #
+    # This is O(N²). For N=2000, that's 4M operations — fast.
+    L_knot = 0.0
+    L_self_near = 0.0   # contributions from |i-j| < N/(2p) (same pass)
+    L_mutual = 0.0      # contributions from different passes
+
+    # For decomposition: points i and j are on the "same pass" if
+    # they're within N/(2p) steps of each other (one half-turn)
+    half_pass = N // (2 * p)
+
+    for i in range(N):
+        # Vector from point i to all other points
+        dr = xyz - xyz[i]  # (N, 3)
+        dist = np.sqrt(np.sum(dr**2, axis=1))  # (N,)
+
+        # Regularize: replace small distances with r_tube
+        dist_reg = np.maximum(dist, r_tube)
+
+        # Dot product dl_i · dl_j for all j
+        dot = np.sum(dl[i] * dl, axis=1)  # (N,)
+
+        # Contribution to inductance
+        contrib = dot / dist_reg  # (N,)
+
+        L_knot += np.sum(contrib)
+
+        # Decompose: same pass vs different pass
+        # Distance along the curve (in index units, wrapping)
+        idx_dist = np.minimum(np.abs(np.arange(N) - i),
+                              N - np.abs(np.arange(N) - i))
+        same_pass = idx_dist < half_pass
+        L_self_near += np.sum(contrib[same_pass])
+        L_mutual += np.sum(contrib[~same_pass])
+
+    L_knot *= mu0 / (4.0 * np.pi)
+    L_self_near *= mu0 / (4.0 * np.pi)
+    L_mutual *= mu0 / (4.0 * np.pi)
+
+    # Single-ring Neumann for comparison
+    log_factor = np.log(8.0 * R / r_tube) - 2.0
+    L_single_ring = mu0 * R * max(log_factor, 0.01)
+
+    # Current
+    L_path = compute_path_length(params, N)
+    I = e_charge * c / L_path
+
+    # Self-energies (total = E + B = 2 × magnetic for v=c)
+    U_knot = 2.0 * 0.5 * L_knot * I**2
+    U_single_ring = 2.0 * 0.5 * L_single_ring * I**2
+    U_mutual = 2.0 * 0.5 * L_mutual * I**2
+
+    return {
+        'L_knot': L_knot,
+        'L_single_ring': L_single_ring,
+        'L_ratio': L_knot / L_single_ring,
+        'L_self_near': L_self_near,
+        'L_mutual': L_mutual,
+        'mutual_fraction': L_mutual / L_knot if L_knot > 0 else 0,
+        'I_amps': I,
+        'L_path': L_path,
+        'U_knot_J': U_knot,
+        'U_knot_MeV': U_knot / MeV,
+        'U_knot_keV': U_knot / MeV * 1000,
+        'U_single_ring_J': U_single_ring,
+        'U_single_ring_MeV': U_single_ring / MeV,
+        'U_single_ring_keV': U_single_ring / MeV * 1000,
+        'U_mutual_J': U_mutual,
+        'U_mutual_MeV': U_mutual / MeV,
+        'U_mutual_keV': U_mutual / MeV * 1000,
+        'p': p, 'q': q, 'N': N,
+        'R': R, 'r_tube': r_tube,
     }
 
 
@@ -1953,99 +2157,205 @@ def print_gordon_metric_analysis():
   UV modes above 1/r_tube.
 """)
 
-    # Nonlocal self-energy at the reference geometry
-    print("  Computing nonlocal self-energy at reference geometry...")
-    nonlocal_se = compute_nonlocal_self_energy(R, r, p, q)
+    # Nonlocal self-energy at the reference geometry — all four tube models
+    print("  Computing nonlocal self-energy (4 tube cross-section models)...")
+    nonlocal_se = compute_nonlocal_self_energy(R, r, p, q, tube_model='surface')
 
     q_g = nonlocal_se['q_grid']
     Pi_g = nonlocal_se['Pi']
     lambda_C_bar_nl = nonlocal_se['lambda_C_bar']
+    models = nonlocal_se['models']
 
     print(f"""
   Torus self-energy in momentum space:
-    U_E = (e²/4π²ε₀) ∫ dq [sin(qR)/(qR)]² × exp(-q²r²/2)
+    U_E = (e²/4π²ε₀) ∫ dq [sin(qR)/(qR)]² × |F_tube(q)|²
     U_total = 2 × U_E  (electric + magnetic at v = c)
 
+  The tube form factor F_tube(q) determines the UV behavior:
+    Gaussian:      exp(-q²r²/4)     — exponential kill (fuzzy blob)
+    Hard cylinder: 2J₁(qr)/(qr)    — power-law ~1/(qr)^3/2 (uniform fill)
+    Surface ring:  J₀(qr)           — power-law ~1/√(qr) (charge on tube wall)
+    Thin wire:     1                 — no cutoff (UV divergent, shown for reference)
+
   Analytic check: ring without tube = k_e e²/(2R) = {nonlocal_se['U_ring_analytic_MeV']:.6f} MeV
-  Numerical bare (with tube cutoff)  = {nonlocal_se['U_E_bare_MeV']:.6f} MeV (electric)
-  Neumann inductance (position-space) = {nonlocal_se['U_Neumann_MeV']:.6f} MeV
-
-  Vacuum polarization Π(q²) profile:
+  Neumann inductance (position-space)              = {nonlocal_se['U_Neumann_MeV']:.6f} MeV
 """)
-    print(f"  {'q × ƛ_C':>10s}  {'Π(q²)':>12s}  {'1/(1-Π)':>10s}"
-          f"  {'|F_ring|²':>10s}  {'|F_tube|²':>10s}  {'|F|²':>10s}")
-    print(f"  {'─'*10}  {'─'*12}  {'─'*10}  {'─'*10}  {'─'*10}  {'─'*10}")
 
-    indices_nl = np.unique(np.logspace(0, np.log10(len(q_g) - 1), 20, dtype=int))
+    # ── Form factor comparison table ──
+    print(f"  {'q × ƛ_C':>10s}  {'Π(q²)':>10s}  {'1/(1-Π)':>8s}"
+          f"  {'Gauss²':>10s}  {'Cylind²':>10s}  {'Surf²':>10s}  {'Wire²':>8s}")
+    print(f"  {'─'*10}  {'─'*10}  {'─'*8}  {'─'*10}  {'─'*10}  {'─'*10}  {'─'*8}")
+
+    tube_ff = nonlocal_se['tube_ff']
+    indices_nl = np.unique(np.logspace(0, np.log10(len(q_g) - 1), 22, dtype=int))
     for i in indices_nl:
         q_lc = q_g[i] * lambda_C_bar_nl
-        screening = 1.0 / (1.0 - Pi_g[i])
-        F_r2 = nonlocal_se['F_ring'][i]**2
-        F_t2 = nonlocal_se['F_tube'][i]**2
-        print(f"  {q_lc:10.4f}  {Pi_g[i]:12.6e}  {screening:10.6f}"
-              f"  {F_r2:10.4e}  {F_t2:10.4e}  {nonlocal_se['F2'][i]:10.4e}")
+        scr = 1.0 / (1.0 - Pi_g[i])
+        print(f"  {q_lc:10.4f}  {Pi_g[i]:10.4e}  {scr:8.4f}"
+              f"  {tube_ff['gaussian_sq'][i]:10.4e}"
+              f"  {tube_ff['cylinder_sq'][i]:10.4e}"
+              f"  {tube_ff['surface_sq'][i]:10.4e}"
+              f"  {1.0:8.4f}")
 
+    # ── Self-energy comparison across models ──
     print(f"""
-  Self-energy results (total = electric + magnetic):
-    U_bare (ring + tube, no Π)   = {nonlocal_se['U_bare_MeV']:.6f} MeV  = {nonlocal_se['U_bare_MeV']*1000:.4f} keV
-    U_screened (with Π(q²))      = {nonlocal_se['U_screened_MeV']:.6f} MeV  = {nonlocal_se['U_screened_MeV']*1000:.4f} keV
-    δU = U_screened - U_bare     = {nonlocal_se['delta_U_keV']:+.6f} keV
-    Neumann (position-space)     = {nonlocal_se['U_Neumann_MeV']:.6f} MeV  = {nonlocal_se['U_Neumann_MeV']*1000:.4f} keV
-    EH local (from Section 4)    = {nonlocal_se['U_EH_local_MeV']:.6f} MeV  = {nonlocal_se['U_EH_local_MeV']*1000:.4f} keV
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │  SELF-ENERGY BY TUBE CROSS-SECTION MODEL                               │
+  │                                                                         │
+  │  Model          U_bare (keV)  U_screened (keV)  δU_Π (keV)  Π corr %  │
+  │  ──────────────────────────────────────────────────────────────────     │""")
+    for name, label in [('gaussian', 'Gaussian    '),
+                         ('cylinder', 'Hard cylndr '),
+                         ('surface',  'Surface ring'),
+                         ('wire',     'Thin wire   ')]:
+        m = models[name]
+        u_b = m['U_bare_keV']
+        u_s = m['U_screened_keV']
+        du = m['delta_U_keV']
+        pct = m['Pi_correction_pct']
+        marker = ' ◄── NWT' if name == 'surface' else ''
+        if name == 'wire' and (u_b > 1e6 or np.isinf(u_b)):
+            print(f"  │  {label}     DIVERGENT        DIVERGENT          ---       ---   │")
+        else:
+            print(f"  │  {label}   {u_b:10.4f}      {u_s:10.4f}     {du:+10.4f}   {pct:6.2f}%{marker}  │")
+    print(f"  │                                                                         │")
+    print(f"  │  Neumann inductance (position-space):  {nonlocal_se['U_Neumann_MeV']*1000:10.4f} keV              │")
+    print(f"  │  EH local (from Section 4):            {nonlocal_se['U_EH_local_MeV']*1000:10.4f} keV              │")
+    print(f"  └─────────────────────────────────────────────────────────────────────────┘")
 
-  The Π(q²) correction matters at q × ƛ_C ≳ 1 (momentum ~ m_e c).
-  But the ring form factor [sin(qR)/(qR)]² suppresses modes above
-  q ~ 1/R, i.e., q × ƛ_C ~ ƛ_C/R = {lambda_C_bar_nl/R:.4f}.
-  At that scale, Π ~ {Pi_g[np.searchsorted(q_g, 1.0/R)]:.4e} — negligible!
+    # Key physics insight
+    surf = models['surface']
+    gauss = models['gaussian']
+    print(f"""
+  The surface ring model (J₀) is the most physical for NWT: the charge
+  circulates on the null worldtube BOUNDARY, not smeared through the interior.
 
-  The anti-screening lives at q × ƛ_C ~ 1-10, where |F_ring|² ~ {nonlocal_se['F_ring'][np.searchsorted(q_g * lambda_C_bar_nl, 1.0)]**2:.4e}.
-  The tube cutoff exp(-q²r²/2) kills modes above q ~ 1/r (q×ƛ_C ~ {lambda_C_bar_nl/r:.1f}).
+  Surface ring vs Gaussian:
+    U_bare:     {surf['U_bare_keV']:.4f} keV vs {gauss['U_bare_keV']:.4f} keV  ({surf['U_bare_keV']/gauss['U_bare_keV']:.2f}×)
+    δU from Π:  {surf['delta_U_keV']:+.4f} keV vs {gauss['delta_U_keV']:+.4f} keV  ({surf['delta_U_keV']/gauss['delta_U_keV']:.2f}× if both nonzero)
+
+  The J₀ form factor decays as 1/√(qr), letting through modes up to
+  q × ƛ_C ~ {lambda_C_bar_nl/r:.0f} (vs Gaussian cutoff at q×ƛ_C ~ {np.sqrt(2)*lambda_C_bar_nl/r:.0f}).
+  This is exactly where Π(q²) peaks (~18% anti-screening).
 """)
 
-    # Full energy budget comparison
-    print("  Computing full nonlocal energy budget...")
+    # Full energy budget comparison using the surface model
+    print("  Computing full nonlocal energy budget (surface ring model)...")
     budget = compute_full_nonlocal_energy_budget(R, r, p, q)
 
     print(f"""
   ┌───────────────────────────────────────────────────────────────────┐
   │  ENERGY BUDGET COMPARISON                                        │
   │                                                                   │
-  │  A) Local EH dressed (from Section 5):                           │
+  │  A) Local EH dressed (Neumann self-energy):                      │
   │     E_circ_eff      = {budget['E_circ_eff_MeV']:12.6f} MeV                      │
   │     U_self (EH)     = {budget['U_self_EH_MeV']:12.6f} MeV                      │
   │     U_drag          = {budget['U_drag_MeV']:12.6f} MeV                      │
   │     ─────────────────────────────────────                        │
   │     E_dressed       = {budget['E_dressed_MeV']:12.6f} MeV  gap = {budget['gap_dressed_keV']:+.4f} keV  │
   │                                                                   │
-  │  B) Hybrid (nonlocal self-energy):                               │
-  │     E_circ_eff      = {budget['E_circ_eff_MeV']:12.6f} MeV  (same — local EH)   │
-  │     U_self (Π(q²))  = {budget['U_self_nonlocal_MeV']:12.6f} MeV  (momentum-space) │
-  │     U_drag          = {budget['U_drag_MeV']:12.6f} MeV  (same — local EH)   │
+  │  B) Hybrid (surface ring + Π(q²)):                               │
+  │     E_circ_eff      = {budget['E_circ_eff_MeV']:12.6f} MeV  (local EH)          │
+  │     U_self (Π(q²))  = {budget['U_self_nonlocal_MeV']:12.6f} MeV  (surface, screened)│
+  │     U_drag          = {budget['U_drag_MeV']:12.6f} MeV  (local EH)          │
   │     ─────────────────────────────────────                        │
   │     E_hybrid        = {budget['E_hybrid_MeV']:12.6f} MeV  gap = {budget['gap_hybrid_keV']:+.4f} keV  │
   │                                                                   │
   │  m_e                = {m_e_MeV:12.6f} MeV  (target)               │
   └───────────────────────────────────────────────────────────────────┘
 
-  The nonlocal Π(q²) correction to self-energy: {budget['delta_U_nonlocal_keV']:+.6f} keV
-  (Positive = anti-screening adds energy; this should help close the gap)
-
+  Π(q²) correction to surface ring self-energy: {budget['delta_U_nonlocal_keV']:+.6f} keV
   Remaining gap: {budget['gap_hybrid_keV']:+.4f} keV ({budget['gap_hybrid_pct']:+.4f}% of m_e)
 """)
 
-    # Spectral analysis
-    print("  Self-energy spectral density dU/dq:")
-    print(f"  {'q × ƛ_C':>8s}  {'dU/dq bare':>14s}  {'dU/dq screened':>14s}"
-          f"  {'dU/dq correction':>16s}")
-    print(f"  {'─'*8}  {'─'*14}  {'─'*14}  {'─'*16}")
-
-    dU_bare = nonlocal_se['dU_dq_bare']
-    dU_scr = nonlocal_se['dU_dq_screened']
-    dU_corr = nonlocal_se['dU_dq_correction']
-    for i in indices_nl:
-        q_lc = q_g[i] * lambda_C_bar_nl
-        print(f"  {q_lc:8.4f}  {dU_bare[i]:14.4e}  {dU_scr[i]:14.4e}"
-              f"  {dU_corr[i]:16.4e}")
-
+    # ════════════════════════════════════════════════════════════════
+    # SECTION 11: Knot Self-Interaction — Full Neumann Integral
+    # ════════════════════════════════════════════════════════════════
     print()
+    print("  ╔══════════════════════════════════════════════════════════════════╗")
+    print("  ║  SECTION 11: KNOT SELF-INTERACTION — (p,q) NEUMANN INTEGRAL    ║")
+    print("  ╚══════════════════════════════════════════════════════════════════╝")
+
+    print(f"""
+  The single-ring Neumann formula L = μ₀R[ln(8R/r) - 2] treats the
+  knot as a simple circular loop. But the ({p},{q}) torus knot winds
+  p = {p} times around the torus. At each cross-section, there are {p}
+  current elements on the tube, separated by ~2r sin(π/{p}).
+
+  The full Neumann double integral over the actual knot path:
+    L = (μ₀/4π) ∮∮ (dl₁ · dl₂) / max(|r₁ - r₂|, r_tube)
+
+  includes BOTH the self-inductance of each pass AND the mutual
+  inductance between passes. For closely-wound turns (r << R),
+  L_total ≈ p² × L_single (like an inductor coil).
+
+  Computing full Neumann integral over ({p},{q}) knot...
+""")
+
+    knot = compute_knot_neumann_inductance(R, r, p, q)
+
+    print(f"""
+  Results:
+    L_single_ring  = {knot['L_single_ring']:.6e} H  (formula: μ₀R[ln(8R/r)-2])
+    L_knot (full)  = {knot['L_knot']:.6e} H  (numerical double integral)
+    L_knot / L_ring = {knot['L_ratio']:.4f}  (expected ≈ p² = {p**2} for tight winding)
+
+  Decomposition:
+    L_self (same pass)  = {knot['L_self_near']:.6e} H  ({knot['L_self_near']/knot['L_knot']*100:.1f}%)
+    L_mutual (between)  = {knot['L_mutual']:.6e} H  ({knot['mutual_fraction']*100:.1f}%)
+
+  Self-energy (total = E + B = 2 × ½LI²):
+    U_single_ring   = {knot['U_single_ring_keV']:.4f} keV
+    U_knot (full)   = {knot['U_knot_keV']:.4f} keV  ({knot['L_ratio']:.2f}× single ring)
+    U_mutual only   = {knot['U_mutual_keV']:.4f} keV  (energy from inter-pass interaction)
+""")
+
+    # Updated energy budget with knot self-interaction
+    gordon = budget['gordon']
+    E_circ_eff = gordon['E_circ_eff_MeV']
+    U_drag = gordon['U_drag_MeV']
+
+    # Replace Neumann self-energy with full knot inductance
+    U_knot_MeV = knot['U_knot_MeV']
+    E_knot_dressed = E_circ_eff + U_knot_MeV + U_drag
+    gap_knot = (E_knot_dressed - m_e_MeV) * 1000
+
+    # And with Π(q²) correction scaled by the knot/ring ratio
+    # The Π correction scales with the self-energy, so multiply by L_ratio
+    Pi_corr_keV = budget['delta_U_nonlocal_keV'] * knot['L_ratio']
+    U_knot_screened_keV = knot['U_knot_keV'] + Pi_corr_keV
+    E_knot_screened = E_circ_eff + U_knot_screened_keV / 1000 + U_drag
+    gap_knot_screened = (E_knot_screened - m_e_MeV) * 1000
+
+    print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  UPDATED ENERGY BUDGET WITH KNOT SELF-INTERACTION                │
+  │                                                                   │
+  │  C) Knot inductance (no Π):                                      │
+  │     E_circ_eff      = {E_circ_eff:12.6f} MeV                      │
+  │     U_self (knot)   = {U_knot_MeV:12.6f} MeV  ({knot['L_ratio']:.2f}× Neumann)    │
+  │     U_drag          = {U_drag:12.6f} MeV                      │
+  │     ─────────────────────────────────────                        │
+  │     E_total         = {E_knot_dressed:12.6f} MeV  gap = {gap_knot:+.4f} keV  │
+  │                                                                   │
+  │  D) Knot + Π(q²) correction:                                     │
+  │     U_self (knot+Π) = {U_knot_screened_keV/1000:12.6f} MeV                      │
+  │     E_total         = {E_knot_screened:12.6f} MeV  gap = {gap_knot_screened:+.4f} keV  │
+  │                                                                   │
+  │  Compare to previous:                                             │
+  │     A) Neumann dressed:    gap = {budget['gap_dressed_keV']:+.4f} keV              │
+  │     B) Ring + Π(q²):       gap = {budget['gap_hybrid_keV']:+.4f} keV              │
+  │     C) Knot inductance:    gap = {gap_knot:+.4f} keV              │
+  │     D) Knot + Π(q²):       gap = {gap_knot_screened:+.4f} keV              │
+  │  m_e = {m_e_MeV:.6f} MeV                                         │
+  └───────────────────────────────────────────────────────────────────┘
+""")
+
+    # Also compute for p=1 as sanity check
+    print("  Sanity check: p=1 (single ring, should recover Neumann)...")
+    knot_p1 = compute_knot_neumann_inductance(R, r, p=1, q=1)
+    print(f"    L_knot(1,1) / L_single_ring = {knot_p1['L_ratio']:.4f}  (should be ~1.0)")
+    print(f"    U_knot(1,1) = {knot_p1['U_knot_keV']:.4f} keV vs Neumann = {knot_p1['U_single_ring_keV']:.4f} keV")
+    print()
+
     print("=" * 70)
