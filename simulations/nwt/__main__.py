@@ -62,6 +62,8 @@ def main():
                         help='Settling radiation: Kelvin wave spectrum from vortex relaxation')
     parser.add_argument('--thevenin', action='store_true',
                         help='Thevenin impedance matching: constrain r/R from circuit + Kelvin wave consistency')
+    parser.add_argument('--gordon-metric', action='store_true', dest='gordon_metric',
+                        help='Gordon effective metric: non-perturbative EH vacuum corrections')
     parser.add_argument('--R', type=float, default=1.0, help='Major radius in units of λ_C')
     parser.add_argument('--r', type=float, default=0.1, help='Minor radius in units of λ_C')
     parser.add_argument('--p', type=int, default=1, help='Toroidal winding number')
@@ -221,6 +223,11 @@ def main():
     if args.thevenin:
         from .settling import print_thevenin_analysis
         print_thevenin_analysis()
+        return
+
+    if args.gordon_metric:
+        from .gordon_metric import print_gordon_metric_analysis
+        print_gordon_metric_analysis()
         return
 
     params = TorusParams(
