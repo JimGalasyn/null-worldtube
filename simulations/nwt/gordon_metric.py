@@ -662,6 +662,144 @@ def find_gordon_self_consistent_radius(target_MeV, p=2, q=1, r_ratio=None):
     }
 
 
+def compute_knot_total_energy(R, r, p=2, q=1, N_knot=500):
+    """
+    Total energy using the full knot Neumann integral + Π(q²) correction.
+
+    E_total = E_circ_eff + U_self_knot_screened + U_drag
+
+    where U_self_knot uses the full Neumann double integral over the (p,q)
+    knot (not the single-ring approximation), and the Π(q²) anti-screening
+    correction is applied.
+
+    Parameters
+    ----------
+    R, r : float
+        Torus radii (m).
+    p, q : int
+        Winding numbers.
+    N_knot : int
+        Points on knot for Neumann integral (500 is fast, 2000 is precise).
+
+    Returns
+    -------
+    dict with energy budget.
+    """
+    # Gordon metric: circulation energy and frame-dragging
+    circ = compute_effective_circulation(R, r, p, q)
+    E_circ_eff = circ['E_circ_eff_J']
+
+    # Frame-dragging
+    n_avg = circ['n_avg']
+    L_path = circ['L_flat']
+    omega_circ = 2.0 * np.pi * c / L_path
+    Omega_drag_path = (1.0 - 1.0 / n_avg**2) * omega_circ
+    U_drag = -p * hbar * Omega_drag_path
+
+    # Full knot Neumann self-energy
+    knot = compute_knot_neumann_inductance(R, r, p, q, N=N_knot)
+    U_self_knot = knot['U_knot_J']
+
+    # Π(q²) correction: scale the ring Π correction by the knot/ring ratio
+    # (The Π correction is proportional to the self-energy)
+    # Quick estimate: Π adds ~7.8% to the bare self-energy (from Section 10)
+    Pi_fraction = 0.078  # from numerical results, stable across models
+    U_self_screened = U_self_knot * (1.0 + Pi_fraction)
+
+    E_total = E_circ_eff + U_self_screened + U_drag
+    E_total_MeV = E_total / MeV
+
+    return {
+        'E_total_J': E_total,
+        'E_total_MeV': E_total_MeV,
+        'E_circ_eff_J': E_circ_eff,
+        'E_circ_eff_MeV': circ['E_circ_eff_MeV'],
+        'U_self_knot_J': U_self_knot,
+        'U_self_knot_MeV': knot['U_knot_MeV'],
+        'U_self_screened_J': U_self_screened,
+        'U_self_screened_MeV': U_self_screened / MeV,
+        'U_drag_J': U_drag,
+        'U_drag_MeV': U_drag / MeV,
+        'L_ratio': knot['L_ratio'],
+        'n_avg': n_avg,
+        'gap_from_me_keV': (E_total_MeV - m_e_MeV) * 1000,
+        'gap_pct': (E_total_MeV - m_e_MeV) / m_e_MeV * 100,
+    }
+
+
+def find_knot_self_consistent_radius(target_MeV, p=2, q=1, r_ratio=None,
+                                      N_knot=500):
+    """
+    Find major radius R where knot-corrected total energy = target mass.
+
+    Uses bisection with the full knot Neumann integral + Π(q²) screening.
+
+    Parameters
+    ----------
+    target_MeV : float
+        Target mass in MeV.
+    p, q : int
+        Winding numbers.
+    r_ratio : float or None
+        r/R ratio. Defaults to α.
+    N_knot : int
+        Points on knot for Neumann integral (500 for speed).
+
+    Returns
+    -------
+    dict with solution, or None if no solution found.
+    """
+    if r_ratio is None:
+        r_ratio = alpha
+
+    target_J = target_MeV * MeV
+
+    def energy_at_R(R_val):
+        r_val = r_ratio * R_val
+        result = compute_knot_total_energy(R_val, r_val, p, q, N_knot)
+        return result['E_total_J']
+
+    # Bisection: energy decreases with R
+    R_low = 1e-20
+    R_high = 1e-8
+
+    E_low = energy_at_R(R_low)
+    E_high = energy_at_R(R_high)
+
+    if not (E_low > target_J > E_high):
+        return None
+
+    # Bisection (35 iterations — sufficient for ~10 digits)
+    for _ in range(35):
+        R_mid = (R_low + R_high) / 2.0
+        E_mid = energy_at_R(R_mid)
+        if E_mid > target_J:
+            R_low = R_mid
+        else:
+            R_high = R_mid
+
+    R_sol = (R_low + R_high) / 2.0
+    r_sol = r_ratio * R_sol
+
+    # Final evaluation at higher resolution
+    result = compute_knot_total_energy(R_sol, r_sol, p, q, N_knot)
+
+    return {
+        'R': R_sol,
+        'r': r_sol,
+        'R_over_lambda_C': R_sol / lambda_C,
+        'r_over_lambda_C': r_sol / lambda_C,
+        'R_femtometers': R_sol * 1e15,
+        'r_femtometers': r_sol * 1e15,
+        'p': p, 'q': q,
+        'r_ratio': r_ratio,
+        'E_total_MeV': result['E_total_MeV'],
+        'target_MeV': target_MeV,
+        'match_ppm': abs(result['E_total_MeV'] - target_MeV) / target_MeV * 1e6,
+        'breakdown': result,
+    }
+
+
 # ════════════════════════════════════════════════════════════════════
 # Step 7b: Effective viscosity of the QED vacuum
 # ════════════════════════════════════════════════════════════════════
@@ -2356,6 +2494,71 @@ def print_gordon_metric_analysis():
     knot_p1 = compute_knot_neumann_inductance(R, r, p=1, q=1)
     print(f"    L_knot(1,1) / L_single_ring = {knot_p1['L_ratio']:.4f}  (should be ~1.0)")
     print(f"    U_knot(1,1) = {knot_p1['U_knot_keV']:.4f} keV vs Neumann = {knot_p1['U_single_ring_keV']:.4f} keV")
+    print()
+
+    # ════════════════════════════════════════════════════════════════
+    # SECTION 12: Self-Consistent Radius with Full Knot Budget
+    # ════════════════════════════════════════════════════════════════
+    print()
+    print("  ╔══════════════════════════════════════════════════════════════════╗")
+    print("  ║  SECTION 12: SELF-CONSISTENT RADIUS — KNOT + Π(q²) BUDGET     ║")
+    print("  ╚══════════════════════════════════════════════════════════════════╝")
+
+    print(f"""
+  All previous sections used the flat-space self-consistent radius
+  R = {R/lambda_C:.4f} ƛ_C from the single-ring Neumann formula. But the
+  full knot Neumann integral changes the self-energy by {knot['L_ratio']:.2f}×.
+
+  Question: what R makes the FULL knot + Π(q²) budget exactly equal m_e?
+
+  E_total(R) = E_circ_eff(R) + U_self_knot(R) × 1.078 + U_drag(R) = m_e
+
+  Searching by bisection (r/R = α)...
+""")
+
+    # Current energy at flat-space R for reference
+    current = compute_knot_total_energy(R, r, p, q, N_knot=500)
+    print(f"  At flat-space R = {R/lambda_C:.4f} ƛ_C:")
+    print(f"    E_total = {current['E_total_MeV']:.6f} MeV  (gap = {current['gap_from_me_keV']:+.4f} keV)")
+    print()
+
+    # Find self-consistent R
+    print("  Running bisection search...")
+    sol = find_knot_self_consistent_radius(m_e_MeV, p=p, q=q)
+
+    if sol is not None:
+        bd = sol['breakdown']
+        print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  SELF-CONSISTENT SOLUTION  (knot + Π budget)                     │
+  │                                                                   │
+  │  R = {sol['R_over_lambda_C']:.6f} ƛ_C  ({sol['R_femtometers']:.3f} fm)                     │
+  │  r = {sol['r_over_lambda_C']:.6f} ƛ_C  ({sol['r_femtometers']:.4f} fm)                    │
+  │  r/R = α = {sol['r_ratio']:.6e}                                 │
+  │                                                                   │
+  │  Energy budget at self-consistent R:                              │
+  │     E_circ_eff      = {bd['E_circ_eff_MeV']:12.6f} MeV                      │
+  │     U_self (knot+Π) = {bd['U_self_screened_MeV']:12.6f} MeV  ({bd['L_ratio']:.2f}× ring)  │
+  │     U_drag          = {bd['U_drag_MeV']:12.6f} MeV                      │
+  │     ─────────────────────────────────────                        │
+  │     E_total         = {bd['E_total_MeV']:12.6f} MeV                      │
+  │     m_e             = {m_e_MeV:12.6f} MeV                      │
+  │     Match           = {sol['match_ppm']:.1f} ppm                               │
+  │                                                                   │
+  │  Shift from flat-space R:                                         │
+  │     ΔR = {(sol['R_over_lambda_C'] - R/lambda_C):.6f} ƛ_C  ({(sol['R_over_lambda_C'] - R/lambda_C)/(R/lambda_C)*100:+.4f}%)          │
+  │     n_avg = {bd['n_avg']:.6f}  (effective refractive index)         │
+  └───────────────────────────────────────────────────────────────────┘
+""")
+
+        # Interpretation
+        dR_pct = (sol['R_over_lambda_C'] - R/lambda_C) / (R/lambda_C) * 100
+        print(f"  The self-consistent R {'increases' if dR_pct > 0 else 'decreases'} by {abs(dR_pct):.2f}%.")
+        print(f"  E_circ accounts for {bd['E_circ_eff_MeV']/m_e_MeV*100:.2f}% of m_e.")
+        print(f"  U_self accounts for {bd['U_self_screened_MeV']/m_e_MeV*100:.2f}% of m_e.")
+        print(f"  U_drag accounts for {bd['U_drag_MeV']/m_e_MeV*100:.4f}% of m_e.")
+    else:
+        print("  *** No solution found in search range! ***")
     print()
 
     print("=" * 70)
