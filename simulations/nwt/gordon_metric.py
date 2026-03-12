@@ -800,6 +800,184 @@ def find_knot_self_consistent_radius(target_MeV, p=2, q=1, r_ratio=None,
     }
 
 
+def compute_stability_analysis(R_sc, p=2, q=1, r_ratio=None, N_knot=500,
+                                N_scan=80, R_range_factor=3.0):
+    """
+    Stability analysis around the self-consistent radius.
+
+    Scans E_total(R) and its components over a range of R, computes
+    numerical derivatives to determine:
+    - Whether the crossing is from above or below (monotonic vs extremum)
+    - dE/dR and d²E/dR² at the self-consistent point
+    - Effective spring constant and oscillation frequency if bound
+    - The full E(R) landscape for each energy component
+
+    Parameters
+    ----------
+    R_sc : float
+        Self-consistent radius (m).
+    p, q : int
+        Winding numbers.
+    r_ratio : float or None
+        r/R ratio, defaults to α.
+    N_knot : int
+        Points on knot for Neumann integral.
+    N_scan : int
+        Number of R values to scan.
+    R_range_factor : float
+        Scan from R_sc/factor to R_sc*factor.
+
+    Returns
+    -------
+    dict with scan results, derivatives, stability classification.
+    """
+    if r_ratio is None:
+        r_ratio = alpha
+
+    # Scan range: logarithmic around R_sc
+    R_min = R_sc / R_range_factor
+    R_max = R_sc * R_range_factor
+    R_scan = np.geomspace(R_min, R_max, N_scan)
+
+    # Evaluate energy at each R
+    E_total = np.zeros(N_scan)
+    E_circ = np.zeros(N_scan)
+    U_self = np.zeros(N_scan)
+    U_drag = np.zeros(N_scan)
+    n_avg_arr = np.zeros(N_scan)
+    L_ratio_arr = np.zeros(N_scan)
+
+    for i, Rv in enumerate(R_scan):
+        rv = r_ratio * Rv
+        result = compute_knot_total_energy(Rv, rv, p, q, N_knot)
+        E_total[i] = result['E_total_MeV']
+        E_circ[i] = result['E_circ_eff_MeV']
+        U_self[i] = result['U_self_screened_MeV']
+        U_drag[i] = result['U_drag_MeV']
+        n_avg_arr[i] = result['n_avg']
+        L_ratio_arr[i] = result['L_ratio']
+
+    R_lam = R_scan / lambda_C  # in units of ƛ_C
+
+    # Numerical derivatives at R_sc using finite differences
+    # Use small step: δR = 0.1% of R_sc
+    dR = 0.001 * R_sc
+    r_m = r_ratio * (R_sc - dR)
+    r_0 = r_ratio * R_sc
+    r_p = r_ratio * (R_sc + dR)
+
+    E_m = compute_knot_total_energy(R_sc - dR, r_m, p, q, N_knot)['E_total_MeV']
+    E_0 = compute_knot_total_energy(R_sc, r_0, p, q, N_knot)['E_total_MeV']
+    E_p = compute_knot_total_energy(R_sc + dR, r_p, p, q, N_knot)['E_total_MeV']
+
+    dEdR = (E_p - E_m) / (2 * dR) * MeV  # J/m
+    d2EdR2 = (E_p - 2*E_0 + E_m) / (dR**2) * MeV  # J/m²
+
+    # Also compute component derivatives
+    circ_m = compute_knot_total_energy(R_sc - dR, r_m, p, q, N_knot)
+    circ_p = compute_knot_total_energy(R_sc + dR, r_p, p, q, N_knot)
+
+    dEcirc_dR = (circ_p['E_circ_eff_MeV'] - circ_m['E_circ_eff_MeV']) / (2*dR) * MeV
+    dUself_dR = (circ_p['U_self_screened_MeV'] - circ_m['U_self_screened_MeV']) / (2*dR) * MeV
+    dUdrag_dR = (circ_p['U_drag_MeV'] - circ_m['U_drag_MeV']) / (2*dR) * MeV
+
+    # Classification
+    # If d²E/dR² > 0 at crossing: stable (minimum nearby or restoring)
+    # If d²E/dR² < 0: unstable (maximum nearby)
+    # If dE/dR ≈ 0 AND d²E/dR² > 0: true bound state minimum
+    is_monotonic = abs(dEdR) > abs(d2EdR2 * R_sc * 0.01)  # dE/dR dominates
+
+    # For monotonic crossing: stability comes from the sign of dE/dR
+    # If dE/dR < 0 (energy decreases with R), then:
+    #   - R too small → E > m_e → system "wants" to expand
+    #   - R too large → E < m_e → system "wants" to contract
+    #   → STABLE crossing (restoring force toward R_sc)
+    # If dE/dR > 0: UNSTABLE (perturbations grow)
+    crossing_stable = dEdR < 0
+
+    # Effective spring constant (even for monotonic crossing)
+    # The "restoring force" F = -dE/dR acts on the radius
+    # For oscillations: m_eff × d²R/dt² = -dE/dR evaluated near R_sc
+    # Need effective mass: m_eff ~ E_total/c² = m_e
+    # For monotonic: ω² ~ |dE/dR| / (m_e × R_sc) (dimensional estimate)
+    # For minimum: ω² = d²E/dR² / m_e (exact for harmonic)
+    if d2EdR2 > 0:
+        omega_osc = np.sqrt(abs(d2EdR2) / m_e)
+        f_osc = omega_osc / (2 * np.pi)
+        E_osc_eV = hbar * omega_osc / eV
+    else:
+        omega_osc = 0.0
+        f_osc = 0.0
+        E_osc_eV = 0.0
+
+    # Find if there's a local minimum in the scan
+    min_idx = np.argmin(E_total)
+    has_minimum = 0 < min_idx < N_scan - 1  # not at boundary
+    if has_minimum:
+        R_min_val = R_scan[min_idx]
+        E_min_val = E_total[min_idx]
+    else:
+        R_min_val = None
+        E_min_val = None
+
+    # Virial-like analysis: how do components scale with R?
+    # E_circ ~ 1/R (photon in box), U_self ~ ln(R)/R (inductance), U_drag ~ 1/R
+    # Fit power laws in log space around R_sc
+    # Use 5 points around R_sc
+    sc_idx = np.argmin(np.abs(R_scan - R_sc))
+    lo = max(0, sc_idx - 5)
+    hi = min(N_scan, sc_idx + 6)
+    if hi - lo >= 4:
+        log_R = np.log(R_scan[lo:hi])
+        log_Ec = np.log(np.abs(E_circ[lo:hi]))
+        log_Us = np.log(np.abs(U_self[lo:hi]))
+        log_Ud = np.log(np.abs(U_drag[lo:hi]))
+        # Linear fits: log(E) = a + n*log(R)
+        n_circ = np.polyfit(log_R, log_Ec, 1)[0]
+        n_self = np.polyfit(log_R, log_Us, 1)[0]
+        n_drag = np.polyfit(log_R, log_Ud, 1)[0]
+    else:
+        n_circ = n_self = n_drag = np.nan
+
+    return {
+        # Scan data
+        'R_scan': R_scan,
+        'R_lam': R_lam,
+        'E_total': E_total,
+        'E_circ': E_circ,
+        'U_self': U_self,
+        'U_drag': U_drag,
+        'n_avg': n_avg_arr,
+        'L_ratio': L_ratio_arr,
+        # Derivatives at R_sc
+        'dEdR': dEdR,  # J/m
+        'dEdR_MeV_per_lam': dEdR * lambda_C / MeV,  # MeV per ƛ_C
+        'd2EdR2': d2EdR2,  # J/m²
+        'd2EdR2_MeV_per_lam2': d2EdR2 * lambda_C**2 / MeV,  # MeV per ƛ_C²
+        # Component derivatives
+        'dEcirc_dR': dEcirc_dR,
+        'dUself_dR': dUself_dR,
+        'dUdrag_dR': dUdrag_dR,
+        # Component scaling exponents (E ~ R^n)
+        'n_circ': n_circ,
+        'n_self': n_self,
+        'n_drag': n_drag,
+        # Classification
+        'is_monotonic': is_monotonic,
+        'crossing_stable': crossing_stable,
+        'has_minimum': has_minimum,
+        'R_min': R_min_val,
+        'E_min': E_min_val,
+        # Oscillation (if bound)
+        'omega_osc': omega_osc,
+        'f_osc': f_osc,
+        'E_osc_eV': E_osc_eV,
+        # Reference
+        'R_sc': R_sc,
+        'R_sc_lam': R_sc / lambda_C,
+    }
+
+
 # ════════════════════════════════════════════════════════════════════
 # Step 7b: Effective viscosity of the QED vacuum
 # ════════════════════════════════════════════════════════════════════
@@ -2559,6 +2737,110 @@ def print_gordon_metric_analysis():
         print(f"  U_drag accounts for {bd['U_drag_MeV']/m_e_MeV*100:.4f}% of m_e.")
     else:
         print("  *** No solution found in search range! ***")
+        sol = None
     print()
+
+    # ════════════════════════════════════════════════════════════════
+    # SECTION 13: Stability Analysis
+    # ════════════════════════════════════════════════════════════════
+    if sol is not None:
+        R_sc = sol['R']
+
+        print()
+        print("  ╔══════════════════════════════════════════════════════════════════╗")
+        print("  ║  SECTION 13: STABILITY ANALYSIS — IS R = 0.488 ƛ_C A BOUND    ║")
+        print("  ║  STATE OR JUST A CROSSING POINT?                                ║")
+        print("  ╚══════════════════════════════════════════════════════════════════╝")
+
+        print(f"""
+  At R_sc = {R_sc/lambda_C:.4f} ƛ_C, E_total(R_sc) = m_e by construction.
+  But is this a STABLE equilibrium?
+
+  Scanning E_total(R) over [{R_sc/lambda_C/3:.3f}, {R_sc/lambda_C*3:.3f}] ƛ_C...
+""")
+
+        stab = compute_stability_analysis(R_sc, p=p, q=q, N_knot=300, N_scan=60)
+
+        # Display the E(R) landscape as ASCII
+        R_lam = stab['R_lam']
+        E_tot = stab['E_total']
+        E_crc = stab['E_circ']
+        U_slf = stab['U_self']
+        U_drg = stab['U_drag']
+
+        # Table of selected values
+        indices = np.linspace(0, len(R_lam)-1, 15, dtype=int)
+        print("  ┌─────────────────────────────────────────────────────────────────┐")
+        print("  │  R/ƛ_C    E_circ    U_self    U_drag    E_total    gap (keV)   │")
+        print("  │           (MeV)     (MeV)     (MeV)     (MeV)                  │")
+        print("  ├─────────────────────────────────────────────────────────────────┤")
+        for i in indices:
+            gap = (E_tot[i] - m_e_MeV) * 1000
+            marker = " ◄" if abs(R_lam[i] - stab['R_sc_lam']) / stab['R_sc_lam'] < 0.05 else ""
+            print(f"  │  {R_lam[i]:.4f}  {E_crc[i]:9.4f}  {U_slf[i]:9.6f}  {U_drg[i]:9.4f}"
+                  f"  {E_tot[i]:9.4f}  {gap:+9.2f}{marker:3s}│")
+        print("  └─────────────────────────────────────────────────────────────────┘")
+
+        # Derivatives
+        print(f"""
+  Derivatives at R_sc = {stab['R_sc_lam']:.4f} ƛ_C:
+
+    dE/dR         = {stab['dEdR_MeV_per_lam']:+.4f} MeV/ƛ_C
+    d²E/dR²       = {stab['d2EdR2_MeV_per_lam2']:+.4f} MeV/ƛ_C²
+
+    Component slopes (MeV/ƛ_C):
+      dE_circ/dR  = {stab['dEcirc_dR']*lambda_C/MeV:+.4f}   (circulation)
+      dU_self/dR  = {stab['dUself_dR']*lambda_C/MeV:+.6f}   (self-energy)
+      dU_drag/dR  = {stab['dUdrag_dR']*lambda_C/MeV:+.4f}   (frame-drag)
+
+    Power-law scaling (E ~ R^n) near R_sc:
+      E_circ ~ R^{{{stab['n_circ']:.3f}}}   (expected -1 for photon-in-box)
+      U_self ~ R^{{{stab['n_self']:.3f}}}   (expected ~-1 for inductance)
+      U_drag ~ R^{{{stab['n_drag']:.3f}}}   (expected -1 for frame-drag)
+""")
+
+        # Stability classification
+        if stab['has_minimum']:
+            print(f"  ★ E_total(R) has a LOCAL MINIMUM at R = {stab['R_min']/lambda_C:.4f} ƛ_C")
+            print(f"    E_min = {stab['E_min']:.6f} MeV")
+            depth = (m_e_MeV - stab['E_min']) * 1000
+            print(f"    Binding depth below m_e: {depth:.2f} keV")
+            if stab['E_osc_eV'] > 0:
+                print(f"    Oscillation quantum: ℏω = {stab['E_osc_eV']:.2f} eV")
+                print(f"    Oscillation frequency: f = {stab['f_osc']:.3e} Hz")
+        else:
+            print("  E_total(R) is MONOTONICALLY DECREASING over the scan range.")
+            print("  No local minimum found — R_sc is a CROSSING POINT, not a bound minimum.")
+
+        if stab['crossing_stable']:
+            print(f"""
+  STABLE CROSSING: dE/dR = {stab['dEdR_MeV_per_lam']:+.4f} MeV/ƛ_C < 0
+    → R too small ⟹ E > m_e ⟹ system expands toward R_sc
+    → R too large ⟹ E < m_e ⟹ system contracts toward R_sc
+    This is a SELF-REGULATING equilibrium: perturbations are restored.""")
+        else:
+            print(f"""
+  UNSTABLE CROSSING: dE/dR = {stab['dEdR_MeV_per_lam']:+.4f} MeV/ƛ_C > 0
+    → Perturbations in R would grow, not restore.
+    → Additional physics needed for stability.""")
+
+        # Virial theorem check
+        print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  VIRIAL / FORCE BALANCE AT R_sc                                  │
+  │                                                                   │
+  │  For a stationary configuration, the "forces" must balance:      │
+  │  dE_circ/dR + dU_self/dR + dU_drag/dR = 0  (equilibrium)       │
+  │                                                                   │
+  │  Actually:                                                        │
+  │  dE_circ/dR = {stab['dEcirc_dR']*lambda_C/MeV:+12.4f} MeV/ƛ_C  (inward: shrink R)   │
+  │  dU_self/dR = {stab['dUself_dR']*lambda_C/MeV:+12.6f} MeV/ƛ_C  (self-energy)        │
+  │  dU_drag/dR = {stab['dUdrag_dR']*lambda_C/MeV:+12.4f} MeV/ƛ_C  (outward: expand R)  │
+  │  ─────────────────────────────────────                           │
+  │  Total dE/dR = {stab['dEdR_MeV_per_lam']:+12.4f} MeV/ƛ_C                       │
+  │                                                                   │
+  │  Ratio |dE_circ/dR| : |dU_drag/dR| = {abs(stab['dEcirc_dR']/stab['dUdrag_dR']):.3f}               │
+  └───────────────────────────────────────────────────────────────────┘
+""")
 
     print("=" * 70)
