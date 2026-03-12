@@ -1513,6 +1513,130 @@ def compute_tube_radius_equilibrium(R, p=2, q=1, N_r=50):
 
 
 # ════════════════════════════════════════════════════════════════════
+# Step 7e: Null congruence and magnetic flux analysis
+# ════════════════════════════════════════════════════════════════════
+
+def compute_null_congruence(R, r, p=2, q=1, N=2000):
+    """
+    Null congruence analysis on the torus: Raychaudhuri equation.
+
+    For a tube of radius r around a curve with curvature κ(s):
+    - Expansion: θ(s,φ) = -κ cos(φ) / (1 - rκ cos(φ))
+    - Shear: σ ~ κ sin(φ) (deformation of cross-section)
+    - Twist: ω = dφ/ds = q/|dr/dλ| (poloidal rotation)
+
+    Raychaudhuri (null, flat space): dθ/dλ = -θ²/2 - σ² + ω²
+    Averaged over closed path: ⟨θ²/2 + σ²⟩ vs ⟨ω²⟩ gives focusing balance.
+
+    Returns dict with curvature, expansion, shear, twist, balance ratio.
+    """
+    curv = compute_knot_curvature(R, r, p, q, N)
+    kappa = curv['kappa']
+    ds = curv['ds']
+    L = curv['L_total']
+
+    kappa2_avg = np.sum(kappa**2 * ds) / L
+
+    # For thin tube (rκ << 1):
+    # ⟨θ²⟩ = κ²/2 (averaged over poloidal angle)
+    # ⟨σ²⟩ = κ²/2 (same)
+    theta2_avg = kappa2_avg / 2.0
+    sigma2_avg = kappa2_avg / 2.0
+
+    # Twist: poloidal rotation rate
+    params = TorusParams(R=R, r=r, p=p, q=q)
+    _, _, _, ds_dlam = torus_knot_curve(params, N)
+    dlam = 2 * np.pi / N
+    dphi_ds = q / ds_dlam  # poloidal angular rate per arc length
+    omega2_avg = np.sum(dphi_ds**2 * ds_dlam * dlam) / L
+
+    # Raychaudhuri balance
+    LHS = theta2_avg / 2.0 + sigma2_avg  # = 3κ²/4
+    RHS = omega2_avg  # = q²/(p²R²)
+    balance_ratio = LHS / RHS  # >1 means net focusing
+
+    # Correction from finite rκ
+    rk = r * np.sqrt(kappa2_avg)
+
+    return {
+        'kappa2_avg': kappa2_avg,
+        'theta2_avg': theta2_avg,
+        'sigma2_avg': sigma2_avg,
+        'omega2_avg': omega2_avg,
+        'LHS': LHS,
+        'RHS': RHS,
+        'balance_ratio': balance_ratio,
+        'rk': rk,
+        'rk_correction': rk**2,
+        'net_focusing': LHS > RHS,
+    }
+
+
+def compute_magnetic_flux_analysis(R, r, p=2, q=1):
+    """
+    Thorough magnetic flux analysis of the torus knot.
+
+    Computes:
+    - Poloidal flux (through tube cross-section) from toroidal current
+    - Toroidal flux (through torus hole) from Neumann inductance
+    - Comparison with flux quanta (h/e, h/2e)
+    - The analytic relation Φ_pol/(h/e) = α³/(2π) at r = αR
+    - Aharonov-Bohm phase
+    - What r would give various flux quantization conditions
+    """
+    # Path and current
+    L_path = 2.0 * np.pi * np.sqrt(p**2 * R**2 + q**2 * r**2)
+    I = e_charge * c / L_path
+
+    # Poloidal B field (from p toroidal windings = p-turn solenoid)
+    B_pol = mu0 * p * I / (2.0 * np.pi * R)
+    # Poloidal flux through tube cross-section (thin tube approximation)
+    Phi_pol = mu0 * p * I * r**2 / (2.0 * R)
+
+    # Toroidal flux from Neumann inductance
+    L_Neumann = mu0 * R * (np.log(8*R/r) - 2)
+    Phi_total = L_Neumann * I
+
+    # Flux quanta
+    Phi_0_single = h_planck / e_charge
+    Phi_0_pair = h_planck / (2.0 * e_charge)
+
+    # Aharonov-Bohm phase
+    AB_phase = 2.0 * np.pi * Phi_total / Phi_0_single
+
+    # Analytic result: at r = αR, Φ_pol/(h/e) = α³/(2π)
+    phi_pol_analytic = alpha**3 / (2.0 * np.pi)
+
+    # What r gives various flux conditions?
+    # Φ_pol = n × h/e → r = R × √(2πn/α)
+    flux_radii = {}
+    for label, n_flux in [('Phi_0', 1.0), ('alpha_Phi_0', alpha),
+                           ('alpha2_Phi_0', alpha**2),
+                           ('alpha3_Phi_0', alpha**3)]:
+        r_flux = R * np.sqrt(2.0 * np.pi * n_flux / alpha)
+        flux_radii[label] = {
+            'n': n_flux, 'r': r_flux, 'r_over_R': r_flux / R,
+            'r_over_lambda_C': r_flux / lambda_C,
+        }
+
+    return {
+        'I': I, 'L_path': L_path,
+        'B_pol': B_pol,
+        'Phi_pol': Phi_pol,
+        'Phi_total': Phi_total,
+        'L_Neumann': L_Neumann,
+        'Phi_0_single': Phi_0_single,
+        'Phi_0_pair': Phi_0_pair,
+        'Phi_pol_over_Phi0': Phi_pol / Phi_0_single,
+        'Phi_total_over_Phi0': Phi_total / Phi_0_single,
+        'AB_phase': AB_phase,
+        'phi_pol_analytic': phi_pol_analytic,
+        'phi_pol_match_pct': abs(Phi_pol/Phi_0_single - phi_pol_analytic) / phi_pol_analytic * 100,
+        'flux_radii': flux_radii,
+    }
+
+
+# ════════════════════════════════════════════════════════════════════
 # Step 7b: Effective viscosity of the QED vacuum
 # ════════════════════════════════════════════════════════════════════
 
@@ -3701,5 +3825,142 @@ def print_gordon_metric_analysis():
     else:
         print(f"  The EH boundary tension is {'too strong' if res_EH['min_j'] == 0 else 'too weak'}"
               f" for equilibrium at this R.")
+
+    # ════════════════════════════════════════════════════════════════
+    # SECTION 16: Minkowski Geometry & Magnetic Flux
+    # ════════════════════════════════════════════════════════════════
+    print()
+    print("  ╔══════════════════════════════════════════════════════════════════╗")
+    print("  ║  SECTION 16: MINKOWSKI NULL SURFACE & MAGNETIC FLUX            ║")
+    print("  ╚══════════════════════════════════════════════════════════════════╝")
+
+    print(f"""
+  Two potentially neglected aspects of the model:
+  A) The null worldtube is a NULL SURFACE in Minkowski space — what
+     does the Raychaudhuri equation (null geodesic focusing) constrain?
+  B) The torus carries MAGNETIC FLUX — does flux quantization set r/R?
+""")
+
+    # ─── Part A: Null congruence ───
+    print("  ── A) NULL CONGRUENCE — RAYCHAUDHURI EQUATION ──")
+
+    nc = compute_null_congruence(R_cf, r_cf, p, q)
+
+    print(f"""
+  The null worldtube is generated by a congruence of null rays.
+  The Raychaudhuri equation (flat space, R_μν = 0):
+
+    dθ/dλ = -θ²/2 - σ² + ω²
+
+  where θ = expansion, σ = shear, ω = twist.
+  Averaged over one closed orbit: ⟨dθ/dλ⟩ = 0, so:
+
+    ⟨θ²/2 + σ²⟩  vs  ⟨ω²⟩
+
+  For a thin tube (rκ = {nc['rk']:.4f} << 1) around the ({p},{q}) knot:
+    ⟨θ²⟩ = ⟨κ²⟩/2 = {nc['theta2_avg']:.4e} /m²
+    ⟨σ²⟩ = ⟨κ²⟩/2 = {nc['sigma2_avg']:.4e} /m²
+    ⟨ω²⟩ = q²/(p²R²) = {nc['omega2_avg']:.4e} /m²
+
+    LHS (focusing) = {nc['LHS']:.4e} /m²
+    RHS (defocusing) = {nc['RHS']:.4e} /m²
+    Ratio = {nc['balance_ratio']:.4f}
+
+  The congruence is {'' if nc['net_focusing'] else 'NOT '}FOCUSING (ratio {'>' if nc['net_focusing'] else '<'} 1).
+  For (p,q) = ({p},{q}): ratio = 3p²/q² / 4 = {3*p**2/(4*q**2):.1f}
+
+  → Expansion + shear overpower twist by {nc['balance_ratio']:.0f}:1
+  → The null congruence WANTS to collapse (net focusing)
+  → Something must prevent this — the tube boundary itself.
+
+  CRITICAL: The Raychaudhuri balance depends on p,q (topology)
+  but NOT on r/R at leading order (correction ~ (rκ)² = {nc['rk_correction']:.2e}).
+  → Minkowski null geometry constrains WINDING NUMBERS, not tube radius.
+""")
+
+    # ─── Part B: Magnetic flux ───
+    print("  ── B) MAGNETIC FLUX STRUCTURE ──")
+
+    mf = compute_magnetic_flux_analysis(R_cf, r_cf, p, q)
+
+    print(f"""
+  The ({p},{q}) knot carries current I = ec/L = {mf['I']:.2f} A.
+  Two independent magnetic circuits:
+
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  POLOIDAL FLUX (through tube πr², from p toroidal windings)      │
+  │                                                                   │
+  │  B_pol = μ₀pI/(2πR) = {mf['B_pol']:.4e} T                      │
+  │  Φ_pol = μ₀pIr²/(2R) = {mf['Phi_pol']:.4e} Wb                  │
+  │  Φ_pol / (h/e)  = {mf['Phi_pol_over_Phi0']:.6e}                 │
+  │                                                                   │
+  │  ANALYTIC RESULT: at r = αR,                                     │
+  │    Φ_pol / (h/e) = α³/(2π) = {mf['phi_pol_analytic']:.6e}  ✓   │
+  │    (verified numerically to {mf['phi_pol_match_pct']:.2f}%)                      │
+  │                                                                   │
+  │  The poloidal flux is α³/(2π) ≈ 6.2 × 10⁻⁸ flux quanta —       │
+  │  deeply sub-quantum. Flux quantization cannot fix r at this scale.│
+  ├───────────────────────────────────────────────────────────────────┤
+  │  TOROIDAL FLUX (through torus hole, from Neumann inductance)     │
+  │                                                                   │
+  │  Φ_total = LI = {mf['Phi_total']:.4e} Wb                        │
+  │  Φ_total / (h/e)  = {mf['Phi_total_over_Phi0']:.6e}             │
+  │  Φ_total / (h/2e) = {mf['Phi_total_over_Phi0']*2:.6e}          │
+  │                                                                   │
+  │  Also sub-quantum but closer: ~0.6% of h/e.                     │
+  ├───────────────────────────────────────────────────────────────────┤
+  │  AHARONOV-BOHM PHASE                                             │
+  │                                                                   │
+  │  Δφ_AB = 2π Φ/Φ₀ = {mf['AB_phase']:.4f} rad ({mf['AB_phase']/np.pi:.4f}π)         │
+  │  Tiny — no Aharonov-Bohm quantization condition active.          │
+  └───────────────────────────────────────────────────────────────────┘
+
+  What tube radius r gives Φ_pol = n × (h/e)?
+""")
+
+    for label, nice in [('Phi_0', 'n = 1'),
+                         ('alpha_Phi_0', 'n = α'),
+                         ('alpha2_Phi_0', 'n = α²'),
+                         ('alpha3_Phi_0', 'n = α³')]:
+        fr = mf['flux_radii'][label]
+        print(f"    {nice:12s}: r/R = {fr['r_over_R']:.4f}"
+              f"  r = {fr['r_over_lambda_C']:.4f} ƛ_C"
+              f"  {'← MATCH' if abs(fr['r_over_R'] - alpha)/alpha < 0.5 else ''}")
+
+    print(f"""
+  None of the simple flux quantization conditions give r/R ≈ α.
+  The result Φ_pol/(h/e) = α³/(2π) is EXACT (analytic), showing that
+  the poloidal flux is a CONSEQUENCE of r/R = α, not its cause.
+
+  ═══════════════════════════════════════════════════════════════
+  SYNTHESIS: WHAT FIXES r/R = α?
+
+  From the analyses in Sections 13-16:
+
+  1. STABILITY (Sec 13): E(R) is monotonically decreasing at fixed
+     r/R = α. The crossing E = m_e is stable (self-correcting).
+     But there is no minimum — R is set by mass-shell, not a well.
+
+  2. SELF-SIMILARITY (Sec 14): At fixed r/R, ALL energy terms scale
+     as R⁻¹. No minimum is possible without a fixed length scale.
+
+  3. SURFACE TENSION (Sec 15): E_conf ~ 1/r (repulsive) vs U_σ ~ r
+     (attractive) CAN create a minimum in r, but the required σ is
+     ~900× σ_Schwinger. No known QED mechanism provides this.
+
+  4. NULL GEOMETRY (Sec 16A): Raychaudhuri constrains p,q topology
+     but not r/R (correction is O(α²) ~ 5×10⁻⁵).
+
+  5. MAGNETIC FLUX (Sec 16B): Φ_pol/(h/e) = α³/(2π) — deeply
+     sub-quantum. Flux quantization is not active.
+
+  OPEN QUESTION: r/R = α may be set by:
+  • The topology of the null surface (global, not local geometry)
+  • Quantization of angular momentum: L = ℏ/2 → R = ƛ_C/2 (97.6% match)
+  • The EH vacuum matching condition across the tube boundary
+    (Israel junction + dielectric matching simultaneously)
+  • A variational principle we haven't yet identified
+  ═══════════════════════════════════════════════════════════════
+""")
 
     print("=" * 70)
