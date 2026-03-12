@@ -1263,6 +1263,256 @@ def compute_centrifugal_total_energy(R, r, p=2, q=1, N_knot=500):
 
 
 # ════════════════════════════════════════════════════════════════════
+# Step 7d: Surface tension and the 2D energy landscape
+# ════════════════════════════════════════════════════════════════════
+
+def compute_surface_tension_energy(R, r, p=2, q=1):
+    """
+    Surface tension energy of the null worldtube torus.
+
+    The worldtube boundary separates the nonlinear EH vacuum (inside)
+    from the perturbative vacuum (outside). This discontinuity in the
+    vacuum state has an energy cost proportional to surface area —
+    the surface tension σ.
+
+    For the torus, the surface area is A = 4π²Rr (for a (1,1) torus;
+    for (p,q) knots, the relevant area is the tube surface, not the
+    knot itself).
+
+    The surface tension σ can be estimated from:
+    1. Young-Laplace balance: σ = P_rad × r (from orbit.py)
+    2. EH vacuum energy discontinuity: σ = Δu × ℓ, where Δu is the
+       difference in vacuum energy density and ℓ is the boundary thickness
+    3. Dimensional analysis: σ ~ α × ℏc / r² (QED surface energy)
+
+    Here we use approach 2: the EH vacuum energy density at the tube
+    surface is u_EH = (2α²/45)(E/E_S)² × ε₀E²/2. The boundary layer
+    has thickness ~ ƛ_C (Compton wavelength, the scale over which the
+    nonlinear vacuum transitions to perturbative).
+
+    But more physically: the surface tension is the WORK per unit area
+    to create the interface. For a QED vacuum boundary where the
+    dielectric constant jumps from ε_eff to ε₀, this is:
+
+        σ = ∫ (ε_eff(z) - ε₀) E²/2 dz ≈ Δε × E² × ℓ_boundary / 2
+
+    Parameters
+    ----------
+    R, r : float
+        Torus major and minor radii (m).
+    p, q : int
+        Winding numbers.
+
+    Returns
+    -------
+    dict with surface tension estimates, energies, and scaling.
+    """
+    # Torus surface area
+    A_torus = 4.0 * np.pi**2 * R * r
+
+    # Method 1: Young-Laplace derived σ
+    # From orbit.py: σ_eff = P_rad × r, where P_rad = u_EM = U_EM / V_tube
+    # U_EM at the self-consistent point scales as ~ α × ℏc / R
+    # V_tube = 2π²Rr²
+    # P_rad = U_EM / V_tube ~ α ℏc / (R × 2π²Rr²) = α ℏc / (2π²R²r²)
+    # σ_YL = P_rad × r = α ℏc / (2π²R²r)
+    # At r = αR: σ_YL = ℏc / (2π²R²) (independent of α to leading order!)
+    sigma_YL = alpha * hbar * c / (2.0 * np.pi**2 * R**2 * r)
+    # Corrected: use the actual Neumann self-energy for the pressure
+    # U_self ~ μ₀/(4π) × (e²c²/(4π²R²)) × R × ln(8R/r)
+    # But let's just compute it directly from the fields
+    V_tube = 2.0 * np.pi**2 * R * r**2
+    I = e_charge * c / (2.0 * np.pi * R * p)  # current for (p,q) winding
+    L_Neumann = mu0 * R * (np.log(8*R/r) - 2)
+    U_mag = 0.5 * L_Neumann * I**2
+    U_EM = 2.0 * U_mag  # E + B at v = c
+    u_EM = U_EM / V_tube
+    P_rad = u_EM  # radiation pressure (1D photon gas)
+    sigma_from_balance = P_rad * r
+
+    # Method 2: EH vacuum energy discontinuity
+    # At the tube surface, E ≈ k_e × e / r²
+    E_surface = k_e * e_charge / r**2
+    x_surf = E_surface / E_Schwinger
+    # EH dielectric shift: δε/ε₀ = (8α²/45)(E/E_S)² for weak field
+    # For strong field: use our compute_eh_effective_response
+    eh = compute_eh_effective_response(E_surface)
+    eps_eff_scalar = float(np.asarray(eh['eps_eff']).ravel()[0])
+    delta_eps = (eps_eff_scalar - eps0)
+    # Boundary thickness: the field drops from E_surface at r to ~ 0 over
+    # a distance of order r (the tube radius). The interface width is ~ r.
+    ell_boundary = r
+    sigma_EH = 0.5 * delta_eps * E_surface**2 * ell_boundary
+
+    # Method 3: Dimensional — QED surface tension
+    # The only QED scale for surface tension: σ ~ α × ℏc / r²
+    # (energy per area, with the fine structure constant as coupling)
+    sigma_QED = alpha * hbar * c / r**2
+
+    # Surface tension energies
+    U_YL = sigma_from_balance * A_torus
+    U_EH = sigma_EH * A_torus
+    U_QED = sigma_QED * A_torus
+
+    # Scaling analysis:
+    # U_σ = σ × 4π²Rr
+    # Method 1: σ_YL ~ 1/(R²r), so U_YL ~ 4π² × Rr/(R²r) = 4π²/R ~ R⁻¹ (no!)
+    # Method 2: σ_EH ~ δε × E² × r ~ (E/E_S)² × ε₀E² × r
+    #           E ~ 1/r², so σ_EH ~ ε₀/r⁴ × r³ × r = ε₀  ... wait
+    #           Need to be more careful with the scaling.
+    # Method 3: σ_QED ~ α ℏc / r², so U_QED ~ αℏc × Rr/r² = αℏc × R/r
+    #           At r = αR: U_QED ~ ℏc/R × R/αR = ℏc/(αR) ~ R⁻¹ (same!)
+    #           At r ≠ αR: U_QED ~ αℏcR/r — R-linear at fixed r!
+
+    # The KEY: surface tension can break R⁻¹ only if σ is NOT
+    # derived self-consistently from the torus fields (which scale with R).
+    # If σ comes from a FIXED external scale, then U_σ ~ R² for fixed r/R.
+    #
+    # Physical candidates for fixed σ:
+    # - Schwinger critical field: σ_Schwinger = ε₀ E_S² × ℓ_C
+    #   This is a property of the vacuum, not the torus.
+    sigma_Schwinger = eps0 * E_Schwinger**2 * lambda_C
+    U_Schwinger = sigma_Schwinger * A_torus
+
+    return {
+        # Surface tensions (N/m)
+        'sigma_YL': sigma_from_balance,
+        'sigma_EH': sigma_EH,
+        'sigma_QED': sigma_QED,
+        'sigma_Schwinger': sigma_Schwinger,
+        # Energies (J)
+        'U_YL_J': U_YL,
+        'U_EH_J': U_EH,
+        'U_QED_J': U_QED,
+        'U_Schwinger_J': U_Schwinger,
+        # In MeV
+        'U_YL_MeV': U_YL / MeV,
+        'U_EH_MeV': U_EH / MeV,
+        'U_QED_MeV': U_QED / MeV,
+        'U_Schwinger_MeV': U_Schwinger / MeV,
+        # Surface area
+        'A_torus': A_torus,
+        # Pressures
+        'P_rad': P_rad,
+        'u_EM': u_EM,
+        # EH parameters
+        'E_surface': E_surface,
+        'x_surface': x_surf,
+        'delta_eps_over_eps0': delta_eps / eps0,
+        # Scaling exponents at fixed r/R
+        # U = σ × 4π²Rr; if σ(R,r) = σ₀ × R^a × r^b, then U ~ R^(1+a) × r^(1+b)
+        # at r = αR: U ~ R^(2+a+b)
+    }
+
+
+def compute_tube_radius_equilibrium(R, p=2, q=1, N_r=50):
+    """
+    Scan tube radius r at fixed R to find equilibrium with surface tension.
+
+    E(r) = E_circ_eff(R,r) + E_conf(r) + U_self(R,r) + U_drag(R,r) + U_σ(R,r)
+
+    E_conf ~ 1/r (repulsive at small r) and U_σ ~ r (attractive, squeezing tube).
+    Competition between these creates a minimum in r.
+
+    We try several surface tension models to see which one (if any)
+    gives an equilibrium at r/R ≈ α.
+
+    Returns results for each σ model.
+    """
+    j01 = 2.4048
+
+    r_min = 0.0001 * R   # r/R = 0.0001
+    r_max = 0.3 * R      # r/R = 0.3
+    r_grid = np.geomspace(r_min, r_max, N_r)
+
+    # Pre-compute surface tensions that are constant
+    sigma_S = eps0 * E_Schwinger**2 * lambda_C
+
+    results = {}
+
+    for sigma_label, sigma_fn in [
+        ('Schwinger', lambda rv: sigma_S),
+        ('EH_boundary', lambda rv: None),  # computed per-r
+        ('fit_to_alpha', lambda rv: None),  # reverse-engineer the σ needed
+    ]:
+        E_total = np.full(N_r, np.nan)
+        E_circ_arr = np.full(N_r, np.nan)
+        E_conf_arr = np.full(N_r, np.nan)
+        U_self_arr = np.full(N_r, np.nan)
+        U_drag_arr = np.full(N_r, np.nan)
+        U_sigma_arr = np.full(N_r, np.nan)
+
+        for j, rv in enumerate(r_grid):
+            try:
+                base = compute_knot_total_energy(R, rv, p, q, N_knot=200)
+                E_conf = hbar * c * j01 / rv
+
+                A = 4.0 * np.pi**2 * R * rv
+
+                if sigma_label == 'Schwinger':
+                    sigma = sigma_S
+                elif sigma_label == 'EH_boundary':
+                    # Self-consistent: σ from EH dielectric at tube surface
+                    E_surf = k_e * e_charge / rv**2
+                    eh = compute_eh_effective_response(E_surf)
+                    eps_eff = float(np.asarray(eh['eps_eff']).ravel()[0])
+                    delta_eps = eps_eff - eps0
+                    sigma = 0.5 * delta_eps * E_surf**2 * rv
+                elif sigma_label == 'fit_to_alpha':
+                    # σ chosen so that the minimum is at r = αR
+                    # At equilibrium: dE_conf/dr + dU_σ/dr = 0
+                    # -ℏc j₀₁/r² + σ × 4π²R = 0
+                    # σ = ℏc j₀₁ / (4π²R r²) evaluated at r = αR
+                    r_target = alpha * R
+                    sigma = hbar * c * j01 / (4.0 * np.pi**2 * R * r_target**2)
+
+                U_sigma = sigma * A
+
+                E_circ_arr[j] = base['E_circ_eff_MeV']
+                E_conf_arr[j] = E_conf / MeV
+                U_self_arr[j] = base['U_self_screened_MeV']
+                U_drag_arr[j] = base['U_drag_MeV']
+                U_sigma_arr[j] = U_sigma / MeV
+
+                E_total[j] = base['E_total_MeV'] + E_conf / MeV + U_sigma / MeV
+            except Exception:
+                continue
+
+        # Find minimum
+        valid = ~np.isnan(E_total)
+        if np.any(valid):
+            min_j = np.nanargmin(E_total)
+            is_interior = 0 < min_j < N_r - 1
+        else:
+            min_j = 0
+            is_interior = False
+
+        results[sigma_label] = {
+            'r_grid': r_grid,
+            'E_total': E_total,
+            'E_circ': E_circ_arr,
+            'E_conf': E_conf_arr,
+            'U_self': U_self_arr,
+            'U_drag': U_drag_arr,
+            'U_sigma': U_sigma_arr,
+            'min_j': min_j,
+            'r_min': r_grid[min_j],
+            'E_min': E_total[min_j],
+            'is_interior': is_interior,
+        }
+
+    # Also compute what σ is needed for equilibrium at r = αR
+    r_target = alpha * R
+    sigma_needed = hbar * c * j01 / (4.0 * np.pi**2 * R * r_target**2)
+
+    results['sigma_needed'] = sigma_needed
+    results['sigma_Schwinger'] = sigma_S
+    results['R'] = R
+
+    return results
+
+
+# ════════════════════════════════════════════════════════════════════
 # Step 7b: Effective viscosity of the QED vacuum
 # ════════════════════════════════════════════════════════════════════
 
@@ -3302,35 +3552,154 @@ def print_gordon_metric_analysis():
               f"  {E_circ_2d[i,j_r]:8.4f}  {E_conf_2d[i,j_r]:8.4f}"
               f"  {U_self_2d[i,j_r]:10.6f}  {E_2d[i,j_r]:8.4f}")
 
-    # Fixed length scale discussion
     print(f"""
-  ═══════════════════════════════════════════════════════════════
-  THE FIXED LENGTH SCALE
+  CONCLUSION: At fixed r/R = α, E(R) ~ 1/R everywhere — no minimum.
+  The size is SET by E = m_e (mass-shell), not by a potential well.
 
-  For a true minimum in E(R) at fixed r/R = α, we need a term
-  that does NOT scale as R⁻¹. Candidates:
-
-  1. ƛ_C = ℏ/(m_e c) — but this IS m_e, so it's circular.
-
-  2. r_e = α × ƛ_C — the classical electron radius, set by α.
-     This is already encoded in the self-energy: U_self ~ e²/R.
-
-  3. The Schwinger length √(ℏc/eE_S) = √(r_e × ƛ_C) = α^(1/2) ƛ_C
-     This enters through the EH nonlinearity, which we already include.
-
-  4. The Bohr radius a₀ = ƛ_C / α — but this is too large.
-
-  The issue is that ALL these scales are multiples of R itself
-  (since R ≈ ƛ_C/2). The torus IS the Compton wavelength.
-
-  CONCLUSION: At fixed r/R = α, the 1D energy E(R) has no minimum
-  because the system is scale-invariant. The size is SET by
-  E_total = m_e (mass-shell condition), not by a potential minimum.
-
-  But in the 2D landscape E(R, r), confinement energy E_conf ~ 1/r
-  provides an independent axis. If a minimum exists there, the
-  RATIO r/R is dynamically determined, not assumed.
-  ═══════════════════════════════════════════════════════════════
+  But the 2D landscape E(R, r) has independent axes. What's missing
+  is a term that grows with r to prevent tube expansion. The natural
+  candidate: SURFACE TENSION of the null worldtube boundary.
 """)
+
+    # ════════════════════════════════════════════════════════════════
+    # SECTION 15: Surface Tension and the Full 2D Landscape
+    # ════════════════════════════════════════════════════════════════
+    print()
+    print("  ╔══════════════════════════════════════════════════════════════════╗")
+    print("  ║  SECTION 15: SURFACE TENSION — WHAT CONFINES THE TUBE?         ║")
+    print("  ╚══════════════════════════════════════════════════════════════════╝")
+
+    st = compute_surface_tension_energy(R_cf, r_cf, p, q)
+
+    print(f"""
+  The worldtube boundary separates the nonlinear EH vacuum (inside)
+  from the perturbative vacuum (outside). Maintaining this interface
+  costs energy — surface tension σ.
+
+  At the tube surface (r = {r_cf*1e15:.3f} fm):
+    E_surface = {st['E_surface']:.4e} V/m  ({st['x_surface']:.1f} × E_Schwinger)
+    δε/ε₀ = {st['delta_eps_over_eps0']:.4f}  (dielectric shift)
+
+  Four estimates of σ:
+
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  Method                    σ (N/m)       U_σ (MeV)  Scaling     │
+  │                                                                   │
+  │  1. Young-Laplace:     {st['sigma_YL']:12.4e}  {st['U_YL_MeV']:10.4f}   ~R⁻¹     │
+  │     σ = P_rad × r (force balance at tube surface)               │
+  │                                                                   │
+  │  2. EH boundary layer: {st['sigma_EH']:12.4e}  {st['U_EH_MeV']:10.4f}   ~R⁻¹     │
+  │     σ = ½ δε E² × r (dielectric mismatch × width)              │
+  │                                                                   │
+  │  3. QED dimensional:   {st['sigma_QED']:12.4e}  {st['U_QED_MeV']:10.4f}   ~R⁻¹     │
+  │     σ = αℏc/r² (fine structure × quantum surface energy)        │
+  │                                                                   │
+  │  4. Schwinger vacuum:  {st['sigma_Schwinger']:12.4e}  {st['U_Schwinger_MeV']:10.4f}   ~R²      │
+  │     σ = ε₀E_S²ƛ_C (vacuum property, independent of torus)      │
+  └───────────────────────────────────────────────────────────────────┘
+
+  Methods 1-3 derive σ from the torus fields → σ scales with the torus
+  → U_σ ~ R⁻¹ (self-similar, no minimum).
+
+  Method 4 uses a FIXED vacuum property: σ_Schwinger = ε₀ E_S² ƛ_C.
+  This is the energy per area to maintain a critical-field boundary
+  against the QED vacuum. It does NOT scale with R.
+
+  U_Schwinger = σ_S × 4π²Rr = σ_S × 4π²αR²  at r = αR
+  → scales as R²  → GROWS with R → creates confining potential!
+""")
+
+    # Tube radius equilibrium scan
+    print("  Scanning E(r) at fixed R to find tube equilibrium...")
+    print("  E = E_circ_eff + E_conf + U_self + U_drag + U_σ")
+    print()
+
+    tube_eq = compute_tube_radius_equilibrium(R_cf, p=p, q=q, N_r=40)
+
+    # Show results for each surface tension model
+    for sigma_label, nice_name, explain in [
+        ('Schwinger', 'σ = ε₀E_S²ƛ_C (vacuum)',
+         'Fixed vacuum property — does NOT depend on torus fields'),
+        ('EH_boundary', 'σ = ½δε E² r (EH boundary)',
+         'Self-consistent dielectric mismatch at tube surface'),
+        ('fit_to_alpha', 'σ tuned for r/R = α',
+         'Reverse-engineered: what σ gives equilibrium at r = αR?'),
+    ]:
+        res = tube_eq[sigma_label]
+        r_g = res['r_grid']
+        min_j = res['min_j']
+        r_eq = res['r_min']
+        E_eq = res['E_min']
+
+        print(f"  ── {nice_name} ──")
+        print(f"  {explain}")
+
+        if res['is_interior']:
+            print(f"  ★ EQUILIBRIUM FOUND at r = {r_eq/lambda_C:.5f} ƛ_C"
+                  f"  (r/R = {r_eq/R_cf:.6f})")
+            print(f"    E_min = {E_eq:.4f} MeV")
+        else:
+            if min_j == 0:
+                print(f"  No minimum — tube collapses (σ too strong)")
+            else:
+                print(f"  No minimum — tube expands indefinitely (σ too weak)")
+
+        # Show a few points around the minimum/boundary
+        indices = np.linspace(0, len(r_g)-1, 12, dtype=int)
+        print(f"    {'r/R':>10s}  {'E_conf':>8s}  {'U_σ':>8s}  {'E_total':>9s}")
+        for j in indices:
+            if np.isnan(res['E_total'][j]):
+                continue
+            marker = " ◄" if j == min_j else ""
+            print(f"    {r_g[j]/R_cf:10.6f}  {res['E_conf'][j]:8.3f}"
+                  f"  {res['U_sigma'][j]:8.4f}  {res['E_total'][j]:9.4f}{marker}")
+        print()
+
+    # The key result: what σ is needed?
+    sigma_needed = tube_eq['sigma_needed']
+    sigma_S = tube_eq['sigma_Schwinger']
+    ratio_to_S = sigma_needed / sigma_S
+
+    print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  WHAT SURFACE TENSION REPRODUCES r/R = α?                        │
+  │                                                                   │
+  │  At equilibrium: dE_conf/dr + dU_σ/dr = 0                       │
+  │  → -ℏc j₀₁/r² + σ × 4π²R = 0                                   │
+  │  → σ_needed = ℏc j₀₁/(4π²Rr²)                                  │
+  │                                                                   │
+  │  At r = αR = {r_cf*1e15:.3f} fm:                                       │
+  │     σ_needed    = {sigma_needed:.4e} N/m                         │
+  │     σ_Schwinger = {sigma_S:.4e} N/m                         │
+  │     σ_EH_bdry   = {st['sigma_EH']:.4e} N/m                         │
+  │                                                                   │
+  │     σ_needed / σ_Schwinger = {ratio_to_S:.1f}                          │
+  │     σ_needed / σ_EH       = {sigma_needed/st['sigma_EH']:.2f}                             │
+  └───────────────────────────────────────────────────────────────────┘
+""")
+
+    # Physical interpretation
+    u_needed = sigma_needed / r_cf  # equivalent volume energy density
+    u_Schwinger = eps0 * E_Schwinger**2 / 2
+    u_inside = st['P_rad']  # radiation pressure inside tube
+
+    print(f"  Physical interpretation of σ_needed:")
+    print(f"    Energy density equiv:   {u_needed:.4e} J/m³")
+    print(f"    u_Schwinger:            {u_Schwinger:.4e} J/m³")
+    print(f"    u_radiation (inside):   {u_inside:.4e} J/m³")
+    print(f"    σ_needed/σ_Schwinger:   {ratio_to_S:.1f}")
+    print(f"    u_needed/u_radiation:   {u_needed/u_inside:.1f}")
+    print()
+
+    # Can the EH boundary tension do it?
+    res_EH = tube_eq['EH_boundary']
+    if res_EH['is_interior']:
+        r_EH = res_EH['r_min']
+        print(f"  ★ The EH boundary tension DOES create an equilibrium!")
+        print(f"    r_eq/R = {r_EH/R_cf:.6f}  (target: α = {alpha:.6f})")
+        print(f"    Match: {abs(r_EH/R_cf - alpha)/alpha*100:.1f}%")
+    else:
+        print(f"  The EH boundary tension is {'too strong' if res_EH['min_j'] == 0 else 'too weak'}"
+              f" for equilibrium at this R.")
 
     print("=" * 70)
