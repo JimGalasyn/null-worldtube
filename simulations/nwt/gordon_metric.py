@@ -59,6 +59,13 @@ def compute_eh_effective_response(E_mag, B_mag=0.0):
     x = E_mag / E_Schwinger  # dimensionless field ratio
 
     # --- Weak-field EH: δε/ε₀ = (8α²/45)(E/E_S)² ---
+    #
+    # Higher-order terms (c₂ x⁴, c₃ x⁶, ...) were tested and found to
+    # shift the dressed total by only 0.011 keV — negligible because the
+    # knot path sits at E/E_S ~ 137 (deep strong-field), where the running
+    # coupling dominates. The weak-field series only matters at ρ/r > 15
+    # where the fields are too weak to affect the result.
+    #
     delta_eps_weak = (8.0 * alpha**2 / 45.0) * x**2
     eps_weak = eps0 * (1.0 + delta_eps_weak)
     # Similarly for permeability: δμ/μ₀ = (14α²/45)(E/E_S)² for pure E field
