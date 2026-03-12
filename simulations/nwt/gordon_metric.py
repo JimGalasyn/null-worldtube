@@ -979,6 +979,290 @@ def compute_stability_analysis(R_sc, p=2, q=1, r_ratio=None, N_knot=500,
 
 
 # ════════════════════════════════════════════════════════════════════
+# Step 7c: Centrifugal energy from path curvature
+# ════════════════════════════════════════════════════════════════════
+
+def compute_knot_curvature(R, r, p=2, q=1, N=2000):
+    """
+    Compute the curvature κ(s) of the (p,q) torus knot.
+
+    For a torus knot parametrized by λ:
+      r(λ) = ((R + r cos(qλ)) cos(pλ), (R + r cos(qλ)) sin(pλ), r sin(qλ))
+
+    Curvature: κ = |r'' × r'| / |r'|³  (Frenet formula)
+
+    Returns
+    -------
+    dict with:
+        kappa : ndarray, curvature at each point (1/m)
+        rho_curv : ndarray, radius of curvature (m)
+        kappa_avg : float, path-averaged curvature
+        kappa_max, kappa_min : float
+        rho_curv_min : float, minimum radius of curvature (tightest bend)
+        ds : ndarray, arc length element
+    """
+    params = TorusParams(R=R, r=r, p=p, q=q)
+    lam, xyz, dxyz, ds_dlam = torus_knot_curve(params, N)
+    dlam = lam[1] - lam[0]
+
+    # Second derivative d²r/dλ² by finite differences
+    d2xyz = np.zeros_like(xyz)
+    d2xyz[1:-1] = (dxyz[2:] - dxyz[:-2]) / (2 * dlam)
+    d2xyz[0] = (dxyz[1] - dxyz[-1]) / (2 * dlam)
+    d2xyz[-1] = (dxyz[0] - dxyz[-2]) / (2 * dlam)
+
+    # Curvature: κ = |r' × r''| / |r'|³
+    cross = np.cross(dxyz, d2xyz)
+    cross_mag = np.sqrt(np.sum(cross**2, axis=-1))
+    kappa = cross_mag / ds_dlam**3
+
+    rho_curv = 1.0 / np.maximum(kappa, 1e-50)
+
+    # Arc length element ds = |dr/dλ| dλ
+    ds = ds_dlam * dlam
+    L_total = np.sum(ds)
+
+    # Path-averaged curvature
+    kappa_avg = np.sum(kappa * ds) / L_total
+
+    return {
+        'kappa': kappa,
+        'rho_curv': rho_curv,
+        'kappa_avg': kappa_avg,
+        'kappa_max': np.max(kappa),
+        'kappa_min': np.min(kappa),
+        'rho_curv_min': np.min(rho_curv),
+        'rho_curv_max': np.max(rho_curv),
+        'ds': ds,
+        'L_total': L_total,
+        'N': N,
+    }
+
+
+def compute_centrifugal_energy(R, r, p=2, q=1, N=2000):
+    """
+    Centrifugal energy of a photon confined to the (p,q) torus knot.
+
+    A photon with energy E circulating on a curved path experiences
+    centrifugal acceleration a_c = c²/ρ_curv at each point. This
+    creates an effective outward pressure on the tube wall.
+
+    The centrifugal potential energy comes from the curvature coupling
+    in the wave equation for a mode confined to a curved waveguide.
+    For a massless scalar field on a curve with curvature κ(s), the
+    effective potential is:
+
+        V_curv(s) = -(ℏ²/2m) × κ²(s)/4    (for massive particle)
+
+    For a photon (conformal coupling), the curvature correction to
+    the mode energy is:
+
+        δE_curv = (ℏc/2) × ⟨κ²⟩ × A_tube
+
+    where A_tube = πr² is the tube cross-section area and ⟨κ²⟩ is
+    the path-averaged square curvature. This comes from the transverse
+    zero-point energy of the mode being modified by the curvature:
+    the inner wall is closer to the center of curvature (blue-shifted)
+    and the outer wall is farther (red-shifted), and the asymmetry
+    doesn't cancel because E ~ 1/ρ is concave.
+
+    More precisely, for a waveguide of cross-section radius a bent
+    with curvature κ, the frequency shift of the fundamental mode is:
+
+        δω/ω ≈ -(κa)²/4  (to leading order)
+
+    This LOWERS the frequency (red-shift from path lengthening on the
+    outside dominating). But the CONFINEMENT energy — what keeps the
+    photon from escaping radially — is:
+
+        E_conf = ℏc × j₀₁ / r_tube
+
+    where j₀₁ ≈ 2.405 is the first zero of J₀ (TM₀₁ mode in a
+    circular waveguide). This scales as 1/r = 1/(αR) ∝ R⁻¹.
+
+    The centrifugal correction to confinement is the interaction
+    between curvature and confinement:
+
+        U_centrifugal = E_conf × ⟨(κ r)²⟩ / 4
+
+    This is POSITIVE (outward pressure) and scales as r²κ² × ℏc/r.
+    For the torus knot: κ ~ 1/R (toroidal) and κ ~ q²r/(R²) is
+    small, so the dominant term is:
+
+        U_cf ~ ℏc × r / R² × something
+
+    which at r = αR gives U_cf ~ ℏc α / R — same R⁻¹ scaling.
+    BUT the coefficient depends on the curvature VARIANCE, which
+    has a different R-dependence for the knot than for a circle.
+
+    Parameters
+    ----------
+    R, r : float
+        Torus radii (m).
+    p, q : int
+        Winding numbers.
+    N : int
+        Points on knot curve.
+
+    Returns
+    -------
+    dict with curvature statistics and centrifugal energies.
+    """
+    curv = compute_knot_curvature(R, r, p, q, N)
+    kappa = curv['kappa']
+    ds = curv['ds']
+    L = curv['L_total']
+
+    # Path averages
+    kappa_avg = curv['kappa_avg']
+    kappa2_avg = np.sum(kappa**2 * ds) / L  # ⟨κ²⟩
+    kappa_var = kappa2_avg - kappa_avg**2    # Var(κ)
+
+    # 1. Waveguide confinement energy (TM₀₁ mode)
+    # E_conf = ℏc × j₀₁ / r
+    j01 = 2.4048  # first zero of J₀
+    E_conf = hbar * c * j01 / r
+    E_conf_MeV = E_conf / MeV
+
+    # 2. Centrifugal correction to confinement
+    # δE_cf = E_conf × ⟨(κr)²⟩ / 4
+    # This is the leading curvature-confinement coupling
+    kr2_avg = kappa2_avg * r**2
+    U_cf_coupling = E_conf * kr2_avg / 4.0
+    U_cf_coupling_MeV = U_cf_coupling / MeV
+
+    # 3. Pure centrifugal energy: radiation pressure on the tube wall
+    # A photon of energy E_circ going around curvature κ exerts force
+    # F = E_circ × κ. Integrated over the cross-section asymmetry,
+    # the net outward energy is:
+    # U_cf_pressure = (E_circ / L) × ∫ κ(s) × r × ds = E_circ × r × ⟨κ⟩
+    # This is the work done inflating the tube by r against curvature.
+    E_circ = 2.0 * np.pi * hbar * c / L  # flat circulation energy
+    U_cf_pressure = E_circ * r * kappa_avg
+    U_cf_pressure_MeV = U_cf_pressure / MeV
+
+    # 4. Curvature-induced effective mass (geometric potential)
+    # For a quantum particle on a curve embedded in 3D, da Costa (1981)
+    # showed the effective potential is V_geom = -ℏ²κ²/(8m).
+    # For a photon, the analogous term from conformal coupling is:
+    # V_geom = -(ℏc) × κ / (4π) per unit length
+    # Integrated: U_geom = -(ℏc/4π) ∫ κ(s) ds = -(ℏc/4π) × ⟨κ⟩ × L
+    # = -(ℏc/4π) × (something of order 1/R) × (2πR × p × ...) ~ -ℏc×p/R
+    # Wait — this is NEGATIVE (attractive). Let's compute it both ways.
+
+    # da Costa geometric potential (attractive): V = -ℏ²κ²/(8m_eff)
+    # For photon: m_eff = E/(c²), so V = -ℏ²c²κ²/(8E) per point
+    # Integrated: U_daCosta = -(ℏ²c²/(8E_circ)) × ∫κ²ds = -(ℏ²c²/(8E_circ))×⟨κ²⟩×L
+    # = -(ℏc)²/(8×E_circ) × ⟨κ²⟩ × L
+    U_daCosta = -(hbar * c)**2 * kappa2_avg * L / (8.0 * E_circ)
+    U_daCosta_MeV = U_daCosta / MeV
+
+    # 5. Full centrifugal energy: outward pressure from all curvature
+    # The photon has momentum p = ℏω/c = E_circ/(c×L) per unit length.
+    # Centrifugal force per unit length: f_cf = p × v²/ρ = (E_circ/L) × κ
+    # This force acts OUTWARD, doing work against confinement.
+    # The total centrifugal energy stored in the tube inflation is:
+    # U_cf_total = ∫₀ᴸ (E_circ/L) × κ(s) × r ds = (E_circ × r / L) × ∫κ ds
+    # = E_circ × r × ⟨κ⟩
+    # (same as U_cf_pressure above)
+
+    # 6. Comparison of all terms
+    # The key question: which terms scale differently from R⁻¹?
+    # E_conf ~ 1/r = 1/(αR) ~ R⁻¹  (same scaling, won't help)
+    # U_cf_coupling ~ E_conf × (κr)² ~ (1/r) × (r/R)² = r/R² = α/R ~ R⁻¹ (same!)
+    # U_cf_pressure ~ (1/L) × r × (1/R) ~ r/R² = α/R ~ R⁻¹ (same again)
+    # U_daCosta ~ (1/E) × κ² × L ~ R × (1/R²) × R = R⁻¹ (same!)
+    #
+    # ALL centrifugal terms scale as R⁻¹ when r = αR. This is because
+    # the constraint r/R = α makes the torus self-similar under scaling.
+    # To break the R⁻¹ scaling, we need physics that introduces a FIXED
+    # length scale (not proportional to R).
+
+    return {
+        # Curvature statistics
+        'kappa_avg': kappa_avg,
+        'kappa_max': curv['kappa_max'],
+        'kappa_min': curv['kappa_min'],
+        'kappa2_avg': kappa2_avg,
+        'kappa_var': kappa_var,
+        'rho_curv_min': curv['rho_curv_min'],
+        'rho_curv_max': curv['rho_curv_max'],
+        'L_total': L,
+        # Dimensionless curvature parameters
+        'kappa_avg_R': kappa_avg * R,  # ⟨κ⟩R (= 1 for a circle)
+        'kr_rms': np.sqrt(kr2_avg),    # √⟨(κr)²⟩ (curvature × tube radius)
+        # Energy terms
+        'E_conf_MeV': E_conf_MeV,
+        'U_cf_coupling_MeV': U_cf_coupling_MeV,
+        'U_cf_pressure_MeV': U_cf_pressure_MeV,
+        'U_daCosta_MeV': U_daCosta_MeV,
+        'E_circ_flat_MeV': E_circ / MeV,
+        # For stability: all in Joules
+        'E_conf_J': E_conf,
+        'U_cf_coupling_J': U_cf_coupling,
+        'U_cf_pressure_J': U_cf_pressure,
+        'U_daCosta_J': U_daCosta,
+    }
+
+
+def compute_centrifugal_total_energy(R, r, p=2, q=1, N_knot=500):
+    """
+    Total energy including centrifugal terms.
+
+    E_total = E_circ_eff + U_self_knot_screened + U_drag + U_cf
+
+    where U_cf includes the waveguide confinement and curvature coupling.
+
+    Returns dict compatible with compute_knot_total_energy output format,
+    plus centrifugal components.
+    """
+    # Base budget (knot + Π)
+    base = compute_knot_total_energy(R, r, p, q, N_knot)
+
+    # Centrifugal terms
+    cf = compute_centrifugal_energy(R, r, p, q)
+
+    # The physically relevant centrifugal contribution:
+    # 1. Waveguide confinement (E_conf) is the transverse zero-point energy.
+    #    This is REAL energy that must be included in the total.
+    # 2. Curvature-confinement coupling (U_cf_coupling) modifies it.
+    # 3. da Costa geometric potential (attractive, lowers energy).
+    #
+    # However, E_conf is the full transverse confinement energy — it's what
+    # keeps the photon from spreading out radially. In the NWT model, the
+    # null worldtube surface provides this confinement. The question is
+    # whether this energy is ALREADY included in E_circ_eff.
+    #
+    # E_circ_eff = ℏω for the longitudinal mode. The transverse mode has
+    # its own energy E_conf = ℏc j₀₁/r. These are INDEPENDENT modes.
+    # Total energy of a confined photon = E_long + E_trans.
+    #
+    # So E_conf should be ADDED to the budget.
+    # The curvature corrections modify this.
+
+    U_cf_total = cf['E_conf_J'] + cf['U_cf_coupling_J'] + cf['U_daCosta_J']
+
+    E_total = base['E_total_J'] + U_cf_total
+    E_total_MeV = E_total / MeV
+
+    return {
+        **base,
+        'E_total_J': E_total,
+        'E_total_MeV': E_total_MeV,
+        'U_cf_total_J': U_cf_total,
+        'U_cf_total_MeV': U_cf_total / MeV,
+        'E_conf_MeV': cf['E_conf_MeV'],
+        'U_cf_coupling_MeV': cf['U_cf_coupling_MeV'],
+        'U_daCosta_MeV': cf['U_daCosta_MeV'],
+        'U_cf_pressure_MeV': cf['U_cf_pressure_MeV'],
+        'kappa_avg_R': cf['kappa_avg_R'],
+        'kr_rms': cf['kr_rms'],
+        'gap_from_me_keV': (E_total_MeV - m_e_MeV) * 1000,
+        'gap_pct': (E_total_MeV - m_e_MeV) / m_e_MeV * 100,
+    }
+
+
+# ════════════════════════════════════════════════════════════════════
 # Step 7b: Effective viscosity of the QED vacuum
 # ════════════════════════════════════════════════════════════════════
 
@@ -2841,6 +3125,212 @@ def print_gordon_metric_analysis():
   │                                                                   │
   │  Ratio |dE_circ/dR| : |dU_drag/dR| = {abs(stab['dEcirc_dR']/stab['dUdrag_dR']):.3f}               │
   └───────────────────────────────────────────────────────────────────┘
+""")
+
+    # ════════════════════════════════════════════════════════════════
+    # SECTION 14: Centrifugal Energy and Waveguide Confinement
+    # ════════════════════════════════════════════════════════════════
+    print()
+    print("  ╔══════════════════════════════════════════════════════════════════╗")
+    print("  ║  SECTION 14: CENTRIFUGAL ENERGY & WAVEGUIDE CONFINEMENT        ║")
+    print("  ╚══════════════════════════════════════════════════════════════════╝")
+
+    R_cf = R_sc if sol is not None else R
+    r_cf = alpha * R_cf
+
+    print(f"""
+  The torus tube is a curved waveguide. A photon confined to the tube
+  has TRANSVERSE zero-point energy from confinement (like a particle
+  in a cylindrical box), plus curvature corrections.
+
+  Key energies for a circular waveguide of radius r = {r_cf*1e15:.3f} fm:
+""")
+
+    cf = compute_centrifugal_energy(R_cf, r_cf, p, q)
+
+    print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  CURVATURE OF THE ({p},{q}) TORUS KNOT at R = {R_cf/lambda_C:.4f} ƛ_C        │
+  │                                                                   │
+  │  Path-averaged curvature:  ⟨κ⟩ = {cf['kappa_avg_R']/R_cf:.4e} /m               │
+  │  Dimensionless:            ⟨κ⟩R = {cf['kappa_avg_R']:.4f}                     │
+  │  Curvature range:          κ_min R = {cf['kappa_avg_R'] - np.sqrt(cf['kr_rms']**2*R_cf**2/r_cf**2 - cf['kappa_avg_R']**2) if cf['kr_rms']**2*R_cf**2/r_cf**2 > cf['kappa_avg_R']**2 else 0:.4f}                     │
+  │  Min radius of curvature:  ρ_min = {cf['rho_curv_min']*1e15:.2f} fm             │
+  │  Max radius of curvature:  ρ_max = {cf['rho_curv_max']*1e15:.2f} fm             │
+  │  √⟨(κr)²⟩ = {cf['kr_rms']:.6f}  (curvature × tube radius)       │
+  └───────────────────────────────────────────────────────────────────┘
+
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  CENTRIFUGAL ENERGY TERMS                                        │
+  │                                                                   │
+  │  1. Waveguide confinement (TM₀₁ mode):                          │
+  │     E_conf = ℏc × j₀₁ / r  = {cf['E_conf_MeV']:12.6f} MeV              │
+  │     (j₀₁ = 2.4048, first zero of J₀)                            │
+  │     E_conf / m_e            = {cf['E_conf_MeV']/m_e_MeV:12.2f}                  │
+  │                                                                   │
+  │  2. Curvature-confinement coupling:                               │
+  │     δE = E_conf × ⟨(κr)²⟩/4  = {cf['U_cf_coupling_MeV']:12.6f} MeV              │
+  │                                                                   │
+  │  3. Centrifugal pressure (radiation on walls):                    │
+  │     U_cf = E_circ × r × ⟨κ⟩  = {cf['U_cf_pressure_MeV']:12.6f} MeV              │
+  │                                                                   │
+  │  4. da Costa geometric potential (attractive):                    │
+  │     U_geom = -(ℏc)²⟨κ²⟩L/(8E) = {cf['U_daCosta_MeV']:12.6f} MeV              │
+  │                                                                   │
+  │  Net centrifugal: E_conf + coupling + da Costa                   │""")
+
+    U_cf_net = cf['E_conf_MeV'] + cf['U_cf_coupling_MeV'] + cf['U_daCosta_MeV']
+    print(f"  │     = {U_cf_net:12.6f} MeV  ({U_cf_net/m_e_MeV*100:.1f}% of m_e)              │")
+    print(f"  └───────────────────────────────────────────────────────────────────┘")
+
+    # The big question: scaling
+    print(f"""
+  SCALING ANALYSIS — does centrifugal energy break R⁻¹ universality?
+
+  At r = αR (fixed aspect ratio), all terms scale as:
+    E_conf = ℏc j₀₁/(αR) ~ R⁻¹
+    U_cf_coupling ~ (ℏc/r)(κr)² ~ (1/R)(r/R)² ~ α²/R ~ R⁻¹
+    U_daCosta ~ (ℏc)²κ²L/E ~ (ℏc)/R ~ R⁻¹
+
+  → ALL centrifugal terms scale as R⁻¹ at fixed r/R = α.
+  → They cannot create a minimum in E(R).
+
+  This is a consequence of SELF-SIMILARITY: when r/R is fixed,
+  the torus looks the same at every scale. The only way to get
+  a minimum is to introduce a FIXED length scale.
+""")
+
+    # Now the key insight: what if r is NOT slaved to R?
+    print(f"  ═══════════════════════════════════════════════════════════════")
+    print(f"  BREAKING SELF-SIMILARITY: 2D energy landscape E(R, r)")
+    print(f"  ═══════════════════════════════════════════════════════════════")
+
+    print(f"""
+  If r is an independent dynamical variable (not r = αR), then:
+    E_circ ~ 1/R  (longitudinal, depends mainly on R)
+    E_conf ~ 1/r  (transverse, depends mainly on r)
+    U_self ~ R × ln(R/r)  ... complex dependence on both
+    U_drag ~ 1/R
+
+  The confinement energy E_conf = ℏc j₀₁/r DIVERGES as r → 0,
+  while E_circ = 2πℏc/L(R) DIVERGES as R → 0.
+  These are INDEPENDENT repulsive walls in the (R, r) plane.
+
+  Scanning the 2D landscape...
+""")
+
+    # 2D scan: E(R, r) with both as free variables
+    N_R2d = 25
+    N_r2d = 25
+    R_2d = np.geomspace(0.1 * lambda_C, 2.0 * lambda_C, N_R2d)
+    r_2d = np.geomspace(0.001 * lambda_C, 0.05 * lambda_C, N_r2d)
+
+    E_2d = np.zeros((N_R2d, N_r2d))
+    E_circ_2d = np.zeros((N_R2d, N_r2d))
+    E_conf_2d = np.zeros((N_R2d, N_r2d))
+    U_self_2d = np.zeros((N_R2d, N_r2d))
+    U_drag_2d = np.zeros((N_R2d, N_r2d))
+
+    print("  Computing 2D energy surface (25×25 grid)...")
+    for i, Rv in enumerate(R_2d):
+        for j, rv in enumerate(r_2d):
+            if rv >= Rv:
+                E_2d[i, j] = np.nan
+                continue
+            try:
+                base = compute_knot_total_energy(Rv, rv, p, q, N_knot=200)
+                cf2 = compute_centrifugal_energy(Rv, rv, p, q, N=500)
+                E_circ_2d[i, j] = base['E_circ_eff_MeV']
+                U_self_2d[i, j] = base['U_self_screened_MeV']
+                U_drag_2d[i, j] = base['U_drag_MeV']
+                E_conf_2d[i, j] = cf2['E_conf_MeV']
+                E_2d[i, j] = base['E_total_MeV'] + cf2['E_conf_MeV'] + cf2['U_daCosta_MeV']
+            except Exception:
+                E_2d[i, j] = np.nan
+
+    # Find minimum
+    E_2d_masked = np.where(np.isnan(E_2d), np.inf, E_2d)
+    min_idx = np.unravel_index(np.argmin(E_2d_masked), E_2d.shape)
+    R_min_2d = R_2d[min_idx[0]]
+    r_min_2d = r_2d[min_idx[1]]
+    E_min_2d = E_2d[min_idx]
+
+    # Check if minimum is interior (not on boundary)
+    is_interior = (0 < min_idx[0] < N_R2d - 1) and (0 < min_idx[1] < N_r2d - 1)
+
+    print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  2D ENERGY LANDSCAPE E(R, r)                                     │
+  │                                                                   │
+  │  E_total = E_circ_eff + U_self_knot + U_drag + E_conf + U_geom  │
+  │                                                                   │
+  │  Grid minimum: R = {R_min_2d/lambda_C:.4f} ƛ_C, r = {r_min_2d/lambda_C:.5f} ƛ_C   │
+  │                r/R = {r_min_2d/R_min_2d:.6f}  (α = {alpha:.6f})             │
+  │                E_min = {E_min_2d:.6f} MeV                      │
+  │                Interior minimum: {'YES' if is_interior else 'NO (boundary)'}                    │
+  │                                                                   │""")
+
+    if is_interior:
+        # Show the energy components at the minimum
+        i0, j0 = min_idx
+        print(f"  │  At the minimum:                                              │")
+        print(f"  │     E_circ   = {E_circ_2d[i0,j0]:10.4f} MeV                         │")
+        print(f"  │     E_conf   = {E_conf_2d[i0,j0]:10.4f} MeV                         │")
+        print(f"  │     U_self   = {U_self_2d[i0,j0]:10.6f} MeV                         │")
+        print(f"  │     U_drag   = {U_drag_2d[i0,j0]:10.4f} MeV                         │")
+        print(f"  │     E/m_e    = {E_min_2d/m_e_MeV:10.4f}                              │")
+    print(f"  └───────────────────────────────────────────────────────────────────┘")
+
+    # Show slices at fixed R and fixed r
+    print(f"\n  Slice at R = {R_min_2d/lambda_C:.4f} ƛ_C (vary r):")
+    i_R = min_idx[0]
+    print(f"    {'r/ƛ_C':>10s}  {'r/R':>10s}  {'E_circ':>8s}  {'E_conf':>8s}  {'U_self':>10s}  {'E_total':>8s}")
+    for j in range(N_r2d):
+        if np.isnan(E_2d[i_R, j]):
+            continue
+        print(f"    {r_2d[j]/lambda_C:10.5f}  {r_2d[j]/R_2d[i_R]:10.6f}"
+              f"  {E_circ_2d[i_R,j]:8.4f}  {E_conf_2d[i_R,j]:8.4f}"
+              f"  {U_self_2d[i_R,j]:10.6f}  {E_2d[i_R,j]:8.4f}")
+
+    print(f"\n  Slice at r = {r_min_2d/lambda_C:.5f} ƛ_C (vary R):")
+    j_r = min_idx[1]
+    print(f"    {'R/ƛ_C':>10s}  {'r/R':>10s}  {'E_circ':>8s}  {'E_conf':>8s}  {'U_self':>10s}  {'E_total':>8s}")
+    for i in range(N_R2d):
+        if np.isnan(E_2d[i, j_r]):
+            continue
+        print(f"    {R_2d[i]/lambda_C:10.4f}  {r_2d[j_r]/R_2d[i]:10.6f}"
+              f"  {E_circ_2d[i,j_r]:8.4f}  {E_conf_2d[i,j_r]:8.4f}"
+              f"  {U_self_2d[i,j_r]:10.6f}  {E_2d[i,j_r]:8.4f}")
+
+    # Fixed length scale discussion
+    print(f"""
+  ═══════════════════════════════════════════════════════════════
+  THE FIXED LENGTH SCALE
+
+  For a true minimum in E(R) at fixed r/R = α, we need a term
+  that does NOT scale as R⁻¹. Candidates:
+
+  1. ƛ_C = ℏ/(m_e c) — but this IS m_e, so it's circular.
+
+  2. r_e = α × ƛ_C — the classical electron radius, set by α.
+     This is already encoded in the self-energy: U_self ~ e²/R.
+
+  3. The Schwinger length √(ℏc/eE_S) = √(r_e × ƛ_C) = α^(1/2) ƛ_C
+     This enters through the EH nonlinearity, which we already include.
+
+  4. The Bohr radius a₀ = ƛ_C / α — but this is too large.
+
+  The issue is that ALL these scales are multiples of R itself
+  (since R ≈ ƛ_C/2). The torus IS the Compton wavelength.
+
+  CONCLUSION: At fixed r/R = α, the 1D energy E(R) has no minimum
+  because the system is scale-invariant. The size is SET by
+  E_total = m_e (mass-shell condition), not by a potential minimum.
+
+  But in the 2D landscape E(R, r), confinement energy E_conf ~ 1/r
+  provides an independent axis. If a minimum exists there, the
+  RATIO r/R is dynamically determined, not assumed.
+  ═══════════════════════════════════════════════════════════════
 """)
 
     print("=" * 70)
