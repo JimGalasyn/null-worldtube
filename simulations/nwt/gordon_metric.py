@@ -1513,6 +1513,160 @@ def compute_tube_radius_equilibrium(R, p=2, q=1, N_r=50):
 
 
 # ════════════════════════════════════════════════════════════════════
+# Step 7f: Angular momentum quantization
+# ════════════════════════════════════════════════════════════════════
+
+def compute_angular_momentum_gordon(R, r, p=2, q=1, N_knot=500):
+    """
+    Angular momentum of the torus knot with Gordon metric energy.
+
+    L_z = (E_total/c) × R × G(r/R)
+
+    where G(r/R) is a geometric factor ≈ 1 for thin torus (r << R).
+    G accounts for the poloidal winding reducing L_z from the pure
+    circular orbit value.
+
+    Uses Gordon metric energy (knot + Π), not flat-space energy.
+
+    Returns dict with L_z, magnetic moment, g-factor.
+    """
+    # Gordon energy
+    gordon = compute_knot_total_energy(R, r, p, q, N_knot)
+    E_total = gordon['E_total_J']
+
+    # Geometric factor from the knot curve
+    # G = ⟨(x v̂_y - y v̂_x)/R⟩ weighted by arc length
+    params = TorusParams(R=R, r=r, p=p, q=q)
+    lam, xyz, dxyz, ds_dlam = torus_knot_curve(params, 2000)
+    dlam = lam[1] - lam[0]
+
+    x, y = xyz[:, 0], xyz[:, 1]
+    ds = ds_dlam * dlam
+    L_total = np.sum(ds)
+
+    # Unit tangent vector
+    vhat_x = dxyz[:, 0] / ds_dlam
+    vhat_y = dxyz[:, 1] / ds_dlam
+
+    # L_z integrand (per unit momentum): x v̂_y - y v̂_x
+    Lz_geom = x * vhat_y - y * vhat_x  # has units of length
+    G_times_R = np.sum(Lz_geom * ds) / L_total  # average
+    G = G_times_R / R  # dimensionless geometric factor
+
+    # Angular momentum
+    p_photon = E_total / c  # photon momentum
+    Lz = p_photon * G_times_R
+    Lz_over_hbar = Lz / hbar
+
+    # Magnetic moment: μ = p × I × πR²  (p-turn coil)
+    # I = ec / L_path
+    I_current = e_charge * c / L_total
+    mu_mag = p * I_current * np.pi * R**2
+
+    # Bohr magneton
+    mu_B = e_charge * hbar / (2.0 * m_e)
+
+    # g-factor: μ = g × (e/(2m_e)) × L_z  →  g = 2m_e μ/(e L_z)
+    g_factor = 2.0 * m_e * mu_mag / (e_charge * Lz) if Lz > 0 else 0.0
+
+    # Analytic g-factor for thin torus:
+    # μ = p × (ec/L) × πR², L_z = (E/c) × R, L ≈ 2πpR
+    # g = 2m_e × p × (ec/(2πpR)) × πR² / (e × (E/c) × R)
+    #   = 2πpR × m_e c² / (2πpR × E) = m_e c² / E = m_e / E
+    # At E = m_e: g = 1.  (classical orbital g-factor)
+    g_analytic = m_e * c**2 / E_total
+
+    return {
+        'E_total_MeV': gordon['E_total_MeV'],
+        'E_total_J': E_total,
+        'Lz': Lz,
+        'Lz_over_hbar': Lz_over_hbar,
+        'G': G,
+        'G_times_R': G_times_R,
+        'mu_mag': mu_mag,
+        'mu_over_muB': mu_mag / mu_B,
+        'g_factor': g_factor,
+        'g_analytic': g_analytic,
+        'I_current': I_current,
+        'L_path': L_total,
+        # Derived
+        'R_for_half_hbar': hbar * c / (2.0 * E_total),  # R where L_z = ℏ/2
+        'Lz_deviation_from_half': (Lz_over_hbar - 0.5) / 0.5 * 100,  # percent
+    }
+
+
+def find_angular_momentum_radius(p=2, q=1, r_ratio=None, N_knot=300):
+    """
+    Find R where L_z = ℏ/2 using the Gordon metric energy.
+
+    Since L_z ≈ E(R) × R / c and E(R) ≈ C/R, we have L_z ≈ C/c = const.
+    But the corrections from Gordon metric break exact 1/R scaling,
+    so there may be a unique R where L_z = exactly ℏ/2.
+
+    Returns dict with solution, or None.
+    """
+    if r_ratio is None:
+        r_ratio = alpha
+
+    def Lz_at_R(Rv):
+        rv = r_ratio * Rv
+        am = compute_angular_momentum_gordon(Rv, rv, p, q, N_knot)
+        return am['Lz_over_hbar']
+
+    # Scan to see if ℏ/2 crossing exists
+    # L_z is approximately constant (E×R ≈ const), but may drift
+    R_test = np.geomspace(0.1 * lambda_C, 5.0 * lambda_C, 20)
+    Lz_test = np.array([Lz_at_R(Rv) for Rv in R_test])
+
+    # Check if 0.5 is in the range
+    if np.all(Lz_test > 0.5) or np.all(Lz_test < 0.5):
+        # No crossing — L_z is always above or below ℏ/2
+        # Return the R closest to L_z = 0.5
+        idx = np.argmin(np.abs(Lz_test - 0.5))
+        Rv_best = R_test[idx]
+        rv_best = r_ratio * Rv_best
+        am_best = compute_angular_momentum_gordon(Rv_best, rv_best, p, q, N_knot)
+        return {
+            'R': Rv_best,
+            'r': rv_best,
+            'R_over_lambda_C': Rv_best / lambda_C,
+            'Lz_over_hbar': am_best['Lz_over_hbar'],
+            'E_total_MeV': am_best['E_total_MeV'],
+            'crossing_found': False,
+            'am': am_best,
+        }
+
+    # Bisection for L_z = 0.5
+    # L_z increases with R (since E×R increases slowly)
+    if Lz_test[0] < 0.5:
+        R_lo, R_hi = R_test[0], R_test[-1]
+    else:
+        R_lo, R_hi = R_test[-1], R_test[0]
+
+    for _ in range(40):
+        R_mid = (R_lo + R_hi) / 2.0
+        Lz_mid = Lz_at_R(R_mid)
+        if Lz_mid < 0.5:
+            R_lo = R_mid
+        else:
+            R_hi = R_mid
+
+    R_sol = (R_lo + R_hi) / 2.0
+    r_sol = r_ratio * R_sol
+    am_sol = compute_angular_momentum_gordon(R_sol, r_sol, p, q, N_knot)
+
+    return {
+        'R': R_sol,
+        'r': r_sol,
+        'R_over_lambda_C': R_sol / lambda_C,
+        'Lz_over_hbar': am_sol['Lz_over_hbar'],
+        'E_total_MeV': am_sol['E_total_MeV'],
+        'crossing_found': True,
+        'am': am_sol,
+    }
+
+
+# ════════════════════════════════════════════════════════════════════
 # Step 7e: Null congruence and magnetic flux analysis
 # ════════════════════════════════════════════════════════════════════
 
@@ -3960,6 +4114,139 @@ def print_gordon_metric_analysis():
   • The EH vacuum matching condition across the tube boundary
     (Israel junction + dielectric matching simultaneously)
   • A variational principle we haven't yet identified
+  ═══════════════════════════════════════════════════════════════
+""")
+
+    # ════════════════════════════════════════════════════════════════
+    # SECTION 17: Angular Momentum Quantization
+    # ════════════════════════════════════════════════════════════════
+    print()
+    print("  ╔══════════════════════════════════════════════════════════════════╗")
+    print("  ║  SECTION 17: ANGULAR MOMENTUM — L_z = ℏ/2 AND THE g-FACTOR    ║")
+    print("  ╚══════════════════════════════════════════════════════════════════╝")
+
+    print(f"""
+  The electron has spin angular momentum L = ℏ/2.
+  In the NWT model, this is the MECHANICAL angular momentum of the
+  photon circulating on the torus:
+
+    L_z = (E/c) × R × G(r/R)
+
+  where G(r/R) is a geometric factor (≈ 1 for thin torus).
+  Setting L_z = ℏ/2: R = ℏc/(2E).  At E = m_e: R = ƛ_C/2.
+""")
+
+    # Compute at R_sc (Section 12 self-consistent radius)
+    am_sc = compute_angular_momentum_gordon(R_cf, r_cf, p, q)
+
+    print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  ANGULAR MOMENTUM AT SELF-CONSISTENT R = {R_cf/lambda_C:.4f} ƛ_C            │
+  │                                                                   │
+  │  E_total (Gordon) = {am_sc['E_total_MeV']:10.6f} MeV                      │
+  │  G(r/R = α)       = {am_sc['G']:.6f}  (≈ 1 for thin torus)      │
+  │  L_z = E×R×G/c    = {am_sc['Lz_over_hbar']:.6f} ℏ                        │
+  │  Target            = 0.500000 ℏ                                   │
+  │  Deviation         = {am_sc['Lz_deviation_from_half']:+.4f}%                          │
+  │                                                                   │
+  │  R for L_z = ℏ/2:   {am_sc['R_for_half_hbar']/lambda_C:.6f} ƛ_C                      │
+  │  R_self_consistent:  {R_cf/lambda_C:.6f} ƛ_C                      │
+  │  Gap:                {(R_cf - am_sc['R_for_half_hbar'])/am_sc['R_for_half_hbar']*100:+.2f}%                              │
+  └───────────────────────────────────────────────────────────────────┘
+""")
+
+    # Key insight: L_z ≈ E×R/c is approximately constant as R varies
+    print("  L_z vs R (at r = αR, Gordon budget):")
+    print(f"    {'R/ƛ_C':>8s}  {'E (MeV)':>10s}  {'E×R/(ℏc)':>10s}  {'L_z/ℏ':>8s}")
+    for R_frac in [0.3, 0.4, 0.45, 0.488, 0.5, 0.55, 0.6, 0.8, 1.0, 1.5]:
+        Rv = R_frac * lambda_C
+        rv = alpha * Rv
+        am_v = compute_angular_momentum_gordon(Rv, rv, p, q, N_knot=200)
+        marker = " ◄ R_sc" if abs(R_frac - R_cf/lambda_C) < 0.01 else \
+                 " ◄ ƛ/2" if abs(R_frac - 0.5) < 0.01 else ""
+        print(f"    {R_frac:8.3f}  {am_v['E_total_MeV']:10.4f}"
+              f"  {am_v['E_total_MeV']*R_frac/m_e_MeV:10.6f}"
+              f"  {am_v['Lz_over_hbar']:8.4f}{marker}")
+
+    print(f"""
+  L_z is NEARLY CONSTANT across all R — it barely varies!
+  This is because E(R) ≈ C/R (each energy term scales as R⁻¹),
+  so E×R ≈ C ≈ const. The angular momentum is an approximate
+  INVARIANT of the system, not a dynamical variable.
+
+  The value L_z ≈ {am_sc['Lz_over_hbar']:.3f} ℏ is set by the COEFFICIENTS
+  in E(R), not by the particular R chosen.
+""")
+
+    # Search for L_z = ℏ/2 crossing
+    print("  Searching for R where L_z = exactly ℏ/2...")
+    sol_Lz = find_angular_momentum_radius(p=p, q=q)
+
+    if sol_Lz['crossing_found']:
+        am_Lz = sol_Lz['am']
+        print(f"""
+  ★ CROSSING FOUND:
+    R = {sol_Lz['R_over_lambda_C']:.4f} ƛ_C
+    E = {sol_Lz['E_total_MeV']:.6f} MeV  (m_e = {m_e_MeV:.6f} MeV)
+    L_z = {sol_Lz['Lz_over_hbar']:.6f} ℏ
+    Gap from m_e: {(sol_Lz['E_total_MeV']-m_e_MeV)*1000:+.2f} keV
+""")
+    else:
+        am_Lz = sol_Lz['am']
+        print(f"""
+  No exact crossing — L_z is always {'above' if am_Lz['Lz_over_hbar'] > 0.5 else 'below'} ℏ/2.
+  Closest: R = {sol_Lz['R_over_lambda_C']:.4f} ƛ_C,
+           L_z = {sol_Lz['Lz_over_hbar']:.6f} ℏ
+           E = {sol_Lz['E_total_MeV']:.6f} MeV
+
+  The Gordon budget gives E×R that is always {'above' if am_Lz['Lz_over_hbar'] > 0.5 else 'below'}
+  ℏc/2. The gap: L_z - ℏ/2 = {(am_Lz['Lz_over_hbar'] - 0.5)*100:+.2f}% of ℏ/2
+""")
+
+    # Magnetic moment and g-factor
+    print(f"""
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  MAGNETIC MOMENT AND g-FACTOR                                    │
+  │                                                                   │
+  │  For a p-turn current loop:                                      │
+  │  μ = p × I × πR² = p × (ec/L) × πR²                           │
+  │                                                                   │
+  │  At R = {R_cf/lambda_C:.4f} ƛ_C:                                          │
+  │     I = ec/L = {am_sc['I_current']:.2f} A                                 │
+  │     μ = {am_sc['mu_mag']:.4e} J/T                              │
+  │     μ/μ_B = {am_sc['mu_over_muB']:.6f}                                │
+  │                                                                   │
+  │  g-factor = 2m_e μ/(e L_z):                                     │
+  │     g (numerical) = {am_sc['g_factor']:.6f}                             │
+  │     g (analytic)  = m_e/E = {am_sc['g_analytic']:.6f}                   │
+  │     g (Dirac)     = 2.000000                                     │
+  │                                                                   │
+  │  For a thin torus: g = m_e c²/E_total.                          │
+  │  At E = m_e: g = 1 exactly (classical orbital result).           │
+  │                                                                   │
+  │  The Dirac g = 2 is NOT reproduced. This is expected:            │
+  │  g = 2 requires relativistic spin-orbit coupling (Thomas          │
+  │  precession) which is a QUANTUM effect absent from the            │
+  │  classical circulation picture.                                   │
+  └───────────────────────────────────────────────────────────────────┘
+
+  ═══════════════════════════════════════════════════════════════
+  SYNTHESIS: THE TWO CONSTRAINTS
+
+  1. MASS SHELL:  E(R) = m_e  →  R = {R_cf/lambda_C:.4f} ƛ_C  (Section 12)
+  2. SPIN:        L_z = ℏ/2   →  R = ƛ_C/(2 × E/m_e) ≈ ƛ_C/2
+
+  These are NOT independent! Since L_z ≈ E×R/c ≈ const,
+  requiring E = m_e automatically gives L_z ≈ {am_sc['Lz_over_hbar']:.3f} ℏ.
+
+  The {abs(am_sc['Lz_deviation_from_half']):.1f}% deviation from exactly ℏ/2 comes from
+  the Gordon metric corrections (n_avg > 1, frame-dragging,
+  knot self-energy) which make E×R not exactly constant.
+
+  IMPLICATION: If we could tune the Gordon budget to give
+  E×R = exactly ℏc/2, then BOTH constraints would be satisfied
+  simultaneously. The remaining corrections (near-field self-energy,
+  higher-order EH, ...) may close this gap.
   ═══════════════════════════════════════════════════════════════
 """)
 
