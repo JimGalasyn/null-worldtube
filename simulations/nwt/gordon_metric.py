@@ -460,14 +460,24 @@ def compute_effective_self_energy(R, r, p=2, q=1, N_radial=200):
 def compute_gordon_total_energy(R, r, p=2, q=1):
     """
     Compute the total electron energy including all Gordon metric
-    corrections: modified circulation, modified self-energy,
-    vacuum polarization energy, and frame-dragging.
+    corrections.
 
-    E_total = E_circ_eff + U_self_eff + U_vac_pol + U_drag
+    Two interpretations:
+
+    "Additive" (original):
+        E_total = E_circ_eff + U_self_eff + U_vac_pol + U_drag
+        Treats vacuum polarization as a separate energy reservoir.
+
+    "Dressed" (no double-counting):
+        E_total = E_circ_eff + U_self_eff + U_drag
+        The self-energy already uses μ_eff/ε_eff, which incorporates
+        the vacuum polarization. U_vac_pol is the energy cost of
+        polarizing the vacuum, but that cost is already encoded in the
+        modified inductance/capacitance. Adding it again double-counts.
 
     Returns
     -------
-    dict with full energy budget and comparison to m_e.
+    dict with both energy budgets and comparison to m_e.
     """
     # Modified circulation energy (Step 4)
     circ = compute_effective_circulation(R, r, p, q)
@@ -484,15 +494,27 @@ def compute_gordon_total_energy(R, r, p=2, q=1):
     U_vac_pol = profile['U_vac_pol_J']
     U_drag = metric['U_drag_J']
 
-    E_total = E_circ_eff + U_self_eff + U_vac_pol + U_drag
-    E_total_MeV = E_total / MeV
+    # Additive interpretation (original)
+    E_additive = E_circ_eff + U_self_eff + U_vac_pol + U_drag
+    E_additive_MeV = E_additive / MeV
+
+    # Dressed interpretation (no double-counting)
+    E_dressed = E_circ_eff + U_self_eff + U_drag
+    E_dressed_MeV = E_dressed / MeV
 
     # Flat-space comparison
     params = TorusParams(R=R, r=r, p=p, q=q)
     _, E_flat_MeV, flat_breakdown = compute_total_energy(params)
 
+    # Use dressed as the primary E_total (avoids double-counting)
+    E_total = E_dressed
+    E_total_MeV = E_dressed_MeV
+
     gap_from_me = E_total_MeV - m_e_MeV
     gap_pct = gap_from_me / m_e_MeV * 100
+
+    gap_additive = E_additive_MeV - m_e_MeV
+    gap_dressed = E_dressed_MeV - m_e_MeV
 
     return {
         'E_circ_eff_J': E_circ_eff,
@@ -503,12 +525,20 @@ def compute_gordon_total_energy(R, r, p=2, q=1):
         'U_vac_pol_MeV': profile['U_vac_pol_MeV'],
         'U_drag_J': U_drag,
         'U_drag_MeV': metric['U_drag_MeV'],
+        # Dressed (no double-counting) as primary
         'E_total_J': E_total,
         'E_total_MeV': E_total_MeV,
+        # Both variants
+        'E_additive_J': E_additive,
+        'E_additive_MeV': E_additive_MeV,
+        'E_dressed_J': E_dressed,
+        'E_dressed_MeV': E_dressed_MeV,
         'E_flat_MeV': E_flat_MeV,
         'gap_from_me_MeV': gap_from_me,
         'gap_from_me_keV': gap_from_me * 1000,
         'gap_pct': gap_pct,
+        'gap_additive_keV': gap_additive * 1000,
+        'gap_dressed_keV': gap_dressed * 1000,
         'm_e_MeV': m_e_MeV,
         'circ': circ,
         'self_energy': self_e,
@@ -730,20 +760,39 @@ def print_gordon_metric_analysis():
     # SECTION 5: Total Energy Budget
     # ════════════════════════════════════════════════════════════════
     print("  ╔══════════════════════════════════════════════════════════════════╗")
-    print("  ║  SECTION 5: TOTAL ENERGY BUDGET                                ║")
+    print("  ║  SECTION 5: TOTAL ENERGY BUDGET — TWO INTERPRETATIONS          ║")
     print("  ╚══════════════════════════════════════════════════════════════════╝")
 
     result = compute_gordon_total_energy(R, r, p, q)
 
     print(f"""
-  ┌─────────────────────────────────────────────────────────┐
-  │  E_circ_eff (modified circulation)  {result['E_circ_eff_MeV']:12.6f} MeV  │
-  │  U_self_eff (modified self-energy)  {result['U_self_eff_MeV']:12.6f} MeV  │
-  │  U_vac_pol  (vacuum polarization)   {result['U_vac_pol_MeV']:12.6f} MeV  │
-  │  U_drag     (frame-dragging)        {result['U_drag_MeV']:12.6f} MeV  │
-  │  ─────────────────────────────────────────────────────  │
-  │  E_total (Gordon)                   {result['E_total_MeV']:12.6f} MeV  │
-  └─────────────────────────────────────────────────────────┘
+  The self-energy question: does U_vac_pol double-count U_self_eff?
+
+  U_self_eff already uses μ_eff, ε_eff (the polarized vacuum response).
+  The inductance L_eff = μ_eff × R × [ln(8R/r) - 2] already encodes
+  the energy cost of polarizing the vacuum. Adding U_vac_pol = ∫(ε_eff - ε₀)E²/2 dV
+  on top may count the same energy twice.
+
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  INTERPRETATION A: "Additive" (U_vac_pol is independent)         │
+  │                                                                   │
+  │  E_circ_eff (modified circulation)    {result['E_circ_eff_MeV']:12.6f} MeV        │
+  │  U_self_eff (modified self-energy)    {result['U_self_eff_MeV']:12.6f} MeV        │
+  │  U_vac_pol  (vacuum polarization)     {result['U_vac_pol_MeV']:12.6f} MeV        │
+  │  U_drag     (frame-dragging)          {result['U_drag_MeV']:12.6f} MeV        │
+  │  ───────────────────────────────────────────────────────────────  │
+  │  E_total (additive)                   {result['E_additive_MeV']:12.6f} MeV        │
+  └───────────────────────────────────────────────────────────────────┘
+
+  ┌───────────────────────────────────────────────────────────────────┐
+  │  INTERPRETATION B: "Dressed" (U_self_eff already includes it)    │
+  │                                                                   │
+  │  E_circ_eff (modified circulation)    {result['E_circ_eff_MeV']:12.6f} MeV        │
+  │  U_self_eff (dressed self-energy)     {result['U_self_eff_MeV']:12.6f} MeV        │
+  │  U_drag     (frame-dragging)          {result['U_drag_MeV']:12.6f} MeV        │
+  │  ───────────────────────────────────────────────────────────────  │
+  │  E_total (dressed)                    {result['E_dressed_MeV']:12.6f} MeV        │
+  └───────────────────────────────────────────────────────────────────┘
 """)
 
     # ════════════════════════════════════════════════════════════════
@@ -754,30 +803,35 @@ def print_gordon_metric_analysis():
     print("  ╚══════════════════════════════════════════════════════════════════╝")
 
     E_flat = result['E_flat_MeV']
-    E_gordon = result['E_total_MeV']
+    E_additive = result['E_additive_MeV']
+    E_dressed = result['E_dressed_MeV']
     gap_flat = (E_flat - m_e_MeV) * 1000  # keV
-    gap_gordon = (E_gordon - m_e_MeV) * 1000
+    gap_additive = result['gap_additive_keV']
+    gap_dressed = result['gap_dressed_keV']
 
     print(f"""
-  E_flat   = {E_flat:.6f} MeV    gap = {gap_flat:+.4f} keV  ({(E_flat - m_e_MeV)/m_e_MeV*100:+.4f}%)
-  E_gordon = {E_gordon:.6f} MeV    gap = {gap_gordon:+.4f} keV  ({(E_gordon - m_e_MeV)/m_e_MeV*100:+.4f}%)
-  m_e      = {m_e_MeV:.6f} MeV    (target)
+  At flat-space self-consistent R = {R/lambda_C:.6f} λ_C:
 
-  Energy fractions (Gordon):
-    Circulation:    {result['E_circ_eff_MeV']/E_gordon*100:6.2f}%
-    Self-energy:    {result['U_self_eff_MeV']/E_gordon*100:6.2f}%
-    Vac. polariz.:  {result['U_vac_pol_MeV']/E_gordon*100:6.2f}%
-    Frame-dragging: {result['U_drag_MeV']/E_gordon*100:6.2f}%
+  E_flat     = {E_flat:.6f} MeV    gap = {gap_flat:+.4f} keV  ({(E_flat - m_e_MeV)/m_e_MeV*100:+.4f}%)
+  E_additive = {E_additive:.6f} MeV    gap = {gap_additive:+.4f} keV  ({(E_additive - m_e_MeV)/m_e_MeV*100:+.4f}%)
+  E_dressed  = {E_dressed:.6f} MeV    gap = {gap_dressed:+.4f} keV  ({(E_dressed - m_e_MeV)/m_e_MeV*100:+.4f}%)
+  m_e        = {m_e_MeV:.6f} MeV    (target)
+
+  Energy fractions (dressed):
+    Circulation:    {result['E_circ_eff_MeV']/E_dressed*100:6.2f}%
+    Self-energy:    {result['U_self_eff_MeV']/E_dressed*100:6.2f}%
+    Frame-dragging: {result['U_drag_MeV']/E_dressed*100:6.2f}%
 """)
 
     # ════════════════════════════════════════════════════════════════
-    # SECTION 7: Self-consistent Gordon radius
+    # SECTION 7: Self-consistent Gordon radius (dressed)
     # ════════════════════════════════════════════════════════════════
     print("  ╔══════════════════════════════════════════════════════════════════╗")
     print("  ║  SECTION 7: SELF-CONSISTENT GORDON RADIUS                      ║")
     print("  ╚══════════════════════════════════════════════════════════════════╝")
     print()
-    print("  Finding R where E_total(Gordon) = m_e ...")
+    print("  Using dressed interpretation (E = E_circ_eff + U_self_eff + U_drag)")
+    print("  Finding R where E_total(dressed) = m_e ...")
 
     sol = find_gordon_self_consistent_radius(m_e_MeV, p=p, q=q, r_ratio=alpha)
     if sol is not None:
@@ -790,14 +844,15 @@ def print_gordon_metric_analysis():
     Match: {sol['match_ppm']:.1f} ppm
 
   Flat-space R/λ_C = {sol_flat['R_over_lambda_C']:.6f}
-  Gordon R/λ_C     = {sol['R_over_lambda_C']:.6f}
+  Dressed R/λ_C    = {sol['R_over_lambda_C']:.6f}
   Shift: {(sol['R_over_lambda_C'] - sol_flat['R_over_lambda_C'])/sol_flat['R_over_lambda_C']*100:.4f}%
 
   Energy budget at self-consistent R:
     E_circ_eff = {bd['E_circ_eff_MeV']:.6f} MeV  ({bd['E_circ_eff_MeV']/m_e_MeV*100:.2f}% of m_e)
     U_self_eff = {bd['U_self_eff_MeV']:.6f} MeV  ({bd['U_self_eff_MeV']/m_e_MeV*100:.2f}% of m_e)
-    U_vac_pol  = {bd['U_vac_pol_MeV']:.6f} MeV  ({bd['U_vac_pol_MeV']/m_e_MeV*100:.2f}% of m_e)
     U_drag     = {bd['U_drag_MeV']:.6f} MeV  ({bd['U_drag_MeV']/m_e_MeV*100:.2f}% of m_e)
+
+  (For reference, U_vac_pol at this R = {bd['U_vac_pol_MeV']:.6f} MeV — NOT included)
 """)
     else:
         print("  No solution found in search range.")
@@ -808,17 +863,22 @@ def print_gordon_metric_analysis():
     print("  ┌──────────────────────────────────────────────────────────────────┐")
     print("  │  SUMMARY                                                        │")
     print("  │                                                                 │")
+    print(f"  │  Flat-space:  E = {E_flat:.6f} MeV  gap = {gap_flat:+8.4f} keV          │")
+    print(f"  │  Additive:   E = {E_additive:.6f} MeV  gap = {gap_additive:+8.4f} keV          │")
+    print(f"  │  Dressed:    E = {E_dressed:.6f} MeV  gap = {gap_dressed:+8.4f} keV          │")
+    print(f"  │  m_e:        E = {m_e_MeV:.6f} MeV  (target)                     │")
+    print(f"  │                                                                 │")
+    if abs(gap_dressed) < abs(gap_flat):
+        print(f"  │  Dressed interpretation REDUCES the gap!                        │")
+        direction = "below" if gap_dressed < 0 else "above"
+        print(f"  │  E_dressed is {abs(gap_dressed):.4f} keV {direction} m_e "
+              f"({abs(gap_dressed)/m_e_MeV/10:.4f}%)            │")
+    else:
+        print(f"  │  Dressed interpretation does not reduce the gap at flat R.     │")
+    print(f"  │                                                                 │")
     if sol is not None:
-        is_closer = abs(gap_gordon) < abs(gap_flat)
-        print(f"  │  Flat-space gap:  {gap_flat:+8.4f} keV from m_e                       │")
-        print(f"  │  Gordon gap:      {gap_gordon:+8.4f} keV from m_e                       │")
-        if is_closer:
-            print(f"  │  Gordon metric REDUCES the gap.                                │")
-        else:
-            print(f"  │  Gordon metric does not reduce the gap at flat-space R.        │")
-        print(f"  │                                                                 │")
-        print(f"  │  Self-consistent R/λ_C = {sol['R_over_lambda_C']:.6f}"
-              f"                             │")
+        print(f"  │  Self-consistent dressed R/λ_C = {sol['R_over_lambda_C']:.6f}"
+              f"                    │")
     print("  └──────────────────────────────────────────────────────────────────┘")
     print()
     print("=" * 70)
