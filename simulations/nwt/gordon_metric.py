@@ -257,16 +257,44 @@ def compute_gordon_metric(R, r, p=2, q=1, N_radial=200):
     # g_{tθ} = -Ω_drag × ρ² (analogous to Kerr g_{tφ})
     g_t_theta = -Omega_drag * rho**2
 
-    # Frame-dragging energy per photon: E_drag ~ ℏ × Ω_drag (at tube surface)
-    # Use the profile-averaged value weighted by energy density
-    weights = profile['u_vac_pol'] * rho  # weight by energy × ρ (volume element)
+    # Frame-dragging energy: Kerr analogy
+    #
+    # In the Kerr metric, a co-rotating photon has energy shift
+    #   E_drag = -m × ℏ × Ω
+    # where m is the azimuthal angular momentum quantum number and
+    # Ω is the frame-dragging angular velocity.
+    #
+    # The photon CO-ROTATES with the polarized vacuum (it IS the thing
+    # creating the polarization), so the sign is NEGATIVE: the vacuum
+    # "carries" the photon, reducing the energy needed to maintain
+    # circulation — like swimming with the current.
+    #
+    # The toroidal winding number p gives the angular momentum quantum
+    # number: the photon winds p times around the torus per period.
+    #
+    # We evaluate Ω_drag along the knot path (where the photon actually
+    # travels) rather than volume-averaging, for consistency with how
+    # n_eff is evaluated in compute_effective_circulation.
+    #
+    # Volume-averaged Omega_drag (for reference / metric display)
+    weights = profile['u_vac_pol'] * rho
     total_weight = np.sum(weights)
     if total_weight > 0:
-        Omega_drag_avg = np.sum(Omega_drag * weights) / total_weight
+        Omega_drag_vol_avg = np.sum(Omega_drag * weights) / total_weight
     else:
-        Omega_drag_avg = Omega_drag[0]
+        Omega_drag_vol_avg = Omega_drag[0]
 
-    U_drag = hbar * Omega_drag_avg
+    # Path-averaged: use the average n on the knot to get Omega_drag
+    # (The actual path-averaging is done in compute_effective_circulation;
+    # here we use its n_avg result for consistency)
+    # We'll store both and let compute_gordon_total_energy use the path value
+    # For now, estimate from the profile at ρ = r (tube surface)
+    n_at_surface = np.interp(r, rho, n)
+    Omega_drag_surface = (1.0 - 1.0 / n_at_surface**2) * omega_circ
+
+    # Frame-dragging energy: E_drag = -p × ℏ × Ω_drag (co-rotating, negative)
+    U_drag_vol = -p * hbar * Omega_drag_vol_avg
+    U_drag_surface = -p * hbar * Omega_drag_surface
 
     return {
         'rho': rho,
@@ -276,11 +304,15 @@ def compute_gordon_metric(R, r, p=2, q=1, N_radial=200):
         'g_rr': g_rr,
         'g_t_theta': g_t_theta,
         'Omega_drag': Omega_drag,
-        'Omega_drag_avg': Omega_drag_avg,
-        'U_drag_J': U_drag,
-        'U_drag_MeV': U_drag / MeV,
+        'Omega_drag_vol_avg': Omega_drag_vol_avg,
+        'Omega_drag_surface': Omega_drag_surface,
+        'U_drag_J': U_drag_surface,
+        'U_drag_MeV': U_drag_surface / MeV,
+        'U_drag_vol_J': U_drag_vol,
+        'U_drag_vol_MeV': U_drag_vol / MeV,
         'omega_circ': omega_circ,
-        'n_at_surface': np.interp(r, rho, n),
+        'p': p,
+        'n_at_surface': n_at_surface,
         'n_at_center': n[0],
         'c_eff_at_surface': np.interp(r, rho, c_eff),
         'profile': profile,
@@ -492,7 +524,13 @@ def compute_gordon_total_energy(R, r, p=2, q=1):
     E_circ_eff = circ['E_circ_eff_J']
     U_self_eff = self_e['U_self_eff_J']
     U_vac_pol = profile['U_vac_pol_J']
-    U_drag = metric['U_drag_J']
+
+    # Frame-dragging: use path-averaged n from circulation for consistency
+    # E_drag = -p × ℏ × Ω_drag, where Ω_drag = (1 - 1/n²) × ω_circ
+    n_avg = circ['n_avg']
+    omega_circ = metric['omega_circ']
+    Omega_drag_path = (1.0 - 1.0 / n_avg**2) * omega_circ
+    U_drag = -p * hbar * Omega_drag_path
 
     # Additive interpretation (original)
     E_additive = E_circ_eff + U_self_eff + U_vac_pol + U_drag
@@ -524,7 +562,9 @@ def compute_gordon_total_energy(R, r, p=2, q=1):
         'U_vac_pol_J': U_vac_pol,
         'U_vac_pol_MeV': profile['U_vac_pol_MeV'],
         'U_drag_J': U_drag,
-        'U_drag_MeV': metric['U_drag_MeV'],
+        'U_drag_MeV': U_drag / MeV,
+        'Omega_drag_path': Omega_drag_path,
+        'n_avg_path': n_avg,
         # Dressed (no double-counting) as primary
         'E_total_J': E_total,
         'E_total_MeV': E_total_MeV,
@@ -695,10 +735,15 @@ def print_gordon_metric_analysis():
   At tube center (ρ = 0.5r):
     n_eff = {metric['n_at_center']:.6f}
 
-  Frame-dragging:
-    Circulation frequency: ω_circ = {metric['omega_circ']:.4e} rad/s
-    Average drag: Ω_drag = {metric['Omega_drag_avg']:.4e} rad/s
-    Drag energy: U_drag = {metric['U_drag_MeV']:.6f} MeV
+  Frame-dragging (Kerr analogy):
+    ω_circ = {metric['omega_circ']:.4e} rad/s
+    Ω_drag (at surface)   = {metric['Omega_drag_surface']:.4e} rad/s
+    Ω_drag (vol-averaged) = {metric['Omega_drag_vol_avg']:.4e} rad/s
+
+    E_drag = -p × ℏ × Ω_drag  (co-rotating → NEGATIVE)
+    Photon co-rotates with polarized vacuum (p = {p}):
+      E_drag (surface)    = {metric['U_drag_MeV']*1000:+.4f} keV
+      E_drag (vol-avg)    = {metric['U_drag_vol_MeV']*1000:+.4f} keV
 """)
 
     print(f"  {'ρ/r':>8s}  {'n_eff':>10s}  {'c_eff/c':>10s}"
@@ -868,13 +913,11 @@ def print_gordon_metric_analysis():
     print(f"  │  Dressed:    E = {E_dressed:.6f} MeV  gap = {gap_dressed:+8.4f} keV          │")
     print(f"  │  m_e:        E = {m_e_MeV:.6f} MeV  (target)                     │")
     print(f"  │                                                                 │")
-    if abs(gap_dressed) < abs(gap_flat):
-        print(f"  │  Dressed interpretation REDUCES the gap!                        │")
-        direction = "below" if gap_dressed < 0 else "above"
-        print(f"  │  E_dressed is {abs(gap_dressed):.4f} keV {direction} m_e "
-              f"({abs(gap_dressed)/m_e_MeV/10:.4f}%)            │")
-    else:
-        print(f"  │  Dressed interpretation does not reduce the gap at flat R.     │")
+    direction = "below" if gap_dressed < 0 else "above"
+    print(f"  │  Dressed E is {abs(gap_dressed):.4f} keV {direction} m_e"
+          f" ({gap_dressed/m_e_MeV/10:+.4f}%)             │")
+    print(f"  │  Gordon corrections shift E by {gap_dressed - gap_flat:+.4f} keV"
+          f" from flat-space    │")
     print(f"  │                                                                 │")
     if sol is not None:
         print(f"  │  Self-consistent dressed R/λ_C = {sol['R_over_lambda_C']:.6f}"
