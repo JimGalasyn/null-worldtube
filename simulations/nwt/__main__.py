@@ -226,7 +226,7 @@ def main():
         return
 
     if args.gordon_metric:
-        from .gordon_metric import print_gordon_metric_analysis
+        from .gordon_display import print_gordon_metric_analysis
         print_gordon_metric_analysis()
         return
 
