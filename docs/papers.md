@@ -29,6 +29,18 @@ Paper 1 took three inputs as given: the fine-structure constant &alpha;, the muo
 
 ---
 
+## Paper 3: Nuclear Magic Numbers from Torus Topology
+
+**Full title:** *Nuclear Magic Numbers from Torus Topology*
+
+James P. Galasyn and Claude Théodore
+
+The torus geometry that encoded the particle spectrum now reaches into the atomic nucleus. Starting from the pion mass relation m<sub>&pi;</sub> = 2m<sub>e</sub>/&alpha; and the k=3 aspect ratio, we derive the nuclear potential depth (50.2 MeV), the scalar-vector splitting of the relativistic mean field (V &minus; S = 853 MeV), and the resulting spin-orbit interaction — all with zero new free parameters. Solved in a Woods-Saxon shell model, these produce all seven nuclear magic numbers (2, 8, 20, 28, 50, 82, 126) and predict N=184 as the next closure. As a stress test, the NWT-derived nuclear masses correctly trace all four natural radioactive decay series to their Pb/Bi endpoints.
+
+**DOI:** [10.5281/zenodo.19036783](https://doi.org/10.5281/zenodo.19036783)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:

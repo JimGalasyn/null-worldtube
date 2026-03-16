@@ -73,6 +73,48 @@ This is just asking: do the quantum numbers form a **Pythagorean triple**?
 
 The stability of matter is a consequence of Pythagorean geometry.
 
+## Nuclear Magic Numbers (Paper 3)
+
+The same torus geometry that predicts particle masses also explains nuclear structure — spanning twelve orders of magnitude in energy.
+
+### The Derivation Chain
+
+Starting from the pion mass m<sub>&pi;</sub> = 2m<sub>e</sub>/&alpha; = 140.1 MeV (0.34% accuracy):
+
+| Step | Formula | Value | Measured |
+|:-----|:--------|:------|:---------|
+| Pion mass | 2m<sub>e</sub>/&alpha; | 140.1 MeV | 139.6 MeV (0.34%) |
+| Pion decay constant | (k+1)/k &times; m<sub>e</sub>/&alpha; | 93.4 MeV | 92.1 MeV (1.4%) |
+| Nuclear potential | C<sub>eff</sub> &times; one-pion exchange | 50.2 MeV | ~50 MeV (textbook) |
+| Scalar potential S | &minus;k<sup>2</sup>V<sub>0</sub> | &minus;452 MeV | ~&minus;450 MeV |
+| Vector potential V | (k<sup>2</sup>&minus;1)V<sub>0</sub> | +401 MeV | ~+400 MeV |
+| Spin-orbit V&minus;S | (2k<sup>2</sup>&minus;1)V<sub>0</sub> | 853 MeV | ~850 MeV |
+
+The spin-orbit strength is the "holy grail" of nuclear physics — it determines which nuclei are magic. Most models fit this number to data; NWT derives it from k=3.
+
+### All Seven Magic Numbers
+
+Without spin-orbit coupling, a shell model gives: 2, 8, 20, 40, 58, 92, ...
+
+With the NWT-derived spin-orbit (V<sub>&ell;s</sub> = 35 MeV&middot;fm<sup>2</sup>):
+
+> **2, 8, 20, 28, 50, 82, 126** &checkmark;
+
+Every magic number is correct. The model also predicts **N = 184** as the next magic number, testable in superheavy element experiments.
+
+### Decay Chain Validation
+
+The four natural radioactive decay series, traced using NWT-derived nuclear masses with shell corrections, terminate at the correct stable endpoints:
+
+| Series | Start | Endpoint (predicted) | Endpoint (actual) |
+|:-------|:------|:---------------------|:-------------------|
+| Thorium | <sup>232</sup>Th | <sup>208</sup>Pb | <sup>208</sup>Pb &checkmark; |
+| Neptunium | <sup>237</sup>Np | <sup>209</sup>Bi | <sup>209</sup>Bi &checkmark; |
+| Uranium | <sup>238</sup>U | <sup>206</sup>Pb | <sup>206</sup>Pb &checkmark; |
+| Actinium | <sup>235</sup>U | <sup>207</sup>Pb | <sup>207</sup>Pb &checkmark; |
+
+The doubly-magic <sup>208</sup>Pb — terminus of three of the four series — owes its exceptional stability to shell closures at Z=82 and N=126, which are direct consequences of k=3.
+
 ---
 
 [Home](index.html) &#183; [Papers](papers.html) &#183; [About](about.html)

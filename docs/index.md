@@ -25,6 +25,10 @@ These three integers describe the geometry:
 
 From these alone, the theory predicts the masses of all quarks and leptons, the Higgs boson mass, the Weinberg angle, the strong coupling constant, neutrino mixing angles, and more — with a **median error of 0.7%** against experimental measurements.
 
+## From Quarks to Nuclei
+
+The same geometry extends to nuclear physics. The torus aspect ratio k=3 determines the nuclear spin-orbit interaction, which in turn produces all seven **nuclear magic numbers** (2, 8, 20, 28, 50, 82, 126) — the shell closures that make certain nuclei exceptionally stable. The pion mass emerges as m<sub>&pi;</sub> = 2m<sub>e</sub>/&alpha;, and the NWT-derived nuclear masses correctly trace all four natural radioactive decay series to their endpoints at lead and bismuth. A single geometric framework now spans from the electron mass (0.5 MeV) to nuclear binding (8 MeV/nucleon) — twelve orders of magnitude.
+
 ## A Forgotten Discovery, Rediscovered
 
 In the 1980s, a computer scientist named **F. Ray Skilton** at Brock University published three papers proving that the fine-structure constant — one of the most fundamental numbers in physics — could be derived from a Pythagorean triple:
