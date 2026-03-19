@@ -115,6 +115,30 @@ The four natural radioactive decay series, traced using NWT-derived nuclear mass
 
 The doubly-magic <sup>208</sup>Pb — terminus of three of the four series — owes its exceptional stability to shell closures at Z=82 and N=126, which are direct consequences of k=3.
 
+## Dynamical Derivations (Paper 4)
+
+Paper 4 derives the torus geometry dynamically rather than assuming it:
+
+| Quantity | Formula | Value | Measured | Error |
+|:---------|:--------|:------|:---------|:------|
+| Tube radius | r/R = 1/&pi;&sup2; | 0.1013 | 0.10392 | 2.5% |
+| Pion mass | 2m<sub>e</sub>/&alpha; | 140.05 MeV | 139.57 MeV | 0.34% |
+| Top quark mass | 2k&sup2;m<sub>e</sub>/&alpha;&sup2; | 172,730 MeV | 172,760 MeV | 0.02% |
+
+Quark confinement is explained by incommensurability: when gcd(n<sub>quarks</sub>, q<sub>poloidal</sub>) = 1, the mode is localized and cannot propagate alone.
+
+## The Electron Mass (Paper 5)
+
+Paper 5 eliminates the electron mass as a free parameter:
+
+| Condition | Result |
+|:----------|:-------|
+| Phase closure on (2,1) knot at m=3 | R/&xi; = &radic;5/2 = 1.1180 (Pythagorean: 3&sup2; = (&radic;5)&sup2; + 2&sup2;) |
+| Dual resonance with (1,4) proton | &kappa; = 12/&radic;7 = 4.536 |
+| Vortex ring energy balance | m<sub>e</sub> = 9.19 &times; 10<sup>&minus;31</sup> kg (0.85% match) |
+
+The input set is now reduced to **three integers**: (p, q, k) = (2, 1, 3). The electron mass, previously the sole dimensional input, is derived from the topology of the torus knot in a superfluid vacuum.
+
 ---
 
 [Home](index.html) &#183; [Papers](papers.html) &#183; [About](about.html)

@@ -29,6 +29,12 @@ From these alone, the theory predicts the masses of all quarks and leptons, the 
 
 The same geometry extends to nuclear physics. The torus aspect ratio k=3 determines the nuclear spin-orbit interaction, which in turn produces all seven **nuclear magic numbers** (2, 8, 20, 28, 50, 82, 126) — the shell closures that make certain nuclei exceptionally stable. The pion mass emerges as m<sub>&pi;</sub> = 2m<sub>e</sub>/&alpha;, and the NWT-derived nuclear masses correctly trace all four natural radioactive decay series to their endpoints at lead and bismuth. A single geometric framework now spans from the electron mass (0.5 MeV) to nuclear binding (8 MeV/nucleon) — twelve orders of magnitude.
 
+## From Dynamics to the Electron Mass
+
+Paper 4 moves beyond geometry into dynamics: the electron is a quantized vortex ring in a superfluid vacuum described by the Gross-Pitaevskii equation. The tube radius r/R = 1/&pi;&sup2; is derived (not assumed), quark confinement emerges from incommensurability of torus-knot winding numbers, and the Euler-Heisenberg QED vacuum polarization is identified as the physical mechanism for soliton stability &mdash; replacing the ad hoc "pivot field" proposed by Williamson, which we tested in FDTD and found insufficient.
+
+Paper 5 completes the program: the electron mass itself is no longer an input. Three self-consistency conditions &mdash; phase closure at first resonance (yielding the Pythagorean identity 3&sup2; = (&radic;5)&sup2; + 2&sup2;), dual resonance with the proton mode, and vortex energy balance &mdash; together fix m<sub>e</sub> to within 0.85%. The input set is now **three integers alone**: (p, q, k) = (2, 1, 3).
+
 ## A Forgotten Discovery, Rediscovered
 
 In the 1980s, a computer scientist named **F. Ray Skilton** at Brock University published three papers proving that the fine-structure constant — one of the most fundamental numbers in physics — could be derived from a Pythagorean triple:

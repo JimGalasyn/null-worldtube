@@ -41,6 +41,30 @@ The torus geometry that encoded the particle spectrum now reaches into the atomi
 
 ---
 
+## Paper 4: From Vortex Rings to the Top Quark
+
+**Full title:** *From Vortex Rings to the Top Quark: Dynamical Derivations in the Null Worldtube Framework*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+Papers 1&ndash;3 treated the torus geometry as given. This paper derives it dynamically. Modeling the electron as a quantized vortex ring in a superfluid vacuum described by the Gross-Pitaevskii equation, we derive the tube radius r/R = 1/&pi;&sup2; (matching the NWT value of 0.10392 to 2.5%), explain quark confinement through an incommensurability condition on torus-knot winding numbers, and show that the pion mass m<sub>&pi;</sub> = 2m<sub>e</sub>/&alpha; = 140.05 MeV (0.34%) and the top quark mass m<sub>t</sub> = 2k&sup2;m<sub>e</sub>/&alpha;&sup2; = 172,730 MeV (0.02%) emerge from the same framework. The Macken spacetime impedance Z<sub>s</sub> = c&sup3;/G connects gravitational and electromagnetic scales, while the Euler-Heisenberg QED vacuum polarization replaces Williamson's ad hoc "pivot field" as the physical mechanism for soliton confinement.
+
+**DOI:** [10.5281/zenodo.19051589](https://doi.org/10.5281/zenodo.19051589)
+
+---
+
+## Paper 5: The Electron Mass from Phase Closure
+
+**Full title:** *The Electron Mass from Phase Closure: Self-Consistent Torus Knots in the Superfluid Vacuum*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+Papers 1&ndash;4 took the electron mass as a given input. This paper eliminates it as a free parameter. Three self-consistency conditions &mdash; phase closure on the (2,1) torus knot at first resonance m=3, dual resonance with the (1,4) proton mode, and vortex ring energy balance &mdash; together determine R/&xi; = &radic;5/2 from the Pythagorean identity 3&sup2; = (&radic;5)&sup2; + 2&sup2;, fix the aspect ratio &kappa; = 12/&radic;7, and yield m<sub>e</sub> = 9.19 &times; 10<sup>&minus;31</sup> kg (0.85% match). The electron mass is now a derived quantity: a consequence of the topology of a (2,1) torus knot in a superfluid vacuum, not an input.
+
+**DOI:** [10.5281/zenodo.19072313](https://doi.org/10.5281/zenodo.19072313)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
