@@ -37,6 +37,7 @@ from .gordon_metric import (
     compute_self_entanglement,
     compute_entanglement_radius,
     compute_nonlinear_maxwell_eigenvalue,
+    compute_longitudinal_modes,
     find_gordon_self_consistent_radius,
     find_knot_self_consistent_radius,
     find_angular_momentum_radius,
@@ -3408,6 +3409,118 @@ def print_gordon_metric_analysis():
     is DEFINITIONAL: r_e = αλ_C is the Coulomb/rest-energy balance
     point. The electron's "size" is set by the same physics that
     defines α, not dynamically selected by mode competition.
+""")
+
+    # ── Section 28: Longitudinal Resonant Modes ────────────────────────
+    print("\n")
+    print("=" * 70)
+    print("  28. LONGITUDINAL RESONANT MODES ON GORDON-METRIC TORUS")
+    print("      Hill equation for standing waves along the knot path")
+    print("=" * 70)
+
+    lm = compute_longitudinal_modes(R=R, p=p, q=q)
+
+    # 28a. n(s) profile
+    print(f"""
+  28a. n(s) Profile Along the ({lm['p']},{lm['q']}) Knot
+  ─────────────────────────────────────────────
+    L_flat  = {lm['L_flat']:.6e} m
+    L_eff   = {lm['L_eff']:.6e} m   (n-weighted)
+    n_avg   = {lm['n_avg']:.10f}
+    Δn/n    = {lm['n_variation']:.6e}   (fractional variation)
+""")
+
+    # 28b. Flat-space modes
+    print("  28b. Flat-Space Reference Modes")
+    print("  ─────────────────────────────────────────────")
+    print(f"    {'n':>3s}  {'ω (rad/s)':>14s}  {'E (MeV)':>12s}  {'E/m_e':>10s}")
+    print(f"    {'─'*3}  {'─'*14}  {'─'*12}  {'─'*10}")
+    for m in lm['flat_modes'][:6]:
+        print(f"    {m['n']:3d}  {m['omega']:14.6e}  {m['E_MeV']:12.6f}  {m['E_over_me']:10.6f}")
+    print()
+
+    # 28c. Gordon-corrected modes
+    print("  28c. Gordon-Corrected Modes (Hill equation)")
+    print("  ─────────────────────────────────────────────")
+    print(f"    {'n':>3s}  {'harm':>4s}  {'ω (rad/s)':>14s}  {'E (MeV)':>12s}  {'E/m_e':>10s}  {'shift%':>10s}")
+    print(f"    {'─'*3}  {'─'*4}  {'─'*14}  {'─'*12}  {'─'*10}  {'─'*10}")
+    for m in lm['gordon_modes'][:6]:
+        print(f"    {m['n']:3d}  {m['harm_n']:4d}  {m['omega']:14.6e}  {m['E_MeV']:12.6f}  {m['E_over_me']:10.6f}  {m['shift_pct']:+10.6f}")
+
+    if lm['splittings']:
+        print(f"\n    Degeneracy splittings (sin/cos pairs):")
+        for sp in lm['splittings'][:5]:
+            print(f"      pair {sp['pair']}: Δω/ω = {sp['rel_split']:.6e}")
+    print()
+
+    # 28d. Koide connection
+    print("  28d. Koide Connection")
+    print("  ─────────────────────────────────────────────")
+    koide = lm['koide']
+    if koide:
+        print(f"    First 3 mode frequencies: ω₁={koide['omega_1']:.6e}, ω₂={koide['omega_2']:.6e}, ω₃={koide['omega_3']:.6e}")
+        print(f"    Q parameter (Koide):    {koide['Q_param']:.8f}   (exact Koide: 0.666...)")
+        print(f"    Extracted θ:            {koide['theta_extracted']:.8f} rad")
+        print(f"    Target θ_K = (6π+2)/9:  {koide['theta_target']:.8f} rad")
+        print(f"    Mismatch:               {koide['theta_match_pct']:.4f}%")
+        theta_ok = koide['theta_match_pct'] < 1.0
+        print(f"    VERDICT: {'θ MATCHES Koide angle!' if theta_ok else 'θ does NOT match — equally-spaced modes give wrong structure.'}")
+    else:
+        print("    (Insufficient modes for Koide analysis)")
+    print()
+
+    # 28e. Lenz connection
+    print("  28e. Lenz Connection (m_p/m_e = 6π⁵)")
+    print("  ─────────────────────────────────────────────")
+    lenz_data = lm['lenz']
+    if lenz_data:
+        print(f"    Target: 6π⁵ = {lenz_data['target']:.3f}")
+        print(f"\n    {'Weighting':>16s}  {'n_best':>6s}  {'Σ(E)/E₁':>12s}  {'diff%':>8s}")
+        print(f"    {'─'*16}  {'─'*6}  {'─'*12}  {'─'*8}")
+        for label, cand in lenz_data['candidates'].items():
+            print(f"    {label:>16s}  {cand['n_best']:6d}  {cand['ratio']:12.3f}  {cand['diff_pct']:8.4f}")
+        best_label = min(lenz_data['candidates'], key=lambda k: lenz_data['candidates'][k]['diff_pct'])
+        best = lenz_data['candidates'][best_label]
+        lenz_ok = best['diff_pct'] < 1.0
+        print(f"\n    VERDICT: {'Lenz ratio FOUND with ' + best_label + ' weighting!' if lenz_ok else 'No weighting reproduces 6π⁵ — modes too uniformly spaced.'}")
+    else:
+        print("    (Insufficient modes for Lenz analysis)")
+    print()
+
+    # 28f. k-scan
+    print("  28f. k-Scan (Aspect Ratio Variation)")
+    print("  ─────────────────────────────────────────────")
+    print(f"    {'k':>3s}  {'r/R':>10s}  {'n_avg':>12s}  {'Δn/n':>12s}  {'band gap':>12s}  {'ω₂/ω₁':>8s}  {'ω₃/ω₁':>8s}")
+    print(f"    {'─'*3}  {'─'*10}  {'─'*12}  {'─'*12}  {'─'*12}  {'─'*8}  {'─'*8}")
+    for ks in lm['k_scan']:
+        hr = ks['harmonic_ratios']
+        r2 = f"{hr[1]:.4f}" if len(hr) > 1 else "—"
+        r3 = f"{hr[2]:.4f}" if len(hr) > 2 else "—"
+        print(f"    {ks['k']:3d}  {ks['r_over_R']:10.6f}  {ks['n_avg']:12.8f}  {ks['n_variation']:12.6e}  {ks['band_gap_rel']:12.6e}  {r2:>8s}  {r3:>8s}")
+    print()
+
+    # 28g. Synthesis
+    n_var = lm['n_variation']
+    has_structure = n_var > 1e-3
+    koide_match = koide and koide.get('theta_match_pct', 100) < 1.0
+    lenz_match = lenz_data and any(c['diff_pct'] < 1.0 for c in lenz_data.get('candidates', {}).values())
+
+    print(f"""
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  28g. SYNTHESIS: Longitudinal Mode Structure                   │
+  └─────────────────────────────────────────────────────────────────┘
+
+  n(s) variation along the ({p},{q}) knot: Δn/n = {n_var:.2e}
+  {"This is LARGE enough to create non-trivial band structure." if has_structure else "This is O(α²) — the Hill correction is perturbatively small."}
+
+  Koide angle:  {"MATCH" if koide_match else "NO MATCH"} — {"longitudinal modes encode the Koide structure!" if koide_match else "equally-spaced modes cannot produce the Koide angle."}
+  Lenz ratio:   {"MATCH" if lenz_match else "NO MATCH"} — {"energy sums reproduce 6π⁵!" if lenz_match else "no degeneracy weighting gives m_p/m_e from these modes."}
+
+  {"The longitudinal mode spectrum on the Gordon-metric torus" if not (koide_match or lenz_match) else "SURPRISING RESULT:"}
+  {"is almost perfectly harmonic (uniform spacing with O(α²) gaps)." if not has_structure else ""}
+  {"The Koide angle and Lenz ratio must come from TRANSVERSE mode" if not (koide_match or lenz_match) else "The Koide/Lenz structure emerges from the longitudinal"}
+  {"structure (Section 27) or from inter-torus coupling, not from" if not (koide_match or lenz_match) else "mode spectrum — this is a key result!"}
+  {"the nearly-uniform longitudinal overtones." if not (koide_match or lenz_match) else ""}
 """)
 
     print("=" * 70)
