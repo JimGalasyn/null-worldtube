@@ -35,6 +35,10 @@ Paper 4 moves beyond geometry into dynamics: the electron is a quantized vortex 
 
 Paper 5 completes the program: the electron mass itself is no longer an input. Three self-consistency conditions &mdash; phase closure at first resonance (yielding the Pythagorean identity 3&sup2; = (&radic;5)&sup2; + 2&sup2;), dual resonance with the proton mode, and vortex energy balance &mdash; together fix m<sub>e</sub> to within 0.85%. The input set is now **three integers alone**: (p, q, k) = (2, 1, 3).
 
+## The Complete Mass Spectrum
+
+Paper 6 delivers the crown jewel: **56 particle masses from a single formula** with four quantum numbers and no free parameters. Every particle &mdash; hadrons, mesons, leptons, tetraquarks, and pentaquarks &mdash; is a torus knot mode whose mass is determined by its winding numbers (p, q), a phase-closure integer m, and a confinement factor n<sub>q</sub><sup>q</sup> that arises from mode-locking on the torus. Quark flavor maps to the poloidal winding number (q=5 for light, q=7 for charm, q=9 for bottom), and confinement follows from the condition gcd(n<sub>q</sub>, q)=1. All 56 predictions fall within 3% of experiment, with **median error 0.40%**. The Standard Model mass spectrum is the perturbative mode-locking structure of torus knot vortices in a superfluid vacuum.
+
 ## A Forgotten Discovery, Rediscovered
 
 In the 1980s, a computer scientist named **F. Ray Skilton** at Brock University published three papers proving that the fine-structure constant — one of the most fundamental numbers in physics — could be derived from a Pythagorean triple:

@@ -139,6 +139,27 @@ Paper 5 eliminates the electron mass as a free parameter:
 
 The input set is now reduced to **three integers**: (p, q, k) = (2, 1, 3). The electron mass, previously the sole dimensional input, is derived from the topology of the torus knot in a superfluid vacuum.
 
+## The Complete Mass Spectrum (Paper 6)
+
+Paper 6 extends the framework to **56 particles** &mdash; the most comprehensive test yet:
+
+| Category | Count | Confinement factor | Example |
+|:---------|:------|:-------------------|:--------|
+| Leptons (n<sub>q</sub>=0) | 2 | 1 | e, &mu; |
+| Mesons (n<sub>q</sub>=2) | 22 | 2<sup>q</sup> | &pi;, K, J/&psi;, &Upsilon; |
+| Baryons (n<sub>q</sub>=3) | 15 | 3<sup>q</sup> | p, n, &Lambda;, &Xi;, &Omega;<sup>&minus;</sup> |
+| &tau; (stealth baryon) | 1 | 3<sup>4</sup>=81 | &tau; |
+| Tetraquarks (n<sub>q</sub>=4) | 6 | 4<sup>q</sup> | X(3872), Z(4430) |
+| Pentaquarks (n<sub>q</sub>=5) | 5 | 5<sup>q</sup> | P<sub>c</sub>(4312), P<sub>c</sub>(4440) |
+
+The mass formula combines three factors:
+
+> m/m<sub>e</sub> = (p&sup2;+q&sup2;)/(p<sub>e</sub>&sup2;+q<sub>e</sub>&sup2;) &times; (&beta;/&beta;<sub>e</sub>) &times; ln(8&beta;)/ln(8&beta;<sub>e</sub>) &times; n<sub>q</sub><sup>q</sup>
+
+**Results: all 56 within 3%, 46 within 1%, median |error| = 0.40%.**
+
+Quark flavor maps to the poloidal winding number: q=5 (light), q=7 (charm), q=9 (bottom). Confinement follows from gcd(n<sub>q</sub>, q)=1.
+
 ---
 
 [Home](index.html) &#183; [Papers](papers.html) &#183; [About](about.html)

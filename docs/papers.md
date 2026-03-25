@@ -65,6 +65,18 @@ Papers 1&ndash;4 took the electron mass as a given input. This paper eliminates 
 
 ---
 
+## Paper 6: The Particle Mass Spectrum from Torus Knot Mode-Locking
+
+**Full title:** *The Particle Mass Spectrum from Torus Knot Mode-Locking: 56 Masses from Four Quantum Numbers*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+The masses of 56 particles &mdash; including hadrons, mesons, leptons, tetraquarks, and pentaquarks &mdash; are reproduced by a single formula with four quantum numbers (p, q, m, n<sub>q</sub>) and no continuously adjustable parameters beyond the electron mass. Each particle is a torus knot mode with a topological factor (p&sup2;+q&sup2;), a geometric factor from phase closure (&beta; and ln(8&beta;)), and a confinement factor n<sub>q</sub><sup>q</sup> arising from a mode-locking cascade: each of q poloidal windings compounds the interaction among n<sub>q</sub> quarks. Quark flavor maps to the poloidal winding number: light quarks at q=5, charm at q=7, bottom at q=9. The confinement condition gcd(n<sub>q</sub>, q)=1 ensures quarks cannot escape. All 56 predictions fall within 3% of experiment, with 46 within 1% and median absolute error 0.40%. The &tau; lepton admits an interpretation as a "stealth baryon" &mdash; topologically a (3,4) state that appears as a lepton because perfect confinement suppresses strong interactions.
+
+**DOI:** [10.5281/zenodo.19225259](https://doi.org/10.5281/zenodo.19225259)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -80,6 +92,14 @@ python3 -m simulations.nwt --self-energy # Fine-structure constant emergence
 python3 -m simulations.nwt --pythagorean # Stability analysis
 python3 -m simulations.nwt --skilton     # Skilton's alpha derivation
 python3 -m simulations.nwt --proton-mass # Proton mass from Cornell potential
+```
+
+Reproduce paper figures and analyses:
+```
+python3 papers/paper6_figures.py         # Paper 6: all 56 mass predictions + 5 figures
+python3 analysis/nwt_alpha_ladder.py     # Paper 4: 1/α energy ladder
+python3 analysis/nwt_self_consistent_knot_v3.py  # Paper 5: phase closure
+python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation
 ```
 
 ---
