@@ -65,13 +65,9 @@ NWT tested Williamson's pivot field in FDTD simulation and found it insufficient
 Funaro's key results:
 
 - **The no-go theorem**: Standard Maxwell equations admit no soliton solutions. Any bounded, finite-energy EM field in free space must disperse. This is provable via Liouville's theorem: such fields would have to be holomorphic and bounded, hence constant, hence zero. If particles are trapped light, something beyond standard Maxwell is required.
-
-- **Modified Maxwell with a velocity field**: Funaro introduced a velocity field V (|V| = c) that enlarges the solution space to include solitons with compact support, while preserving the same Lagrangian L = |E|<sup>2</sup> &minus; c<sup>2</sup>|B|<sup>2</sup>.
-
-- **Bessel modes on the torus**: Rotating wave solutions of the form J<sub>k</sub>(&omega;r) in the torus cross-section, with integer k &ge; 2 &mdash; modes with k = 1 cannot satisfy continuity at the axis. This selection rule independently matches NWT's finding that only certain torus knot modes form stable solitons.
-
+- **Modified Maxwell with a velocity field**: Funaro introduced a velocity field V with magnitude c that enlarges the solution space to include solitons with compact support, while preserving the same Lagrangian.
+- **Bessel modes on the torus**: Rotating wave solutions in the torus cross-section, with integer mode number k &ge; 2 &mdash; modes with k = 1 cannot satisfy continuity at the axis. This selection rule independently matches NWT's finding that only certain torus knot modes form stable solitons.
 - **The vortex-ring electron** (2009): A cylinder of rotating electromagnetic fields bent into a torus, with explicit formulas for charge, mass, and magnetic moment. The mass turns out to be independent of frequency and tube radius &mdash; it depends only on the Bessel mode number k and the major radius. Mass from topology, not from energy.
-
 - **The proton as a Hill's vortex** (2012): An outer spherical vortex encapsulating an inner toroidal ring, with three charge regions (negative-positive-negative) resembling quark structure. Funaro noted that the proton is not a sign-flipped electron &mdash; it has fundamentally different topology.
 
 Funaro also proved a formal connection between vortex ring filaments and the nonlinear Schr&ouml;dinger equation, noted the Euler fluid analogy for electromagnetic fields, and extended the framework to include Einstein's field equations. In a related paper with collaborators (Chinosi, Della Croce & Funaro 2010), he solved the eigenvalue problem on toroidal domains using finite elements, finding that curvature produces a potential term proportional to 1/(y+&eta;)<sup>2</sup> and that domain shape must be iteratively optimized for rotational degeneracy. The authors noted explicitly: *"We are not able to discuss the stability"* &mdash; they needed nonlinear dynamics.
