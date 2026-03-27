@@ -77,6 +77,18 @@ The masses of 56 particles &mdash; including hadrons, mesons, leptons, tetraquar
 
 ---
 
+## Paper 7: Charge, Leptons, and the Genus of Torus Knots
+
+**Full title:** *Charge, Leptons, and the Genus of Torus Knots*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+A fifth quantum number &mdash; the framing f of the torus knot embedding &mdash; gives electric charge via the Gell-Mann&ndash;Nishijima formula Q = I<sub>3</sub> + (B+S)/2, where I<sub>3</sub> = f/2. This reproduces the charge of every hadron tested: the proton/neutron doublet (f = &plusmn;1), the &Delta; quartet (f = &plusmn;3, &plusmn;1), pion/kaon multiplets, and the &Omega;<sup>&minus;</sup> singlet. The genus of the torus knot g = (p&minus;1)(q&minus;1)/2 provides a structural criterion: particles with g = 0 and n<sub>q</sub> = 0 are leptons; all others are hadrons. The &tau; lepton maps onto a genus-3 configuration, placing it structurally among hadrons &mdash; independent confirmation of the stealth baryon hypothesis. All NWT torus knots saturate the Thurston&ndash;Bennequin bound from Legendrian contact geometry, suggesting a minimum-energy selection principle. Particle decays correspond to Dehn surgery operations, with neutrinos carrying the topology-change data.
+
+**DOI:** [10.5281/zenodo.19256133](https://doi.org/10.5281/zenodo.19256133)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -97,6 +109,11 @@ python3 -m simulations.nwt --proton-mass # Proton mass from Cornell potential
 Reproduce paper figures and analyses:
 ```
 python3 papers/paper6_figures.py         # Paper 6: all 56 mass predictions + 5 figures
+python3 papers/paper7_figures.py         # Paper 7: genus classification figure
+python3 analysis/nwt_charge_from_framing.py  # Paper 7: charge from framing verification
+python3 analysis/nwt_jones_polynomial.py     # Paper 7: Jones polynomial for all particles
+python3 analysis/nwt_surgery_network.py      # Paper 7: decay surgery network + string tensions
+python3 analysis/nwt_conservation_laws.py    # Paper 7: conservation law search
 python3 analysis/nwt_alpha_ladder.py     # Paper 4: 1/α energy ladder
 python3 analysis/nwt_self_consistent_knot_v3.py  # Paper 5: phase closure
 python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation

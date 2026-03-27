@@ -160,6 +160,28 @@ The mass formula combines three factors:
 
 Quark flavor maps to the poloidal winding number: q=5 (light), q=7 (charm), q=9 (bottom). Confinement follows from gcd(n<sub>q</sub>, q)=1.
 
+## The Fifth Quantum Number: Charge from Framing (Paper 7)
+
+Paper 7 extends the scheme to **five quantum numbers** (p, q, m, n<sub>q</sub>, f), adding electric charge:
+
+| Quantum number | Physical role | Type |
+|:---|:---|:---|
+| p (toroidal winding) | Quark content within flavor sector | Topological |
+| q (poloidal winding) | Flavor: q=4 (baryon), q=5 (light), q=7 (charm), q=9 (bottom) | Topological |
+| m (phase closure) | Mass (via &beta; and vortex energy) | Geometric |
+| n<sub>q</sub> (constituents) | Baryon number: B = n<sub>q</sub> mod 2; confinement: n<sub>q</sub><sup>q</sup> | Topological |
+| **f (framing)** | **Isospin I<sub>3</sub> = f/2; charge Q = I<sub>3</sub> + (B+S)/2** | **Topological** |
+
+**Charge multiplets from framing:**
+
+| Multiplet | Knot | Framings | Charges |
+|:---|:---|:---|:---|
+| p, n | T(1,4) | f = +1, &minus;1 | Q = +1, 0 |
+| &Sigma;<sup>+</sup>, &Sigma;<sup>0</sup>, &Sigma;<sup>&minus;</sup> | T(1,4) | f = +2, 0, &minus;2 | Q = +1, 0, &minus;1 |
+| &Delta;<sup>++</sup>, &Delta;<sup>+</sup>, &Delta;<sup>0</sup>, &Delta;<sup>&minus;</sup> | T(5,4) | f = +3, +1, &minus;1, &minus;3 | Q = +2, +1, 0, &minus;1 |
+
+**The genus criterion:** Leptons are genus-zero unknots with n<sub>q</sub> = 0. The &tau; has genus 3 &mdash; it is a true knot, confirming the stealth baryon hypothesis.
+
 ---
 
 [Home](index.html) &#183; [Papers](papers.html) &#183; [About](about.html)

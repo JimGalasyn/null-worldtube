@@ -39,6 +39,10 @@ Paper 5 completes the program: the electron mass itself is no longer an input. T
 
 Paper 6 delivers the crown jewel: **56 particle masses from a single formula** with four quantum numbers and no free parameters. Every particle &mdash; hadrons, mesons, leptons, tetraquarks, and pentaquarks &mdash; is a torus knot mode whose mass is determined by its winding numbers (p, q), a phase-closure integer m, and a confinement factor n<sub>q</sub><sup>q</sup> that arises from mode-locking on the torus. Quark flavor maps to the poloidal winding number (q=5 for light, q=7 for charm, q=9 for bottom), and confinement follows from the condition gcd(n<sub>q</sub>, q)=1. All 56 predictions fall within 3% of experiment, with **median error 0.40%**. The Standard Model mass spectrum is the perturbative mode-locking structure of torus knot vortices in a superfluid vacuum.
 
+## Charge, Leptons, and the Fifth Quantum Number
+
+Paper 7 completes the quantum number scheme. A fifth discrete number &mdash; the **framing** f of the torus knot embedding &mdash; encodes electric charge via the Gell-Mann&ndash;Nishijima formula Q = f/2 + (B+S)/2. The proton and neutron are the same knot T(1,4) with framings f = +1 and f = &minus;1. The entire &Delta; quartet emerges from four framings of T(5,4). The **genus** of the torus knot, g = (p&minus;1)(q&minus;1)/2, provides a structural criterion: true leptons (e, &mu;) have genus zero &mdash; they are unknots wound on the torus &mdash; while all hadrons are true knots with g &gt; 0. The &tau; lepton, previously identified as a stealth baryon by its mass, independently maps onto genus 3: topologically, it is not a lepton. Every NWT torus knot saturates the Thurston&ndash;Bennequin bound from Legendrian contact geometry, suggesting particles occupy maximally tight embeddings.
+
 ## A Forgotten Discovery, Rediscovered
 
 In the 1980s, a computer scientist named **F. Ray Skilton** at Brock University published three papers proving that the fine-structure constant — one of the most fundamental numbers in physics — could be derived from a Pythagorean triple:
