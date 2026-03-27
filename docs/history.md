@@ -15,6 +15,12 @@ The program attracted serious attention for two decades. Peter Guthrie Tait bega
 
 The topology was right. The physics was missing.
 
+**References:**
+- Thomson, W. "On Vortex Atoms." *Proceedings of the Royal Society of Edinburgh* 6, 94-105 (1867). Reprinted in *Philosophical Magazine* Series 4, 34, 15-24 (1867).
+- Helmholtz, H. "&Uuml;ber Integrale der hydrodynamischen Gleichungen, welche den Wirbelbewegungen entsprechen." *Journal f&uuml;r die reine und angewandte Mathematik* 55, 25-55 (1858). English translation by P.G. Tait: *Philosophical Magazine* Series 4, 33(226), 485-512 (1867).
+- Tait, P.G. "On Knots." *Transactions of the Royal Society of Edinburgh* 28, 145-190 (1877).
+- Thomson, J.J. *A Treatise on the Motion of Vortex Rings.* London: Macmillan (1883).
+
 ## 2. F. Ray Skilton and the Pythagorean Triple (1986&ndash;1988)
 
 A century after Kelvin, **F. Raymond Skilton** &mdash; a professor of Computer Science and Information Processing at Brock University in St. Catharines, Ontario &mdash; published three papers in the proceedings of the Annual Pittsburgh Conference on Modeling and Simulation. Working entirely with integer arithmetic, Skilton proved that the fine-structure constant could be derived from a Pythagorean triple:
@@ -92,29 +98,44 @@ The photon vortex idea was discovered independently by several researchers worki
 
 **Vivian Robinson**, a New Zealand independent researcher, proposed in his self-published book *The Common Sense Universe* that particles are spinning photons whose masses correspond to subharmonic frequency ratios: f/3, f/9, f/27, and so on. While the book was not peer-reviewed, the subharmonic insight was prescient. NWT provides the dynamical mechanism for these ratios: they are the frequency-locked plateaus of a devil's staircase arising from KAM (Kolmogorov-Arnold-Moser) theory on the torus. Robinson had the right pattern; torus dynamics explains why it appears.
 
+- Robinson, V. *The Common Sense Universe.* Self-published (2023). ISBN 978-0-6454125-5-0.
+
 ### Shixing Weng: The Helical Photon (2016)
 
 **Shixing Weng**, working in Brampton, Ontario (near Skilton's Brock University, though decades later), solved the four-potential wave equations in cylindrical coordinates and found that a photon is naturally described as a helical electromagnetic wave on a cylinder of radius r<sub>0</sub> = &lambda;/2&pi;. The photon energy E = h&nu; and angular momentum J = &#8463; both follow from surface integrals over this cylinder. The photon is the *open* (propagating) version of the NWT torus; the electron is the *closed* (trapped) version &mdash; the same helix with its ends joined.
+
+- Weng, S. "A Classical Model of the Photon." *Progress in Physics* 12(1), 49-55 (2016).
+- Weng, S. "Theoretical Study on Polarized Photon." *Progress in Physics* 17, 23-29 (2021).
 
 ### G&uuml;nter Poelz: Synchrotron Self-Consistency at DESY (2013)
 
 **G&uuml;nter Poelz**, a retired experimental physicist from DESY and Hamburg University, calculated the exact Li&eacute;nard-Wiechert retarded fields of a massless charge circulating at c on a circular orbit of radius r<sub>Q</sub> = &#8463;<sub>C</sub> (the reduced Compton wavelength). Summing the synchrotron radiation modes and requiring self-consistency, he recovered the elementary charge e = 1.6 &times; 10<sup>&minus;19</sup> C and the fine-structure constant &alpha; = 1/137. His field-line plots at higher multipole orders trace out trefoil and figure-eight patterns &mdash; torus knots &mdash; though he did not make the knot-theory connection.
 
+- Poelz, G. "On the Wave Character of the Electron." arXiv:1206.0620 (2013).
+
 ### Jack Avrin: Torus Knot Particles (2012)
 
 **Jack S. Avrin**, an independent researcher in California, published a 77-page paper in *Symmetry* modeling all particles as (2,n) torus knots, with the unknot and trefoil as fundamental building blocks. Spin-1/2 follows from the M&ouml;bius strip's double cover of SO(3), three generations from icosahedral symmetry, and CPT invariance from the topology of knot inversions. Avrin had the right geometric intuition: particles *are* torus knots, not merely described by them. NWT adds the dynamics and the quantitative mass predictions that Avrin's purely topological framework lacked.
+
+- Avrin, J.S. "Knots on a Torus: A Model of the Elementary Particles." *Symmetry* 4, 39-115 (2012). DOI: 10.3390/sym4010039.
 
 ### Yaroslav Klyushin: The Ether Torus (2015)
 
 **Yaroslav Klyushin** of St. Petersburg modeled particles as toroidal vortices in an ether, with explicit calculations of poloidal velocities and ether densities. His electron has a poloidal-to-meridional velocity ratio of 2.5 (close to NWT's aspect ratio of ~2.9), and his vacuum density of ~10<sup>5</sup>&ndash;10<sup>9</sup> kg/m<sup>3</sup> overlaps NWT's &rho;<sub>0</sub> = 1.69 &times; 10<sup>5</sup> kg/m<sup>3</sup>. He recovered the Rydberg formula from 137 quantized vortex rings between proton and electron. The ether framework is unjustified, but the numerical coincidences are striking.
 
+- Klyushin, Y. "Elementary Particles Structures." Ch. 16 of *Electricity, Gravity, Heat: Another Look* (2nd ed.). International Scientists' Club, St. Petersburg (2015).
+
 ### Josef Vrba: Maxwellian Solitons (2022)
 
 **Josef Vrba** reformulated Maxwell's equations as three coupled vector-algebraic relations M(u, B, E), where u is the velocity field, and showed that closed-path solutions &mdash; "3D rotons" tracing torus-knot trajectories &mdash; reproduce the properties of massive particles. The frequency ratio &omega;<sub>1</sub>:&omega;<sub>2</sub> determines the knot type, quantization follows from rational winding ratios, and the Planck relation E = hf is derived from geometric periodicity rather than postulated. His fine-structure relation &kappa;<sup>2</sup> = 1/(2&alpha;) emerges geometrically. The parallel to NWT is nearly exact in topology and differs mainly in method: Vrba works analytically, NWT adds FDTD simulation, nonlinear dynamics, and multi-particle systems.
 
+- Vrba, J. "General Maxwellian Dynamics / Particles are Maxwellian Solitons." *Proceedings: Harbingers of Neophysics* (2022). neophysics.org/p/1673.
+
 ### Peter Mohr: Maxwell = Dirac (2010)
 
 At the mainstream end of the spectrum, **Peter J. Mohr** of NIST published a rigorous proof in *Annals of Physics* that Maxwell's equations can be recast exactly as a massless spin-1 Dirac equation: &gamma;<sup>&mu;</sup>&part;<sub>&mu;</sub>&Psi; = 0, where &Psi; is a six-component photon wavefunction built from E and B. The Maxwell Green function has the same covariant form as the Dirac Green function. This is not an analogy &mdash; it is a mathematical identity. If the photon wavefunction *is* the electromagnetic field, then a trapped electromagnetic field on a torus *is* a particle wavefunction. Mohr provides the rigorous foundation for treating NWT's FDTD fields as quantum states.
+
+- Mohr, P.J. "Solutions of the Maxwell equations and photon wave functions." *Annals of Physics* 325, 607-663 (2010).
 
 ## 6. The Quantum Topology of Torus Knots
 
@@ -126,6 +147,14 @@ A parallel mathematical tradition, largely unaware of the physics program, devel
 
 **Alexander Gorsky, Alexei Milekhin and Nikita Sopenko** (2015) showed in *JHEP* that in Omega-deformed 5D supersymmetric QED, the parameters (n, m) of a torus knot T<sub>n,m</sub> correspond directly to instanton charge and electric charge &mdash; *knot quantum numbers are particle quantum numbers*. The HOMFLY polynomial of the torus knot provides an entropic factor counting the degeneracy of instanton-W-boson configurations. Condensate formation arises from knot topology. This is mainstream gauge theory arriving at the same structure as NWT from a completely different direction.
 
+**References:**
+- Rosso, M. and Jones, V. "On the Invariants of Torus Knots Derived from Quantum Groups." *J. Knot Theory Ramifications* 2(1), 97-112 (1993). DOI: 10.1142/S0218216593000064.
+- Sreedhar, V.V. "The Classical and Quantum Mechanics of a Particle on a Knot." arXiv:1501.01098 (2015).
+- Das, P., Pramanik, S. and Ghosh, S. "Particle on a Torus Knot: Constrained Dynamics and Semi-Classical Quantization in a Magnetic Field." arXiv:1511.09035 (2016).
+- Biswas, D. and Ghosh, S. "Quantum Mechanics of Particle on a Torus Knot: Curvature and Torsion Effects." arXiv:1908.06423 (2019).
+- Anjali, S. and Gupta, S. "Particle on a torus knot: Symplectic analysis." *Eur. Phys. J. Plus* 137, 511 (2022). DOI: 10.1140/epjp/s13360-022-02699-3.
+- Gorsky, A., Milekhin, A. and Sopenko, N. "The condensate from torus knots." *JHEP* 09, 102 (2015). arXiv:1506.06695.
+
 ## 7. The Nonlinear Vacuum
 
 NWT's soliton stability relies on the Euler-Heisenberg effective Lagrangian &mdash; the one-loop QED correction that makes the vacuum behave as a nonlinear medium at strong field strengths. This is not speculative physics: it was calculated by Werner Heisenberg and Hans Euler in 1936, rederived by Julian Schwinger in 1951 using proper-time methods, and is the same physics responsible for vacuum birefringence (being measured by PVLAS and LUXE experiments) and Delbr&uuml;ck scattering (measured since 1975).
@@ -134,11 +163,21 @@ NWT's soliton stability relies on the Euler-Heisenberg effective Lagrangian &mda
 
 **Shiva Kumar** (2026), a nonlinear optics specialist at McMaster University, independently arrived at the same philosophical program from a different direction. Published in *Nature Scientific Reports*, Kumar showed that a nonlinear extension of Maxwell's equations with a &kappa;A<sup>2</sup>A<sub>&mu;</sub> self-interaction produces dark soliton solutions with quantized energies, pseudo-charges whose coupling reproduces the fine-structure constant, and an envelope equation that reduces to the Schr&ouml;dinger equation. His cavity modes equilibrate via four-wave mixing to reproduce the blackbody spectrum. Kumar's work validates the broader "quantum mechanics from nonlinear electrodynamics" paradigm. NWT adds what his framework lacks: the torus topology that gives discrete quantum numbers, mode selection, and the mass spectrum.
 
+**References:**
+- Heisenberg, W. and Euler, H. "Folgerungen aus der Diracschen Theorie des Positrons." *Zeitschrift f&uuml;r Physik* 98, 714-732 (1936). DOI: 10.1007/BF01343663.
+- Schwinger, J. "On Gauge Invariance and Vacuum Polarization." *Physical Review* 82(5), 664-679 (1951). DOI: 10.1103/PhysRev.82.664.
+- Dunne, G.V. "Heisenberg-Euler Effective Lagrangians: Basics and Extensions." arXiv:hep-th/0406216 (2004). In *From Fields to Strings: Circumnavigating Theoretical Physics* (Shifman, Vainshtein, Wheater, eds.).
+- Dunne, G.V. "The Heisenberg-Euler Effective Action: 75 years on." *Int. J. Mod. Phys. A* 27, 1260004 (2012). arXiv:1202.1557.
+- Kumar, S. "The connection between nonlinear extension of Maxwell's equations, blackbody spectrum, Lorentz force and quantum mechanics." *Scientific Reports* 16, 4269 (2026). DOI: 10.1038/s41598-025-34478-2.
+
 ## 8. Torus Knots in the Laboratory
 
 In 2024, **Maitreyi Jayaseelan** and colleagues at the University of Rochester created torus knot wavefunctions experimentally in spinor Bose-Einstein condensates and published the results in *Nature Communications Physics*. By coordinating orbital and spin rotations of atomic wavefunctions, they engineered (p,q) torus knots, M&ouml;bius strips, and Solomon's knots in a multi-component superfluid described by the Gross-Pitaevskii equation &mdash; the same equation NWT uses for the superfluid vacuum.
 
 Their knots are externally engineered by laser fields; NWT claims self-consistent solitons that form spontaneously. But the mathematical framework &mdash; GPE + torus topology &mdash; is identical. Their experimental platform could, in principle, test NWT predictions by measuring the eigenfrequency spectrum of specific torus knot modes and comparing to the phase closure calculation.
+
+**References:**
+- Jayaseelan, M., Murphree, J.D., Schultz, J.T., Ruostekoski, J. and Bigelow, N.P. "Topological atom optics and beyond with knotted quantum wavefunctions." *Communications Physics* (Nature) 7, 7 (2024). DOI: 10.1038/s42005-023-01499-0.
 
 ## 9. The Null Worldtube
 
