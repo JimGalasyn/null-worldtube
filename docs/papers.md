@@ -121,4 +121,4 @@ python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation
 
 ---
 
-[Home](index.html) &#183; [The Predictions](results.html) &#183; [About](about.html)
+[Home](index.html) &#183; [The Predictions](results.html) &#183; [History](history.html) &#183; [About](about.html)

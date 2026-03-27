@@ -184,4 +184,4 @@ Paper 7 extends the scheme to **five quantum numbers** (p, q, m, n<sub>q</sub>, 
 
 ---
 
-[Home](index.html) &#183; [Papers](papers.html) &#183; [About](about.html)
+[Home](index.html) &#183; [Papers](papers.html) &#183; [History](history.html) &#183; [About](about.html)

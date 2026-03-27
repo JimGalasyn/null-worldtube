@@ -62,4 +62,4 @@ NWT reveals *why* Skilton's formula works: the numbers 88 and 105 are generated 
 
 ---
 
-[The Predictions](results.html) &#183; [Papers](papers.html) &#183; [About](about.html)
+[The Predictions](results.html) &#183; [Papers](papers.html) &#183; [History](history.html) &#183; [About](about.html)
