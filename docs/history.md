@@ -46,11 +46,9 @@ In 1997, **John G. Williamson** and **Martin B. van der Mark** asked the questio
 
 Williamson, an electrical engineer at the University of Glasgow and later founder of the Quantum Bicycle Society in Scotland, developed this into a full algebraic program using Clifford algebra Cl<sub>1,3</sub>. His key contributions:
 
-- **The pivot field** (2008): A Lorentz-invariant scalar P = &part;<sub>0</sub>A<sub>0</sub> + &nabla;&middot;A (the divergence of the four-potential, usually set to zero by the Lorenz gauge condition). Williamson proposed keeping P &ne; 0 as a physical quantity. The cross-term PE in the energy-momentum density creates an inward-directed confining force for radial electric fields, providing a mechanism for trapping electromagnetic energy.
-
-- **Extended Maxwell equations**: In Clifford algebra, Maxwell's equations generalize to a 16-component equation dF = 0 where mass, spin, and electromagnetic field emerge on the same footing &mdash; not added by hand.
-
-- **The Mexican hat potential** (2021): With van der Mark, Williamson showed that a Higgs-like quartic potential &mu;<sub>0</sub><sup>4</sup> = &mu;<sup>2</sup>|&phi;|<sup>2</sup> &minus; &frac14;|&phi;|<sup>4</sup> arises naturally from the structure of Cl<sub>1,3</sub>. Spontaneous symmetry breaking &mdash; and therefore mass &mdash; is algebraic, not postulated.
+- **The pivot field** (2008): A Lorentz-invariant scalar P &mdash; the divergence of the four-potential, usually set to zero by the Lorenz gauge condition. Williamson proposed keeping P nonzero as a physical quantity. The cross-term PE in the energy-momentum density creates an inward-directed confining force for radial electric fields, providing a mechanism for trapping electromagnetic energy.
+- **Extended Maxwell equations**: In Clifford algebra, Maxwell's equations generalize to a 16-component equation where mass, spin, and electromagnetic field emerge on the same footing &mdash; not added by hand.
+- **The Mexican hat potential** (2021): With van der Mark, Williamson showed that a Higgs-like quartic potential arises naturally from the structure of the Clifford algebra Cl(1,3). Spontaneous symmetry breaking &mdash; and therefore mass &mdash; is algebraic, not postulated.
 
 NWT tested Williamson's pivot field in FDTD simulation and found it insufficient for soliton stabilization: the confinement force is linear in the fields and cannot overcome dispersion. The Euler-Heisenberg QED vacuum polarization, with its F<sup>4</sup> nonlinearity, provides the self-focusing that the pivot requires. This is not a rejection of Williamson's program but its completion &mdash; NWT replaces his ad hoc confinement mechanism with known QED physics.
 
