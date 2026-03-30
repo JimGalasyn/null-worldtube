@@ -90,7 +90,7 @@ The photon vortex idea was discovered independently by several researchers worki
 
 ### Vivian Robinson: Subharmonic Frequencies (2011)
 
-**Vivian Robinson**, a New Zealand independent researcher, proposed in his self-published book *The Common Sense Universe* that particles are spinning photons whose masses correspond to subharmonic frequency ratios: f/3, f/9, f/27, and so on. While the book was not peer-reviewed, the subharmonic insight was prescient. NWT provides the dynamical mechanism for these ratios: they are the frequency-locked plateaus of a devil's staircase arising from KAM (Kolmogorov-Arnold-Moser) theory on the torus. Robinson had the right pattern; torus dynamics explains why it appears.
+**Vivian Robinson**, a New Zealand independent researcher, proposed in his self-published book *The Common Sense Universe* that particles are spinning photons whose masses correspond to subharmonic frequency ratios: f/3, f/9, f/27, and so on. While the book was not peer-reviewed, the subharmonic insight was prescient. NWT identifies these ratios as arising from the mode structure of torus knots: each subharmonic corresponds to a specific winding number on the torus, with the mass hierarchy set by phase closure and confinement. Robinson had the right pattern; torus geometry explains why it appears.
 
 - Robinson, V. *The Common Sense Universe.* Self-published (2023). ISBN 978-0-6454125-5-0.
 
@@ -177,9 +177,9 @@ Their knots are externally engineered by laser fields; NWT claims self-consisten
 
 NWT sits at the confluence of these streams. From Kelvin it inherits the vortex topology. From Skilton, the Pythagorean integers. From Williamson, the question: *is the electron a photon?* From Funaro, the Bessel modes and the torus eigenvalue problem. From Robinson, the subharmonic pattern. From Vrba, the algebraic soliton picture. From the quantum topologists, the knot invariants. From Euler-Heisenberg, the nonlinear vacuum that makes it all work.
 
-What NWT adds is the dynamical verification: full FDTD electromagnetic simulation on the torus with Euler-Heisenberg nonlinearity, KAM stability analysis identifying which modes survive as solitons, and quantitative predictions &mdash; 56 particle masses to 0.40% median error from four quantum numbers and no free parameters &mdash; that test whether the century-old intuition of particles as knotted light can actually reproduce the measured universe.
+What NWT adds is the quantitative programme: 56 particle masses to 0.40% median error from four quantum numbers and no free parameters; all three gauge coupling constants from the crossing geometry of the torus; both quark and neutrino mixing matrices from the mod-2 and mod-3 symmetries of the Hopf link and trefoil; CP violation from the geometric phase at crossings; the Higgs mechanism from the Gross&ndash;Pitaevskii nonlinearity at Hopf link crossings; and &mdash; most fundamentally &mdash; the Standard Model gauge group SU(3) &times; SU(2) &times; U(1) itself, derived as the crossing exchange algebra of the trefoil (3 self-crossings &rarr; su(3)) and the Hopf link (2 inter-crossings &rarr; su(2) &oplus; u(1)).
 
-The photon vortex idea was discovered and rediscovered at least a dozen times over 150 years, by physicists and mathematicians and computer scientists working in complete isolation. Each found a piece of the picture. NWT attempts to assemble them.
+The photon vortex idea was discovered and rediscovered at least a dozen times over 150 years, by physicists and mathematicians and computer scientists working in complete isolation. Each found a piece of the picture. NWT attempts to assemble them &mdash; and, with the gauge group derivation, to show that the pieces fit together into a single mathematical structure: the topology of the simplest knot and the simplest link.
 
 ---
 
