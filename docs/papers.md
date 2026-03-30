@@ -143,6 +143,23 @@ python3 analysis/nwt_self_consistent_knot_v3.py  # Paper 5: phase closure
 python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation
 ```
 
+Papers 8 & 9 analyses:
+```
+python3 analysis/nwt_reidemeister_couplings.py   # Paper 8/9: α, α_s from R-move operators
+python3 analysis/nwt_knot_eigensolver_v3.py      # Paper 8/9: Level-2 eigensolver (coupling constants)
+python3 analysis/nwt_crossing_geometry.py        # Paper 8: trefoil crossing coordinates
+python3 analysis/nwt_ewk_boson_scan.py           # Paper 9: W/Z/H as Hopf(2) mesons
+python3 analysis/nwt_hopf_component_analysis.py  # Paper 9: per-component coprimality
+python3 analysis/nwt_multimode_carrier_scan.py   # Paper 9: multi-mode × carrier scan
+python3 analysis/nwt_pmns_3d.py                  # Paper 9: PMNS from 3D GPE eigenstates
+python3 analysis/nwt_g_minus_2.py                # Paper 9: anomalous magnetic moment
+python3 analysis/nwt_ewk_decay_check.py          # Paper 9: EWK boson decay channels
+python3 analysis/nwt_lifetime_geometry.py        # Paper 9: geometric carrier sizes + lifetimes
+python3 simulations/nwt_gpe_knots_3d.py ring     # Paper 9: Level-3 GPE vortex dynamics
+python3 simulations/nwt_gpe_knots_3d.py trefoil  # Paper 9: trefoil knot evolution
+python3 simulations/nwt_gpe_knots_3d.py hopf     # Paper 9: Hopf link dynamics
+```
+
 ---
 
 [Home](index.html) &#183; [The Predictions](results.html) &#183; [History](history.html) &#183; [About](about.html)
