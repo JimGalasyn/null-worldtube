@@ -7,23 +7,24 @@ title: "What is the Null Worldtube?"
 
 ![A photon confined to a torus knot — the geometric foundation of the electron](assets/images/figure1_torus_knot.png)
 
-Imagine a photon — a particle of light — trapped on the surface of a donut, racing around it in a knotted path that closes on itself after winding twice around the long way and once around the short way. That knotted loop of light *is* the electron.
+Imagine a photon &mdash; a particle of light &mdash; trapped on the surface of a donut, racing around it in a knotted path that closes on itself after winding twice around the long way and once around the short way. That knotted loop of light *is* the electron.
 
-This is the central idea of the **Null Worldtube Theory (NWT)**. The electron is not a point particle with dozens of unexplained properties. It is a specific geometric object — a **(2,1) torus knot** — and nearly everything we measure about it follows from the shape of the donut it lives on.
+Now tie the donut itself into a knot &mdash; a **trefoil**, the simplest non-trivial knot. The three self-crossings of that knot are the three &ldquo;colours&rdquo; of the strong force. Link two donut rings together &mdash; a **Hopf link**, the simplest non-trivial link. The two perpendicular crossings are the weak force and the linking phase is electromagnetism. **The gauge group of the Standard Model &mdash; SU(3) &times; SU(2) &times; U(1) &mdash; is the crossing exchange algebra of the trefoil and the Hopf link.**
 
-## One Mass + Three Integers = 23 Predictions
+This is the central idea of the **Null Worldtube Theory (NWT)**. Particles are quantised vortex knots in a superfluid vacuum. Electrons live on unknotted carriers, mesons on Hopf links, and baryons on trefoils. The topology of the carrier determines the particle&rsquo;s quantum numbers, the forces it feels, and even the symmetry-breaking pattern of the Higgs mechanism.
 
-The entire Standard Model of particle physics has 26 free parameters — numbers like particle masses, mixing angles, and coupling constants that physicists have measured but never explained. NWT derives **23 of them** from just four inputs:
+## One Parameter = The Standard Model
 
-- **One measured mass:** the electron mass (0.511 MeV)
-- **Three integers:** **(p, q, k) = (2, 1, 3)**
+The entire framework is governed by a single geometric quantity: the **aspect ratio** &kappa; = R/r &asymp; &pi;&sup2; &mdash; the ratio of the donut&rsquo;s major radius to its tube radius. From this one number:
 
-These three integers describe the geometry:
-- **p = 2** — the photon winds twice around the donut (toroidal winding)
-- **q = 1** — it winds once around the tube (poloidal winding)
-- **k = 3** — the donut is three times wider than its tube (aspect ratio)
-
-From these alone, the theory predicts the masses of all quarks and leptons, the Higgs boson mass, the Weinberg angle, the strong coupling constant, neutrino mixing angles, and more — with a **median error of 0.7%** against experimental measurements.
+- **56 particle masses** (quarks, leptons, mesons, baryons, tetraquarks, pentaquarks) with **median error 0.40%**
+- **The fine structure constant** &alpha; = 1/(&radic;2 &kappa;&sup2;) &mdash; 0.52% from experiment
+- **The W/Z mass ratio** &mdash; 0.07% from experiment, with zero free parameters
+- **The Cabibbo angle** sin&sup2;&theta;<sub>C</sub> = 7&alpha; &mdash; 0.05% from experiment
+- **All three neutrino mixing angles**, the mass hierarchy, and CP violation
+- **The gauge group** SU(3) &times; SU(2) &times; U(1) itself, from the crossing algebra of knots and links
+- **The Higgs mechanism** &mdash; built into the condensate dynamics at link crossings
+- **The proton cross section** &sigma;<sub>pp</sub> = 2&pi;R<sub>p</sub>&sup2; &asymp; 44 mb &mdash; 10% from experiment
 
 ## From Quarks to Nuclei
 
@@ -46,6 +47,12 @@ Paper 7 completes the quantum number scheme. A fifth discrete number &mdash; the
 ## The Gauge Group from Knot Topology
 
 Paper 8 answers the deepest structural question: *why SU(3) &times; SU(2) &times; U(1)?* The gauge group of the Standard Model is the **crossing exchange algebra** of the two simplest vortex topologies. The trefoil knot has three self-crossings; continuous strand exchange at those crossings generates the eight-dimensional Lie algebra su(3) &mdash; the symmetry of the strong force. The three &ldquo;colours&rdquo; of quarks are the three crossings. The Hopf link has two inter-crossings in perpendicular planes, generating su(2), while the linking phase provides u(1) &mdash; the electroweak symmetry. The Gross&ndash;Pitaevskii nonlinearity at the Hopf crossings provides the Higgs potential: electroweak symmetry breaking is the condensate stiffening at the crossings as the universe cools. The Standard Model gauge group is not a choice &mdash; it is the minimal structure compatible with the simplest knot and the simplest link.
+
+## Coupling Constants, Mixing, and the Complete Phenomenology
+
+Paper 9 delivers the quantitative consequences of the gauge structure. The fine structure constant &alpha; = 1/(&radic;2 &kappa;&sup2;) is derived from the R1 transition operator on the vortex tube surface, decomposing into three factors: the tube solid angle (r/R)&sup2;, a cos(&theta;) selection rule, and the condensate amplitude&ndash;phase equipartition factor &radic;2. The W/Z mass ratio follows from consecutive phase-closure excitations on the Hopf link (0.07% accuracy, zero free parameters). The W, Z, and Higgs are identified as high-excitation Hopf(2) meson states with sub-percent mass accuracy.
+
+The PMNS neutrino mixing matrix emerges from the trefoil&rsquo;s crossing geometry: a mod-3 selection rule from the three-fold symmetry, a topological invariant &Delta;t = &pi; at each crossing (proved to be exact for all aspect ratios), and even/odd strand interference that naturally produces small &theta;<sub>13</sub> and large &theta;<sub>23</sub>. The Jarlskog CP-violation invariant |J| = 0.033 matches experiment exactly. The CKM quark mixing matrix follows from the Hopf link&rsquo;s mod-2 parity, giving the Cabibbo angle sin&sup2;&theta;<sub>C</sub> = 7&alpha; (0.05% from experiment) &mdash; a formula connecting two independently measured constants through the electron&rsquo;s winding number.
 
 ## A Forgotten Discovery, Rediscovered
 
