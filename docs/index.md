@@ -11,6 +11,8 @@ Imagine a photon &mdash; a particle of light &mdash; trapped on the surface of a
 
 Now tie the donut itself into a knot &mdash; a **trefoil**, the simplest non-trivial knot. The three self-crossings of that knot are the three &ldquo;colours&rdquo; of the strong force. Link two donut rings together &mdash; a **Hopf link**, the simplest non-trivial link. The two perpendicular crossings are the weak force and the linking phase is electromagnetism. **The gauge group of the Standard Model &mdash; SU(3) &times; SU(2) &times; U(1) &mdash; is the crossing exchange algebra of the trefoil and the Hopf link.**
 
+![The three carrier types: unknot (leptons), Hopf link (mesons), trefoil (baryons)](assets/images/carrier_hierarchy.png)
+
 This is the central idea of the **Null Worldtube Theory (NWT)**. Particles are quantised vortex knots in a superfluid vacuum. Electrons live on unknotted carriers, mesons on Hopf links, and baryons on trefoils. The topology of the carrier determines the particle&rsquo;s quantum numbers, the forces it feels, and even the symmetry-breaking pattern of the Higgs mechanism.
 
 ## One Parameter = The Standard Model
