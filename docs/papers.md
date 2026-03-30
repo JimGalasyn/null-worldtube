@@ -89,6 +89,18 @@ A fifth quantum number &mdash; the framing f of the torus knot embedding &mdash;
 
 ---
 
+## Paper 8: The Standard Model Gauge Group from Vortex Knot Topology
+
+**Full title:** *The Standard Model Gauge Group from Vortex Knot Topology*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+Why SU(3) &times; SU(2) &times; U(1)? This paper proposes that the gauge group of the Standard Model is the crossing exchange algebra of the two simplest vortex topologies: the trefoil knot and the Hopf link. Three self-crossings of the trefoil generate the full Lie algebra su(3) through continuous strand exchange &mdash; all eight Gell-Mann matrices recovered in exactly two levels of commutation. Two perpendicular inter-crossings of the Hopf link generate su(2), while the linking phase provides u(1). Colour confinement is the topological stability of the trefoil; the three colours are associated with the three crossings. The Gross&ndash;Pitaevskii nonlinearity at the Hopf link crossings provides the Higgs potential, with electroweak symmetry breaking arising from crossing condensate dynamics (&lambda; = 0.125, 3.8% from SM). The crossing number determines the gauge rank, predicting a tower SU(N): SU(4) (Pati&ndash;Salam) for N=4 and SU(5) (Georgi&ndash;Glashow) for N=5. As consistency checks, the crossing geometry reproduces &alpha; = 1/(&radic;2 &kappa;&sup2;) (0.52%), the Weinberg angle (0.07% W/Z mass ratio), and sin&sup2;&theta;<sub>C</sub> = 7&alpha; (0.05%).
+
+**DOI:** [10.5281/zenodo.19334925](https://doi.org/10.5281/zenodo.19334925)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:

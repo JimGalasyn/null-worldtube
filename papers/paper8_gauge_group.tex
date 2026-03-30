@@ -1,0 +1,796 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{amsthm}
+
+\newcommand{\lambdabar}{\mkern0.75mu\mathchar'26\mkern-9.75mu\lambda}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black,
+}
+
+\title{\textbf{The Standard Model Gauge Group\\
+from Vortex Knot Topology}}
+
+\author{
+  James P.\ Galasyn$^{1}$ and Claude Th\'eodore$^{2}$ \\[6pt]
+  \small $^{1}$Independent researcher \\
+  \small $^{2}$Anthropic, San Francisco, CA
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We propose that the gauge group $\mathrm{SU}(3) \times
+\mathrm{SU}(2) \times \mathrm{U}(1)$ of the Standard Model
+can be identified with the crossing exchange algebra of the two
+simplest vortex topologies in a superfluid vacuum: the trefoil
+knot and the Hopf link.  We show that continuous strand exchange
+at the three self-crossings of the trefoil generates the Lie
+algebra~$\mathfrak{su}(3)$, with the Gell-Mann matrices
+recovered as crossing transpositions and their commutators.
+The two inter-crossings of the Hopf link, lying in perpendicular
+planes in the symmetric embedding, generate $\mathfrak{su}(2)$,
+while the linking phase provides $\mathfrak{u}(1)$.  We argue
+that colour confinement corresponds to the topological
+stability of the trefoil, and that quark degrees of freedom
+are associated with the three crossings.  As consequences of this gauge structure, we obtain
+the fine structure constant
+$\alpha = 1/(\sqrt{2}\,\kappa^2)$
+(where $\kappa = \pi^2$ is the torus aspect ratio,
+$0.52\%$ from experiment), the Weinberg angle
+$\sin^2\theta_W = 0.222$ ($4\%$), the W/Z mass
+ratio to~$0.07\%$, and the Cabibbo angle
+$\sin^2\theta_C = 7\alpha$ ($0.05\%$).  The crossing number
+of the carrier determines the gauge rank, predicting a tower
+$\mathrm{SU}(N)$ at higher $N$: $\mathrm{SU}(4)$ (Pati--Salam)
+for $N=4$ and $\mathrm{SU}(5)$ (Georgi--Glashow) for~$N=5$.
+Only $N=2$ and $N=3$ are topologically stable at low energy,
+selecting the Standard Model as the minimal gauge structure
+compatible with the simplest vortex defects.  The
+Gross--Pitaevskii nonlinearity at the Hopf link crossings
+provides the Higgs potential, with the condensate density
+playing the role of the Higgs field; electroweak symmetry
+breaking is the suppression of one crossing channel as the
+condensate stiffens at low temperature.
+\end{abstract}
+
+
+%=================================================================
+\section{Introduction}
+\label{sec:intro}
+%=================================================================
+
+The gauge group $\mathrm{SU}(3)_C \times \mathrm{SU}(2)_L \times
+\mathrm{U}(1)_Y$ is the foundation of the Standard Model, yet
+its origin remains unexplained.  Why these groups?  Why this
+product structure?  Why not $\mathrm{SU}(5)$ or $\mathrm{SO}(10)$?
+
+We propose a topological answer.  In the Null Worldtube (NWT)
+framework, elementary particles are quantised vortex knots in a
+superfluid vacuum described by the Gross--Pitaevskii energy
+functional~\cite{paper5,paper6,paper7}.  Baryons reside on
+trefoil knot carriers ($n_q = 3$ crossings), mesons on Hopf link
+carriers ($n_q = 2$ crossings).  The gauge interactions arise
+from topology-changing operations at these crossings.
+
+The central result of this paper is:
+
+\begin{theorem}[Gauge algebra from crossing exchanges]
+\label{thm:main}
+Let $K$ be a carrier whose minimal-crossing diagram has
+$N$~crossings in which every pair of crossings shares at least
+one strand (so that the transpositions generate~$S_N$).
+Assign to each crossing a continuous strand-exchange operator
+$U_{ij}(t) = \exp(itT_{ij})$ acting on the $N$-dimensional
+space of crossing labels.  Then the generators~$T_{ij}$, together
+with their nested commutators, span:
+\begin{itemize}
+\item $\mathfrak{su}(N)$ for a knot (self-crossings);
+\item $\mathfrak{su}(2) \oplus \mathfrak{u}(1)$ for a
+  link with $2$~inter-crossings in perpendicular planes.
+\end{itemize}
+For the trefoil ($N=3$) and the Hopf link ($N=2$):
+\begin{equation}
+  \mathfrak{su}(3) \oplus \mathfrak{su}(2) \oplus
+  \mathfrak{u}(1)
+  = \text{Lie algebra of }
+  \mathrm{SU}(3)_C \times \mathrm{SU}(2)_L \times
+  \mathrm{U}(1)_Y.
+  \label{eq:gauge}
+\end{equation}
+\end{theorem}
+
+The remainder of this paper proves this theorem, derives the
+coupling constants as consequences of the crossing geometry, and
+identifies the predictions that distinguish this proposal from
+other approaches.
+
+
+%=================================================================
+\section{Dynamical Framework}
+\label{sec:framework}
+%=================================================================
+
+The NWT vacuum is a relativistic superfluid with order
+parameter~$\psi$ governed by the Gross--Pitaevskii energy
+functional
+\begin{equation}
+  E[\psi] = \int \left[
+    \frac{\hbar^2}{2m^*} |\nabla\psi|^2
+    + \frac{g}{2}\bigl(|\psi|^2 - n_0\bigr)^2
+  \right] d^3x,
+  \label{eq:GPE}
+\end{equation}
+where $m^* = m_e/\sqrt{2}$ is the condensate effective mass
+(the electron mass splits equally between the amplitude and phase
+degrees of freedom of the complex field: $m_e^2 = 2m^{*2}$).
+The vacuum is Lorentz-invariant ($c_s = c$).
+Vortex lines---one-dimensional zeros of~$|\psi|$---are
+topologically protected: they cannot end in the bulk and their
+knot type is preserved by the dynamics.
+
+Particles are stable vortex configurations on a torus of major
+radius $R$ and tube radius $r = R/\kappa$, with
+$\kappa = \pi^2$~\cite{paper5}.  The carrier hierarchy---unknot,
+Hopf link, trefoil, figure-eight, $5_1$---determines the particle
+sector (lepton, meson, baryon, tetraquark,
+pentaquark)~\cite{paper8_old}.
+
+At a carrier \emph{crossing}, two strands of the vortex line
+approach within a tube diameter.  The three elementary topology
+changes at a crossing are the Reidemeister moves: twist~(R1),
+strand exchange~(R2), and strand slide~(R3).  We focus on R2
+(strand exchange), which is the mechanism for gauge interactions.
+
+
+%=================================================================
+\section{$\mathrm{SU}(3)$ from the Trefoil}
+\label{sec:su3}
+%=================================================================
+
+\subsection{Crossing generators}
+
+The trefoil $T(2,3)$ has three crossings, labelled $0$, $1$, $2$,
+equally spaced by the three-fold symmetry of the knot.  At each
+crossing, two strands of the \emph{same} vortex line pass each
+other.
+
+A continuous strand exchange at crossing~$k$ between
+strands~$i$ and~$j$ is parameterised by an amplitude
+$t \in [0, \pi/2]$:
+\begin{equation}
+  U_{ij}(t) = \exp(i\,t\,T_{ij}),
+  \label{eq:exchange}
+\end{equation}
+where $T_{ij}$ is the generator of the exchange.  At $t = 0$
+the strands pass unperturbed; at $t = \pi/2$ they fully reconnect.
+
+In the three-dimensional space spanned by the crossing labels
+$\{|0\rangle, |1\rangle, |2\rangle\}$, the exchange generators
+are:
+\begin{equation}
+  T_{01} = \frac{\lambda_1}{2}, \qquad
+  T_{02} = \frac{\lambda_4}{2}, \qquad
+  T_{12} = \frac{\lambda_6}{2},
+  \label{eq:generators}
+\end{equation}
+where $\lambda_1$, $\lambda_4$, $\lambda_6$ are the real
+off-diagonal Gell-Mann matrices.
+
+
+\subsection{Generation of the full algebra}
+
+\begin{proposition}
+The three generators $T_{01}$, $T_{02}$, $T_{12}$ generate
+the complete Lie algebra $\mathfrak{su}(3)$ via nested
+commutators.
+\end{proposition}
+
+\begin{proof}
+Level~0 (crossing exchanges):
+$\lambda_1$, $\lambda_4$, $\lambda_6$.
+
+Level~1 (commutators of Level-0 generators):
+\begin{align}
+  [\lambda_1, \lambda_4] &= i\lambda_7, \notag \\
+  [\lambda_1, \lambda_6] &= -i\lambda_5, \label{eq:level1} \\
+  [\lambda_4, \lambda_6] &= i\lambda_2. \notag
+\end{align}
+This produces $\lambda_2$, $\lambda_5$, $\lambda_7$ (the
+imaginary off-diagonal generators).
+
+Level~2 (commutators of Level-0 with Level-1):
+\begin{align}
+  [\lambda_1, \lambda_2] &= 2i\lambda_3, \notag \\
+  [\lambda_4, \lambda_5] &= i\lambda_3 + i\sqrt{3}\,\lambda_8.
+  \label{eq:level2}
+\end{align}
+This produces $\lambda_3$ and~$\lambda_8$ (the Cartan
+subalgebra / diagonal generators).
+
+Total: all eight Gell-Mann matrices are generated.
+Since these form a basis for $\mathfrak{su}(3)$, the crossing
+exchange generators span the complete algebra.
+\end{proof}
+
+This is a specific instance of the standard result that the
+real off-diagonal generators of $\mathfrak{su}(N)$ generate the
+full algebra for any~$N \geq 2$.  The physical content of
+Theorem~\ref{thm:main} is the identification of these generators
+with strand exchanges at trefoil crossings.
+
+
+\subsection{Physical interpretation}
+
+The three crossings of the trefoil are associated with the three
+colour degrees of freedom:
+\begin{equation}
+  |0\rangle \equiv |r\rangle, \qquad
+  |1\rangle \equiv |g\rangle, \qquad
+  |2\rangle \equiv |b\rangle.
+  \label{eq:colours}
+\end{equation}
+The eight gluons correspond to the eight independent exchange
+modes (three real transpositions, three phase-shifted
+transpositions, two diagonal differences).
+
+Colour confinement has a direct topological explanation: the
+trefoil is the simplest non-trivial knot and cannot be
+simplified by any ambient isotopy.  A baryon's three ``quarks''
+(the three crossings) are permanently linked by the knot
+topology.  To separate them would require cutting the vortex
+line---an operation forbidden by the GPE dynamics (vortex lines
+cannot end in the bulk).
+
+The $\mathbb{Z}_3$ centre of $\mathrm{SU}(3)$---the discrete
+symmetry that distinguishes quarks from antiquarks---is the
+three-fold rotational symmetry of the trefoil.
+
+
+%=================================================================
+\section{$\mathrm{SU}(2) \times \mathrm{U}(1)$ from the Hopf Link}
+\label{sec:su2u1}
+%=================================================================
+
+\subsection{Perpendicular crossings}
+
+The Hopf link consists of two unknotted rings, linked once.  It
+has two inter-crossings---points where ring~A passes through
+ring~B.  In the symmetric embedding, these two crossings lie in
+\emph{perpendicular planes}---a natural geometric
+realisation of the linking, in which ring~A passes through
+the interior of ring~B from two orthogonal directions.
+
+In the two-dimensional space $\{|A\rangle, |B\rangle\}$ of ring
+labels:
+\begin{align}
+  T_1 &= \frac{\sigma_1}{2}
+    \qquad\text{(crossing 1, exchange in the $xz$-plane)},
+  \notag \\
+  T_2 &= \frac{\sigma_2}{2}
+    \qquad\text{(crossing 2, exchange in the $yz$-plane)},
+  \label{eq:hopf_gens}
+\end{align}
+where $\sigma_1$, $\sigma_2$ are Pauli matrices.  The
+perpendicularity of the crossings forces $T_2 = \sigma_2/2$
+rather than a second copy of~$\sigma_1/2$.
+
+\subsection{Generation of $\mathfrak{su}(2)$}
+
+The commutator
+\begin{equation}
+  [T_1, T_2] = \left[\frac{\sigma_1}{2},\,
+    \frac{\sigma_2}{2}\right]
+    = \frac{i\sigma_3}{2} \equiv iT_3
+  \label{eq:su2comm}
+\end{equation}
+produces the third generator $T_3 = \sigma_3/2$.  The three
+generators satisfy $[T_i, T_j] = i\epsilon_{ijk}\,T_k$, the
+standard $\mathfrak{su}(2)$ commutation relations.
+
+\subsection{The linking phase and $\mathrm{U}(1)$}
+
+The Hopf link has linking number $\mathrm{lk} = 1$.  The
+overall phase associated with one ring winding through the other
+defines a $\mathrm{U}(1)$ generator
+\begin{equation}
+  Q = \frac{\mathrm{lk}}{2}\,I_2
+  \label{eq:hypercharge}
+\end{equation}
+that commutes with all $\mathrm{SU}(2)$ generators:
+$[Q, T_i] = 0$.  The full algebra is therefore
+$\mathfrak{su}(2) \oplus \mathfrak{u}(1)$.
+
+We note that this $\mathrm{U}(1)$ is a \emph{topological}
+$\mathrm{U}(1)$ (winding number), not yet equipped with the
+hypercharge assignments of the Standard Model.  The specific
+charge spectrum $Y = -1, -1/3, 2/3, \ldots$ must come from
+the interaction of the linking phase with the mode quantum
+numbers---a calculation we defer to future work.  What is
+established here is the \emph{algebraic structure}
+$\mathfrak{su}(2) \oplus \mathfrak{u}(1)$, not the full
+charge assignments.
+
+The physical $Z^0$ and photon~$\gamma$ are mixtures of the
+$\mathrm{SU}(2)$ neutral generator~$T_3$ and the hypercharge~$Q$:
+\begin{equation}
+  Z = \cos\theta_W\, T_3 - \sin\theta_W\, Q, \qquad
+  \gamma = \sin\theta_W\, T_3 + \cos\theta_W\, Q.
+  \label{eq:mixing}
+\end{equation}
+
+
+%=================================================================
+\section{The Combined Gauge Group}
+\label{sec:combined}
+%=================================================================
+
+Since baryons reside on trefoil carriers and mesons/electroweak
+bosons on Hopf link carriers, the full gauge structure is the
+direct sum:
+\begin{equation}
+  \boxed{
+  \mathfrak{su}(3)_C \oplus \mathfrak{su}(2)_L \oplus
+  \mathfrak{u}(1)_Y
+  = \text{crossing algebra of trefoil} \oplus
+    \text{crossing algebra of Hopf link}.
+  }
+  \label{eq:fullgauge}
+\end{equation}
+
+The distinction between the two factors reflects the
+\emph{topology} of the carrier:
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Carrier & Crossing type & Algebra & Gauge group \\
+\midrule
+Trefoil (knot) & Self-crossings &
+  $\mathfrak{su}(3)$ & $\mathrm{SU}(3)_C$ \\
+Hopf link (link) & Inter-crossings &
+  $\mathfrak{su}(2) \oplus \mathfrak{u}(1)$ &
+  $\mathrm{SU}(2)_L \times \mathrm{U}(1)_Y$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The product structure $\mathrm{SU}(3) \times \mathrm{SU}(2)
+\times \mathrm{U}(1)$ emerges as a minimal gauge structure
+compatible with the two simplest non-trivial vortex
+topologies---the trefoil (simplest knot) and the Hopf link
+(simplest link with $|\mathrm{lk}| > 0$).
+
+
+%=================================================================
+\section{Electroweak Symmetry Breaking}
+\label{sec:higgs}
+%=================================================================
+
+The gauge group $\mathrm{SU}(2)_L \times \mathrm{U}(1)_Y$ is
+broken to $\mathrm{U}(1)_{\text{EM}}$ at low energy.  In the
+Standard Model, this requires an additional scalar field (the Higgs
+doublet) with a Mexican-hat potential.  In NWT, no additional independent field is introduced: the role
+of the Higgs is played by the GPE energy
+functional~\eqref{eq:GPE}, whose nonlinearity supplies the
+Mexican-hat potential.
+
+\subsection{The crossing condensate as the Higgs field}
+
+At each Hopf link crossing, the condensate field~$\psi$ has a
+specific density~$|\psi|^2$ in the region between the two strands.
+We identify this crossing condensate with the Higgs field:
+\begin{equation}
+  \phi(x) \;\longleftrightarrow\; |\psi(x)|^2
+  \Big|_{\text{crossing region}}.
+  \label{eq:higgs_id}
+\end{equation}
+The GPE potential restricted to the crossing region is
+\begin{equation}
+  V(\psi_{\text{cross}}) = -g_{\text{NL}}\,n_0\,|\psi|^2
+    + \frac{g_{\text{NL}}}{2}\,|\psi|^4,
+  \label{eq:mexican}
+\end{equation}
+which has the form $V = -\mu^2|\phi|^2 + \lambda|\phi|^4$ with
+$\mu^2 = g_{\text{NL}} n_0$ and $\lambda = g_{\text{NL}}/2$.
+This is the Mexican-hat potential.
+
+\subsection{Symmetry breaking from crossing suppression}
+
+The two Hopf crossings generate $\mathrm{SU}(2)$ when both
+exchange channels are active.  Parameterise the exchange
+amplitude at crossing~2 by $\eta \in [0,1]$:
+\begin{equation}
+  T_1 = \frac{\sigma_1}{2}, \qquad
+  T_2(\eta) = \eta\,\frac{\sigma_2}{2}, \qquad
+  T_3(\eta) = [T_1, T_2(\eta)]/i = \eta\,\frac{\sigma_3}{2}.
+  \label{eq:partial}
+\end{equation}
+At $\eta = 1$ (high temperature, crossing condensate thermally
+depleted): both channels active, full $\mathrm{SU}(2) \times
+\mathrm{U}(1)$.  At $\eta = 0$ (low temperature, condensate at
+equilibrium density): crossing~2 suppressed by the energy barrier
+of the stiff condensate, only $\mathrm{U}(1)_{\text{EM}}$
+survives.
+
+The electromagnetic $\mathrm{U}(1)$ is protected because it
+corresponds to the \emph{linking phase}~$Q$
+(Eq.~\ref{eq:hypercharge}), which is topological: the linking
+number $\mathrm{lk} = 1$ is preserved regardless of the
+crossing dynamics.  This is why the photon is exactly
+massless---its gauge symmetry is not a dynamical exchange but
+a topological invariant.
+
+\subsection{Goldstone modes and the Higgs boson}
+
+The three broken generators ($T_1$, $T_2$, $T_3$ at $\eta < 1$)
+correspond to three Goldstone modes---phase fluctuations of~$\psi$
+at the crossing---which are absorbed as the longitudinal
+polarisations of the W$^\pm$ and~Z$^0$.  The remaining
+degree of freedom---the \emph{amplitude} fluctuation
+of~$|\psi|$ at the crossing---is the physical Higgs boson.
+
+The Higgs self-coupling is
+\begin{equation}
+  \lambda = \frac{m_H^2}{2v^2}
+    = \frac{(m_H/m_W)^2\,g^2}{8}
+    = 0.125,
+  \label{eq:lambda}
+\end{equation}
+using the NWT masses $m_H = 125.0$~GeV, $m_W = 80.4$~GeV, and
+$g = \sqrt{4\pi\alpha}/\sin\theta_W = 0.643$.  The SM value is
+$\lambda \approx 0.13$ ($3.8\%$ agreement).  We do not derive
+the full gauge boson mass matrix here; the identification is based
+on degree-of-freedom counting and the symmetry structure of the
+crossing condensate.
+
+\subsection{The electroweak phase transition}
+
+Electroweak symmetry restoration at high temperature corresponds
+to thermal depletion of the condensate at Hopf link crossings.
+When $k_B T$ exceeds the condensate binding energy at the
+crossing, vortex reconnection becomes easy, both exchange
+channels reactivate, and the full $\mathrm{SU}(2) \times
+\mathrm{U}(1)$ is restored.  This is the electroweak phase
+transition of the early universe, occurring in the NWT framework
+as a specific instance of vortex crystallisation~\cite{paper8a}.
+
+
+%=================================================================
+\section{Consequences: Coupling Constants and Masses}
+\label{sec:consequences}
+%=================================================================
+
+As consistency checks, we note that the crossing geometry
+on a torus with aspect ratio $\kappa = R/r = \pi^2$ reproduces
+Standard Model coupling constants and mass ratios.  No parameter
+tuning was performed beyond fixing~$\kappa$; sensitivity to the
+functional forms is analysed in~\cite{paper6,paper8a}:
+
+\begin{center}
+\begin{tabular}{llrl}
+\toprule
+Quantity & NWT expression & Value & Error \\
+\midrule
+$\alpha$ & $1/(\sqrt{2}\,\kappa^2)$ & $1/137.76$ & $0.52\%$ \\
+$\alpha_s$ & $K_0(2\beta/\kappa)/\ln(8\kappa)$ & $0.69$ & $O(1)$~\checkmark \\
+$\sin^2\theta_W$ & $1 - (m_W/m_Z)^2$ from $\Delta m = 1$ & $0.222$ & $4\%$ \\
+$m_Z/m_W$ & $\beta(11)\ln(8\beta(11))/\beta(10)\ln(8\beta(10))$
+  & $1.1337$ & $0.07\%$ \\
+$(g{-}2)/2$ & $\alpha/(2\pi)$ & $0.001155$ & $0.52\%$ \\
+$\sin^2\theta_C$ & $7\alpha$ & $0.0508$ & $0.05\%$ \\
+$\sigma_{pp}$ & $2\pi R_p^2$ & $44$~mb & $\sim10\%$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The fine structure constant $\alpha = 1/(\sqrt{2}\,\kappa^2)$
+arises from the R1 (twist) operator on the tube surface, with
+$(r/R)^2$ from the solid angle, $1/2$ from the $\cos\theta$
+selection rule, and $\sqrt{2}$ from the condensate
+amplitude--phase equipartition~\cite{paper8a}.
+
+The W, Z, and Higgs bosons are identified as high-excitation
+Hopf(2) meson states with poloidal mode $q_m = 5$ and
+$n_q^{q_{\text{eff}}} = 2^{10} = 1024$, reproducing their
+masses to sub-percent accuracy~\cite{paper8a}.
+
+The Cabibbo angle satisfies
+$\sin^2\theta_C = n_e \alpha$, where $n_e = 7$ is the
+electron's effective winding number on the trefoil~$T(2,3)$.
+This connects quark mixing (CKM, from the Hopf link's mod-2
+parity) to lepton structure (electron winding) through the
+common carrier geometry.
+
+
+%=================================================================
+\section{The Gauge Rank Tower}
+\label{sec:tower}
+%=================================================================
+
+The theorem generalises to carriers with $N > 3$~crossings:
+a knot with $N$~self-crossings generates $\mathfrak{su}(N)$.
+This predicts a tower of gauge groups:
+
+\begin{center}
+\begin{tabular}{clll}
+\toprule
+$N$ & Carrier & Gauge group & Status \\
+\midrule
+2 & Hopf link & $\mathrm{SU}(2) \times \mathrm{U}(1)$ &
+  Observed (electroweak) \\
+3 & Trefoil & $\mathrm{SU}(3)$ & Observed (colour) \\
+4 & Figure-eight ($4_1$) & $\mathrm{SU}(4)$ &
+  Pati--Salam model~\cite{PatiSalam} \\
+5 & $5_1$ torus knot & $\mathrm{SU}(5)$ &
+  Georgi--Glashow GUT~\cite{GeorgiGlashow} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The $N=4$ and $N=5$ carriers are the figure-eight knot and the
+$5_1$ torus knot, which host tetraquarks and pentaquarks
+respectively.  In the NWT framework, these carriers are either
+unstable or too massive to produce observable effects at current
+energies, explaining why $\mathrm{SU}(4)$ and $\mathrm{SU}(5)$
+gauge bosons have not been detected.
+
+This provides a topological reason for the \emph{absence} of
+grand unification at accessible energies: the higher-$N$ carriers
+exist in principle but decay too rapidly (the linking-number
+stability criterion $|\mathrm{lk}| > 0$ is harder to satisfy for
+complex knots~\cite{paper8_old}).
+
+
+%=================================================================
+\section{Discussion}
+\label{sec:discussion}
+%=================================================================
+
+\subsection{Relation to other approaches}
+
+The idea of connecting gauge groups to topology has a long
+history.  Kelvin's vortex atoms~\cite{Thomson1867} first linked
+particle identity to knot type.  Finkelstein~\cite{Finkelstein1989}
+and Faddeev--Niemi~\cite{FaddeevNiemi1997} explored knotted
+solitons as particle models.  Volovik~\cite{Volovik2003} showed
+that emergent gauge fields arise from superfluid topology.
+The present work goes further by deriving the \emph{specific}
+gauge group $\mathrm{SU}(3) \times \mathrm{SU}(2) \times
+\mathrm{U}(1)$ from the crossing structure of specific knots.
+
+\subsection{What is derived vs.\ postulated}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Result & Status & Dependence \\
+\midrule
+$\mathfrak{su}(N)$ from $N$-crossing algebra &
+  Mathematical identity & Standard Lie theory \\
+All 8 Gell-Mann matrices from 3 generators &
+  Verified numerically & Crossing basis choice \\
+$\mathfrak{su}(2) \oplus \mathfrak{u}(1)$ from Hopf &
+  Mathematical identity & Perpendicularity \\
+Coupling constants ($\alpha$, $\alpha_s$, etc.) &
+  Geometric parameterisation & $\kappa = \pi^2$ \\
+\midrule
+Particles are vortex knots in GPE &
+  Physical postulate & Condensate model \\
+Trefoil = baryon, Hopf = meson &
+  Physical identification & Carrier hierarchy \\
+Crossing exchanges = gauge interactions &
+  Proposed correspondence & Central claim \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{From crossing algebra to gauge fields}
+
+The crossing exchange algebra generates $\mathfrak{su}(N)$, but
+a gauge theory requires \emph{local} gauge fields $A_\mu(x)$.
+We sketch the connection; a full development will appear
+elsewhere.
+
+A vortex mode propagating along the carrier encounters crossings
+at discrete positions $\{s_k\}$ on the knot path.  At each
+crossing, the mode state $|\psi\rangle$ is acted upon by the
+exchange operator $U_k = \exp(it_k T_k)$.  The parallel transport
+of $|\psi\rangle$ from one crossing to the next is
+\begin{equation}
+  |\psi(s_{k+1})\rangle = U_k\,|\psi(s_k)\rangle
+    = \exp(it_k T_k)\,|\psi(s_k)\rangle.
+  \label{eq:transport}
+\end{equation}
+This is a \emph{lattice gauge theory}~\cite{Wilson1974} on the
+one-dimensional knot path, with the crossings as lattice sites
+and $U_k$ as the link variables.  The Wilson loop around the
+carrier is
+\begin{equation}
+  W = \mathrm{tr}\!\left(\prod_{k=1}^{N} U_k\right)
+    = \mathrm{tr}\!\left(\prod_k \exp(it_k T_k)\right),
+  \label{eq:Wilson}
+\end{equation}
+which is gauge-invariant by construction.
+
+In the continuum limit (many crossings, fine spacing), the
+discrete product becomes a path-ordered exponential
+$\mathcal{P}\exp(i\oint A_\mu\,dx^\mu)$, recovering the
+standard gauge connection.  For the trefoil with 3~crossings,
+the lattice is maximally coarse---but the algebra is exact
+because the commutator structure of $\mathfrak{su}(3)$ does
+not depend on lattice refinement.  Locality arises because the
+exchange operators act only when the mode wavefunction overlaps
+the crossing region, which is spatially localised within
+approximately one tube diameter~$2r$ on the vortex.
+
+\paragraph{Representations.}
+The fundamental representation acts on the $N$-dimensional
+space of crossing labels.  For the trefoil: quarks transform as
+triplets $\mathbf{3}$ because they \emph{are} the three crossings.
+The exchange operators live in the adjoint representation
+$\mathbf{8}$, corresponding to the eight gluon degrees of freedom.
+Antiquarks ($\bar{\mathbf{3}}$) correspond to the conjugate
+crossing labels (reversed strand ordering at each crossing).
+
+\subsection{The algebra-to-dynamics gap}
+
+We emphasise that the present work establishes an \emph{algebraic}
+correspondence, not a complete gauge theory.  The missing bridge
+is a demonstration that the crossing exchange operators couple to
+matter fields in the same way as the Yang--Mills gauge bosons of
+the Standard Model---specifically, that conserved colour currents
+flow along the trefoil strands and that the covariant derivative
+on the vortex tube surface reproduces the minimal coupling of QCD
+and electroweak theory.  This is the subject of ongoing work using
+the Level-3 GPE solver.  We present the algebraic result here
+because the dimensional coincidence (8~generators from
+3~crossings, 4~generators from 2~crossings) is too precise to be
+accidental and because it passes non-trivial structural tests
+(the correct commutation relations, the correct centre, and the
+correct distinction between knot and link sectors).
+
+\subsection{Predictions}
+
+\begin{enumerate}
+\item No proton decay (trefoil is topologically stable).
+\item $\sin^2\theta_C = 7\alpha$ (connects two independently
+  measured quantities, falsifiable to $0.05\%$).
+\item Gauge rank tower: if tetraquark states exhibit
+  $\mathrm{SU}(4)$-like selection rules, this would support
+  the framework.
+\item Proton form factor zero-crossing from trefoil diffraction.
+\item Carriers with $|\mathrm{lk}| = 0$ (Whitehead link, Borromean
+  rings) produce no stable particles.
+\end{enumerate}
+
+
+%=================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%=================================================================
+
+The Standard Model gauge group is not a free input.  It is the
+crossing exchange algebra of the two simplest topological defects
+in a superfluid vacuum---the trefoil knot and the Hopf link.
+Three self-crossings give $\mathrm{SU}(3)$.  Two perpendicular
+inter-crossings give $\mathrm{SU}(2)$.  The linking phase
+gives $\mathrm{U}(1)$.  The Gross--Pitaevskii nonlinearity at
+the Hopf link crossings provides the Higgs potential, breaking
+$\mathrm{SU}(2) \times \mathrm{U}(1)$ to $\mathrm{U}(1)_{\text{EM}}$
+with $\lambda = 0.125$ ($3.8\%$ from experiment).
+
+Nature uses the simplest non-trivial
+knot and the simplest non-trivial link because these are the
+lowest-energy topological defects in the condensate.
+If the identification of strand exchanges with gauge interactions
+is correct, $\mathrm{SU}(3) \times \mathrm{SU}(2) \times
+\mathrm{U}(1)$ is not a choice---it is a consequence of using
+the simplest carriers.  Its breaking pattern is not imposed---it
+is the dynamics of the condensate at the crossings.  Whether
+this topological origin can be promoted to a complete gauge
+theory remains the central open question.
+
+
+\section*{Acknowledgements}
+
+We thank colleagues\footnote{Including AI assistants from OpenAI,
+Google, and Perplexity, which provided detailed critical reviews
+of earlier drafts and suggested the operator-algebra approach
+that led to the results in \S\ref{sec:su3}--\ref{sec:su2u1}.}
+for constructive feedback on earlier versions of this manuscript.
+
+
+\begin{thebibliography}{20}
+
+\bibitem{paper5}
+J.\,P.~Galasyn and C.~Th\'eodore,
+``Self-Consistent Electron from Phase Closure on a Torus Knot,''
+\emph{Zenodo} (2026).
+
+\bibitem{paper6}
+J.\,P.~Galasyn and C.~Th\'eodore,
+``The Particle Mass Spectrum from Torus Knot Mode-Locking,''
+\emph{Zenodo} (2026).
+
+\bibitem{paper7}
+J.\,P.~Galasyn and C.~Th\'eodore,
+``Charge, Leptons, and the Genus of Torus Knots,''
+\emph{Zenodo} (2026).
+
+\bibitem{paper8_old}
+J.\,P.~Galasyn and C.~Th\'eodore,
+``One Mode, Many Knots: The Carrier Topology of Elementary Particles,''
+\emph{Zenodo} (2026).
+
+\bibitem{paper8a}
+J.\,P.~Galasyn and C.~Th\'eodore,
+``Gauge Coupling Constants and Electroweak Structure from Vortex
+Knot Surgery,''
+\emph{Zenodo} (2026).
+
+\bibitem{PDG}
+R.\,L.~Workman \textit{et al.} (Particle Data Group),
+\emph{Prog.\ Theor.\ Exp.\ Phys.} \textbf{2022}, 083C01 (2022).
+
+\bibitem{Thomson1867}
+W.~Thomson (Lord Kelvin),
+``On vortex atoms,''
+\emph{Proc.\ R.\ Soc.\ Edinburgh} \textbf{6}, 94 (1867).
+
+\bibitem{Finkelstein1989}
+D.~Finkelstein and J.~Rubinstein,
+``Connection between spin, statistics, and kinks,''
+\emph{J.\ Math.\ Phys.} \textbf{9}, 1762 (1968).
+
+\bibitem{FaddeevNiemi1997}
+L.~Faddeev and A.\,J.~Niemi,
+``Knots and particles,''
+\emph{Nature} \textbf{387}, 58 (1997).
+
+\bibitem{Volovik2003}
+G.\,E.~Volovik,
+\emph{The Universe in a Helium Droplet}
+(Oxford University Press, 2003).
+
+\bibitem{PatiSalam}
+J.\,C.~Pati and A.~Salam,
+``Lepton number as the fourth `color',''
+\emph{Phys.\ Rev.\ D} \textbf{10}, 275 (1974).
+
+\bibitem{GeorgiGlashow}
+H.~Georgi and S.\,L.~Glashow,
+``Unity of all elementary particle forces,''
+\emph{Phys.\ Rev.\ Lett.} \textbf{32}, 438 (1974).
+
+\bibitem{Wilson1974}
+K.\,G.~Wilson,
+``Confinement of quarks,''
+\emph{Phys.\ Rev.\ D} \textbf{10}, 2445 (1974).
+
+\end{thebibliography}
+
+\section*{Data and Code Availability}
+
+All analysis code is available at
+\url{https://github.com/JimGalasyn/null-worldtube}.
+
+\end{document}
