@@ -113,6 +113,18 @@ Companion to Paper 8. Given the gauge group from crossing topology, what are the
 
 ---
 
+## Paper 10: Vortex Strings in a Two-Component Superfluid Vacuum
+
+**Full title:** *Vortex Strings in a Two-Component Superfluid Vacuum: Cosmic Strings, Dark Matter, and the String/Knot Duality*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+The most ambitious step yet: the central one-dimensional intuition of string theory may apply more naturally to a *dark*-sector condensate than to the visible sector. The vacuum is a two-component superfluid &mdash; &psi;<sub>SM</sub>, where particles live as compact vortex knots (R/&xi; ~ 1), and &psi;<sub>GUT</sub>, a residual grand-unified condensate where dark particles live as thin vortex loops (R/&xi; ~ 10<sup>14</sup>) &mdash; closed-string-like defects in a literal sense. The interface coupling &alpha;<sub>dark</sub> = 1/(&radic;2 &kappa;<sub>SM</sub> &kappa;<sub>GUT</sub>) &asymp; 1/74 follows from the cross-term in the two-condensate energy functional, matching &radic;(&alpha;<sub>SM</sub> &alpha;<sub>GUT</sub>) to 0.3%. Cosmic strings (CSc-1, individual tension G&mu;/c&sup2; &asymp; 7&times;10<sup>&minus;7</sup>) and the Galactic-Centre radio filaments are macroscopic vortex lines in &psi;<sub>GUT</sub>. The dark particle spectrum &mdash; a dark electron (93 MeV), dark muon (18.8 GeV), dark pions (25 GeV), and a dominant dark proton (187 GeV) &mdash; emerges from mode-locking on the dark torus with &kappa;<sub>GUT</sub> = 5.32. The Totani (2025) 20 GeV gamma-ray halo excess is identified as dark muon annihilation, the Bullet Cluster as a Mach-0.015 subsonic superfluid collision, and proton decay is predicted in the window &tau;<sub>p</sub> &isin; [2.4, 5.5] &times; 10<sup>34</sup> yr &mdash; the lower end already excluded by Super-Kamiokande, the surviving range fully within Hyper-Kamiokande&rsquo;s projected sensitivity. The six compactified dimensions of string theory find a suggestive analogue in six discrete quantum numbers (p, q, m, n<sub>q</sub>, f, g), collapsing the 10<sup>500</sup> string-theory landscape to a countable periodic table. Paper 10 is presented as a phenomenological framework, not a UV-complete derivation; explicit falsification conditions are stated. The visible sector is knot theory; the dark sector is string theory.
+
+**DOI:** [10.5281/zenodo.19516386](https://doi.org/10.5281/zenodo.19516386)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
