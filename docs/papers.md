@@ -137,6 +137,18 @@ The field-theoretic derivation of the NWT program. Starting from a single Lagran
 
 ---
 
+## Paper 12: Fermion Structure and Gauge Dynamics from Topological Sectors
+
+**Full title:** *Fermion Structure and Gauge Dynamics from Topological Sectors of the Abelian Higgs Model*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+Companion to Paper&nbsp;11. Addresses the two structures Paper&nbsp;11 deferred: fermion spin-statistics and dynamical gauge theory. The mass formula is broadly applicable across vortex models &mdash; promoting the scalar field to Rybakov&rsquo;s 16-spinor adds spin-&frac12; (via the Noether theorem) without changing any mass prediction. The Brioschi 8-spinor identity partitions particles into S&sup2;-target leptons (n<sub>q</sub>=0), Hopf-linked mesons (n<sub>q</sub>=2), and S&sup3;-target baryons (n<sub>q</sub>=3), reproducing all 22 particle assignments. The Yang&ndash;Mills dynamics of the Standard Model gauge group is a **topologically protected sector** of the abelian Higgs theory: the crossing subspace is protected by the BPS bound to 3&times;10<sup>&minus;8</sup> relative accuracy, and the non-abelian field strength F<sub>&mu;&nu;</sub> = &part;A &minus; &part;A &minus; ig[A,A] arises from the non-commutativity of strand-exchange operators at knot crossings. Combined with Paper&nbsp;11: masses + gauge algebra + gauge dynamics + &alpha; + spin + baryon/lepton distinction, all from one Lagrangian.
+
+**DOI:** [10.5281/zenodo.19555978](https://doi.org/10.5281/zenodo.19555978)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -165,6 +177,12 @@ python3 analysis/nwt_conservation_laws.py    # Paper 7: conservation law search
 python3 analysis/nwt_alpha_ladder.py     # Paper 4: 1/α energy ladder
 python3 analysis/nwt_self_consistent_knot_v3.py  # Paper 5: phase closure
 python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation
+```
+
+Paper 12 analyses (fermion structure + gauge dynamics):
+```
+python3 analysis/nwt_universality_argument.py          # Paper 12: mass formula universality
+python3 analysis/nwt_emergent_yang_mills.py             # Paper 12: Yang-Mills from crossing lattice
 ```
 
 Paper 11 analyses (abelian Higgs derivation):

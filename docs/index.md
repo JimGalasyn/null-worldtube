@@ -72,6 +72,12 @@ The Aharonov&ndash;Bohm phase at torus knot crossings, computed from the BPS gau
 
 This is 689&times; more accurate than the earlier NWT estimate and decomposes cleanly: 25 = (p&sup2;+q&sup2;)&sup2; from the electron topology, &pi; from the circular vortex core, &radic;3 from the trefoil&rsquo;s three crossings, and +1 from the U(1) unit charge. The gravitational correction at the Standard Model scale is (m<sub>e</sub>/M<sub>Pl</sub>)&sup2; &asymp; 10<sup>&minus;45</sup>: the flat-space derivation is already general-relativistically exact at all accessible energies.
 
+## Fermions, Gauge Dynamics, and the Complete Kinematic Standard Model
+
+Paper 12 completes the kinematic program. Promoting the scalar field to Rybakov&rsquo;s 16-spinor Skyrme&ndash;Faddeev model gives each vortex excitation spin-&frac12; via the Noether theorem, with the spin-statistics connection following from the Finkelstein&ndash;Rubinstein topological argument. The Brioschi 8-spinor identity partitions particles into leptons (S&sup2; target, n<sub>q</sub>=0), mesons (Hopf-linked S&sup2;&times;S&sup2;, n<sub>q</sub>=2), and baryons (S&sup3; target, n<sub>q</sub>=3). And the Yang&ndash;Mills gauge dynamics is a topologically protected sector of the abelian Higgs model &mdash; not an effective field theory, but an exact projection onto the crossing subspace, protected by the BPS bound to 3&times;10<sup>&minus;8</sup> relative accuracy. The non-abelian field strength F = dA&minus;dA&minus;ig[A,A] arises from the non-commutativity of strand-exchange operators: the order in which crossings are traversed along the knot IS the non-abelian structure.
+
+Papers 11 and 12 together derive the kinematic content of the Standard Model from one Lagrangian: masses, gauge algebra, gauge dynamics, coupling constants, spin, and the baryon/lepton distinction.
+
 ## A Forgotten Discovery, Rediscovered
 
 In the 1980s, a computer scientist named **F. Ray Skilton** at Brock University published three papers proving that the fine-structure constant — one of the most fundamental numbers in physics — could be derived from a Pythagorean triple:
