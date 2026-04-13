@@ -125,6 +125,18 @@ The most ambitious step yet: the central one-dimensional intuition of string the
 
 ---
 
+## Paper 11: The Standard Model from a Gravitating Abelian Higgs Vortex on Torus Knots
+
+**Full title:** *The Standard Model from a Gravitating Abelian Higgs Vortex on Torus Knots*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+The field-theoretic derivation of the NWT program. Starting from a single Lagrangian &mdash; the gravitating abelian Higgs model at the BPS point &mdash; we derive the mass spectrum from Bogomolny&rsquo;s BPS vortex line tension (1976), Lord Kelvin&rsquo;s vortex ring self-energy (1867), and the Pythagorean effective circulation (p&sup2;+q&sup2;) of torus knots. The result is the mass formula from Paper&nbsp;6, now derived from first principles with zero free parameters beyond the electron mass anchor. The Aharonov&ndash;Bohm phase at torus knot crossings, computed from the BPS gauge profile, recovers the Lie algebra &frak;su(3)&oplus;&frak;su(2)&oplus;&frak;u(1) and gives &alpha;<sub>GUT</sub> = 3/(25&pi;) &asymp; 1/26.2 &mdash; within the standard grand-unification window. Adding the U(1) unit-charge contribution yields the fine structure constant: **1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 to 7.6 parts per million** &mdash; 689&times; more accurate than the earlier NWT estimate. The gravitational correction at the Standard Model scale is (m<sub>e</sub>/M<sub>Pl</sub>)&sup2; &asymp; 10<sup>&minus;45</sup>: the flat-space result is an excellent approximation at all experimentally accessible energies.
+
+**DOI:** [10.5281/zenodo.19554227](https://doi.org/10.5281/zenodo.19554227)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -153,6 +165,14 @@ python3 analysis/nwt_conservation_laws.py    # Paper 7: conservation law search
 python3 analysis/nwt_alpha_ladder.py     # Paper 4: 1/α energy ladder
 python3 analysis/nwt_self_consistent_knot_v3.py  # Paper 5: phase closure
 python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation
+```
+
+Paper 11 analyses (abelian Higgs derivation):
+```
+python3 analysis/nwt_mass_from_abelian_higgs.py   # Paper 11: full mass formula derivation
+python3 analysis/nwt_crossing_phase.py             # Paper 11: BPS crossing phases → α_GUT
+python3 analysis/nwt_rybakov_path_a.py             # Paper 11: exact integral analysis
+python3 analysis/nwt_null_worldtube_kappa.py       # Paper 11: null worldtube κ analysis
 ```
 
 Papers 8 & 9 analyses:

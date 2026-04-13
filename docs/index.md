@@ -20,7 +20,7 @@ This is the central idea of the **Null Worldtube Theory (NWT)**. Particles are q
 The entire framework is governed by a single geometric quantity: the **aspect ratio** &kappa; = R/r &asymp; &pi;&sup2; &mdash; the ratio of the donut&rsquo;s major radius to its tube radius. From this one number:
 
 - **56 particle masses** (quarks, leptons, mesons, baryons, tetraquarks, pentaquarks) with **median error 0.40%**
-- **The fine structure constant** &alpha; = 1/(&radic;2 &kappa;&sup2;) &mdash; 0.52% from experiment
+- **The fine structure constant** 1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 &mdash; **7.6 parts per million** from experiment (Paper 11, derived from BPS vortex crossing phases)
 - **The W/Z mass ratio** &mdash; 0.07% from experiment, with zero free parameters
 - **The Cabibbo angle** sin&sup2;&theta;<sub>C</sub> = 7&alpha; &mdash; 0.05% from experiment
 - **All three neutrino mixing angles**, the mass hierarchy, and CP violation
@@ -61,6 +61,16 @@ The PMNS neutrino mixing matrix emerges from the trefoil&rsquo;s crossing geomet
 Paper 10 takes the boldest step yet. String theory&rsquo;s central insight &mdash; that the fundamental constituents of matter are one-dimensional &mdash; may be correct, but the strings inhabit the *dark* sector. The vacuum is a two-component superfluid: &psi;<sub>SM</sub>, where visible particles live as compact vortex *knots* (R/&xi; ~ 1, properly described by knot theory), and &psi;<sub>GUT</sub>, a residual grand-unified condensate where dark particles live as thin vortex *loops* (R/&xi; ~ 10<sup>14</sup>, properly described by string theory). The interface coupling &alpha;<sub>dark</sub> = 1/(&radic;2 &kappa;<sub>SM</sub> &kappa;<sub>GUT</sub>) &asymp; 1/74 follows from the cross-term in the two-condensate energy functional. Cosmic strings (the CSc-1 candidate) and the &sim;1,000 radio filaments near Sgr A* are identified as macroscopic vortex lines in &psi;<sub>GUT</sub>: cosmic-scale and parsec-scale realisations of the same one-dimensional defects that give rise to the dark particle spectrum at the femtometre scale.
 
 The dark spectrum &mdash; a dark electron (93 MeV), dark muon (18.8 GeV), dark pions (25 GeV), and a dominant dark proton (187 GeV) &mdash; emerges from mode-locking on the dark torus with &kappa;<sub>GUT</sub> = 5.32. The Totani (2025) 20 GeV gamma-ray halo excess is identified as dark muon annihilation. The Bullet Cluster&rsquo;s &ldquo;collisionless&rdquo; dark matter is a Mach-0.015 subsonic superfluid collision. Proton decay is predicted in the window &tau;<sub>p</sub> &isin; [2.4, 5.5] &times; 10<sup>34</sup> yr &mdash; the lower end already excluded by Super-Kamiokande, the surviving range fully within Hyper-Kamiokande&rsquo;s reach. And the six compactified dimensions of string theory find a suggestive analogue in six discrete quantum numbers (p, q, m, n<sub>q</sub>, f, g) on the torus knot parameter space, collapsing the 10<sup>500</sup> string-theory landscape to a countable periodic table. Paper 10 is presented as a phenomenological framework rather than a UV-complete derivation, with explicit falsification conditions stated. The visible sector is knot theory; the dark sector is string theory.
+
+## The Field-Theoretic Derivation
+
+Paper 11 closes the loop. Starting from a single Lagrangian &mdash; the gravitating abelian Higgs model at the Bogomolny&ndash;Prasad&ndash;Sommerfield (BPS) point &mdash; we derive the mass formula of Paper&nbsp;6 from first principles. The BPS vortex line tension (Bogomolny 1976) provides the energy scale. Lord Kelvin&rsquo;s 1867 thin vortex ring self-energy provides the logarithmic factor ln(8&beta;). The Pythagorean sum of independent torus circulations (p&sup2;+q&sup2;) provides the topological weighting. Phase closure provides &beta; = &radic;(m&sup2;/p&sup2;&minus;1). No free parameters remain beyond the electron mass.
+
+The Aharonov&ndash;Bohm phase at torus knot crossings, computed from the BPS gauge profile, recovers the Lie algebra &frak;su(3)&oplus;&frak;su(2)&oplus;&frak;u(1) and predicts the GUT coupling &alpha;<sub>GUT</sub> = 3/(25&pi;) &asymp; 1/26.2. Adding the U(1) unit-charge contribution yields the fine structure constant to unprecedented accuracy:
+
+> **1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 &mdash; 7.6 parts per million from experiment**
+
+This is 689&times; more accurate than the earlier NWT estimate and decomposes cleanly: 25 = (p&sup2;+q&sup2;)&sup2; from the electron topology, &pi; from the circular vortex core, &radic;3 from the trefoil&rsquo;s three crossings, and +1 from the U(1) unit charge. The gravitational correction at the Standard Model scale is (m<sub>e</sub>/M<sub>Pl</sub>)&sup2; &asymp; 10<sup>&minus;45</sup>: the flat-space derivation is already general-relativistically exact at all accessible energies.
 
 ## A Forgotten Discovery, Rediscovered
 
