@@ -19,7 +19,7 @@ This is the central idea of the **Null Worldtube Theory (NWT)**. Particles are q
 
 The entire framework is governed by a single geometric quantity: the **aspect ratio** &kappa; = R/r &asymp; &pi;&sup2; &mdash; the ratio of the donut&rsquo;s major radius to its tube radius. From this one number:
 
-- **56 particle masses** (quarks, leptons, mesons, baryons, tetraquarks, pentaquarks) with **median error 0.40%**
+- **80 observables** (quarks, leptons, mesons, baryons, quarkonium, pentaquarks, mixing angles, coupling constants) with **median error 0.1%** (Paper 13)
 - **The fine structure constant** 1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 &mdash; **7.6 parts per million** from experiment (Paper 11, derived from BPS vortex crossing phases)
 - **The W/Z mass ratio** &mdash; 0.07% from experiment, with zero free parameters
 - **The Cabibbo angle** sin&sup2;&theta;<sub>C</sub> = 7&alpha; &mdash; 0.05% from experiment
@@ -77,6 +77,20 @@ This is 689&times; more accurate than the earlier NWT estimate and decomposes cl
 Paper 12 completes the kinematic program. Promoting the scalar field to Rybakov&rsquo;s 16-spinor Skyrme&ndash;Faddeev model gives each vortex excitation spin-&frac12; via the Noether theorem, with the spin-statistics connection following from the Finkelstein&ndash;Rubinstein topological argument. The Brioschi 8-spinor identity partitions particles into leptons (S&sup2; target, n<sub>q</sub>=0), mesons (Hopf-linked S&sup2;&times;S&sup2;, n<sub>q</sub>=2), and baryons (S&sup3; target, n<sub>q</sub>=3). And the Yang&ndash;Mills gauge dynamics is a topologically protected sector of the abelian Higgs model &mdash; not an effective field theory, but an exact projection onto the crossing subspace, protected by the BPS bound to 3&times;10<sup>&minus;8</sup> relative accuracy. The non-abelian field strength F = dA&minus;dA&minus;ig[A,A] arises from the non-commutativity of strand-exchange operators: the order in which crossings are traversed along the knot IS the non-abelian structure.
 
 Papers 11 and 12 together derive the kinematic content of the Standard Model from one Lagrangian: masses, gauge algebra, gauge dynamics, coupling constants, spin, and the baryon/lepton distinction.
+
+## The SM Capstone: 80 Particles from One Input
+
+Paper 13 is the culmination of the SM program. Using a single continuous input &mdash; the electron mass &mdash; plus a discrete vocabulary of topological integers, eighty observables (75 particles plus mixing and coupling parameters) are reproduced at a **median residual of 0.1%** against PDG values. Every integer in the vocabulary is derived from torus-knot crossing algebra: crossing counts give Casimir invariants, toroidal eigenvalues give q&sup2;, braid-group composition gives representation dimensions, and geodesic norms give p&sup2;+q&sup2;. **No integer is imported from outside the knot geometry.**
+
+A GPU-accelerated simulation program (JAX on NVIDIA 4090) independently validates the framework:
+- BPS vortex line tension &mu; = &pi; to 0.016%
+- Bogomol&rsquo;nyi non-interaction theorem verified for 11 torus knots
+- Three-layer physics confirmed: abelian Higgs (topology) &rarr; AB phase (&alpha;) &rarr; Casimir algebra (masses)
+- All 80 masses independently recomputed from topological primitives
+
+The pentaquarks P<sub>c</sub>(4312&ndash;4457) are identified as cinquefoil hadrons &mdash; the first directly observed visible-sector particles carrying GUT topology. The framework predicts P<sub>c</sub>(4397) at k = 8 as a falsification target for LHCb.
+
+> **DOI:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239)
 
 ## A Forgotten Discovery, Rediscovered
 

@@ -149,6 +149,18 @@ Companion to Paper&nbsp;11. Addresses the two structures Paper&nbsp;11 deferred:
 
 ---
 
+## Paper 13: The Standard Model from NWT Topology (SM Capstone)
+
+**Full title:** *The Standard Model from NWT Topology: A One-Input Framework for the Particle Spectrum*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+The SM capstone. Eighty observables &mdash; 75 particles plus mixing and coupling parameters &mdash; are reproduced at a median residual of 0.1% against PDG values, using a single continuous input (the electron mass) plus a discrete vocabulary of topological integers. The dimensionless coupling &alpha; and the master parameter &kappa;<sub>SM</sub> &asymp; 9.844 are derived from topology via a seven-step Aharonov&ndash;Bohm construction, not fitted. All eighty entries are independently recomputed from topological primitives (crossing counts, toroidal eigenvalues, Casimir invariants), with every integer derived from knot geometry (companion Paper 14). The paper includes a GPU-accelerated simulation program: BPS vortex profiles, tube-adapted energy functional (&mu; = &pi; to 0.016%), Bogomol&rsquo;nyi non-interaction theorem verified for 11 torus knots, and the three-layer physics confirmed (abelian Higgs &rarr; AB phase &rarr; Casimir framework). The pentaquarks P<sub>c</sub>(4312&ndash;4457) are identified as cinquefoil hadrons; the framework predicts P<sub>c</sub>(4397) at k = 8 = dim(adj SU(3)) as a falsification target for LHCb.
+
+**DOI:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -177,6 +189,19 @@ python3 analysis/nwt_conservation_laws.py    # Paper 7: conservation law search
 python3 analysis/nwt_alpha_ladder.py     # Paper 4: 1/α energy ladder
 python3 analysis/nwt_self_consistent_knot_v3.py  # Paper 5: phase closure
 python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation
+```
+
+Paper 13 analyses (SM capstone + simulation):
+```
+python3 analysis/nwt_sensitivity_analysis.py         # Paper 13: integer perturbation sensitivity
+python3 analysis/nwt_residual_histogram.py            # Paper 13: residual distribution figure
+python3 analysis/nwt_complete_spectrum_paper13.py     # Paper 13: 84-particle master spectrum
+python3 simulations/helmholtz_eigenvalue/bps_profile.py           # BPS profile solver
+python3 simulations/helmholtz_eigenvalue/straight_tube_eigenvalue.py  # Radial eigenvalue
+python3 simulations/helmholtz_eigenvalue/ab_phase_verification.py # 7-step AB verification
+python3 simulations/paper14_integers/crossings.py     # Crossing count → C_A
+python3 simulations/paper14_integers/braid_algebra.py # Braid → su(N) → Casimirs
+python3 simulations/paper14_integers/integers_out.py  # END-TO-END: 80/80 from knot geometry
 ```
 
 Paper 12 analyses (fermion structure + gauge dynamics):
