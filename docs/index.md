@@ -66,7 +66,7 @@ The dark spectrum &mdash; a dark electron (93 MeV), dark muon (18.8 GeV), dark p
 
 Paper 11 closes the loop. Starting from a single Lagrangian &mdash; the gravitating abelian Higgs model at the Bogomolny&ndash;Prasad&ndash;Sommerfield (BPS) point &mdash; we derive the mass formula of Paper&nbsp;6 from first principles. The BPS vortex line tension (Bogomolny 1976) provides the energy scale. Lord Kelvin&rsquo;s 1867 thin vortex ring self-energy provides the logarithmic factor ln(8&beta;). The Pythagorean sum of independent torus circulations (p&sup2;+q&sup2;) provides the topological weighting. Phase closure provides &beta; = &radic;(m&sup2;/p&sup2;&minus;1). No free parameters remain beyond the electron mass.
 
-The Aharonov&ndash;Bohm phase at torus knot crossings, computed from the BPS gauge profile, recovers the Lie algebra &frak;su(3)&oplus;&frak;su(2)&oplus;&frak;u(1) and predicts the GUT coupling &alpha;<sub>GUT</sub> = 3/(25&pi;) &asymp; 1/26.2. Adding the U(1) unit-charge contribution yields the fine structure constant to unprecedented accuracy:
+The Aharonov&ndash;Bohm phase at torus knot crossings, computed from the BPS gauge profile, recovers the Lie algebra su(3) &oplus; su(2) &oplus; u(1) and predicts the GUT coupling &alpha;<sub>GUT</sub> = 3/(25&pi;) &asymp; 1/26.2. Adding the U(1) unit-charge contribution yields the fine structure constant to unprecedented accuracy:
 
 > **1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 &mdash; 7.6 parts per million from experiment**
 
