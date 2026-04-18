@@ -72,7 +72,7 @@ def render_particle(p, q, name, symbol, mass_str=None,
 
     # Torus surface (translucent)
     X_t, Y_t, Z_t = torus_surface(R, r)
-    ax.plot_surface(X_t, Y_t, Z_t, alpha=0.08, color='#4488cc',
+    ax.plot_surface(X_t, Y_t, Z_t, alpha=0.18, color='#4488cc',
                     shade=True, edgecolor='none')
 
     # Knot path
@@ -155,7 +155,7 @@ def render_gallery():
 
         R, r = 1.0, 0.3
         X_t, Y_t, Z_t = torus_surface(R, r, N_major=50, N_minor=25)
-        ax.plot_surface(X_t, Y_t, Z_t, alpha=0.06, color='#4488cc',
+        ax.plot_surface(X_t, Y_t, Z_t, alpha=0.15, color='#4488cc',
                         shade=True, edgecolor='none')
 
         X_k, Y_k, Z_k, t = torus_knot_path(p, q, R, r, N=600)
