@@ -150,7 +150,7 @@ def resonance_on_carrier(centerline, p_res, q_res, r_tube=0.08, N=1000):
     s_idx = (t / (2*np.pi * p_res) * N_carrier).astype(int) % N_carrier
     phi_res = q_res * t / p_res  # poloidal angle
 
-    r_res = r_tube * 1.05  # slightly above the tube surface
+    r_res = r_tube * 1.08  # on the tube surface
 
     rx = pts[0, s_idx] + r_res * (np.cos(phi_res) * normals[0, s_idx] +
                                     np.sin(phi_res) * binormals[0, s_idx])
@@ -176,7 +176,7 @@ def render_particle(carrier_type, p_res, q_res, symbol, label,
     ax = fig.add_subplot(111, projection='3d', facecolor='black')
 
     R = 1.0
-    r_tube = 0.12
+    r_tube = 0.35  # fat tube so the poloidal spiral is dramatic
 
     if carrier_type == 'unknot':
         cl, _ = circle_centerline(R)
@@ -188,7 +188,7 @@ def render_particle(carrier_type, p_res, q_res, symbol, label,
         cl, _ = cinquefoil_centerline(R, a=0.30)
         carriers = [cl]
     elif carrier_type == 'hopf':
-        c1, c2, _ = hopf_link_centerlines(R, r_sep=0.5)
+        c1, c2, _ = hopf_link_centerlines(R, r_sep=0.55)
         carriers = [c1, c2]
     else:
         cl, _ = circle_centerline(R)
@@ -196,18 +196,23 @@ def render_particle(carrier_type, p_res, q_res, symbol, label,
 
     # Draw carrier tube(s) in gray
     for cl in carriers:
-        X, Y, Z = tube_around_curve(cl, r_tube=r_tube, N_circ=12)
-        ax.plot_surface(X, Y, Z, alpha=0.25, color='#888888',
-                        shade=True, edgecolor='none',
-                        lightsource=plt.matplotlib.colors.LightSource(azdeg=315, altdeg=45))
+        X, Y, Z = tube_around_curve(cl, r_tube=r_tube, N_circ=16)
+        ax.plot_surface(X, Y, Z, alpha=0.20, color='#888888',
+                        shade=True, edgecolor='none')
 
-    # Draw resonance winding on the first carrier
-    rx, ry, rz, colors = resonance_on_carrier(
-        carriers[0], p_res, q_res, r_tube=r_tube, N=1500)
+    # Draw carrier centerline (thin white reference line)
+    for cl in carriers:
+        ax.plot(cl[0], cl[1], cl[2], color='white', linewidth=0.8,
+                alpha=0.5)
 
-    for i in range(0, len(rx) - 1, 2):
-        ax.plot(rx[i:i+2], ry[i:i+2], rz[i:i+2],
-                color=colors[i], linewidth=2.5, solid_capstyle='round')
+    # Draw resonance winding on each carrier
+    for cl in carriers:
+        rx, ry, rz, colors = resonance_on_carrier(
+            cl, p_res, q_res, r_tube=r_tube, N=2000)
+
+        for i in range(0, len(rx) - 1, 2):
+            ax.plot(rx[i:i+2], ry[i:i+2], rz[i:i+2],
+                    color=colors[i], linewidth=2.5, solid_capstyle='round')
 
     # Styling
     lim = 1.6 * R
@@ -268,7 +273,7 @@ def render_gallery():
         ax.set_facecolor('black')
 
         R = 1.0
-        r_tube = 0.12
+        r_tube = 0.35
 
         if carrier == 'unknot':
             cl, _ = circle_centerline(R)
@@ -280,19 +285,24 @@ def render_gallery():
             cl, _ = cinquefoil_centerline(R, a=0.30)
             cls = [cl]
         elif carrier == 'hopf':
-            c1, c2, _ = hopf_link_centerlines(R, r_sep=0.5)
+            c1, c2, _ = hopf_link_centerlines(R, r_sep=0.55)
             cls = [c1, c2]
 
         for cl in cls:
-            X, Y, Z = tube_around_curve(cl, r_tube=r_tube, N_circ=10)
-            ax.plot_surface(X, Y, Z, alpha=0.25, color='#888888',
+            X, Y, Z = tube_around_curve(cl, r_tube=r_tube, N_circ=12)
+            ax.plot_surface(X, Y, Z, alpha=0.20, color='#888888',
                             shade=True, edgecolor='none')
 
-        rx, ry, rz, colors = resonance_on_carrier(
-            cls[0], p, q, r_tube=r_tube, N=800)
-        for i in range(0, len(rx) - 1, 3):
-            ax.plot(rx[i:i+2], ry[i:i+2], rz[i:i+2],
-                    color=colors[i], linewidth=2.0)
+        for cl in cls:
+            ax.plot(cl[0], cl[1], cl[2], color='white', linewidth=0.6,
+                    alpha=0.4)
+
+        for cl in cls:
+            rx, ry, rz, colors = resonance_on_carrier(
+                cl, p, q, r_tube=r_tube, N=1000)
+            for i in range(0, len(rx) - 1, 2):
+                ax.plot(rx[i:i+2], ry[i:i+2], rz[i:i+2],
+                        color=colors[i], linewidth=2.0)
 
         lim = 1.6
         ax.set_xlim(-lim, lim)
