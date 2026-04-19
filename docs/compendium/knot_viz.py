@@ -82,42 +82,31 @@ def torus_knot_path(p, q, R=1.0, r=0.3, N=1000):
     return X, Y, Z, t
 
 
-def resonance_on_knot_tube(center, p_res, q_res, r_tube=0.15, N=1500):
-    """Resonance winding on a knotted tube carrier."""
-    N_carrier = center.shape[1]
+def resonance_on_knot_tube(center, p_res, q_res, r_tube=0.15, N=1500,
+                            p_knot=2, q_knot=3, R=1.0, a=0.35):
+    """Resonance winding on a knotted tube carrier.
 
-    tangent = np.gradient(center, axis=1)
-    norms = np.sqrt(np.sum(tangent**2, axis=0))
-    tangent /= norms[np.newaxis, :]
+    The resonance T(p_res, q_res) on a carrier T(p_knot, q_knot)
+    is a CABLE KNOT: a torus knot on a slightly larger torus with
+    combined winding numbers:
 
-    if abs(tangent[2, 0]) < 0.9:
-        n0 = np.cross(tangent[:, 0], [0, 0, 1])
-    else:
-        n0 = np.cross(tangent[:, 0], [1, 0, 0])
-    n0 /= np.linalg.norm(n0)
+      p_total = p_res × p_knot
+      q_total = q_res + p_res × q_knot
 
-    normals = np.zeros_like(center)
-    normals[:, 0] = n0
-    for i in range(1, N_carrier):
-        n = normals[:, i-1] - np.dot(normals[:, i-1], tangent[:, i]) * tangent[:, i]
-        norm_val = np.linalg.norm(n)
-        if norm_val > 1e-10:
-            normals[:, i] = n / norm_val
-        else:
-            normals[:, i] = normals[:, i-1]
-    binormals = np.cross(tangent.T, normals.T).T
+    E.g., proton (1,4) on trefoil (2,3): cable = T(2, 7)
+          J/ψ (2,3) on trefoil (2,3): cable = T(4, 9)
+    """
+    p_total = p_res * p_knot
+    q_total = q_res + p_res * q_knot
 
-    t = np.linspace(0, 2*np.pi * p_res, N, endpoint=False)
-    s_idx = (t / (2*np.pi * p_res) * N_carrier).astype(int) % N_carrier
-    phi_res = q_res * t / p_res
+    t = np.linspace(0, 2*np.pi, N, endpoint=False)
 
-    r_res = r_tube * 1.05
-    rx = center[0, s_idx] + r_res * (np.cos(phi_res) * normals[0, s_idx] +
-                                      np.sin(phi_res) * binormals[0, s_idx])
-    ry = center[1, s_idx] + r_res * (np.cos(phi_res) * normals[1, s_idx] +
-                                      np.sin(phi_res) * binormals[1, s_idx])
-    rz = center[2, s_idx] + r_res * (np.cos(phi_res) * normals[2, s_idx] +
-                                      np.sin(phi_res) * binormals[2, s_idx])
+    # Cable knot on a torus of minor radius (a*R + r_tube)
+    a_cable = a + r_tube / R
+
+    rx = (R + a_cable * R * np.cos(q_total * t)) * np.cos(p_total * t)
+    ry = (R + a_cable * R * np.cos(q_total * t)) * np.sin(p_total * t)
+    rz = a_cable * R * np.sin(q_total * t)
 
     return rx, ry, rz
 
@@ -159,7 +148,8 @@ def render_particle(carrier_type, p_res, q_res, symbol, label,
                 linewidth=1.0, alpha=0.6)
 
         rx, ry, rz = resonance_on_knot_tube(
-            center, p_res, q_res, r_tube, N=2000)
+            center, p_res, q_res, r_tube, N=2000,
+            p_knot=p_k, q_knot=q_k, R=R, a=a)
         ax.plot(rx, ry, rz, color=path_color, linewidth=2.5,
                 solid_capstyle='round')
 
@@ -260,7 +250,9 @@ def render_gallery():
                               alpha=0.35)
             ax.plot(ctr[0], ctr[1], ctr[2], color='#999999', linewidth=0.8,
                     alpha=0.5)
-            rx, ry, rz = resonance_on_knot_tube(ctr, p, q, 0.35, 1200)
+            rx, ry, rz = resonance_on_knot_tube(
+                ctr, p, q, 0.35, 1200,
+                p_knot=2, q_knot=q_k, R=R, a=a)
             ax.plot(rx, ry, rz, color=color, linewidth=2.0)
 
         elif carrier == 'hopf':
