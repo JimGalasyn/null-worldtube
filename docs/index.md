@@ -92,6 +92,18 @@ The pentaquarks P<sub>c</sub>(4312&ndash;4457) are identified as cinquefoil hadr
 
 > **DOI:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239)
 
+## Integers as Output: The Derivation Chain
+
+Paper 14 directly confronts the natural objection: were the fifteen topological integers chosen to fit the data? The answer: every integer is the *output* of torus-knot crossing algebra, forced by topology at each step of a deductive chain.
+
+The trefoil T(2,3) is the **simplest non-trivial torus knot** &mdash; there is literally no torus knot between the unknot and the trefoil (T(2,q) is a knot only for odd q; q=1 is trivial). Its three crossings, via braid closure, generate the Lie algebra &su;(3). The cinquefoil T(2,5) is **uniquely selected** by the coupling constraint: scanning all possible (q<sub>geom</sub>,&nbsp;q<sub>eigen</sub>) combinations, only the trefoil&nbsp;+&nbsp;cinquefoil gives 1/&alpha;&nbsp;&asymp;&nbsp;137. Every other combination misses by factors of 2&ndash;10&times;.
+
+The BPS self-dual condition &lambda;&nbsp;=&nbsp;e&sup2;/2 is **derived, not imposed**: the Bogomolny identity decomposes the vortex energy into perfect squares plus a topological boundary term *only* at this point. At any other coupling, vortex energy depends on the field profile (dynamics), not just the winding number (topology). Since the framework requires mass&nbsp;=&nbsp;topology, the BPS point is forced.
+
+The complete chain &mdash; knot geometry &rarr; crossing counts &rarr; braid algebra &rarr; Casimir invariants &rarr; &alpha; &rarr; mass formulas &rarr; 80 PDG values &mdash; contains no adjustable parameters beyond m<sub>e</sub>.
+
+> **DOI:** [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967)
+
 ## A Forgotten Discovery, Rediscovered
 
 In the 1980s, a computer scientist named **F. Ray Skilton** at Brock University published three papers proving that the fine-structure constant — one of the most fundamental numbers in physics — could be derived from a Pythagorean triple:

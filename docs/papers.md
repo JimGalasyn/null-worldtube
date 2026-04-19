@@ -161,6 +161,18 @@ The SM capstone. Eighty observables &mdash; 75 particles plus mixing and couplin
 
 ---
 
+## Paper 14: Integers as Output
+
+**Full title:** *Integers as Output: Deriving the Standard Model Vocabulary from Torus-Knot Topology*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+The companion to Paper&nbsp;13: a direct response to the objection that the fifteen topological integers were fitted to data. Starting from the abelian Higgs Lagrangian at the BPS self-dual point, the paper demonstrates a complete deductive chain: (i)&nbsp;the trefoil T(2,3) is forced by minimality as the simplest non-trivial torus knot; (ii)&nbsp;its three crossings generate &su;(3) via braid closure, producing all Casimir invariants as computable output; (iii)&nbsp;the cinquefoil T(2,5) is uniquely selected by scanning all possible (q<sub>geom</sub>,&nbsp;q<sub>eigen</sub>) combinations &mdash; only the trefoil&nbsp;+&nbsp;cinquefoil pairing gives 1/&alpha;&nbsp;&asymp;&nbsp;137; (iv)&nbsp;the seven-step Aharonov&ndash;Bohm construction on the BPS gauge field yields 1/&alpha;&nbsp;=&nbsp;25&pi;&radic;3&nbsp;+&nbsp;1&nbsp;=&nbsp;137.035 at 7.6&nbsp;ppm, with every factor traced to a prior step. The BPS self-dual condition &lambda;&nbsp;=&nbsp;e&sup2;/2 is derived (not imposed) from the Bogomolny identity: it is the unique point where vortex energy equals the topological bound. An appendix exhibits the explicit &su;(3) commutator closure from braid generators. The chain contains no adjustable parameters beyond the single mass-scale anchor m<sub>e</sub>.
+
+**DOI:** [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -202,6 +214,20 @@ python3 simulations/helmholtz_eigenvalue/ab_phase_verification.py # 7-step AB ve
 python3 simulations/paper14_integers/crossings.py     # Crossing count → C_A
 python3 simulations/paper14_integers/braid_algebra.py # Braid → su(N) → Casimirs
 python3 simulations/paper14_integers/integers_out.py  # END-TO-END: 80/80 from knot geometry
+```
+
+Paper 14 analyses (integers as output + holonomy):
+```
+python3 simulations/paper14_integers/knot_selection.py   # Why T(2,3) and T(2,5): minimality + α scan
+python3 simulations/paper14_integers/crossings.py        # Crossing count → C_A
+python3 simulations/paper14_integers/braid_algebra.py    # Braid → su(N) → Casimirs
+python3 simulations/paper14_integers/jones.py            # Jones polynomial cross-validation
+python3 simulations/paper14_integers/integers_out.py     # END-TO-END: 80/80 from knot geometry
+python3 simulations/level2_abelian_higgs/holonomy_from_ah.py       # Biot-Savart Wilson loops on trefoil
+python3 simulations/level2_abelian_higgs/holonomy_physical_kappa.py # Physical κ=π², d_cross=2ξ
+python3 simulations/level2_abelian_higgs/crossing_angle_scan.py    # sin(2π/3) is representation-theoretic
+python3 simulations/level2_abelian_higgs/bps_equipartition.py      # +1 from winding, √2 dissolved
+python3 simulations/level2_abelian_higgs/bps_necessity.py          # BPS self-dual condition derived
 ```
 
 Paper 12 analyses (fermion structure + gauge dynamics):
