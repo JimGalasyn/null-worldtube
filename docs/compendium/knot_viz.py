@@ -148,7 +148,7 @@ def render_particle(carrier_type, p_res, q_res, symbol, label,
         p_k = 2
         q_k = 3 if carrier_type == 'trefoil' else 5
         a = 0.35 if carrier_type == 'trefoil' else 0.30
-        r_tube = 0.15
+        r_tube = 0.35  # fat tube so poloidal spiral is visible
 
         X, Y, Z, center = knot_tube_wireframe(
             p_k, q_k, R, a, r_tube, N_arc=200, N_circ=12)
@@ -255,12 +255,12 @@ def render_gallery():
         elif carrier in ('trefoil', 'cinquefoil'):
             q_k = 3 if carrier == 'trefoil' else 5
             a = 0.35 if carrier == 'trefoil' else 0.30
-            X, Y, Z, ctr = knot_tube_wireframe(2, q_k, R, a, 0.15, 150, 10)
+            X, Y, Z, ctr = knot_tube_wireframe(2, q_k, R, a, 0.35, 150, 14)
             ax.plot_wireframe(X, Y, Z, color='#cccccc', linewidth=0.2,
                               alpha=0.35)
             ax.plot(ctr[0], ctr[1], ctr[2], color='#999999', linewidth=0.8,
                     alpha=0.5)
-            rx, ry, rz = resonance_on_knot_tube(ctr, p, q, 0.15, 1200)
+            rx, ry, rz = resonance_on_knot_tube(ctr, p, q, 0.35, 1200)
             ax.plot(rx, ry, rz, color=color, linewidth=2.0)
 
         elif carrier == 'hopf':
