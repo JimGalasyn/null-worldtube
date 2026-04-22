@@ -13,11 +13,12 @@ The Standard Model of particle physics has about 20 free parameters &mdash; mass
 
 - **80 observables** reproduced at **0.1% median residual** against PDG values
 - **The fine structure constant** 1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 &mdash; **7.6 ppm** from experiment
+- **The gravitational constant** G = (8/7)&sup2;(1 + &alpha;/7)&sup2; &alpha;&sup2;&#x00b9; &#x210F;c/m<sub>e</sub>&sup2; &mdash; **0.013%** from CODATA (Paper 15)
 - **The gauge group** SU(3) &times; SU(2) &times; U(1) derived from crossing algebra, not imposed
 - **15 topological integers** &mdash; every one computed from knot geometry, none fitted
 - **The BPS self-dual condition** derived from the requirement that mass = topology
 
-> **Papers 13 &amp; 14:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) &middot; [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967)
+> **Papers 13, 14 &amp; 15:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) &middot; [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967) &middot; [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263)
 
 ## How It Works
 
@@ -29,7 +30,7 @@ The derivation chain has four steps:
 
 1. **BPS vortex.** The abelian Higgs Lagrangian at the self-dual point admits vortex solutions with quantised winding. The fundamental vortex has winding n&nbsp;=&nbsp;1 and energy &mu;&nbsp;=&nbsp;&pi; (the Bogomolny bound). The self-dual condition &lambda;&nbsp;=&nbsp;e&sup2;/2 is the unique point where vortex energy depends only on topology, not on the field profile &mdash; it is derived, not assumed.
 
-2. **Knot selection.** The vortex must close on itself. The trefoil T(2,3) is the simplest non-trivial torus knot &mdash; forced by minimality. The cinquefoil T(2,5) is uniquely selected: scanning all (q<sub>geom</sub>,&nbsp;q<sub>eigen</sub>) combinations, only trefoil&nbsp;+&nbsp;cinquefoil gives 1/&alpha;&nbsp;&asymp;&nbsp;137.
+2. **Knot selection.** The vortex must close on itself. The trefoil T(2,3) is the simplest non-trivial torus knot &mdash; forced by minimality. The cinquefoil T(2,5) appears as a label for the integer 5 = |Irr(A<sub>5</sub>)|; Paper 15 traces this integer back to the trefoil itself, since (+1)-Dehn surgery on the trefoil produces the Poincar&eacute; homology sphere S&sup3;/2I whose fundamental group quotient is A<sub>5</sub>. Among the (q<sub>geom</sub>,&nbsp;q<sub>eigen</sub>) combinations consistent with this chain, only the trefoil-plus-cinquefoil pairing gives 1/&alpha;&nbsp;&asymp;&nbsp;137.
 
 3. **Crossing algebra.** The trefoil&rsquo;s three crossings generate braid matrices whose commutators close on the Lie algebra &su;(3) &mdash; the gauge group of the strong force. The cinquefoil&rsquo;s five crossings give &su;(5) &mdash; the GUT group. All 15 integers in the NWT vocabulary emerge as Casimir invariants and their composites.
 
@@ -51,7 +52,7 @@ If the pentaquark prediction fails, the cinquefoil mass formula &mdash; and with
 
 ## The Paper Trail
 
-The theory developed across 14 papers, each building on the last. The full list with abstracts and DOIs is on the [Papers page](papers.html). Here is the arc:
+The theory has developed across 15 papers, each building on the last. The full list with abstracts and DOIs is on the [Papers page](papers.html). Here is the arc:
 
 **Foundations (Papers 1&ndash;5):** The electron as a torus knot vortex. Mass spectrum from winding numbers. Quark confinement from incommensurability. The electron mass derived from phase closure to 0.85%. Input set reduced to three integers (p,&nbsp;q,&nbsp;k)&nbsp;=&nbsp;(2,&nbsp;1,&nbsp;3).
 
@@ -63,7 +64,9 @@ The theory developed across 14 papers, each building on the last. The full list 
 
 **Field-theoretic derivation (Papers 11&ndash;12):** The mass formula derived from the gravitating abelian Higgs Lagrangian at the BPS point. Fermion spin from the Finkelstein&ndash;Rubinstein theorem. Yang&ndash;Mills dynamics as a topologically protected sector. One Lagrangian &rarr; masses + gauge algebra + gauge dynamics + &alpha; + spin.
 
-**The capstone (Papers 13&ndash;14):** 80 observables at 0.1% median residual. Every integer derived from crossing algebra. The trefoil is forced by minimality. The cinquefoil is uniquely selected. The BPS condition is derived. The vocabulary is computed, not chosen.
+**The SM capstone (Papers 13&ndash;14):** 80 observables at 0.1% median residual. Every integer derived from crossing algebra. The trefoil is forced by minimality. The cinquefoil is uniquely selected. The BPS condition is derived. The vocabulary is computed, not chosen.
+
+**Gravity from the trefoil (Paper 15):** $(+1)$-Dehn surgery on the trefoil produces the Poincar&eacute; homology sphere $S^3/2I$, whose first $2I$-invariant Laplacian eigenvalue $\lambda_1 = 168 = 8 \times 21 = 7 \times 24$ organises the gravitational hierarchy. Via the McKay correspondence and the explicit $\mathrm{Cl}(0,7)$ octonion Clifford embedding $2T \subset \mathrm{Spin}(7)$, the integers $(7, 8, 21) = (\text{vector}, \text{spinor}, \text{adjoint})$ of $\mathrm{Spin}(7) = B_3$ enter the formula $m_e/m_{\text{Pl}} = (8/7)(1 + \alpha/7)\alpha^{21/2}$, matching CODATA at **0.013%**. No integer is introduced as an independent input beyond what the trefoil's surgery and spectrum already generate.
 
 ## A Forgotten Discovery, Rediscovered
 
