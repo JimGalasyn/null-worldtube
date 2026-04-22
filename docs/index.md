@@ -32,7 +32,7 @@ The derivation chain has four steps:
 
 2. **Knot selection.** The vortex must close on itself. The trefoil T(2,3) is the simplest non-trivial torus knot &mdash; forced by minimality. The cinquefoil T(2,5) appears as a label for the integer 5 = \|Irr(A<sub>5</sub>)\|; Paper 15 traces this integer back to the trefoil itself, since (+1)-Dehn surgery on the trefoil produces the Poincar&eacute; homology sphere S&sup3;/2I whose fundamental group quotient is A<sub>5</sub>. Among the (q<sub>geom</sub>,&nbsp;q<sub>eigen</sub>) combinations consistent with this chain, only the trefoil-plus-cinquefoil pairing gives 1/&alpha;&nbsp;&asymp;&nbsp;137.
 
-3. **Crossing algebra.** The trefoil&rsquo;s three crossings generate braid matrices whose commutators close on the Lie algebra &su;(3) &mdash; the gauge group of the strong force. The cinquefoil&rsquo;s five crossings give &su;(5) &mdash; the GUT group. All 15 integers in the NWT vocabulary emerge as Casimir invariants and their composites.
+3. **Crossing algebra.** The trefoil&rsquo;s three crossings generate braid matrices whose commutators close on the Lie algebra su(3) &mdash; the gauge group of the strong force. Hopf-link crossings contribute su(2) and u(1), completing the Standard Model gauge algebra. All 15 integers in the NWT vocabulary emerge as Casimir invariants and their composites.
 
 4. **Holonomy.** The BPS gauge field on the trefoil produces an Aharonov&ndash;Bohm phase with exact D<sub>3</sub> symmetry (100% Fourier purity). The seven-step construction assembles 1/&alpha;&nbsp;=&nbsp;25&pi;&radic;3&nbsp;+&nbsp;1, with every factor traced to a prior step.
 
