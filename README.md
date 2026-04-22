@@ -24,7 +24,7 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 | 12 | Fermion Structure and Gauge Dynamics from Topological Sectors | [10.5281/zenodo.19555978](https://doi.org/10.5281/zenodo.19555978) | 14 |
 | 13 | The Standard Model from NWT Topology (SM Capstone) | [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) | 26 |
 | 14 | Integers as Output | [10.5281/zenodo.19654507](https://doi.org/10.5281/zenodo.19654507) | 18 |
-| 15 | One Knot, All Forces (gravitational constant) | in preparation | 9 |
+| 15 | One Knot, All Forces (gravitational constant) | [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) | 14 |
 | 16 | Nuclear Binding from Topological Linking | in preparation | 31 |
 
 **Note on framework evolution:** Papers 1–5 used an earlier formulation (photon on a (2,1) torus with κ=3, Skilton's α formula). Papers 6–15 use the refined framework (BPS vortex on trefoil T(2,3), crossing algebra, 1/α = 25π√3+1). The later papers supersede the earlier derivations where they conflict. See the [website](https://jimgalasyn.github.io/null-worldtube) for the current summary.
@@ -61,6 +61,41 @@ python3 simulations/helmholtz_eigenvalue/ab_phase_verification.py
 
 # Legacy (Papers 1–5)
 python3 -m simulations.nwt --help
+```
+
+### Paper 15 reproducibility pipeline (analysis/)
+
+The Paper 15 gravitational-hierarchy derivation is verified end-to-end by the
+following scripts. Each is self-contained with numerical checks printed at run
+time.
+
+```bash
+# Paper 15 b1 -- one-loop BPS pipeline (validates the Casimir machinery
+# against Alonso-Izquierdo et al. 2016, Delta_mu = -0.279 in magnitude + sign)
+python3 analysis/nwt_vortex_gravity_flat.py         # Stage 0: BPS profile
+python3 analysis/nwt_vortex_fluctuations_b1_2.py    # 4x4 H+ operator
+python3 analysis/nwt_vortex_fluctuations_b1_3.py    # FP ghost sector
+python3 analysis/nwt_vortex_fluctuations_b1_4.py    # zeta-regularisation
+python3 analysis/nwt_vortex_fluctuations_b1_5.py    # 2-DOF Grassmann ghost fix
+
+# Paper 15 b2 -- Spin(7)/Cl(0,7)/2T structural chain
+python3 analysis/nwt_poincare_sphere_b2_0.py        # lambda_1 = 168 on S^3/2I
+python3 analysis/nwt_2T_character_7dim_b2_4.py      # 2T character table
+python3 analysis/nwt_spin7_chain_b2_5.py            # Spin(7) = B_3 dims 7,8,21
+python3 analysis/nwt_eulerian_amplitude_b2_7.py     # K_7 Eulerian circuit
+python3 analysis/nwt_2T_spin7_clifford_b2_12.py     # Cl(0,7) embedding proof
+python3 analysis/nwt_k7_so7_wilson_b2_13.py         # 21 bivectors span so(7)
+python3 analysis/nwt_87_prefactor_b2_14.py          # 8/7 as Casimir ratio
+python3 analysis/nwt_nlo_alpha7_b2_15.py            # (1 + alpha/7) NLO pattern
+
+# NWT Lagrangian L1-L5 (structural decomposition of Paper 15's result
+# into the minimal three-field theory L1+L2+L3; Paper 16 companion)
+python3 analysis/nwt_lagrangian_L1_fields.py        # minimal field content
+python3 analysis/nwt_lagrangian_L1b_uv_completion.py# SO(10) UV falsifiers
+python3 analysis/nwt_lagrangian_L2_kinetic_bps.py   # Bogomolny mu = pi
+python3 analysis/nwt_lagrangian_L3_skyrme_hopf.py   # Q_H = p*m quantisation
+python3 analysis/nwt_lagrangian_L4_paper6_mass_spectrum.py  # 24 particles, 1.06%
+python3 analysis/nwt_lagrangian_L5_gravity_hierarchy.py     # G to 0.029% NLO
 ```
 
 ## Repository Structure
