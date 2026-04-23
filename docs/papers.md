@@ -185,6 +185,18 @@ Papers 13&ndash;14 derived eighty Standard Model observables from the trefoil. T
 
 ---
 
+## Paper 16: The NWT Lagrangian
+
+**Full title:** *The NWT Lagrangian: A Three-Field Theory of Particles and Gravity*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+The capstone Lagrangian paper for the NWT programme. Presents the minimal field content of the theory as a three-field relativistic Lagrangian: a complex scalar condensate &psi;, an abelian gauge field A<sub>&mu;</sub>, and an S<sup>2</sup>-valued Skyrme&ndash;Faddeev unit field n<sup>a</sup>, tuned to the BPS critical coupling &lambda;&nbsp;=&nbsp;e<sup>2</sup>/2 and the Derrick equilibrium &kappa;&nbsp;=&nbsp;R/a<sub>0</sub>&nbsp;=&nbsp;&pi;<sup>2</sup>. The derivation is organised into five layers L<sub>1</sub>&ndash;L<sub>5</sub>: field content, BPS sector (Bogomolny bound to 10<sup>&minus;3</sup>%), Skyrme+Hopf sector (Q<sub>H</sub> = p&middot;m), Paper 6 mass spectrum (1.06% median on 24 particles, with n<sub>q</sub><sup>q</sup> retained as an empirical input), and the Paper 15 gravitational hierarchy (G to 0.029% at NLO). A first-principles one-loop Casimir calculation on S<sup>3</sup>/2I (Phases 0&ndash;5 of an ongoing programme) produces the &Oscr;(1) coefficient expected for the Seeley a<sub>2</sub> piece of the effective action, &Delta;(1/16&pi;G) &asymp; 0.27 m<sub>e</sub><sup>2</sup>, and **localises the &alpha;<sup>&minus;21</sup> suppression of G** in the Wilson-line amplitude on the 21-edge K<sub>7</sub> Eulerian circuit, not in the Casimir coefficient. A natural SO(10) UV completion at E<sub>GUT</sub>&nbsp;=&nbsp;7.41&times;10<sup>15</sup> GeV adds 33 heavy gauge bosons and yields three concrete falsifiable predictions: proton lifetime of order 10<sup>35</sup> yr (Hyper-Kamiokande reach), non-MSSM coupling unification at &alpha;<sub>GUT</sub>&nbsp;=&nbsp;1/40, and &mdash; if the SO(10) &rarr; SM transition is first order &mdash; a stochastic gravitational-wave signature near 7.4 GHz.
+
+**DOI:** [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -268,6 +280,27 @@ python3 analysis/nwt_lagrangian_L2_kinetic_bps.py             # Bogomolny mu = p
 python3 analysis/nwt_lagrangian_L3_skyrme_hopf.py             # Q_H = p*m quantisation
 python3 analysis/nwt_lagrangian_L4_paper6_mass_spectrum.py    # 24 particles, 1.06% median
 python3 analysis/nwt_lagrangian_L5_gravity_hierarchy.py       # G to -0.029% NLO
+```
+
+Paper 16 analyses (one-loop Casimir on S^3/2I, Phases 0-5):
+```
+# Phase 0 -- heat-kernel scaffold, matches Seeley-DeWitt to 6 decimals
+python3 analysis/nwt_zeta_phase0_scaffold.py
+
+# Phase 1 -- free scalar zeta(s) via Jorgenson-Lang on S^3/2I
+python3 analysis/nwt_zeta_phase1_free_scalar.py
+
+# Phase 2 -- BPS trefoil geometry on the Clifford/Heegaard torus of S^3
+python3 analysis/nwt_zeta_phase2_trefoil_bps.py
+
+# Phase 3 -- tubular Casimir shift (bulk + finite-size)
+python3 analysis/nwt_zeta_phase3_trefoil_casimir.py
+
+# Phase 4 -- curvature corrections + 2I-orbit scheme analysis
+python3 analysis/nwt_zeta_phase4_curvature_corrections.py
+
+# Phase 5 -- extract 1/G from S_eff, localise the alpha^-21 suppression
+python3 analysis/nwt_zeta_phase5_1overG.py
 ```
 
 Paper 12 analyses (fermion structure + gauge dynamics):

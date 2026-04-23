@@ -25,7 +25,8 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 | 13 | The Standard Model from NWT Topology (SM Capstone) | [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) | 26 |
 | 14 | Integers as Output | [10.5281/zenodo.19654507](https://doi.org/10.5281/zenodo.19654507) | 18 |
 | 15 | One Knot, All Forces (gravitational constant) | [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) | 14 |
-| 16 | Nuclear Binding from Topological Linking | in preparation | 31 |
+| 16 | The NWT Lagrangian: A Three-Field Theory of Particles and Gravity | [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846) | 13 |
+| 17 | Nuclear Binding from Topological Linking | in preparation | 31 |
 
 **Note on framework evolution:** Papers 1–5 used an earlier formulation (photon on a (2,1) torus with κ=3, Skilton's α formula). Papers 6–15 use the refined framework (BPS vortex on trefoil T(2,3), crossing algebra, 1/α = 25π√3+1). The later papers supersede the earlier derivations where they conflict. See the [website](https://jimgalasyn.github.io/null-worldtube) for the current summary.
 
@@ -96,6 +97,33 @@ python3 analysis/nwt_lagrangian_L2_kinetic_bps.py   # Bogomolny mu = pi
 python3 analysis/nwt_lagrangian_L3_skyrme_hopf.py   # Q_H = p*m quantisation
 python3 analysis/nwt_lagrangian_L4_paper6_mass_spectrum.py  # 24 particles, 1.06%
 python3 analysis/nwt_lagrangian_L5_gravity_hierarchy.py     # G to 0.029% NLO
+```
+
+### Paper 16 reproducibility pipeline (analysis/)
+
+Paper 16 (*The NWT Lagrangian*) adds a six-phase one-loop Casimir
+programme on the Poincaré sphere S³/2I with the BPS trefoil background.
+Phases 0–5 are implemented and validated; Phase 6 (Wilson amplitude on
+K₇) is deferred to a follow-up paper.
+
+```bash
+# Phase 0: heat-kernel scaffold, matches Seeley-DeWitt to 6 decimals
+python3 analysis/nwt_zeta_phase0_scaffold.py
+
+# Phase 1: free scalar zeta(s) via Jorgenson-Lang on S^3/2I
+python3 analysis/nwt_zeta_phase1_free_scalar.py
+
+# Phase 2: BPS trefoil geometry on the Clifford/Heegaard torus of S^3
+python3 analysis/nwt_zeta_phase2_trefoil_bps.py
+
+# Phase 3: tubular Casimir shift (bulk + finite-size)
+python3 analysis/nwt_zeta_phase3_trefoil_casimir.py
+
+# Phase 4: curvature corrections + 2I-orbit scheme analysis
+python3 analysis/nwt_zeta_phase4_curvature_corrections.py
+
+# Phase 5: extract 1/G from S_eff, localise the alpha^-21 suppression
+python3 analysis/nwt_zeta_phase5_1overG.py
 ```
 
 ## Repository Structure

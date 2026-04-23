@@ -17,8 +17,9 @@ The Standard Model of particle physics has about 20 free parameters &mdash; mass
 - **The gauge group** SU(3) &times; SU(2) &times; U(1) derived from crossing algebra, not imposed
 - **15 topological integers** &mdash; every one computed from knot geometry, none fitted
 - **The BPS self-dual condition** derived from the requirement that mass = topology
+- **A single three-field Lagrangian** (&psi;, A<sub>&mu;</sub>, n<sup>a</sup>) that organises all of the above into five verifiable layers (Paper 16)
 
-> **Papers 13, 14 &amp; 15:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) &middot; [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967) &middot; [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263)
+> **Papers 13, 14, 15 &amp; 16:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) &middot; [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967) &middot; [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) &middot; [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846)
 
 ## How It Works
 
@@ -52,7 +53,7 @@ If the pentaquark prediction fails, the cinquefoil mass formula &mdash; and with
 
 ## The Paper Trail
 
-The theory has developed across 15 papers, each building on the last. The full list with abstracts and DOIs is on the [Papers page](papers.html). Here is the arc:
+The theory has developed across 16 papers, each building on the last. The full list with abstracts and DOIs is on the [Papers page](papers.html). Here is the arc:
 
 **Foundations (Papers 1&ndash;5):** The electron as a torus knot vortex. Mass spectrum from winding numbers. Quark confinement from incommensurability. The electron mass derived from phase closure to 0.85%. Input set reduced to three integers (p,&nbsp;q,&nbsp;k)&nbsp;=&nbsp;(2,&nbsp;1,&nbsp;3).
 
@@ -67,6 +68,8 @@ The theory has developed across 15 papers, each building on the last. The full l
 **The SM capstone (Papers 13&ndash;14):** 80 observables at 0.1% median residual. Every integer derived from crossing algebra. The trefoil is forced by minimality. The cinquefoil is uniquely selected. The BPS condition is derived. The vocabulary is computed, not chosen.
 
 **Gravity from the trefoil (Paper 15):** (+1)-Dehn surgery on the trefoil produces the Poincar&eacute; homology sphere S<sup>3</sup>/2I, whose first 2I-invariant Laplacian eigenvalue &lambda;<sub>1</sub>&nbsp;=&nbsp;168 = 8&nbsp;&times;&nbsp;21 = 7&nbsp;&times;&nbsp;24 organises the gravitational hierarchy. Via the McKay correspondence and the explicit Cl(0,7) octonion Clifford embedding 2T &sub; Spin(7), the integers (7,&nbsp;8,&nbsp;21) = (vector, spinor, adjoint) of Spin(7) = B<sub>3</sub> enter the formula m<sub>e</sub>/m<sub>Pl</sub> = (8/7)(1&nbsp;+&nbsp;&alpha;/7)&nbsp;&alpha;<sup>21/2</sup>, matching CODATA at **0.013%**. No integer is introduced as an independent input beyond what the trefoil's surgery and spectrum already generate.
+
+**The NWT Lagrangian (Paper 16):** A single three-field Lagrangian with a complex scalar condensate &psi;, an abelian gauge field A<sub>&mu;</sub>, and an S<sup>2</sup>-valued Skyrme&ndash;Faddeev unit field n<sup>a</sup>, tuned to the BPS critical coupling &lambda;&nbsp;=&nbsp;e<sup>2</sup>/2 and Derrick equilibrium &kappa;&nbsp;=&nbsp;&pi;<sup>2</sup>. Five layers L<sub>1</sub>&ndash;L<sub>5</sub> recover field content, BPS sector, Skyrme+Hopf sector, Paper&nbsp;6 mass spectrum, and Paper&nbsp;15 gravitational hierarchy. A first-principles one-loop Casimir calculation on S<sup>3</sup>/2I (Phases 0&ndash;5) produces the &Oscr;(1) coefficient expected for the Seeley a<sub>2</sub> piece and **localises the &alpha;<sup>&minus;21</sup> suppression** of G: it is not in the Casimir coefficient and must therefore enter through the Wilson-line amplitude on the 21-edge K<sub>7</sub> Eulerian circuit, as Paper&nbsp;15 proposes. A natural &SOpen;(10) UV completion adds 33 heavy gauge bosons with three concrete falsifiers (Hyper-K proton decay, non-MSSM coupling unification, 7.4&nbsp;GHz GW).
 
 ## A Forgotten Discovery, Rediscovered
 
