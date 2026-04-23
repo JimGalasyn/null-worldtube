@@ -26,7 +26,8 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 | 14 | Integers as Output | [10.5281/zenodo.19654507](https://doi.org/10.5281/zenodo.19654507) | 18 |
 | 15 | One Knot, All Forces (gravitational constant) | [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) | 14 |
 | 16 | The NWT Lagrangian: A Three-Field Theory of Particles and Gravity | [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846) | 13 |
-| 17 | Nuclear Binding from Topological Linking | in preparation | 31 |
+| 17 | The α<sup>21/2</sup> Closure: Wilson Amplitudes on the K<sub>7</sub> Eulerian Circuit | in preparation | – |
+| 18 | Nuclear Binding from Topological Linking | in preparation | 31 |
 
 **Note on framework evolution:** Papers 1–5 used an earlier formulation (photon on a (2,1) torus with κ=3, Skilton's α formula). Papers 6–15 use the refined framework (BPS vortex on trefoil T(2,3), crossing algebra, 1/α = 25π√3+1). The later papers supersede the earlier derivations where they conflict. See the [website](https://jimgalasyn.github.io/null-worldtube) for the current summary.
 
