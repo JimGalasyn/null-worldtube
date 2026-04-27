@@ -1,0 +1,100 @@
+
+==============================================================================
+ Experiment 5: IBM Heron submission
+==============================================================================
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 12:11:22,301: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-04-26 12:11:25,749: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open), the available account instances are: open-instance. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService().
+qiskit_runtime_service.backends:WARNING:2026-04-26 12:11:25,749: Loading instance: open-instance, plan: open
+  Backend:       ibm_fez
+  Qubits:        156
+  Status:        active
+  Pending jobs:  0
+  Shots:         4000 per circuit (×3 circuits)
+  Total shots:   12000
+
+==============================================================================
+ Experiment 5 on ibm_fez  (4000 shots × 3 prep circuits)
+==============================================================================
+
+  Transpiling 3 circuits...
+         |0⟩^7:   52 CZ/ECR after transpile
+         |+⟩^7:   52 CZ/ECR after transpile
+         |K_7⟩:  112 CZ/ECR after transpile
+
+  Submitting...
+    Job ID: d7n66os97osc73drknp0
+    (Look up later at https://quantum.cloud.ibm.com)
+  Job complete.
+
+  |0⟩^7
+    P(0000000)         = 0.0103  (predict 0.0078 = 1/128)
+    P_max              = 0.0130   at bitstring 0001110
+    H_2 (Shannon)      = 6.938 bits  (predict 7.000)
+    H_2 / 7            = 0.991
+    n_nonzero bitstrings = 128 / 128
+    TV distance from uniform = 0.1241
+
+  |+⟩^7
+    P(0000000)         = 0.0035  (predict 0.0078 = 1/128)
+    P_max              = 0.0182   at bitstring 1100111
+    H_2 (Shannon)      = 6.795 bits  (predict 7.000)
+    H_2 / 7            = 0.971
+    n_nonzero bitstrings = 128 / 128
+    TV distance from uniform = 0.2397
+
+  |K_7⟩
+    P(0000000)         = 0.4815  (predict 1.0000)
+    P_max              = 0.4815   at bitstring 0000000
+    H_2 (Shannon)      = 4.274 bits  (predict 0.000)
+    H_2 / 7            = 0.611
+    n_nonzero bitstrings = 127 / 128
+    TV distance from uniform = 0.5838
+
+  Aggregate signal: H_2(|0⟩^7) vs H_2(|K_7⟩)
+  ------------------------------------------
+    H_2(|0⟩^7)         = 6.938  (predict 7.000)
+    H_2(|K_7⟩)         = 4.274  (predict 0.000)
+    Δ entropy          = 2.663 bits
+    P(0|K_7 input)     = 0.4815  (direct |⟨K_7|⟨K_7|⟩|² fidelity ≈ this)
+    P_max(|0⟩ input)   = 0.0130  (predict ≈ 1/128 = 0.0078; >> 0.0078 means noise-bias)
+
+  Interpretation:
+    • Large Δ entropy (between |0⟩^7 and |K_7⟩ inputs) confirms
+      the syndrome eigenspaces are non-degenerate AND that |K_7⟩ is
+      the unique +1-syndrome state.
+    • H_2(|0⟩^7) close to 7 confirms uniform syndrome dist.
+    • P(0|K_7 input) is the round-trip fidelity for |K_7⟩ prep + uncompute;
+      directly bounds how much of |K_7⟩'s amplitude is preserved.
+
+Result retrieved.
+
+
+  |0⟩^7
+    P(0000000)         = 0.0103  (predict 0.0078 = 1/128)
+    P_max              = 0.0130   at bitstring 0001110
+    H_2 (Shannon)      = 6.938 bits  (predict 7.000)
+    H_2 / 7            = 0.991
+    n_nonzero bitstrings = 128 / 128
+    TV distance from uniform = 0.1241
+
+  |+⟩^7
+    P(0000000)         = 0.0035  (predict 0.0078 = 1/128)
+    P_max              = 0.0182   at bitstring 1100111
+    H_2 (Shannon)      = 6.795 bits  (predict 7.000)
+    H_2 / 7            = 0.971
+    n_nonzero bitstrings = 128 / 128
+    TV distance from uniform = 0.2397
+
+  |K_7⟩
+    P(0000000)         = 0.4815  (predict 1.0000)
+    P_max              = 0.4815   at bitstring 0000000
+    H_2 (Shannon)      = 4.274 bits  (predict 0.000)
+    H_2 / 7            = 0.611
+    n_nonzero bitstrings = 127 / 128
+    TV distance from uniform = 0.5838
+
+  Aggregate signal:
+    H_2(|0⟩^7) = 6.938  (predict 7.000)
+    H_2(|K_7⟩) = 4.274  (predict 0.000)
+    Δ entropy  = 2.663 bits
+    P(0|K_7 input) = 0.4815  (round-trip fidelity)

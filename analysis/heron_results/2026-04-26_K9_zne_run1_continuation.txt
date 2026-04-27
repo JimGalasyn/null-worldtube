@@ -1,0 +1,51 @@
+
+==============================================================================
+ ZNE continuation: pick up λ=1 job, submit λ=3
+==============================================================================
+
+  N        = 9
+  backend  = ibm_fez
+  shots    = 4000
+  λ=1 job  = d7n93us97osc73drnnog
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 15:32:48,871: Loading account with the given token. A saved account will not be used.
+
+  Re-transpiling base (λ=1) circuits (seed=42)...
+  Folding for λ=3 (CZ-only)...
+    CZ avg: λ=1 → 88.0, λ=3 → 264.0 (ratio 3.00)
+
+  Submitting λ=3 batch...
+    λ=3 Job ID: d7n956a94dqs73eunus0
+
+  Fetching λ=1 result...
+    λ=1 status: DONE
+  λ=1 result retrieved.
+
+  Waiting for λ=3...
+  λ=3 result retrieved.
+
+
+==============================================================================
+ ZNE result for ⟨H_YY⟩|K_9⟩
+==============================================================================
+
+  Per-scale ⟨H_YY⟩:
+    λ       ⟨H_YY⟩    σ_total     avg ⟨YY⟩
+  ------------------------------------------
+    1     +18.9765     0.0801       0.5271
+    3      +6.5675     0.0930       0.1824
+
+  ZNE-extrapolated ⟨H_YY⟩|K_9⟩(λ=0):
+    Linear extrapolation:  25.1810  ±  0.1288
+    Structural prediction: 36  (= dim(Adj_so(9)))
+    Deviation:             -10.8190
+    Z-score from pred:     -83.98σ
+    Relative deviation:    -30.05%
+
+  Falsification of alternative M values (linear ZNE extrapolation):
+    M =  30  z = -37.41σ  ✗
+    M =  33  z = -60.69σ  ✗
+    M =  36  z = -83.98σ  ✗
+    M =  39  z = -107.27σ  ✗
+    M =  42  z = -130.55σ  ✗
+
+  PAYG usage: 79/125 sec

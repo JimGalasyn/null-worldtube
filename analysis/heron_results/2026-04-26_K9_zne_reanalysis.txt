@@ -1,0 +1,58 @@
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 15:36:00,435: Loading account with the given token. A saved account will not be used.
+
+==============================================================================
+ K_9 ZNE re-analysis: linear vs exponential extrapolation
+==============================================================================
+
+  Fetching results...
+    λ=1: ⟨H_YY⟩ = +18.9765 ± 0.0801
+    λ=3: ⟨H_YY⟩ = +6.5675 ± 0.0930
+
+  Distribution of ⟨YY⟩ values:
+    λ=1: min 0.3515, max 0.7225, avg 0.5271
+    λ=3: min 0.0770, max 0.3505, avg 0.1824
+    λ=3 negative edges: 0 / 36 (noise pushes some below zero)
+
+  ZNE-extrapolated ⟨H_YY⟩|K_9⟩(λ=0):
+            method    ⟨H_YY⟩(0)        σ   / pred   (o-p)/σ
+  ------------------------------------------------------------
+            Linear     +25.1810   0.1288   0.6995    -83.98
+       Exponential     +33.4337   0.3870   0.9287     -6.63
+        Structural           36        -   1.0000     +0.00
+
+  Falsification of alternative M values:
+     M      lin Δ    lin z      exp Δ    exp z
+  --------------------------------------------------
+    25    +0.1810   +1.40✓    +8.4337  +21.79✗
+    28    -2.8190  -21.88✗    +5.4337  +14.04✗
+    30    -4.8190  -37.41✗    +3.4337   +8.87✗
+    33    -7.8190  -60.69✗    +0.4337   +1.12✓
+    36   -10.8190  -83.98✗    -2.5663   -6.63✗
+    39   -13.8190 -107.27✗    -5.5663  -14.38✗
+    42   -16.8190 -130.55✗    -8.5663  -22.14✗
+    45   -19.8190 -153.84✗   -11.5663  -29.89✗
+
+  Interpretation:
+
+  ZNE corrects for noise that scales with fold count (gate-induced
+  depolarization).  It does NOT correct for non-foldable error
+  sources: state prep, measurement readout, idle decoherence (T1/T2
+  during gates and between gates), and crosstalk on simultaneous
+  gates.  These contribute an irreducible floor that ZNE leaves
+  intact.
+
+  For our K_9 measurement on ibm_fez (88 CZ depth):
+    Linear ZNE recovers      25.18 / 36 = 69.9%
+    Exponential ZNE recovers 33.43 / 36 = 92.9%
+    Raw (no mitigation)      19.57 / 36 = 54.4%
+
+  Exponential ZNE recovers an additional 71% over
+  raw, but still falls 7% short of the structural
+  prediction.  The remaining gap is the non-foldable-error floor —
+  not direct evidence against M(K_9) = 36 since the SAME floor would
+  apply to ANY value of M.
+
+  To convert ZNE into a sharp falsification test, we'd need to apply
+  ZNE to K_7 as well (so the non-foldable bias cancels in the ratio
+  K_9_ZNE / K_7_ZNE).  That would cost another ~$60-80 PAYG.
+

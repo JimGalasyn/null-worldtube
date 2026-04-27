@@ -1,0 +1,63 @@
+
+==============================================================================
+ K_7: IBM Heron submission
+==============================================================================
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 13:08:07,448: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-04-26 13:08:11,720: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open), the available account instances are: open-instance. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService().
+qiskit_runtime_service.backends:WARNING:2026-04-26 13:08:11,720: Using instance: open-instance, plan: open
+  Backend:       ibm_fez
+  Qubits:        156
+  Status:        active
+  Pending jobs:  0
+
+==============================================================================
+ K_7 on ibm_fez
+==============================================================================
+
+  N = 7
+  Edges = 21 = N(N-1)/2 = dim(Adj_so(7))
+  Predicted noiseless ⟨H_YY⟩ = 21
+  Shots Exp 1 (stabilizers): 4000 × 7
+  Shots Exp 2 (YY edges):    4000 × 21
+
+  Transpiling...
+  CZ/ECR per stabilizer circuit: min=51, max=52, avg=51.3
+  CZ/ECR per YY circuit:         min=52, max=52, avg=52.0
+
+  Submitting Exp 1 (7 circuits)...
+    Job ID: d7n71bs97osc73drlie0
+
+  Submitting Exp 2 (21 circuits)...
+    Job ID: d7n71c62jamc73bo2r20
+
+  Waiting for results...
+  Both jobs complete.
+
+  EXPERIMENT 1: ⟨S_v⟩ for v = 0..6
+    v        ⟨S_v⟩          σ
+  ------------------------------
+    0      +0.2650     0.0152
+    1      +0.2465     0.0153
+    2      +0.1425     0.0157
+    3      +0.3360     0.0149
+    4      +0.3275     0.0149
+    5      +0.5165     0.0135
+    6      +0.5530     0.0132
+  Mean ⟨S_v⟩: 0.3410  (predict 1.0)
+  Range:      [0.1425, 0.5530]
+
+  EXPERIMENT 2: ⟨H_YY⟩ via 21 edge ⟨Y_u Y_v⟩
+  (suppressing per-edge table for N=7)
+
+  TOTAL ⟨H_YY⟩ |K_7⟩  =  12.2520  ±  0.0569
+  PREDICTION         =  21.0000  (= dim(Adj_so(7)))
+  Deviation         =  8.7480
+  Z-score from prediction: -153.83σ
+
+  Random-null hypothesis ⟨H_YY⟩ = 0:
+  Z-score above null:       +169.1σ
+
+  Edge statistics (PSL(2,7)/PSL(2,N) test):
+    mean ⟨Y_u Y_v⟩:           0.5834
+    std across edges:         0.2141
+    range:                    [0.0200, 0.7980]

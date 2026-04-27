@@ -1,0 +1,44 @@
+
+==============================================================================
+ Zero-noise extrapolation for ⟨H_YY⟩|K_N⟩
+==============================================================================
+
+  N        = 9
+  Backend  = ibm_fez
+  Shots    = 4000 per circuit
+  Scales   = [1, 3]
+  Instance = crn:v1:bluemix:public:quantum-computing:us-east:a/c84951b63d86411c876c4fd868dee84a:e7173ddf-4db9-438c-ad3c-e0b49469f0ed::
+
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 15:30:11,748: Loading account with the given token. A saved account will not be used.
+
+==============================================================================
+ K_9 ZNE on ibm_fez
+==============================================================================
+
+  Scales: [1, 3]  shots/circuit: 4000
+  Total circuits: 2 × 36 = 72
+  Approximate QPU sec ~ depth × shots × Nedges / 1e6 ...
+
+  Transpiling base (λ=1)...
+  Base CZ count per circuit: avg 88.0
+  Folded λ=3: CZ count per circuit avg 264.0 (vs 88.0 at λ=1)
+
+  Submitting 2 batches...
+    λ=1: Job ID d7n93us97osc73drnnog
+Traceback (most recent call last):
+  File "/home/jim/repos/null-worldtube-private/analysis/nwt_qec_heron_zne.py", line 294, in <module>
+    main()
+  File "/home/jim/repos/null-worldtube-private/analysis/nwt_qec_heron_zne.py", line 289, in main
+    result = submit_zne_K_N(args.N, backend, args.shots, args.scales)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jim/repos/null-worldtube-private/analysis/nwt_qec_heron_zne.py", line 125, in submit_zne_K_N
+    job = sampler.run(yy_folded[s], shots=shots)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jim/.local/lib/python3.12/site-packages/qiskit_ibm_runtime/sampler.py", line 109, in run
+    return self._run(coerced_pubs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jim/.local/lib/python3.12/site-packages/qiskit_ibm_runtime/base_primitive.py", line 148, in _run
+    validate_isa_circuits([pub.circuit], self._backend.target)
+  File "/home/jim/.local/lib/python3.12/site-packages/qiskit_ibm_runtime/utils/validations.py", line 97, in validate_isa_circuits
+    raise IBMInputValueError(
+qiskit_ibm_runtime.exceptions.IBMInputValueError: 'The instruction sxdg on qubits (117,) is not supported by the target system. Circuits that do not match the target hardware definition are no longer supported after March 4, 2024. See the transpilation documentation (https://quantum.cloud.ibm.com/docs/guides/transpile) for instructions to transform circuits and the primitive examples (https://quantum.cloud.ibm.com/docs/guides/primitives-examples) to see this coupled with operator transformations.'

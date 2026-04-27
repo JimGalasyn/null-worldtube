@@ -1,0 +1,100 @@
+  Pending jobs:  0
+  Shots Exp 1:   4000 per circuit (×7 circuits)
+  Shots Exp 2:   190 per pair (×21 pairs)
+
+  Transpiling stabilizer circuits...
+  Transpiling YY circuits...
+  CZ/ECR count per stabilizer circuit (after transpile): min=51, max=52, avg=51.3
+
+  Submitting Experiment 1 (7 stabilizer circuits)...
+    Job ID: d7n5e8q94dqs73euk7sg
+
+  Submitting Experiment 2 (21 YY circuits)...
+    Job ID: d7n5e9497osc73drjv8g
+
+  Waiting for results (this may take minutes to hours)...
+  (You can also look up jobs later at https://quantum.cloud.ibm.com)
+  Both jobs complete.
+
+  EXPERIMENT 1 results:
+    v        ⟨S_v⟩          σ
+  ------------------------------
+    0      +0.6380     0.0122
+    1      +0.6640     0.0118
+    2      +0.6985     0.0113
+    3      +0.6915     0.0114
+    4      +0.6790     0.0116
+    5      +0.7045     0.0112
+    6      +0.6815     0.0116
+  Mean ⟨S_v⟩:  0.6796  (prediction: 1.0)
+
+  EXPERIMENT 2 results:
+        pair      ⟨Y_u Y_v⟩          σ
+  ------------------------------------
+  (0,1)             +0.8526     0.0379
+  (0,2)             +0.8737     0.0353
+  (0,3)             +0.7368     0.0490
+  (0,4)             +0.5474     0.0607
+  (0,5)             +0.5684     0.0597
+  (0,6)             +0.7158     0.0507
+  (1,2)             +0.8105     0.0425
+  (1,3)             +0.7053     0.0514
+  (1,4)             +0.8000     0.0435
+  (1,5)             +0.8316     0.0403
+  (1,6)             +0.7579     0.0473
+  (2,3)             +0.8421     0.0391
+  (2,4)             +0.7263     0.0499
+  (2,5)             +0.7684     0.0464
+  (2,6)             +0.7789     0.0455
+  (3,4)             +0.6842     0.0529
+  (3,5)             +0.7895     0.0445
+  (3,6)             +0.7368     0.0490
+  (4,5)             +0.6842     0.0529
+  (4,6)             +0.8421     0.0391
+  (5,6)             +0.9474     0.0232
+
+  TOTAL ⟨H_YY⟩  =  16.0000  ±  0.2131
+  PREDICTION   =  21.0000  (= dim(Adj))
+  Deviation    =  5.0000
+  Z-score:     -23.46σ from prediction
+
+==============================================================================
+ Experimental claims to verify on Heron
+==============================================================================
+
+  Predictions for IBM Heron R2 (or any Heron-class backend):
+
+  EXP 1: ⟨S_v⟩ = +1 for all v ∈ {0, 1, ..., 6}.
+    Hardware-noise-corrected expected: ~0.85 at 99.5% per-CZ
+    fidelity (~36 effective CZ).  Clear positive signal.
+
+  EXP 2: ⟨H_YY⟩ = 21.0 ± shot_noise.
+    On |K_7⟩, this is an exact eigenvalue, so any Hardware-induced
+    shot variance is purely from gate errors.  A measured value
+    of 21 with shot-noise-limited σ would CONFIRM the bracket-
+    source identity ⟨H_YY^n⟩ = dim(Adj)^n directly on hardware.
+
+  EXP 3 (extension, see Phase 8h): ⟨H_YY^2⟩ = 441 = dim(Adj)^2.
+    Requires 4-qubit measurement circuits.  Direct experimental
+    verification of the bracket coefficient at α^2 in m_e/m_Pl.
+
+  EXP 4 (extension): ⟨Y_u Y_v Y_w⟩ = 0 for all 35 K_7 triples.
+    Phase 8e finding.  Direct hardware test of the structural
+    truncation at α² in the m_e/m_Pl bracket.
+
+  EXP 5 (extension): syndrome-measurement collapse on |K_7⟩.
+    Prepare random initial state + repeated stabilizer measurement
+    + post-selection.  Watch fidelity grow from ~1/128 to ~1.
+    Direct experimental verification of Phase 8h's syndrome-
+    attractor reading.
+
+  PUBLICATION VALUE:  first experimental hardware verification of
+  the K_7 QEC structure underlying NWT's m_e/m_Pl formula.
+  Direct test of:
+    - Phase 8e bit-quantum (21 = dim(Adj))
+    - Phase 8g Bremermann derivation of Schrödinger evolution
+    - Paper 17 §11 graph-state moments deriving bracket coefficients
+
+  Estimated cost: free academic IBM Quantum Cloud access.
+  Estimated time: 1-2 hours queue, 10-20 min execution.
+

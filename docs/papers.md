@@ -197,6 +197,18 @@ The capstone Lagrangian paper for the NWT programme. Presents the minimal field 
 
 ---
 
+## Paper 17: Newton's Constant from K<sub>7</sub> Graph-State Information Theory
+
+**Full title:** *Newton's Constant and Rest-Frame Schr&ouml;dinger Evolution from K<sub>7</sub> Graph-State Information Theory*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+A quantum-information-theoretic derivation of the bracket coefficients in the Paper 16 m<sub>e</sub>/m<sub>Pl</sub>&nbsp;=&nbsp;(8/7)(1+&alpha;/7)&alpha;<sup>21/2</sup> identity. Within the NWT framework, m<sub>e</sub>/m<sub>Pl</sub> is interpreted as the encoded fidelity of an electron worldtube traversing the K<sub>7</sub> stabiliser graph state |K<sub>7</sub>&rang; under &alpha;-strength interaction-event noise, and Newton's constant G is interpreted as the transduction ratio between momentum-changing interaction events and topological-information creation. The information-theoretic spine is the structural identity &langle;H<sub>YY</sub><sup>n</sup>&rangle;<sub>|K<sub>N</sub>&rang;</sub>&nbsp;=&nbsp;dim(Adj<sub>so(N)</sub>)<sup>n</sup> for the two-body Pauli-YY Hamiltonian H<sub>YY</sub> on the K<sub>N</sub> stabiliser graph state, verified across the so(2n+1) family at N&nbsp;&isin;&nbsp;{7,&nbsp;9,&nbsp;11}. The bracket coefficients in m<sub>e</sub>/m<sub>Pl</sub> are exactly the first two normalised moments of H<sub>YY</sub>; a 3-body operator probe shows &langle;Y<sub>u</sub>Y<sub>v</sub>Y<sub>w</sub>&rangle;<sub>|K<sub>7</sub>&rang;</sub> = 0 for all 35 basis triples, supporting truncation of the bracket at &alpha;<sup>2</sup>. The closed form, valid at NNLO under the framework's normalisation choices and with &alpha; taken as input from Paper&nbsp;8a, agrees with CODATA m<sub>e</sub>/m<sub>Pl</sub> to **0.0001%** (a 140&times; improvement over Paper 14) and predicts G within **11 ppm** of CODATA G, **inside** the 22 ppm experimental uncertainty. Beyond the gravitational coupling derivation, the same K<sub>7</sub> graph-state framework yields a derived effective rest-frame Schr&ouml;dinger evolution i&hbar;&part;<sub>t</sub>|K<sub>7</sub>&rang;&nbsp;=&nbsp;m<sub>e</sub>c<sup>2</sup>|K<sub>7</sub>&rang; within the model, from Bremermann's bound, the Paper 16 b2.13 bijection, and the PSL(2,7) edge-transitive symmetry of K<sub>7</sub>. The framework is supported by IBM Heron R2 hardware measurements in eight datasets across three backends (ibm_kingston, ibm_marrakesh, ibm_fez), with Z-scores above the random-state null of +75&sigma;, +368&sigma;, and +310&sigma; on the &langle;H<sub>YY</sub>&rangle; measurement and a sharp K<sub>9</sub>/K<sub>7</sub> ZNE ratio cross-group falsification test bracketing M(K<sub>9</sub>) &isin; [36, 39] at 3&sigma; with the structural value 36 at the centre.
+
+**DOI:** [10.5281/zenodo.19807068](https://doi.org/10.5281/zenodo.19807068)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
@@ -302,6 +314,55 @@ python3 analysis/nwt_zeta_phase4_curvature_corrections.py
 # Phase 5 -- extract 1/G from S_eff, localise the alpha^-21 suppression
 python3 analysis/nwt_zeta_phase5_1overG.py
 ```
+
+Paper 17 analyses (K_7 graph-state information theory + IBM Heron R2 experiments):
+```
+# K_N graph-state moment identities (so(2n+1) family at N=7, 9, 11)
+python3 analysis/nwt_qec_bracket_test.py             # K_7 stabiliser, <H_YY^n> = 21^n
+python3 analysis/nwt_qec_KN_generalization.py        # K_9, K_11 cross-group verification
+
+# Bracket-truncation probes (3-body, Casimir hierarchy, channel mixing)
+python3 analysis/nwt_truncation_mechanism.py         # Casimir + Furry + 3-body probes
+python3 analysis/nwt_truncation_qdef.py              # q-deformed dim and G_2 branching
+python3 analysis/nwt_truncation_channel_mixing.py    # Bracket factorisation discovery
+
+# IBM Heron R2 hardware submission and analysis (qiskit-ibm-runtime)
+python3 analysis/nwt_qec_heron_experiment.py        # Run 1/2/3 H_YY + S_v on |K_7>
+python3 analysis/nwt_qec_heron_KN.py                 # K_9 cross-group test on ibm_fez
+python3 analysis/nwt_qec_heron_exp4.py               # 3-body null test (4K and 12K shots)
+python3 analysis/nwt_qec_heron_exp5.py               # syndrome-attractor experiment
+python3 analysis/nwt_qec_heron_zne.py                # zero-noise extrapolation
+python3 analysis/nwt_qec_heron_fetch.py              # job-result fetcher
+python3 analysis/nwt_qec_psl27_edge_transitivity.py  # PSL(2,7) re-analysis (no QPU)
+python3 analysis/nwt_qec_forward_prediction.py       # forward-prediction from gate fidelities
+python3 analysis/nwt_qec_zne_continuation.py         # ZNE continuation analysis
+python3 analysis/nwt_qec_zne_ratio.py                # K_9/K_7 ZNE ratio test
+python3 analysis/nwt_qec_zne_reanalysis.py           # ZNE re-analysis on existing data
+
+# Schrodinger derivation supports (Bremermann + b2.13 + PSL(2,7))
+python3 analysis/nwt_qec_bit_quantum_from_bremermann.py  # bit-quantum from Bremermann saturation
+python3 analysis/nwt_qec_bps_compton_bridge.py           # BPS μ=π action quantization (negative)
+python3 analysis/nwt_qec_proportionality_constant.py     # κ = m_e c^2 / dim(Adj)
+python3 analysis/nwt_qec_route_a_so7_lift.py             # Route A: so(7) lift via b2.13
+python3 analysis/nwt_qec_syndrome_attractor.py            # |K_7> as syndrome attractor
+python3 analysis/nwt_qec_time_evolution.py                # rest-frame Schrodinger evolution
+python3 analysis/nwt_qec_entanglement_structure.py        # |K_7> entanglement
+python3 analysis/nwt_qec_interpretation_b_test.py         # interpretation (B) test
+
+# Information-theoretic bookkeeping (β-decay Landauer floor + hyperon survey)
+python3 analysis/nwt_beta_decay_landauer.py
+python3 analysis/nwt_hyperon_landauer_survey.py
+
+# Volovik direction (parked future-work, c emergence on the discrete medium)
+python3 analysis/nwt_emergent_c.py
+python3 analysis/nwt_volovik_c.py
+python3 analysis/nwt_volovik_bogoliubov.py
+python3 analysis/nwt_volovik_part_b.py
+python3 analysis/nwt_volovik_two_mode.py
+python3 analysis/nwt_volovik_closure.py
+```
+
+Raw IBM Heron R2 job outputs (2026-04-26, 8 datasets across ibm_kingston / ibm_marrakesh / ibm_fez) live in `analysis/heron_results/2026-04-26_*.txt`.
 
 Paper 12 analyses (fermion structure + gauge dynamics):
 ```

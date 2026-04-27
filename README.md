@@ -26,7 +26,7 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 | 14 | Integers as Output | [10.5281/zenodo.19654507](https://doi.org/10.5281/zenodo.19654507) | 18 |
 | 15 | One Knot, All Forces (gravitational constant) | [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) | 14 |
 | 16 | The NWT Lagrangian: A Three-Field Theory of Particles and Gravity | [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846) | 13 |
-| 17 | The α<sup>21/2</sup> Closure: Wilson Amplitudes on the K<sub>7</sub> Eulerian Circuit | in preparation | – |
+| 17 | Newton's Constant and Rest-Frame Schrödinger Evolution from K<sub>7</sub> Graph-State Information Theory | [10.5281/zenodo.19807068](https://doi.org/10.5281/zenodo.19807068) | 55 |
 | 18 | Nuclear Binding from Topological Linking | in preparation | 31 |
 
 **Note on framework evolution:** Papers 1–5 used an earlier formulation (photon on a (2,1) torus with κ=3, Skilton's α formula). Papers 6–15 use the refined framework (BPS vortex on trefoil T(2,3), crossing algebra, 1/α = 25π√3+1). The later papers supersede the earlier derivations where they conflict. See the [website](https://jimgalasyn.github.io/null-worldtube) for the current summary.
@@ -127,18 +127,82 @@ python3 analysis/nwt_zeta_phase4_curvature_corrections.py
 python3 analysis/nwt_zeta_phase5_1overG.py
 ```
 
+### Paper 17 reproducibility pipeline (analysis/)
+
+Paper 17 (*Newton's Constant and Rest-Frame Schrödinger Evolution from
+K_7 Graph-State Information Theory*) gives a quantum-information-theoretic
+derivation of the bracket coefficients in the Paper 16 m_e/m_Pl
+identity. The supporting numerics include K_N graph-state moment
+identities, bracket-truncation probes, and IBM Heron R2 hardware
+experiments (eight datasets across three backends).
+
+```bash
+# K_N graph-state moment identities (so(2n+1) family at N=7,9,11)
+python3 analysis/nwt_qec_bracket_test.py
+python3 analysis/nwt_qec_KN_generalization.py
+
+# Bracket-truncation probes
+python3 analysis/nwt_truncation_mechanism.py
+python3 analysis/nwt_truncation_qdef.py
+python3 analysis/nwt_truncation_channel_mixing.py
+
+# IBM Heron R2 hardware submission and analysis (requires qiskit-ibm-runtime)
+python3 analysis/nwt_qec_heron_experiment.py
+python3 analysis/nwt_qec_heron_KN.py
+python3 analysis/nwt_qec_heron_exp4.py
+python3 analysis/nwt_qec_heron_exp5.py
+python3 analysis/nwt_qec_heron_zne.py
+python3 analysis/nwt_qec_heron_fetch.py
+
+# PSL(2,7) edge-transitivity re-analysis (no QPU)
+python3 analysis/nwt_qec_psl27_edge_transitivity.py
+
+# Forward-prediction and zero-noise extrapolation
+python3 analysis/nwt_qec_forward_prediction.py
+python3 analysis/nwt_qec_zne_continuation.py
+python3 analysis/nwt_qec_zne_ratio.py
+python3 analysis/nwt_qec_zne_reanalysis.py
+
+# Schrödinger derivation supports (Bremermann + b2.13 + PSL(2,7))
+python3 analysis/nwt_qec_bit_quantum_from_bremermann.py
+python3 analysis/nwt_qec_bps_compton_bridge.py
+python3 analysis/nwt_qec_proportionality_constant.py
+python3 analysis/nwt_qec_route_a_so7_lift.py
+python3 analysis/nwt_qec_syndrome_attractor.py
+python3 analysis/nwt_qec_time_evolution.py
+python3 analysis/nwt_qec_entanglement_structure.py
+python3 analysis/nwt_qec_interpretation_b_test.py
+
+# Information-theoretic bookkeeping (β-decay Landauer floor + hyperon survey)
+python3 analysis/nwt_beta_decay_landauer.py
+python3 analysis/nwt_hyperon_landauer_survey.py
+
+# Volovik direction (parked future-work, c emergence on the discrete medium)
+python3 analysis/nwt_emergent_c.py
+python3 analysis/nwt_volovik_c.py
+python3 analysis/nwt_volovik_bogoliubov.py
+python3 analysis/nwt_volovik_part_b.py
+python3 analysis/nwt_volovik_two_mode.py
+python3 analysis/nwt_volovik_closure.py
+```
+
+Raw IBM Heron R2 job outputs (2026-04-26, 8 datasets across
+ibm_kingston / ibm_marrakesh / ibm_fez) are in
+`analysis/heron_results/2026-04-26_*.txt`.
+
 ## Repository Structure
 
 ```
 null-worldtube/
-├── papers/                             # All 16 papers (LaTeX + PDF)
+├── papers/                             # All 17 papers (LaTeX + PDF)
 ├── simulations/
 │   ├── paper14_integers/               # Crossing algebra, braid, Jones, end-to-end
 │   ├── level2_abelian_higgs/           # JAX energy, holonomy, BPS, spectrum
 │   ├── helmholtz_eigenvalue/           # BPS profile, eigenvalues, AB verification
 │   ├── nwt/                            # Legacy analysis package (Papers 1-5)
 │   └── output/                         # Generated data
-├── analysis/                           # Analysis scripts (Papers 6-16)
+├── analysis/                           # Analysis scripts (Papers 6-17)
+│   └── heron_results/                  # IBM Heron R2 raw job outputs (Paper 17)
 ├── docs/                               # GitHub Pages website source
 └── README.md
 ```

@@ -1,0 +1,83 @@
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 15:09:53,129: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-04-26 15:09:57,796: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open), the available account instances are: open-instance. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService().
+qiskit_runtime_service.backends:WARNING:2026-04-26 15:09:57,797: Using instance: open-instance, plan: open
+qiskit_runtime_service.backends:WARNING:2026-04-26 15:09:58,006: Using instance: open-instance, plan: open
+qiskit_runtime_service.backends:WARNING:2026-04-26 15:09:58,413: Using instance: open-instance, plan: open
+
+==============================================================================
+ Forward-prediction: ⟨H_YY⟩|K_N⟩ from device-published gate fidelities
+==============================================================================
+
+  No fitting.  Read per-gate fidelities directly from each backend's
+  target.  Walk transpiled circuits and accumulate the multiplicative
+  fidelity factor.  Sum over edges.
+
+  Predicted ⟨H_YY⟩|K_N⟩ should equal observed if the framework's
+  structural identity ⟨H_YY⟩|K_N⟩ = N(N-1)/2 holds AND the leading-
+  order multiplicative-fidelity model is adequate.
+
+  Loaded backend: ibm_fez
+  Loaded backend: ibm_kingston
+  Loaded backend: ibm_marrakesh
+
+==============================================================================
+ Forward predictions vs observations
+==============================================================================
+
+          device   N      pred       obs    σ_obs   (o-p)/σ  avg CZ
+  --------------------------------------------------------------------
+    ibm_kingston   7   18.7731   16.4715   0.0448    -51.37    52.0
+   ibm_marrakesh   7   18.5680   15.2815   0.0493    -66.66    52.0
+         ibm_fez   5    9.1934    8.6095   0.0180    -32.44    20.0
+         ibm_fez   7   17.6494   12.2520   0.0569    -94.86    52.0
+         ibm_fez   9   27.2957   19.5730   0.0781    -98.88    88.0
+
+  Interpretation:
+    |z| < 3   → forward prediction agrees with observation; the
+                structural identity ⟨H_YY⟩|K_N⟩ = N(N-1)/2 is sharply
+                confirmed.
+    |z| ~ 5-20 → minor model deficiency in the multiplicative-fidelity
+                  approximation (correlated errors, calibration drift,
+                  etc.) — predictions in the right ballpark.
+    |z| >> 20  → either the structural identity disagrees with data,
+                  or the device-published fidelities don't reflect what
+                  the transpiled circuits actually saw.
+
+
+==============================================================================
+ Cross-group sharpness (ibm_fez, K_5 + K_7 + K_9)
+==============================================================================
+
+  Three same-device datapoints anchor the multi-N fit:
+    N      pred       obs        σ   obs/pred
+  ---------------------------------------------
+    5    9.1934    8.6095   0.0180     0.9365
+    7   17.6494   12.2520   0.0569     0.6942
+    9   27.2957   19.5730   0.0781     0.7171
+
+  Multi-N obs/pred bias factor:
+    mean:                    0.7826
+    std across N:            0.1338
+    relative std:            17.09%
+
+  If the structural identity ⟨H_YY⟩|K_N⟩ = N(N-1)/2 holds,
+  obs/pred should be approximately constant across N (just
+  the universal circuit-vs-gate-fidelity bias).  Variation
+  across N flags either a bad noise model or a structural
+  discrepancy.
+  → obs/pred VARIES significantly across N: structural
+    identity challenged OR noise model inadequate.
+
+  Pairwise structural ratio tests:
+        pair    obs ratio   pred ratio    noiseless   pred-obs/obs
+  -----------------------------------------------------------------
+  K_7/K_5        1.4231       1.9198       2.1000       +34.90%
+  K_9/K_5        2.2734       2.9690       3.6000       +30.60%
+  K_9/K_7        1.5975       1.5465       1.7143        -3.19%
+
+  Falsification of alternative M(K_9) values:
+    M(K_9)= 25  pred ratio 1.0740  vs obs 1.5975  (-32.77%)  ✗
+    M(K_9)= 30  pred ratio 1.2888  vs obs 1.5975  (-19.33%)  ✗
+    M(K_9)= 36  pred ratio 1.5465  vs obs 1.5975  (-3.19%)  ✓
+    M(K_9)= 42  pred ratio 1.8043  vs obs 1.5975  (+12.94%)  ✗
+    M(K_9)= 50  pred ratio 2.1480  vs obs 1.5975  (+34.46%)  ✗

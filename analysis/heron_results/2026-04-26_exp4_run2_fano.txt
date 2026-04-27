@@ -1,0 +1,87 @@
+
+==============================================================================
+ Experiment 4: IBM Heron submission
+==============================================================================
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 12:48:53,118: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-04-26 12:48:58,402: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open), the available account instances are: open-instance. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService().
+qiskit_runtime_service.backends:WARNING:2026-04-26 12:48:58,403: Using instance: open-instance, plan: open
+  Backend:       ibm_marrakesh
+  Qubits:        156
+  Status:        active
+  Pending jobs:  0
+  Shots:         12000 per triple (×35 triples)
+  Total shots:   420000
+
+==============================================================================
+ Experiment 4 on ibm_marrakesh  (12000 shots × 35 triples)
+==============================================================================
+
+  Building 35 YYY circuits...
+  Transpiling for backend...
+  CZ/ECR per circuit (after transpile): min=52, max=52, avg=52.0
+
+  Submitting 35 circuits...
+    Job ID: d7n6obak4prs73drrdng
+
+  Waiting for results...
+  (Look up later at https://quantum.cloud.ibm.com)
+  Job complete.
+
+      triple        ⟨YYY⟩          σ        z
+  --------------------------------------------
+  (0,1,2)         +0.0093     0.0091    +1.02
+  (0,1,3)         +0.0213     0.0091    +2.34
+  (0,1,4)         -0.0183     0.0091    -2.01
+  (0,1,5)         -0.0258     0.0091    -2.83
+  (0,1,6)         -0.0033     0.0091    -0.37
+  (0,2,3)         +0.0042     0.0091    +0.46
+  (0,2,4)         -0.0173     0.0091    -1.90
+  (0,2,5)         -0.0178     0.0091    -1.95
+  (0,2,6)         -0.0032     0.0091    -0.35
+  (0,3,4)         +0.0257     0.0091    +2.81
+  (0,3,5)         +0.0075     0.0091    +0.82
+  (0,3,6)         -0.0050     0.0091    -0.55
+  (0,4,5)         -0.0060     0.0091    -0.66
+  (0,4,6)         -0.0058     0.0091    -0.64
+  (0,5,6)         -0.0202     0.0091    -2.21
+  (1,2,3)         +0.0030     0.0091    +0.33
+  (1,2,4)         -0.0020     0.0091    -0.22
+  (1,2,5)         +0.0133     0.0091    +1.46
+  (1,2,6)         +0.0008     0.0091    +0.09
+  (1,3,4)         +0.0287     0.0091    +3.14
+  (1,3,5)         +0.0053     0.0091    +0.58
+  (1,3,6)         +0.0140     0.0091    +1.53
+  (1,4,5)         -0.0065     0.0091    -0.71
+  (1,4,6)         +0.0010     0.0091    +0.11
+  (1,5,6)         -0.0255     0.0091    -2.79
+  (2,3,4)         +0.0193     0.0091    +2.12
+  (2,3,5)         +0.0073     0.0091    +0.80
+  (2,3,6)         -0.0170     0.0091    -1.86
+  (2,4,5)         +0.0070     0.0091    +0.77
+  (2,4,6)         +0.0125     0.0091    +1.37
+  (2,5,6)         +0.0022     0.0091    +0.24
+  (3,4,5)         +0.0028     0.0091    +0.31
+  (3,4,6)         +0.0140     0.0091    +1.53
+  (3,5,6)         +0.0002     0.0091    +0.02
+  (4,5,6)         -0.0102     0.0091    -1.11
+
+  Aggregate test under null hypothesis ⟨YYY⟩ = 0 ∀ triples:
+    Σ |⟨YYY⟩|:             0.3835
+    RMS ⟨YYY⟩:             0.0137
+    max |⟨YYY⟩|:           0.0287
+    χ² (35 dof):           79.05
+    χ²_reduced:            2.259  (≈ 1.0 means consistent with shot-noise-only null)
+
+  Expected noiseless RMS at 12000 shots: 0.0091
+  Observed RMS is consistent with shot-noise-only null.
+
+  Fano-line vs non-Fano breakdown (PSL(2,7) edge structure):
+         group   n       χ²   χ²_red   mean z   RMS |z|
+    --------------------------------------------------
+          Fano   7    19.66    2.809   -0.250     1.676
+      non-Fano  28    59.39    2.121   +0.123     1.456
+
+    Δ⟨z²⟩ = ⟨z²⟩_Fano - ⟨z²⟩_non-Fano = +0.688
+    SE(Δ) = 0.986
+    z-score for Fano excess: +0.70σ
+    → Consistent with no Fano-structure preference.

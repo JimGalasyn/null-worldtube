@@ -1,0 +1,58 @@
+qiskit_runtime_service._discover_account:WARNING:2026-04-26 15:02:37,252: Loading account with the given token. A saved account will not be used.
+qiskit_runtime_service.__init__:WARNING:2026-04-26 15:02:41,128: Instance was not set at service instantiation. Free and trial plan instances will be prioritized. Based on the following filters: (tags: None, region: us-east, eu-de), and available plans: (open), the available account instances are: open-instance. If you need a specific instance set it explicitly either by using a saved account with a saved default instance or passing it in directly to QiskitRuntimeService().
+qiskit_runtime_service.backends:WARNING:2026-04-26 15:02:41,128: Using instance: open-instance, plan: open
+qiskit_runtime_service.backends:WARNING:2026-04-26 15:02:41,422: Using instance: open-instance, plan: open
+qiskit_runtime_service.backends:WARNING:2026-04-26 15:02:41,627: Using instance: open-instance, plan: open
+
+==============================================================================
+ Forward-prediction: ⟨H_YY⟩|K_N⟩ from device-published gate fidelities
+==============================================================================
+
+  No fitting.  Read per-gate fidelities directly from each backend's
+  target.  Walk transpiled circuits and accumulate the multiplicative
+  fidelity factor.  Sum over edges.
+
+  Predicted ⟨H_YY⟩|K_N⟩ should equal observed if the framework's
+  structural identity ⟨H_YY⟩|K_N⟩ = N(N-1)/2 holds AND the leading-
+  order multiplicative-fidelity model is adequate.
+
+  Loaded backend: ibm_marrakesh
+  Loaded backend: ibm_fez
+  Loaded backend: ibm_kingston
+
+==============================================================================
+ Forward predictions vs observations
+==============================================================================
+
+          device   N      pred       obs    σ_obs   (o-p)/σ  avg CZ
+  --------------------------------------------------------------------
+    ibm_kingston   7   18.7731   16.4715   0.0448    -51.37    52.0
+   ibm_marrakesh   7   18.5680   15.2815   0.0493    -66.66    52.0
+         ibm_fez   7   17.6494   12.2520   0.0569    -94.86    52.0
+         ibm_fez   9   27.2957   19.5730   0.0781    -98.88    88.0
+
+  Interpretation:
+    |z| < 3   → forward prediction agrees with observation; the
+                structural identity ⟨H_YY⟩|K_N⟩ = N(N-1)/2 is sharply
+                confirmed.
+    |z| ~ 5-20 → minor model deficiency in the multiplicative-fidelity
+                  approximation (correlated errors, calibration drift,
+                  etc.) — predictions in the right ballpark.
+    |z| >> 20  → either the structural identity disagrees with data,
+                  or the device-published fidelities don't reflect what
+                  the transpiled circuits actually saw.
+
+
+==============================================================================
+ Cross-group sharpness (ibm_fez)
+==============================================================================
+
+  Predicted ⟨H_YY⟩(K_9)/⟨H_YY⟩(K_7) on ibm_fez:
+    From device fidelities:  1.5465
+    From observed values:    1.5975
+    Structural prediction (no noise): 36/21 = 1.7143
+
+  If structural identity holds, observed and predicted
+  ratios should agree.  If they disagree, the structural
+  identity is challenged by the data.
+    (predicted ratio - observed ratio) / observed ratio = -3.19%
