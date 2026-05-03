@@ -40,6 +40,7 @@ Ten dimensionless predictions — mixing angles, CP-violating phases, and coupli
 | Fine-structure constant (1/&alpha;) | 137.036016 | 137.035999 | 0.12 ppm |
 | Proton-to-electron mass ratio | 6&pi;<sup>5</sup> = 1836.118 | 1836.153 | 0.002% |
 | Neutrino mass sum (&Sigma;m<sub>&nu;</sub>) | 59 meV | < 64 meV | consistent |
+| Newton's constant G (Sakharov-induced, Paper 18) | 6.674494&times;10<sup>&minus;11</sup> m<sup>3</sup>kg<sup>&minus;1</sup>s<sup>&minus;2</sup> | 6.67430&times;10<sup>&minus;11</sup> | +29 ppm (inside &plusmn;22 ppm experimental uncertainty) |
 
 **Overall median error: 0.7%. RMS: 2.6%. Maximum: 9.3% (up quark mass, within PDG uncertainty).**
 
