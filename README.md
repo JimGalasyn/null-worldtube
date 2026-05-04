@@ -38,7 +38,7 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 - **G = (8/7)²(1+α/7)² α²¹ ℏc/m_e²** at 0.03% (Paper 15)
 - **All 15 topological integers** derived from trefoil crossing algebra (Paper 14)
 - **Nuclear SEMF** at 1.66% RMS, zero free parameters (Paper 16)
-- **Newton's constant from Sakharov induction** matches CODATA G to **+29 ppm**, inside the ±22 ppm experimental error bar; Schwarzschild verified as a vacuum solution by symbolic computation (Paper 18)
+- **Newton's constant from Sakharov induction** matches CODATA G to **−11 ppm**, inside the ±22 ppm experimental error bar; Schwarzschild verified as a vacuum solution by symbolic computation (Paper 18)
 - **Zero dimensionless free parameters** — one mass-scale anchor (m_e)
 
 ## Simulation Code
@@ -218,7 +218,7 @@ concept DOI):
 
 ```python
 >>> from nwt_substrate.gravity import G_substrate_SI, verify_schwarzschild_vacuum_symbolic
->>> G_substrate_SI()                              # 6.674494e-11 m^3 kg^-1 s^-2  (+29 ppm CODATA)
+>>> G_substrate_SI()                              # 6.674228e-11 m^3 kg^-1 s^-2  (−11 ppm CODATA)
 >>> verify_schwarzschild_vacuum_symbolic()        # all 10 R_munu components vanish identically
 ```
 

@@ -91,7 +91,7 @@ with $N_{\mathrm{DOF}} = 6$ for the minimal matter content and
 $\Lambda_{\mathrm{UV}} \approx \mPl$.
 
 Combining the Sakharov coefficient with Paper~17's closed form
-$\mPl = \me / [(8/7)(1 + \alpha/7 + 3\alpha^2)\,\alpha^{21/2}]$
+$\mPl = \me / [(8/7)(1 + \alpha/7 + (21/8)\alpha^2)\,\alpha^{21/2}]$
 gives the structural relation
 $\Lambda_{\mathrm{UV}}/\mPl =
 \sqrt{12\pi/N_{\mathrm{DOF}}^{\mathrm{sub}}}$, with
@@ -110,7 +110,7 @@ $\Lambda_{\mathrm{UV}} = 0.983\,\mPl$, consistent with
 $\Lambda_{\mathrm{UV}} \approx \mPl$ to $1.7\%$.  A
 first-principles derivation of the substrate $c_J$ is logged as a
 follow-up.  The Newton's-constant prediction following from
-Paper~17's closed form matches CODATA to $+29$\,ppm, inside the
+Paper~17's closed form matches CODATA to $-11$\,ppm, inside the
 $\pm 22$\,ppm experimental uncertainty on $G$.
 
 The Paper~17 identity $\mPl^2/\me^2 = |A_{K_7}|^{-2}$ is identified
@@ -346,7 +346,7 @@ We establish the following, in order:
       the static weak-field limit recovers Newton's law with the
       predicted $G$.
 \item Numerically, the resulting prediction agrees with CODATA $G$
-      to $+29$\,ppm, inside the $\pm 22$\,ppm experimental error
+      to $-11$\,ppm, inside the $\pm 22$\,ppm experimental error
       bar on $G$ itself.
 \end{enumerate}
 
@@ -880,7 +880,7 @@ on the Heegaard torus of $S^3/2I$~\cite{paper17},
    \frac{\dim S}{\dim V}\,
    \left[\,1 + \frac{\alpha}{\dim V} + \frac{\dim \Adj}{\dim S}\,\alpha^2\,\right]
    \;=\;
-   \tfrac{8}{7}\bigl(1 + \tfrac{\alpha}{7} + 3\alpha^2\bigr),
+   \tfrac{8}{7}\bigl(1 + \tfrac{\alpha}{7} + \tfrac{21}{8}\,\alpha^2\bigr),
   \label{eq:bracket-def}
 \end{equation}
 which (in natural units $\hbar = c = 1$) gives
@@ -1246,13 +1246,13 @@ both substrate objects).  Numerically,
 \begin{equation}
   \big|A_{K_7}\big|^{-2}
    \;=\;
-   137^{21}\,(8/7)^{-2}\,(1+\alpha/7+3\alpha^2)^{-2}
+   137^{21}\,(8/7)^{-2}\,\bigl(1+\alpha/7+(21/8)\alpha^2\bigr)^{-2}
    \;\approx\;
    5.71 \times 10^{44},
   \label{eq:hierarchy-numeric}
 \end{equation}
 which agrees with the experimental Planck-to-electron mass-squared
-hierarchy to $-29$\,ppm of CODATA.
+hierarchy to $+11$\,ppm of CODATA.
 
 \paragraph{What this is, and is not.}
 Equation~\eqref{eq:K7-identity} is the Paper~17 result expressed in
@@ -1360,7 +1360,7 @@ required for the dynamical content of
 Sections~\ref{sec:G4-linearized}--\ref{sec:G6-einstein}.  The
 corrected Phase~5 computation is logged as a follow-up.
 
-\subsection{Numerical comparison: $G$ to $+29$\,ppm of CODATA}
+\subsection{Numerical comparison: $G$ to $-11$\,ppm of CODATA}
 
 We can now compute Newton's constant numerically from the unified
 expression.  Writing
@@ -1377,14 +1377,14 @@ routine evaluates
 \begin{equation}
   G_{\mathrm{NWT,\,NNLO}}
    \;=\;
-   6.674494 \times 10^{-11}\;\mathrm{m^3\,kg^{-1}\,s^{-2}}.
+   6.674228 \times 10^{-11}\;\mathrm{m^3\,kg^{-1}\,s^{-2}}.
 \end{equation}
 Compared with the CODATA experimental value
 $G_{\mathrm{CODATA}} = 6.67430(15) \times 10^{-11}$ m$^3$/kg/s$^2$:
 \begin{equation}
   \frac{G_{\mathrm{NWT,\,NNLO}} - G_{\mathrm{CODATA}}}{G_{\mathrm{CODATA}}}
    \;=\;
-   +29\,\mathrm{ppm}.
+   -11\,\mathrm{ppm}.
 \end{equation}
 The $\pm 22$\,ppm experimental uncertainty on $G$ (the largest
 relative uncertainty among the fundamental constants) places the
@@ -1425,7 +1425,7 @@ The structural picture established in this section is:
       incorporating this factor is sketched in
       Section~\ref{sec:G3-phase5-sketch}; the full evaluation is a
       logged follow-up.
-\item Numerically, $G_{\mathrm{NWT,\,NNLO}} = +29$\,ppm of CODATA
+\item Numerically, $G_{\mathrm{NWT,\,NNLO}} = -11$\,ppm of CODATA
       (inside the $\pm 22$\,ppm experimental error), consistent
       with Paper~17's $\me/\mPl$ closed form.
 \end{itemize}
@@ -2133,7 +2133,7 @@ gauge field and an $S^2$-valued Skyrme--Faddeev field at the BPS
 critical coupling) on which the loop is taken, and reported the
 $10^{45}$ Phase~5 structural mismatch with the experimentally
 required $1/G$.  Paper~17 supplied the closed form
-$\me/\mPl = (8/7)\,\alpha^{21/2}\,(1 + \alpha/7 + 3\alpha^2)$
+$\me/\mPl = (8/7)\,\alpha^{21/2}\,(1 + \alpha/7 + (21/8)\alpha^2)$
 through $K_7$ graph-state information theory, agreeing with CODATA
 to $-0.0001\%$.
 
@@ -2178,7 +2178,7 @@ $\Box\,h^{\mathrm{TT}}_{\mu\nu} = -16\pi G\,T^{\mathrm{TT}}_{\mu\nu}$
 with two physical transverse-traceless polarizations, and the
 static weak-field limit recovers Newton's law with the
 structurally derived $G$.  Numerically, the resulting prediction
-matches CODATA $G$ to $+29$\,ppm, inside the $\pm 22$\,ppm
+matches CODATA $G$ to $-11$\,ppm, inside the $\pm 22$\,ppm
 experimental error bar;\ this numerical agreement is a
 re-expression of Paper~17's $\me/\mPl$ closed form via
 $G\,\me^2 = \mathrm{bracket}^2\,\alpha^{21}$, not an independent
@@ -2255,7 +2255,7 @@ Specific paper-supporting components:
   \texttt{verify\_\allowbreak schwarzschild\_\allowbreak vacuum\_\allowbreak symbolic()}
   and the CODATA comparison
   \texttt{G\_\allowbreak substrate\_\allowbreak SI()} that returns
-  $6.674494\times10^{-11}$\,m$^3$\,kg$^{-1}$\,s$^{-2}$ ($+29$\,ppm of CODATA).
+  $6.674228\times10^{-11}$\,m$^3$\,kg$^{-1}$\,s$^{-2}$ ($-11$\,ppm of CODATA).
 \end{itemize}
 
 % ==========================================================
