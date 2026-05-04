@@ -21,7 +21,7 @@ The Standard Model of particle physics has about 20 free parameters &mdash; mass
 - **A quantum-information-theoretic derivation** of the m<sub>e</sub>/m<sub>Pl</sub> bracket coefficients from K<sub>7</sub> graph-state moments, with hardware support across eight datasets on three IBM Heron R2 backends (Paper 17)
 - **Einstein's equations from Sakharov-induced gravity** &mdash; integrating out the matter sector at one loop on a curved background generates the Einstein&ndash;Hilbert action with G matching CODATA to **&minus;11 ppm** (inside the &plusmn;22 ppm experimental error bar), and Schwarzschild verified as a vacuum solution by direct symbolic computation (Paper 18)
 
-> **Papers 13, 14, 15, 16, 17 &amp; 18:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) &middot; [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967) &middot; [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) &middot; [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846) &middot; [10.5281/zenodo.19807068](https://doi.org/10.5281/zenodo.19807068) &middot; [10.5281/zenodo.20012352](https://doi.org/10.5281/zenodo.20012352)
+> **Papers 13, 14, 15, 16, 17 &amp; 18:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) &middot; [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967) &middot; [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) &middot; [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846) &middot; [10.5281/zenodo.20025452](https://doi.org/10.5281/zenodo.20025452) &middot; [10.5281/zenodo.20025459](https://doi.org/10.5281/zenodo.20025459)
 
 ## How It Works
 
