@@ -221,6 +221,18 @@ Einstein's equations as the long-wavelength dynamics induced by the NWT condensa
 
 ---
 
+## Paper 19: Substrate Monism
+
+**Full title:** *Substrate Monism: One Algebra, Seven Vocabularies, All Forces*
+
+James P. Galasyn and Claude Th&eacute;odore
+
+The capstone of the NWT program, presented as a *computational hypothesis*: a commitment that one open-source library, one set of substrate primitives, and no row-specific tuning suffice to reproduce a 22-row master table of Standard-Model-plus-gravity observables. The library [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) (Zenodo concept DOI [10.5281/zenodo.20012027](https://doi.org/10.5281/zenodo.20012027); v0.1.3, 344/344 unit tests passing) places the substrate primitives &mdash; the octonion Clifford algebra Cl(0,7), the binary icosahedral group 2I, the Brieskorn&ndash;Poincar&eacute; homology sphere S<sup>3</sup>/2I, and the complete graph K<sub>7</sub> on seven vertices &mdash; at its core, and surrounds them with seven *view-shims* (QED, QCD, QFT, string theory, IBM Heron quantum hardware, electroweak, and gravity), each of which exposes the substrate through its community's idiomatic vocabulary. The seven shims do not duplicate computations; they label the same Python objects. We walk a single electron through all seven lenses and verify that the same observable computed from each lens agrees to the precision of the underlying derivation. Headline cross-checks: Klein&ndash;Nishina amplitude vs. the substrate Cl(1,3) &gamma;-trace agrees to 1 part in 10<sup>15</sup> (machine precision); &sigma;(e<sup>+</sup>e<sup>&minus;</sup>&rarr;&mu;<sup>+</sup>&mu;<sup>&minus;</sup>) at the Z pole is 1985 pb (substrate LO) vs.&nbsp;PDG-LO &asymp; 2000 pb (99.2%); m<sub>e</sub>/m<sub>Pl</sub> at NNLO is &minus;5.6 ppm vs.&nbsp;CODATA; G at NNLO is &minus;11 ppm vs.&nbsp;CODATA, inside the &plusmn;22 ppm experimental band. Heron Experiment&nbsp;10, executed on `ibm_marrakesh` on 2026-05-01, runs muon decay on the &#8739;K<sub>7</sub>&#10217; substrate vacuum at the 9-qubit, 40-gate, depth-13 level and produces the predicted cos<sup>2</sup>(&theta;) survival curve at 96.3% contrast with 1.6% RMS deviation from theory &mdash; on real superconducting hardware, the K<sub>7</sub> that hosts the gravitational Wilson amplitude is the substrate vacuum of the V&ndash;A weak vertex. We tag each row's evidentiary class explicitly: of the 22 rows, 5 are independent structural predictions, 4 are direct hardware measurements, 6 are textbook QED/QCD identities reproduced from the substrate algebra, 5 are inherited from prior NWT papers, and 2 are algebraic corollaries; the framework's empirical exposure rests on the 9 independent + hardware rows together with the operational consistency of the remaining 13. Whether this computational unification reflects a single physical substrate or only a sophisticated common interface is the program's central interpretive question, to which the present paper supplies the executable evidence.
+
+**DOI:** [10.5281/zenodo.20057423](https://doi.org/10.5281/zenodo.20057423)
+
+---
+
 ## Source Code
 
 The simulation code that reproduces all predictions, figures, and verification calculations is available on GitHub:
