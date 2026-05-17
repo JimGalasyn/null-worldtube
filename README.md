@@ -29,6 +29,7 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 | 17 | Newton's Constant and Rest-Frame Schrödinger Evolution from K<sub>7</sub> Graph-State Information Theory | [10.5281/zenodo.20025452](https://doi.org/10.5281/zenodo.20025452) | 55 |
 | 18 | Sakharov-Induced Einstein Gravity from the Null Worldtube Condensate | [10.5281/zenodo.20025459](https://doi.org/10.5281/zenodo.20025459) | 28 |
 | 19 | Substrate Monism: One Algebra, Seven Vocabularies, All Forces | [10.5281/zenodo.20057423](https://doi.org/10.5281/zenodo.20057423) | 25 |
+| 20 | The Neutrino Sector from Spin(8) Triality on K<sub>7</sub>/K<sub>8</sub> | [10.5281/zenodo.20259632](https://doi.org/10.5281/zenodo.20259632) | 25 |
 
 **Note on framework evolution:** Papers 1–5 used an earlier formulation (photon on a (2,1) torus with κ=3, Skilton's α formula). Papers 6–15 use the refined framework (BPS vortex on trefoil T(2,3), crossing algebra, 1/α = 25π√3+1). The later papers supersede the earlier derivations where they conflict. See the [website](https://jimgalasyn.github.io/null-worldtube) for the current summary.
 
@@ -40,7 +41,8 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 - **All 15 topological integers** derived from trefoil crossing algebra (Paper 14)
 - **Nuclear SEMF** at 1.66% RMS, zero free parameters (Paper 16)
 - **Newton's constant from Sakharov induction** matches CODATA G to **−11 ppm**, inside the ±22 ppm experimental error bar; Schwarzschild verified as a vacuum solution by symbolic computation (Paper 18)
-- **22-row substrate-monism master table** — particle masses, α, G, m_e/m_Pl, Z-pole cross section, Klein–Nishina amplitude, muon-decay survival on real IBM Heron R2 hardware — all computed end-to-end from a small set of substrate primitives by one open-source library [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) (344/344 unit tests passing) with no row-specific tuning (Paper 19)
+- **22-row substrate-monism master table** — particle masses, α, G, m_e/m_Pl, Z-pole cross section, Klein–Nishina amplitude, muon-decay survival on real IBM Heron R2 hardware — all computed end-to-end from a small set of substrate primitives by one open-source library [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) (606/606 unit tests passing) with no row-specific tuning (Paper 19)
+- **Three sterile-neutrino masses** {61.3, 70.8, 218.8} MeV in the νMSM window, universal active-sterile mixing |U<sub>α4</sub>|² ≈ α<sup>9/2</sup> ≈ 2.4×10⁻¹⁰, Dirac CP phase |δ<sub>CP</sub>| = 2π/3 = 120° as a Z<sub>3</sub> winding in π<sub>1</sub>(PSU(3)), PMNS angles at leading order from Spin(8) triality — all from the K<sub>8</sub> = K<sub>7</sub>+1 substrate extension at zero free parameters (Paper 20)
 - **Zero dimensionless free parameters** — one mass-scale anchor (m_e)
 
 ## Simulation Code
