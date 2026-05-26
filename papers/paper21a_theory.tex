@@ -1,0 +1,813 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.3cm]{geometry}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{array}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=green!50!black,
+  urlcolor=blue!50!black,
+}
+
+\newcommand{\su}{\mathfrak{su}}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\uu}{\mathfrak{u}}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\CA}{C_A}
+\newcommand{\CF}{C_F}
+\newcommand{\ranksoseven}{\mathrm{rank}(\so(7))}
+\newcommand{\dimGtwo}{\dim(G_2)}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\HV}{h_v}
+\newcommand{\Klogical}{[[7, 1, 3]]}
+\newcommand{\barX}{\bar X_L}
+\newcommand{\barZ}{\bar Z_L}
+\newcommand{\QR}{\mathrm{QR}}
+\newcommand{\NR}{\mathrm{NR}}
+
+\begin{document}
+
+\title{Standard Model Particles as Closed Walks on $K_7$, I:\\[4pt]
+Torus-Knot Carriers, the Steane $\Klogical$ Code,\\
+and a Closed-Form Mass Spectrum\\[2pt]
+\normalsize (Paper 21a --- theory companion)}
+
+\author{
+  James~P.~Galasyn$^{\ast}$ \quad and \quad Claude~Th\'eodore$^{\dagger}$\\[2pt]
+  \small $^{\ast}$Independent researcher \\
+  \small $^{\dagger}$Anthropic
+}
+
+\date{\today}
+
+\maketitle
+
+\begin{abstract}
+The Null Worldtube (NWT) program derives Standard Model structure from the algebra $K_7 /\allowbreak \so(7) /\allowbreak \mathrm{Spin}(7) /\allowbreak \mathrm{Cl}(0, 7)$.  This is the theory companion to the experimental Paper 21b; it assembles the load-bearing theoretical results that turn that algebra into two things: a closed-form derivation of the Standard Model fermion and hadron mass spectrum, and a directly-executable protocol that realizes each particle's walk as a state on $7$-qubit Steane $\Klogical$ stabilizer-code hardware.  The central identifications are: (i) every Standard Model fermion and hadron is a closed walk on the Heffter embedding of $K_7$, with the walk's $(p, q)$ torus-homology class labeling the Paper 6/7 quantum numbers (mass, charge, isospin, and baryon number); (ii) the carrier-knot family entering the mass formula is the $(2, F_n)$-torus-knot family $\{$unknot, Hopf, trefoil, cinquefoil, $T(2,8), T(2,13), \ldots\}$ for consecutive Fibonacci $F_n$, with the family forced by $K_7$'s binary Hamilton bifurcation ($d=1$ QR, $d=3$ NR; $d=2$ substrate-forbidden) and the Fibonacci indexing forced by $\Phi$-shell substrate algebra; (iii) the closed-form mass-formula factor is $n_q = \det(K) = F_n$ via the Murasugi formula and $n_q^q = \det(K^{\sqcup q}) = \dim((\mathrm{spin}\text{-}((n_q-1)/2))^{\otimes q})$ via determinant multiplicativity / $SU(2)$ tensor power; (iv) per-walk sector assignment $n_q = f(p \bmod 7, q \bmod 7)$ follows the cosmogenic $Z_3 = \mathrm{AGL}(1, 7)$ generator $x \mapsto 2x \bmod 7$, the same $Z_3$ that gives three fermion generations; (v) the Paley quadratic-residue decomposition of $K_7$ \emph{is} the Steane $\Klogical$ stabilizer-and-codespace decomposition, with the walk-to-Pauli direction-sensitive map sending QR-direction steps to logical $X$ and NR-direction steps to logical $Z$; (vi) the transversal Hadamard $H^{\otimes 7}$ \emph{is} the substrate's matter--antimatter CPT operation, and pair production proceeds by simultaneous reverse-traversal walk emission from substrate vacuum; (vii) the syndrome classification of the 25-particle compendium reduces to $10$ distinct $(s_X, s_Z)$ pairs with falsifiable cross-sector substrate-equivalences (e.g.\ $\mu^- \equiv D^+ \equiv J/\psi$ at the syndrome level); (viii) the substrate predicts a catalog of sub-$500$~MeV unseen species, a $q \equiv 6 \bmod 7$ heavy-species class, and a Fibonacci-spaced light-particle tower at MeV scale.  The closed-walk framework applies to matter content; bosons enter as substrate-mediator operations, not walk excitations, and the hardware-realization claim of Paper 21b is restricted to fermions and hadrons accordingly.  No free parameters enter the derivation: the chain $(|p|, |q|) \to \mathrm{sector} \to \mathrm{carrier}(2, F_n) \to n_q^q$ is closed-form from $K_7$ substrate primitives (binary Hamilton bifurcation, $\Phi$-shells, cosmogenic $Z_3$, Murasugi formula, $SU(2)$ tensor power, Paley QR/NR partition).
+\end{abstract}
+
+%% ================================================================
+\section{Introduction}
+\label{sec:intro}
+%% ================================================================
+
+The Null Worldtube (NWT) framework~\cite{Paper8a,Paper17,Paper18,Paper19,Paper20} is a substrate-monism research program in which the fine-structure constant~\cite{Paper8a}, Newton's constant~\cite{Paper17}, the full Standard Model spectrum~\cite{Paper6,Paper13}, three fermion generations~\cite{Paper20}, the neutrino sector~\cite{Paper20}, and seven cosmological parameters~\cite{Paper25Memo} are derived from a single substrate algebra $K_7 /\allowbreak \so(7) /\allowbreak \mathrm{Spin}(7) /\allowbreak \mathrm{Cl}(0, 7)$, with no free \emph{dimensionless} parameters: the only dimensional inputs are $\hbar$ (a unit-conversion factor), the cosmogenic mass scale $M_\text{Pl}$, and the realization's substrate primitives $(a, J_\text{int})$ that fix $c$ (\S\ref{sec:condensate-states}).
+
+This paper consolidates the theoretical chain by which the substrate algebra is reduced to a directly-executable protocol on quantum hardware.  It is the theory companion to Paper 21b~\cite{Paper21b}, which reports the bench-scale experimental confirmation; this paper provides the substrate-mathematical derivation.
+
+\paragraph{The closure status that motivates this companion paper.}
+Paper 6's mass formula~\cite{Paper6} and Paper 8's carrier-knot table~\cite{Paper8} reproduce the $80$-particle Standard Model spectrum at median $\sim 0.1\%$ PDG precision~\cite{Paper13}, from two inputs (the electron mass scale $m_e$ and a single dimensionless gauge normalization $\kappa_\text{SM}$) plus the proton- and $Z$-mass anchors (\S\ref{sec:fitting-closure}, Table~\ref{tab:spectrum-representative}).  The persistent fitting critique against that program was that the carrier-knot crossing-number $n_q \in \{0, 2, 3, 5\}$ entering the formula was \emph{empirically} assigned per sector rather than \emph{substrate-canonically} derived from $K_7$.  A sequence of closure attempts via $\so(7)$ and $\mathrm{Spin}(7)$ representation theory produced negative results: no single $SU(2) \subset \mathrm{Spin}(7)$ on the Cl$(0, 7)$ spinor space $S = 8$ realizes the required dimension $5$ irreducible with the right walk projection, and Wilson-loop correlations against $n_q$ plateau at $r \lesssim 0.6$.  The closure presented here uses a different route: knot-theoretic identification of the carrier family as $(2, F_n)$-torus knots for Fibonacci index $F_n$, closed-form $n_q$ via Murasugi's formula~\cite{Murasugi}, closed-form $n_q^q$ via $SU(2)$ tensor power, and per-walk sector assignment via the cosmogenic $Z_3 = \mathrm{AGL}(1, 7)$ generator.  The result is end-to-end closed-form: no free parameters, no fitting, no representation-theoretic input beyond elementary $SU(2)$ tensor decomposition.
+
+\paragraph{Outline.}
+\S\ref{sec:substrate-primer} reviews the NWT substrate algebra.  \S\ref{sec:walks-as-particles} develops the closed-walk framework: Heffter embedding, $(p, q)$ torus-homology, walk enumeration via the Bogoliubov pipeline, Hamilton-cycle taxonomy, the Paley $(7, 3, 1)$ Fano structure, the walk-knot vs carrier-knot distinction, and the scope restriction to fermions and hadrons.  \S\ref{sec:carrier-family} develops the carrier-knot family closure: the $(2, F_n)$ torus-knot family, closed-form $n_q$ via Murasugi, closed-form $n_q^q$ via $SU(2)$ tensor power, and the cosmogenic-$Z_3$ sector rule.  \S\ref{sec:k7-steane} develops the $K_7$ = Steane $\Klogical$ identification: Paley stabilizers, walk-to-Pauli direction-sensitive map, transversal Hadamard CPT.  \S\ref{sec:pair-production} presents the substrate-vacuum pair-production mechanism with worked examples for $e^\pm$ and $p\bar p$.  \S\ref{sec:syndrome-classification} catalogs the syndrome classification of the 25-particle compendium and its substrate-canonical cross-sector equivalences.  \S\ref{sec:prediction-catalog} compiles the substrate's falsifiable predictions: missing $(p, q)$ species, $q \equiv 6 \bmod 7$ classes, and the Fibonacci-spaced light-particle tower.  \S\ref{sec:discussion} closes with the fitting-critique status and the bridge to Paper 21b's experimental confirmation.
+
+%% ================================================================
+\section{NWT substrate primer}
+\label{sec:substrate-primer}
+%% ================================================================
+
+The NWT framework~\cite{Paper8a,Paper17,Paper18,Paper19,Paper20} identifies fundamental physics with the algebra $K_7 /\allowbreak \so(7) /\allowbreak \mathrm{Spin}(7) /\allowbreak \mathrm{Cl}(0, 7)$, where:
+\begin{itemize}
+\item $K_7$ is the complete graph on $7$ vertices, embedded on a torus $T^2$ via the Heffter embedding (vertex $k$ at $(k/7,\, 3k \bmod 7 / 7)$);
+\item $\so(7)$ is the $21$-dimensional Lie algebra acting on $\mathbb{R}^7$, the imaginary part of the octonions $\mathbb{O}$;
+\item $\mathrm{Spin}(7)$ is the simply-connected cover of $SO(7)$;
+\item $\mathrm{Cl}(0, 7)$ is the Clifford algebra of $\mathbb{R}^{0, 7}$, with spinor space $S = 8$.
+\end{itemize}
+
+The matter content treated in this paper lives on $K_7$; its $K_8$ extension---the complete graph on $8$ vertices, equivalently the $[[8, 1, 1]]$ stabilizer code---carries the dark and neutrino sectors through $\mathrm{Spin}(8)$ triality~\cite{Paper20} and is treated here only in outline (\S\ref{sec:k8-tower}, \S\ref{sec:open-pieces}).
+
+The substrate-derived quantities established in prior NWT papers include the fine-structure constant~\cite{Paper8a}
+\begin{equation}
+  \alpha = \frac{1}{25\pi\sqrt 3 + 1} \approx 7.297\times 10^{-3} \,
+\end{equation}
+(a zero-parameter closed form accurate to $7.6$~ppm: $\alpha^{-1} = 25\pi\sqrt 3 + 1 = 137.0350$ versus the CODATA $137.035999$; $7.6$~ppm is the stated accuracy of the trefoil expression~\cite{Paper8a}, with the residual an uncomputed higher-order correction---the program does \emph{not} claim sub-ppm $\alpha$), the gravitational-constant chain~\cite{Paper17}, the full 80-particle Standard Model spectrum at median $\sim 0.1\%$ PDG precision~\cite{Paper13}, three fermion generations from $G_2 \to SU(3)$ breaking via $S^6$ stabilizer direction~\cite{Paper20}, the neutrino sector~\cite{Paper20}, and the cosmological-constant cascade $\Lambda_\text{cc} = (m_e / M_\text{Pl})^4 \cdot \alpha^{16} \cdot h_\text{Coxeter}$ at three-digit Planck precision~\cite{Paper25Memo}.
+
+For this paper, the load-bearing substrate primitives are:
+\begin{itemize}
+\item $\HV = 5$ (Hopf vacuum, the closure-2 substrate vertex count);
+\item $\ranksoseven = 3$ (rank of $\so(7)$, three fermion generations);
+\item $\dimGtwo = 14$ (dimension of $G_2 = \Aut(\mathbb{O})$, the octonion automorphism group);
+\item $\alpha$ (the trefoil Aharonov--Bohm phase coupling);
+\item the Paley $(7, 3, 1)$ design on $K_7$, with quadratic residues $\QR_7 = \{1, 2, 4\}$ and non-residues $\NR_7 = \{3, 5, 6\}$;
+\item the cosmogenic $Z_3 = \mathrm{AGL}(1, 7)$ generator $x \mapsto 2x \bmod 7$;
+\item the $\Phi$-shell Fibonacci/Lucas substrate ladder from prior NWT closure work.
+\end{itemize}
+Each of these primitives is used below to derive specific load-bearing identifications.
+
+%% ================================================================
+\section{Particles as $K_7$ closed walks}
+\label{sec:walks-as-particles}
+%% ================================================================
+
+\subsection{Heffter embedding and the $(p, q)$ torus-homology classification}
+\label{sec:heffter-pq}
+
+The Heffter embedding of $K_7$ on the torus~\cite{Heffter} places vertex $k$ at $(k/7,\, 3k \bmod 7 / 7) \in T^2$, with edges drawn as geodesic chords on the flat torus.  Each closed walk $W = v_0 \to v_1 \to \cdots \to v_L \to v_0$ on $K_7$ inherits a homology class $(p, q) \in H_1(T^2; \mathbb{Z})$ from its lifted trajectory on the universal cover $\mathbb{R}^2$, where $p$ counts net $u$-direction windings and $q$ counts net $v$-direction windings.
+
+The substrate identification of Standard Model fermions and hadrons~\cite{Paper6} maps each particle to a closed walk on $K_7$ whose $(p, q)$ windings label the Paper~6 torus-knot mass-formula quantum numbers.  The walk's $(p, q)$ class is invariant under reparametrisation of the walk's start vertex but is sensitive to reversal: $\bar W = $ reverse traversal of $W$ has homology class $(-p, -q)$ (see \S\ref{sec:pair-production}).
+
+\subsection{Bogoliubov-pipeline walk enumeration}
+\label{sec:bogoliubov-enumeration}
+
+The walk-as-particle correspondence was originally posited per-particle on heuristic grounds in Paper~6.  Subsequent computational work in the Bogoliubov-pipeline phase-E--H arc~\cite{BogoliubovPipeline} replaced the per-particle posit with a systematic enumeration: starting from the polar vertex $P = 0$, all closed walks of length $L \leq 25$ on $K_7$ are enumerated by breadth-first search; walks with the same $(|p|, |q|)$ class are grouped; and the shortest-length representative per class is identified.  The result is a complete walk classification covering the $25$-particle Standard Model compendium (Table~\ref{tab:walks-25}, with all walks listed in~\cite{BogoliubovPipeline}), plus a catalog of $13$ walk-realizable $(|p|, |q|)$ classes \emph{not} in the SM compendium (\S\ref{sec:prediction-catalog}).
+
+\begin{table}[h]
+\centering
+\caption{Compendium of the 25-particle Standard Model walks on $K_7$ via Bogoliubov-pipeline enumeration~\cite{BogoliubovPipeline}.  $L_{\min}$ is the shortest-length walk in the $(|p|, |q|)$ class.  All walks start and close at the polar vertex $P = 0$.}
+\label{tab:walks-25}
+\small
+\begin{tabular}{lllr}
+\toprule
+$(|p|, |q|)$ & Sector & Particles in class & $L_{\min}$ \\
+\midrule
+$(1, 3)$ & nucleon & $p$, $n$, $\Sigma^+$, $\Sigma^0$, $\Sigma^-$ & 7 \\
+$(2, 1)$ & lepton  & $e^-$                                       & 5 \\
+$(3, 5)$ & meson   & $\pi^+$                                     & 8 \\
+$(1, 8)$ & lepton  & $\mu^-$                                     & 22 \\
+$(2, 5)$ & meson   & $K^+$                                       & 10 \\
+$(2, 7)$ & meson   & $D^+$, $J/\psi$                             & 14 \\
+$(3, 4)$ & hyperon & $\tau^-$, $\Lambda$, $\Sigma^*$             & 11 \\
+$(3, 7)$ & meson   & $D^0$                                       & 17 \\
+$(4, 5)$ & meson   & $\omega$                                    & 13 \\
+$(4, 9)$ & meson   & $\Upsilon$                                  & 27 \\
+$(5, 4)$ & hyperon & $\Xi^0$, $\Xi^-$, $\Delta$                  & 13 \\
+$(5, 7)$ & meson   & $\rho$                                      & 18 \\
+$(6, 5)$ & meson   & $\eta$                                      & 17 \\
+$(7, 3)$ & meson   & $\pi^0$                                     & 10 \\
+$(7, 4)$ & hyperon & $\Omega^-$                                  & 12 \\
+$(7, 5)$ & meson   & $K^0$                                       & 11 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The enumeration discloses the structural decomposition of long walks into shorter sub-walks: $\mu^-$ at $(1, 8)$ realizes as five concatenated $(0, 1)$ tri-cycles plus the $K_7$ Hamilton cycle; $\Upsilon$ at $(4, 9)$ realizes as three concatenated $(1, 2)$ pent-cycles plus the Hamilton cycle; and so on~\cite{BogoliubovPipeline}.  These sub-cycle decompositions become structurally important in \S\ref{sec:fermion-hadron-only-scope} (substrate-mediator interpretation of bosons) and \S\ref{sec:prediction-catalog} (substrate-prediction catalog).
+
+\subsection{Three Hamilton-cycle types by edge-difference}
+\label{sec:hamilton-types}
+
+The complete graph $K_7$ admits three combinatorially distinct Hamilton cycles, classified by signed edge-difference $d \pmod 7$:
+\begin{align}
+  d = 1 \text{ (QR)} &: \quad 0 \to 1 \to 2 \to 3 \to 4 \to 5 \to 6 \to 0 \quad \text{(proton walk)} \\
+  d = 2 \text{ (QR)} &: \quad 0 \to 2 \to 4 \to 6 \to 1 \to 3 \to 5 \to 0 \\
+  d = 3 \text{ (NR)} &: \quad 0 \to 3 \to 6 \to 2 \to 5 \to 1 \to 4 \to 0 \quad \text{(NR-Hamilton)}
+\end{align}
+The $d = 4, 5, 6$ cycles are reverses of $d = 3, 2, 1$ respectively.  The walk's $d$-direction Hamilton-cycle content determines the carrier-knot sector~\cite{k7-hamilton-cycle-taxonomy}: walks dominated by $d = 1$ (QR) become nucleons, walks dominated by $d = 3$ (NR) become hyperons or CP-coupled species, mixed-Hamilton walks become mesons, walks with no full Hamilton become leptons.
+
+Crucially, the $d = 2$ Hamilton cycle is \emph{unrealised in any Standard Model particle}: every walk in the 25-particle compendium has $\mathrm{ham}_{d=2} = 0$.  This is a substrate-canonical absence: the $d = 2$ ``skip-one'' tetrahedral direction does not realize stable bound-state closures, even though it is combinatorially valid.  The $K_7$ binary Hamilton bifurcation $\{d = 1, d = 3\}$ becomes load-bearing in \S\ref{sec:hamilton-bifurcation-2} for the ``2'' in the carrier-knot family $(2, F_n)$.
+
+\subsection{Paley $(7, 3, 1)$ Fano structure and Hamilton-containment law}
+\label{sec:fano-hamilton}
+
+The Paley $(7, 3, 1)$ design on $K_7$~\cite{PaleyHadamard} provides seven Fano triangles, namely the QR translates of $\QR_7 = \{1, 2, 4\}$:
+\begin{equation}
+  F_i = \{i + 1,\, i + 2,\, i + 4\} \pmod 7, \quad i = 0, \ldots, 6 \, .
+\end{equation}
+This Steiner triple system covers each $K_7$ edge in exactly one Fano triangle.  The remaining $35 - 7 = 28$ non-Fano triangles cover each $K_7$ edge in exactly four.
+
+\textbf{Hamilton-containment law.}  A $K_7$ closed walk contains a Hamilton cycle as a sub-walk if and only if it has full Fano-edge coverage (touches all seven Fano triangles via edges, not merely vertices).  This is an empirical regularity across the $16$ compendium $(p, q)$ classes (not yet a proven theorem)~\cite{k7-hamilton-cycle-taxonomy}: $13$ of $16$ have full Fano coverage, and the three exceptions ($e^-$, $\Lambda$ family, $\pi^+$) are exactly the walks that visit fewer than seven $K_7$ vertices.  The structural reading: the Hamilton scaffold is the substrate manifestation of the Steiner $(7, 3, 1)$ covering.  The regularity sharpens to a candidate theorem---full Fano-edge coverage $\Leftrightarrow$ Hamilton-cycle containment, the three exceptions being exactly the sub-Hamilton walks (those visiting fewer than seven vertices)---whose proof at the level of $K_7$ walk combinatorics remains open.
+
+\subsection{Walk-knot versus carrier-knot}
+\label{sec:walk-knot-vs-carrier-knot}
+
+A subtle distinction operative throughout this paper: the $(p, q)$ torus knot of the walk's three-dimensional Heffter embedding is \emph{not} the same as the Paper~8 carrier knot.  The Paper~8 carrier-knots (unknot, Hopf link, trefoil $3_1$, cinquefoil $5_1$, plus substrate-prediction extensions) are determined by the walk's $\sigma$-orbit transition structure and by the substrate's binary Hamilton bifurcation plus $\Phi$-shell algebra, \emph{not} by spatial embedding.  Direct computation confirms this dichotomy operationally: lifting each compendium walk to a three-dimensional Heffter-torus embedding and reading off the embedded-knot determinant via \texttt{pyknotid} gives mostly the unknot, with at most $14\%$ agreement with the Paper~8 carrier-knot.  The carrier-knot identification is at the \emph{substrate algebra} level, not the three-dimensional embedding level.  To commit on what fixes the carrier: there is \emph{no} direct walk-to-knot map through the embedding (the pyknotid lift gives mostly unknots); the carrier is \emph{defined} by the substrate-algebra assignment of \S\ref{sec:carrier-family}---the $(2, F_n)$ family selected by the $\sigma$-orbit and $\Phi$-shell structure via rule~\eqref{eq:rule-I}---and its load-bearing content is the integer $n_q = F_n$ and the associated $SU(2)$ representation, with ``carrier knot'' a geometric label for that algebraic object.
+
+\subsection{Scope: fermions and hadrons, not bosons}
+\label{sec:fermion-hadron-only-scope}
+
+The closed-walk framework above describes the \emph{charged matter content}: charged leptons, mesons, hyperons, and nucleons.  Each is a closed walk on $K_7$ with definite $(p, q)$ winding, Hamilton-cycle content, and carrier-knot assignment.  The closed-walk framework does \emph{not} extend to (i) the bosonic gauge sector---photons, gluons, $W^\pm$, $Z$, and the Higgs are not represented as closed $K_7$ walks of definite $(p, q)$ winding---nor to (ii) neutrinos, which require the $K_8$ Wilson-amplitude extension of Paper~20~\cite{Paper20} rather than a $K_7$ closed-walk carrier (see paragraph below on the neutrino sector).
+
+Bosons enter NWT not as walk-as-particle excitations but as \emph{substrate-mediator operations} acting on the matter Hilbert space, and the hardware-realization claim of Paper~21b~\cite{Paper21b} is restricted accordingly to fermions and hadrons.  Two complementary, dual readings frame the boson-sector algebra~\cite{BosonMemo}.  In the \emph{single-patch} reading a boson is a logical-Pauli operator in $N(S_N)/S_N$ on a multi-patch Steane code: the $U(1)$ photon is the polar-vertex pair $\bigl(X_P^{(i)} X_P^{(j)},\, Z_P^{(i)} Z_P^{(j)}\bigr)$, its spin-1 emerging from the CSS $X$/$Z$ duality, and the gluon ($\mathfrak{su}(3)$), the $W^\pm$ weak vertex, and the Higgs ($g^\text{Higgs} = Y_0 Y_7$ on the $K_8$ extension) follow as the closures summarized in \S\ref{sec:open-pieces}.  In the dual \emph{multi-patch} reading a boson is the inter-patch entanglement (CNOT-bridge) channel between two fermion walks, which gives scattering a direct chip realization (prepare two walks, entangle through the mediator channel, read joint syndromes).  Pair production (\S\ref{sec:pair-production}) is the substrate-vacuum mediator operation that emits a matter walk and its reverse-traversal antimatter partner simultaneously, triggered at the polar vertex; scattering, decay, and nuclear-binding vertices are likewise mediator operations rather than walks (\S\ref{sec:open-pieces}).  On chip these are realized as gate sequences---$H^{\otimes 7}$ for CPT, stabilizer measurements for gauge readout, CNOT-bridges for inter-walk mediation---not as encoded boson excitations.
+
+\paragraph{Neutrinos: $K_8$ Wilson amplitude, not $K_7$ closed walks.}
+Neutrinos are fermions but their substrate realization lies outside the closed-walk + Paper~6 torus-knot framework of this paper.  The $(2, F_n)$ carrier family on $K_7$ has no slot below the charged-lepton unknot: charged leptons already occupy the unknot via $n_q = \det(T(2, F_2)) = F_2 = 1$, and the convention $F_1 = F_2 = 1$ leaves no room for a distinct ``lighter'' unknot carrier within $K_7$.  The correct substrate framing, established in Paper~20~\cite{Paper20}, places neutrinos on the $K_8$ extension of the substrate graph, with the eighth vertex identified as the real octonion unit $1 \in \mathbb{R} \subset \mathbb{O}$ forced by the $\mathrm{Spin}(7) \subset \mathrm{Spin}(8)$ stabilizer chain.  The unified Wilson-amplitude recipe~\cite[eq.~5.1]{Paper20},
+\begin{equation}
+  m = \frac{8}{N_v}\,\alpha^{N_e/2}\,\Bigl(1 + \frac{\alpha}{7}\Bigr)\bigl(1 + 3\alpha^2\bigr)\,m_\text{Pl} \, ,
+\end{equation}
+reproduces $m_e$ at $8$-significant-figure CODATA precision on $K_7$ ($N_v = 7$, $N_e = 21$) and gives the lightest active neutrino at $m_1 = 14.84$~meV on $K_8$ ($N_v = 8$, $N_e = 28$), with $m_2 = 17.16$~meV and $m_3 \approx 53$~meV via NuFIT mass-squared splittings and $\Sigma m_\nu \approx 85$~meV---below the Planck bound ($120$~meV) but in tension with tightening DESI constraints ($\lesssim 60$--$72$~meV), which makes $\Sigma m_\nu$ itself a near-term test of the $K_8$ mass formula.  Neutrinos are therefore handled by Paper~20's $K_8$ extension; the closed-walk + carrier-knot machinery of this paper applies to charged leptons, mesons, hyperons, and nucleons.  Bench-scale chip realization of neutrinos would require an 8-qubit stabilizer-code patch (e.g.\ Reed--Muller $[\![8, 3, 2]\!]$ or a $\mathrm{Spin}(7) \subset \mathrm{Spin}(8)$-adapted custom code) alongside the 7-qubit Steane patches used for charged matter, and is deferred to a future Paper 21 follow-up.
+
+Throughout the rest of this paper, ``particle'' means ``fermion or hadron'' unless otherwise stated.
+
+%% ================================================================
+\section{The $(2, F_n)$ carrier-knot family and closed-form $n_q^q$}
+\label{sec:carrier-family}
+%% ================================================================
+
+This section closes the derivation chain $(|p|, |q|) \to \mathrm{sector} \to \mathrm{carrier} \to n_q^q$ from substrate primitives.  The Paper~6 mass formula~\cite{Paper6} requires the carrier crossing-number $n_q$ and its $q$-th power $n_q^q$.  Until 2026-Q2, the values $n_q \in \{0, 2, 3, 5\}$ entered the formula empirically per sector; this section derives them in full closed form.  The derived (carrier-determinant) values are $\{1, 2, 3, 5\} = \{F_2, F_3, F_4, F_5\}$: they coincide with the empirical set on the meson, hyperon, and nucleon sectors and differ only for leptons, where the substrate-canonical unknot determinant $n_q = \det T(2, F_2) = F_2 = 1$ supersedes the constituent-count label $0$ of Paper~6's enumeration.  Throughout this paper $n_q$ denotes the carrier determinant $F_n$, not Paper~6's constituent count.
+
+\subsection{$K_7$ binary Hamilton bifurcation $\to$ ``2'' in $(2, F_n)$}
+\label{sec:hamilton-bifurcation-2}
+
+The $(2, F_n)$ torus-knot family is the $p = 2$ slice of the two-parameter torus-knot lattice $T(p, q)$.  The substrate origin of the $p = 2$ restriction is $K_7$'s binary Hamilton bifurcation (\S\ref{sec:hamilton-types}): only the QR direction $d = 1$ and the NR direction $d = 3$ host realized Hamilton cycles in any Standard Model walk.  Empirically verified across the 25-particle compendium: $\mathrm{ham}_{d = 2} = 0$ for every compendium walk; the $d = 2$ ``skip-one'' Hamilton direction is substrate-forbidden.  The remaining substrate Hamilton directions form a $Z_2$ partition $\{$QR, NR$\}$, and the $(2, n)$-torus-knot family in Schubert 2-bridge classification~\cite{Schubert} is the natural geometric realization of that $Z_2$.
+
+\subsection{$\Phi$-shell substrate algebra $\to$ Fibonacci indexing}
+\label{sec:phi-shell-fibonacci}
+
+The substrate's $\Phi$-shell algebra (developed in the NWT integer-ladder closure arc) decomposes the substrate vertex/orbit accounting into a Fibonacci/Lucas double ladder governed by golden-ratio shells.  Specifically:
+\begin{itemize}
+\item The Lucas half $\{L_2, L_4, L_6, L_8, \ldots\} = \{3, 7, 18, 47, \ldots\}$ governs the gauge-shell vertex counts (e.g.\ $L_4 = 7 = |K_7|$).
+\item The Fibonacci half $\{F_2, F_3, F_4, F_5, F_6, F_7, \ldots\} = \{1, 2, 3, 5, 8, 13, \ldots\}$ governs the carrier-knot crossing-number sequence.
+\item The two halves are dual under the golden-ratio recursion $\phi^2 = \phi + 1$, with $L_n = \phi^n + (1 - \phi)^n$ and $F_n = (\phi^n - (1 - \phi)^n) / \sqrt{5}$.
+\end{itemize}
+The four Paper~8 carriers $\{$unknot, Hopf, trefoil, cinquefoil$\}$ with $n_q \in \{1, 2, 3, 5\}$ \emph{are} the consecutive Fibonacci subsequence $\{F_2, F_3, F_4, F_5\}$ (the Hopf member is $T(2, 2)$, a $2$-component link rather than a knot; ``torus-knot family'' is shorthand throughout for the torus-knot/link family $T(2, F_n)$).  The extension to $F_6 = 8, F_7 = 13, F_8 = 21, F_9 = 34, F_{10} = 55$ provides substrate-prediction carriers for heavier hypothetical species (\S\ref{sec:prediction-catalog}).
+
+\subsection{$n_q$ via the Murasugi knot-determinant formula}
+\label{sec:nq-murasugi}
+
+Combining the binary Hamilton bifurcation (\S\ref{sec:hamilton-bifurcation-2}) and the Fibonacci indexing (\S\ref{sec:phi-shell-fibonacci}), the substrate carrier-knot family is the $(2, F_n)$-torus-knot family $T(2, F_n)$ for $F_n$ ranging over consecutive Fibonacci values.  The Jones polynomial of the $(p, q)$-torus knot (with $\gcd(p, q) = 1$) is given in closed form by the Murasugi formula~\cite{Murasugi}:
+\begin{equation}
+  V(T(p, q))(t) = t^{(p - 1)(q - 1)/2} \cdot \frac{1 - t^{p + 1} - t^{q + 1} + t^{p + q}}{1 - t^2} \, .
+  \label{eq:murasugi}
+\end{equation}
+Evaluating at $t = -1$ gives the knot determinant $\det(K) = |V_K(-1)|$.  For the $(2, F_n)$ family this evaluates to $F_n$ exactly:
+\begin{equation}
+  \boxed{n_q = \det(T(2, F_n)) = |V_{T(2, F_n)}(-1)| = F_n \, .}
+  \label{eq:nq-fibonacci}
+\end{equation}
+
+The compendium verification is exact (Table~\ref{tab:carrier-jones}).  For non-trivial carriers the Jones polynomial span coincides with the determinant ($\mathrm{span}(V_{T(2, F_n)}) = F_n$ for $n \geq 3$), providing a second closed-form invariant agreeing with $n_q$.
+
+\begin{table}[h]
+\centering
+\caption{Compendium carriers, their Schubert and torus-knot labels, Jones polynomials, and determinant $= n_q = F_n$ identity.  Substrate-prediction extensions to $F_6 = 8$ and $F_7 = 13$ are verified at the polynomial level.}
+\label{tab:carrier-jones}
+\small
+\begin{tabular}{llllll}
+\toprule
+Sector ($n_q$) & Knot/link & Schubert & Torus & Jones $V_K(t)$ & $\det(K) = F_n$ \\
+\midrule
+lepton (0/1)      & unknot $0_1$       & $K(1, 0)$ & $T(2, 1)$  & $+1$                                 & $1 = F_2$ \\
+meson (2)         & Hopf$^+$           & $K(2, 1)$ & $T(2, 2)$  & $-t^{-5/2} - t^{-1/2}$               & $2 = F_3$ \\
+hyperon (3)       & trefoil $3_1$      & $K(3, 1)$ & $T(2, 3)$  & $+t + t^3 - t^4$                     & $3 = F_4$ \\
+nucleon (5)       & cinquefoil $5_1$   & $K(5, 1)$ & $T(2, 5)$  & $+t^2 + t^4 - t^5 + t^6 - t^7$       & $5 = F_5$ \\
+\midrule
+\emph{prediction} & $T(2, 8)$ link     & ---       & $T(2, 8)$  & $V(t = -1) = 8$                      & $8 = F_6$ \\
+\emph{prediction} & $T(2, 13)$ knot    & ---       & $T(2, 13)$ & degree-13 alternating                & $13 = F_7$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{$n_q^q$ via $SU(2)$ tensor power and disjoint-union determinant}
+\label{sec:nqq-tensor}
+
+The Paper~6 mass formula uses $n_q^q$, the $q$-th power of the carrier crossing-number.  Two closed-form identifications of $n_q^q$ are verified across all $8$ compendium $(n_q, q)$ pairs.
+
+\textbf{Identification 1 ($SU(2)$ tensor power).}  For each carrier $T(2, F_n)$ assign the $SU(2)$ irreducible representation $\rho_n = \mathrm{spin}\text{-}((F_n - 1)/2)$ of dimension $F_n = 2j + 1$ (so $\rho_2 = \mathbf{1}$, $\rho_3 = \mathbf{2}$, $\rho_4 = \mathbf{3}$, $\rho_5 = \mathbf{5}$).  Then
+\begin{equation}
+  \dim(\rho_n^{\otimes q}) = F_n^q = n_q^q
+\end{equation}
+by elementary $SU(2)$ tensor decomposition (Clebsch--Gordan).  The substrate reading is that the walk's $q$ $v$-cycle revolutions correspond to $q$ parallel carrier-representation copies tensored together.  Explicit Clebsch--Gordan decompositions for the compendium:
+\begin{align}
+  \pi^+ \text{ at } (n_q, q) = (2, 5) &: \quad \mathbf{2}^{\otimes 5}
+    = 5 \cdot (\half) \oplus 4 \cdot (\tfrac{3}{2}) \oplus (\tfrac{5}{2}) \, , \quad \dim = 32 = 2^5 \, , \\
+  p \text{ at } (n_q, q) = (5, 3) &: \quad \mathbf{5}^{\otimes 3}
+    = \mathbf{1} \oplus 3 \cdot \mathbf{3} \oplus 5 \cdot \mathbf{5} \oplus 4 \cdot \mathbf{7} \oplus 3 \cdot \mathbf{9} \oplus 2 \cdot \mathbf{11} \oplus \mathbf{13} \, , \quad \dim = 125 = 5^3 \, .
+\end{align}
+
+\textbf{Identification 2 (disjoint-union knot determinant).}  Under disjoint union of $q$ copies of the carrier knot $T(2, F_n)$,
+\begin{equation}
+  \det\!\bigl( T(2, F_n)^{\sqcup q} \bigr) = \det\!\bigl( T(2, F_n) \bigr)^q = F_n^q = n_q^q \, ,
+\end{equation}
+by knot-determinant multiplicativity under disjoint union.  The two identifications are equivalent by the substrate dictionary linking the carrier-knot determinant to its $SU(2)$ representation dimension via $\det(K) = \dim(\rho)$.
+
+\textbf{Substrate reading.}  The Paper~6 mass-formula factor $n_q^q$ has \emph{two} closed-form substrate interpretations: $q$ parallel-cabled copies of the carrier knot, or $q$ tensor-product copies of the carrier's $SU(2)$ representation.  Both produce the integer $F_n^q$ exactly; both replace the prior empirical assignment of $n_q$ with a substrate-derived integer.  These power identities are arithmetically elementary once the carrier is fixed---$\det$ is multiplicative under disjoint union, and $\dim(\rho^{\otimes q}) = (\dim\rho)^q$---so the substantive content is the carrier \emph{identification} $n_q = F_n$ and its $SU(2)$ representation, not the power law itself.
+
+\subsection{Per-walk sector assignment via cosmogenic $Z_3 = \mathrm{AGL}(1, 7)$}
+\label{sec:sector-z3}
+
+The remaining piece of the chain $(|p|, |q|) \to \mathrm{sector} \to \mathrm{carrier} \to n_q^q$ is the assignment of which carrier sector $n_q \in \{F_2, F_3, F_4, F_5\}$ corresponds to which $(p, q)$ class.  The closed-form rule, verified across $16/16$ compendium classes, depends only on the residues $(p \bmod 7, q \bmod 7)$:
+
+\begin{equation}
+\label{eq:rule-I}
+n_q(p, q) =
+\begin{cases}
+  0 = F_2 - 1 & q \bmod 7 = 1 \quad (\text{lepton}) \\
+  3 = F_4     & q \bmod 7 = 4 \quad (\text{hyperon}) \\
+  2 = F_3     & q \bmod 7 \in \{0, 2, 5\} \quad (\text{meson}) \\
+  5 = F_5     & q \bmod 7 = 3 \text{ and } p \bmod 7 \neq 0 \quad (\text{nucleon}) \\
+  2 = F_3     & q \bmod 7 = 3 \text{ and } p \bmod 7 = 0 \quad (\text{meson, $u$-degenerate}) \\
+  F_6 = 8     & q \bmod 7 = 6 \quad (\text{substrate prediction, no compendium member})
+\end{cases}
+\end{equation}
+
+\textbf{Substrate mechanism.}  Rule~\eqref{eq:rule-I} is not an empirical fit; it derives from the substrate's cosmogenic $Z_3 = \mathrm{AGL}(1, 7)$ generator $\sigma : x \mapsto 2x \bmod 7$.  This $\sigma$ acts on $Z_7^*$ partitioning it into two three-cycles plus the polar fixed point:
+\begin{itemize}
+\item QR cycle: $1 \to 2 \to 4 \to 1$ (the quadratic residues);
+\item NR cycle: $3 \to 6 \to 5 \to 3$ (the non-residues);
+\item Polar: $0 \to 0$ fixed.
+\end{itemize}
+On the QR cycle, $\sigma$ increments the Fibonacci sector index by $+1$ per step: lepton $(F_2) \to$ meson $(F_3) \to$ hyperon $(F_4) \to$ lepton.  This is the substrate-canonical explanation for the \emph{consecutive} Fibonacci indexing of the three lower carrier-knot shells, and it is governed by the \emph{same} $Z_3$ that gives three SM fermion generations via $G_2 \to SU(3)$ breaking~\cite{Paper20}.
+
+On the NR cycle, $\sigma$ visits the nucleon shell $(F_5)$ at $q \equiv 3 \pmod 7$, a substrate-prediction slot at $q \equiv 6$, and a meson shell $(F_3)$ at $q \equiv 5$.  The NR cycle's structure is the decrement mirror of the QR cycle under reading B of: NR walks descend through $\{F_5, F_4, F_3\}$ as antimatter-direction CPT-conjugates of the QR walks ascending through $\{F_2, F_3, F_4\}$.  The two cycles meet at the meson $F_3$ shell, which is therefore the only sector hosting $q$-residues from both cycles.
+
+\textbf{$p \bmod 7 = 0$ split mechanism.}  At $q \bmod 7 = 3$, rule~\eqref{eq:rule-I} splits by $p \bmod 7$: $p \neq 0$ gives nucleon, $p = 0$ gives meson.  The substrate reading is that $p \equiv 0 \bmod 7$ corresponds to an integer $u$-winding (multiple of $|Z_7|$), which is trivial in the substrate's mod-7 winding accounting; the walk loses one substrate degree of freedom and degrades from the full-rank nucleon $(F_5)$ to the meson $(F_3)$.  Concrete examples: proton at $(1, 3)$ has $p \bmod 7 = 1 \neq 0$ and gets $F_5 = 5$ (nucleon); $\pi^0$ at $(7, 3)$ has $p \bmod 7 = 0$ and gets $F_3 = 2$ (meson).
+
+\textbf{End-to-end closure.}  Equations \eqref{eq:nq-fibonacci}, \eqref{eq:rule-I}, and the $SU(2)$ tensor-power identity (\S\ref{sec:nqq-tensor}) together give the closed-form chain
+\begin{equation}
+  (|p|, |q|) \xrightarrow{\eqref{eq:rule-I}} \mathrm{sector} \xrightarrow{\text{carrier} = T(2, F_n)} F_n = n_q \xrightarrow{\dim(\rho_n^{\otimes q})} n_q^q \, ,
+\end{equation}
+all built from substrate primitives (Paley QR/NR partition, binary Hamilton bifurcation, $\Phi$-shell ladder, cosmogenic $Z_3$, Murasugi formula, $SU(2)$ tensor product).  What is eliminated is the prior \emph{per-sector empirical assignment} of $n_q$: the carrier-knot integers $\{1, 2, 3, 5\}$ now follow from the $(2, F_n)$ family and Murasugi's formula rather than from a fit.  The sector rule~\eqref{eq:rule-I} is strongest for the QR-cycle Fibonacci increment, which $\sigma$ raises by one shell per step; the meson grouping of $q \equiv \{0, 2, 5\}$ and the $p \equiv 0$ nucleon-to-meson degradation are substrate-rationalized and verified against the $16$ compendium classes rather than predicted blind.
+
+\paragraph{Look-elsewhere test of the sector rule.}  Rule~\eqref{eq:rule-I} is fixed on the same $16$ compendium classes it organizes, so it is fair to ask whether so simple a rule would fit \emph{any} sector labeling by chance.  We test this directly (\texttt{analysis/k7\_sector\_rule\_lookelsewhere.py}): holding the sector multiset at the observed particle content ($1$ nucleon, $2$ leptons, $3$ hyperons, $10$ mesons) and permuting its assignment across the $16$ classes, only $12$ of the $480{,}480$ distinct assignments are realizable by a rule of the form ``$\mathrm{sector} = g(q \bmod 7)$ with a single $p \equiv 0$ split at $q \equiv 3$''---a look-elsewhere probability $p = 2.5 \times 10^{-5}$ ($\sim 4.2\sigma$, Monte-Carlo confirmed).  Equivalently, the residue grouping fixes $9$ of the $16$ sectors ``for free'' beyond the one choice per populated residue.  The $q \bmod 7 \to \mathrm{sector}$ regularity is therefore not an artifact of rule flexibility.  (This tests the sector rule \emph{given} the $(p, q)$ homology classes of Table~\ref{tab:walks-25}; whether the $(p, q)$ assignments themselves are over-determined is the separate, upstream question of Paper~6~\cite{Paper6}.)
+
+\paragraph{Mass alone does not select the assignment---the quantum numbers do.}  We state plainly a long-recognized feature of the program (\texttt{analysis/nwt\_assignment\_degeneracy.py}): the mass formula \emph{by itself} does not uniquely fix the $(p, q, m, n_q)$ assignment.  At percent-level tolerance, $11$ of $13$ canonical assignments are \emph{dominated} by a tighter cross-sector mass alternative (typically a lepton-sector fit at $\sim 0.02\%$).  This is expected rather than a defect: a particle is selected by its full quantum-number content---electric charge, spin, baryon number, and sector---not by mass alone, and the dominating alternatives sit in the \emph{wrong} sector (e.g.\ a lepton-sector fit for a baryon), excluded by those quantum numbers.  The sector is fixed independently by Rule~\eqref{eq:rule-I} (non-accidental at $p = 2.5 \times 10^{-5}$, above) and the Hamilton-cycle taxonomy of \S\ref{sec:walks-as-particles}; the small integer vocabulary is then locked globally across the $\sim 75$-particle spectrum by cross-formula consistency (\texttt{analysis/nwt\_sensitivity\_analysis.py}: an isolated $\pm 1$ integer shift is degenerate within a single formula but moves multiple predictions once propagated through the shared vocabulary), not by any single mass fit.
+
+%% ================================================================
+\section{$K_7$ is the Steane $\Klogical$ stabilizer code}
+\label{sec:k7-steane}
+%% ================================================================
+
+The substrate-monism identification at the center of this paper---and the one that makes Paper 21b's chip-side experimental claim possible---is that $K_7$ and the Steane $\Klogical$ stabilizer code are two presentations of one combinatorial object, the Fano plane $\mathrm{PG}(2, 2)$.  The Steane code's stabilizers are the $[7, 4, 3]$ Hamming parity checks, whose point geometry \emph{is} $\mathrm{PG}(2, 2)$; the Paley $(7, 3, 1)$ decomposition of $K_7$ (\S\ref{sec:fano-hamilton}) is the same Fano plane, and both carry its automorphism group $\mathrm{PSL}(2, 7) \cong \mathrm{GL}(3, 2)$ of order $168$.  The identification is therefore an isomorphism of structures (graph-theoretic vs operator-on-$7$-qubits), not an analogy.
+
+\subsection{Paley quadratic-residue decomposition and the Steane stabilizers}
+\label{sec:paley-stabilizers}
+
+The Steane $\Klogical$ code is the smallest CSS quantum error-correcting code that protects one logical qubit against arbitrary single-qubit errors, with six stabilizer generators (three $X$-type and three $Z$-type) and one logical qubit~\cite{Steane1996}.  Its stabilizer-and-codespace structure is identical to the Paley quadratic-residue decomposition of $K_7$:
+
+\begin{itemize}
+\item The three $X$-type stabilizer supports are the QR translates $\QR_7 + i = \{1 + i,\, 2 + i,\, 4 + i\}$ for $i = 0, 1, 2$ (the three Fano-triangle complements through the polar vertex);
+\item The three $Z$-type stabilizer supports are obtained by the transversal Hadamard $X \leftrightarrow Z$ swap, equivalently the NR translates $\NR_7 + i = \{3 + i,\, 5 + i,\, 6 + i\}$;
+\item The seven Paley triangles $F_0, \ldots, F_6$ of \S\ref{sec:fano-hamilton} are the seven non-trivial logical-Pauli supports under the code's Fano-plane automorphism group $\mathrm{PSL}(2, 7) \cong \mathrm{GL}(3, 2)$;
+\item The logical-$X$ and logical-$Z$ supports are the all-qubit operators $X^{\otimes 7}$ and $Z^{\otimes 7}$, with $X^{\otimes 7} = \barX$ and $Z^{\otimes 7} = \barZ$ on the codespace $|0_L\rangle$.
+\end{itemize}
+
+\paragraph{Polar vertex = substrate vacuum reference.}
+The three $X$-type stabilizer supports share a unique common point in $K_7$, which we identify with the Heffter polar vertex $P$.  Under the substrate-vacuum reference convention~\cite{BogoliubovPipeline} this is vertex $0$.  All matter-walk constructions start and end at $P$; antimatter walks (\S\ref{sec:pair-production}) likewise close at $P$ in the reverse-traversal sense.
+
+\subsection{Walk-to-Pauli direction-sensitive map}
+\label{sec:walk-to-pauli}
+
+We compile every closed $K_7$ walk to a Pauli word on the $7$-qubit Steane register via the following rule:
+\begin{equation}
+  \label{eq:walk-to-pauli}
+  v_i \to v_{i + 1} \mapsto \begin{cases}
+    X_{v_{i + 1}} & \text{if } d := v_{i + 1} - v_i \bmod 7 \in \QR_7 = \{1, 2, 4\} \\
+    Z_{v_{i + 1}} & \text{if } d \in \NR_7 = \{3, 5, 6\}
+  \end{cases}
+\end{equation}
+A closed walk $W = v_0 \to v_1 \to \cdots \to v_L \to v_0$ then compiles to a Pauli word $P_W = \prod_{i = 0}^{L - 1} \mathrm{Op}_{v_{i + 1}}(d_i)$ where the operators act at the destination qubit of each edge, and the choice of $X$ or $Z$ is determined by whether the step is a QR-direction (matter) or NR-direction (antimatter) step.
+
+This compilation is faithful at the Pauli-bit level for the pure-direction walks.  In particular, the proton's uniform-QR Hamilton cycle compiles to
+\begin{equation}
+  P_W(W_p) = X_1 X_2 X_3 X_4 X_5 X_6 X_0 = X^{\otimes 7} = \barX
+\end{equation}
+(the Steane logical $\bar X_L$ operator), and the antiproton's uniform-NR reverse Hamilton cycle compiles to
+\begin{equation}
+  P_W(W_{\bar p}) = Z_6 Z_5 Z_4 Z_3 Z_2 Z_1 Z_0 = Z^{\otimes 7} = \barZ \, .
+\end{equation}
+For mixed-direction walks (most leptons, mesons, light hyperons), the compiled Pauli word reduces, modulo the Steane stabilizer subgroup, to a unique syndrome pair $(s_X, s_Z) \in \mathrm{Fano} \times \mathrm{Fano}$ that identifies the walk's substrate-canonical position in the Steane error subspace (\S\ref{sec:syndrome-classification}).
+
+\subsection{Transversal Hadamard $H^{\otimes 7}$ = matter--antimatter CPT}
+\label{sec:hadamard-cpt}
+
+The Steane code's intrinsic $X \leftrightarrow Z$ self-duality is realized on the seven physical qubits by the transversal Hadamard $H^{\otimes 7}$; this is the only $Z_2$ automorphism preserving the polar-vertex vacuum reference while exchanging the $X$- and $Z$-stabilizer-readout sheets of the Heffter substrate.  Under the walk-to-Pauli map of~\eqref{eq:walk-to-pauli}, $H^{\otimes 7}$ exchanges QR-direction with NR-direction at the Pauli-bit level:
+\begin{equation}
+  H^{\otimes 7} \cdot P_W(W) \cdot (H^{\otimes 7})^\dagger = P_W(\bar W) \quad (\text{at the Pauli-bit level})
+\end{equation}
+where $\bar W$ is the reverse-traversal walk (\S\ref{sec:pair-production}).  At the cosmological level $H^{\otimes 7}$ is therefore identified with the substrate's matter $\leftrightarrow$ antimatter CPT operation, and the matter-vs-antimatter universe distinction reduces to a stabilizer-basis-readout choice on the same self-dual code rather than to two distinct condensate species~\cite{Paper25Memo}.
+
+\subsection{Hilbert-space orthogonality of walk-stabilizer subspaces}
+\label{sec:walk-orthogonality}
+
+The walk-to-Pauli map lands each walk $W$ in a unique stabilizer-syndrome subspace $\mathcal{H}^{(\sigma_W)} \subset \mathcal{H}_{13}$ of the $13$-qubit space ($7$ data $+ 6$ syndrome ancillas).  For the four diagnostic walks the syndromes are all-distinct:
+\begin{center}
+\begin{tabular}{llc}
+\toprule
+Walk & $(s_X, s_Z)$ & $\barZ$ \\
+\midrule
+electron $(2, 1)$ & $(101, 010)$ & $-1$ \\
+pion $(3, 5)$     & $(001, 001)$ & $+1$ \\
+muon $(1, 8)$     & $(111, 011)$ & $+1$ \\
+proton $(1, 3)$   & $(000, 000)$ & $-1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Each walk state $|W\rangle$ lives in its own six-stabilizer eigenspace; these subspaces are pairwise orthogonal, so $\langle W | W'\rangle = 0$ for $W \neq W'$ and $\langle W | O | W'\rangle = 0$ for any operator $O$ lacking a Pauli component that performs the syndrome shift $\sigma_W \oplus \sigma_{W'}$.  A structural corollary explains why bench-scale hardware can realize the substrate-canonical walk states despite its qualitatively different physical scales: the chip's intrinsic Hamiltonian $H_\text{chip} = \hbar \omega_{01} \sum_i \hat n_i$ satisfies $\langle 0_L | H_\text{chip} | 0_L\rangle = \langle 1_L | H_\text{chip} | 1_L\rangle = 3.5\,\hbar\omega_{01}$ identically (the eight $X$-stabilizer-shifted basis states of $|0_L\rangle$ carry Hamming-weight distribution $\{0, 4{\cdot}7\}$, becoming $\{7, 3{\cdot}7\}$ after $\barX$, with the same mean $28/8 = 3.5$).  Consequently no local-Pauli-sum observable can yield a non-tautological walk-discriminating expectation value: the substantive chip-realizable observable \emph{is} the stabilizer-syndrome measurement itself, and cross-realization syndrome agreement (Paper~21b~\cite{Paper21b}, \S3.5) is the operative empirical test.
+
+%% ================================================================
+\section{Pair production from substrate vacuum}
+\label{sec:pair-production}
+%% ================================================================
+
+We now describe the substrate mechanism for particle creation: paired forward-walk and reverse-walk emergence from substrate vacuum.  As emphasized in~\S\ref{sec:fermion-hadron-only-scope}, pair production is a substrate-mediator operation; the photon (or, at higher energy, the $Z$) is the mediator, not an incoming closed-walk excitation.  The substrate operation triggers simultaneous emission of a matter walk and its reverse-traversal antimatter walk.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig_combined_pairs.png}
+\caption{Pair production as $K_7$ walk and its reverse traversal. Top row: the electron walk $W_{e^-} = 0 \to 2 \to 5 \to 1 \to 4 \to 0$ has signed-step composition $20\%$ QR (blue, $d \in \{1, 2, 4\}$) / $80\%$ NR (red, $d \in \{3, 5, 6\}$); the positron walk $W_{e^+} = \bar W_{e^-}$ is the same vertex sequence traversed in the opposite direction, with the exact QR/NR swap ($80\%$ QR / $20\%$ NR). Bottom row: the proton walk is the $K_7$ Hamilton cycle, $100\%$ QR; the antiproton walk is the same Hamilton cycle reversed, $100\%$ NR. In both pair-production diagrams (rightmost column), the matter and antimatter walks superimpose to total winding $(0, 0)$. The polar $K_7$ vertex $P$ (gold) is the substrate-vacuum reference point where pair-creation initiates.}
+\label{fig:pair-production-overview}
+\end{figure}
+
+\subsection{The pair-production mechanism}
+\label{sec:pair-production-mechanism}
+
+The $K_7$ walks identifying particles have a natural reverse-traversal operation.  Given a closed walk $W = v_0 \to v_1 \to \cdots \to v_L \to v_0$, its \emph{reverse} is
+\begin{equation}
+  \bar W = v_0 \to v_L \to v_{L - 1} \to \cdots \to v_1 \to v_0 \, .
+\end{equation}
+The reverse walk satisfies four structural properties that identify it as the antiparticle of $W$:
+\begin{enumerate}
+\item \textbf{CPT mass equality.}  The walk's mass formula~\cite{Paper6} depends only on $|p|$, $|q|$, walk length $L$, and the carrier-knot crossings $n_q$.  All four are invariant under reversal, so $m(\bar W) = m(W)$, satisfying CPT.
+\item \textbf{Fano vertex coverage preserved.}  $\bar W$ visits the same $K_7$ vertices as $W$, so the Fano-triangle vertex coverage (\S\ref{sec:fano-hamilton}) is identical.
+\item \textbf{QR/NR sector swap.}  Each edge step $v_i \to v_{i + 1}$ has a signed direction $d = v_{i + 1} - v_i \bmod 7$.  The QR set $\{1, 2, 4\}$ is mapped to the NR set $\{3, 5, 6\}$ under negation ($d \mapsto -d \equiv 7 - d$), so reversal swaps QR-direction steps with NR-direction steps in the walk, and via~\eqref{eq:walk-to-pauli} swaps $X$-Pauli operators with $Z$-Pauli operators in the compiled Pauli word.  This is the Pauli-level statement of $C$-conjugation.
+\item \textbf{$\sigma$-orbit composition preserved.}  Each $K_7$ edge belongs to a fixed $\sigma$-orbit (Closure 2 of~\cite{Paper22}), and reversal traverses the same edges in opposite direction.
+\end{enumerate}
+Of the three candidate antimatter-walk definitions (reverse-traversal, negative winding, edge-orientation flip), only reverse-traversal preserves all four structural properties; negative-winding is mathematically equivalent for closed walks, and edge-orientation-flip diverges for mixed-step walks~\cite{Paper23Memo}.  We therefore identify
+\begin{equation}
+  \boxed{\text{antimatter walk of $W$} := \bar W = \text{reverse traversal of $W$}\, .}
+  \label{eq:antimatter-walk}
+\end{equation}
+
+This identification has an immediate consequence: \emph{pair production proceeds by emitting a forward walk and its reverse together from substrate vacuum}.  The pair has total winding $(p, q) + (-p, -q) = (0, 0)$ and conserves all topological charges.  Under the walk-to-Pauli map of~\S\ref{sec:walk-to-pauli}, this is the substrate-mechanical realization of standard QED/QCD pair production: $\gamma \to e^+ e^-$ is the cosmological-scale statement of the chip-level operation $|0_L\rangle \to \barX|0_L\rangle \otimes \barZ|0_L\rangle$ on two Steane code blocks~\cite{Paper21b}.
+
+\subsection{Worked example: $e^+ e^-$ pair production}
+\label{sec:pair-production-electron}
+
+The electron walk is the length-$5$ walk $W_{e^-} = 0 \to 2 \to 5 \to 1 \to 4 \to 0$.  Its reverse, the positron walk, is
+\begin{equation}
+  W_{e^+} = \bar W_{e^-} = 0 \to 4 \to 1 \to 5 \to 2 \to 0 \, .
+\end{equation}
+The matter walk has signed differences $(2, 3, 3, 3, 3)$ ($20\%$ QR-direction, $80\%$ NR-direction); the antimatter walk has signed differences $(4, 4, 4, 4, 5)$ ($80\%$ QR-direction, $20\%$ NR-direction), the exact QR/NR swap predicted by Property~3.
+
+The pair-production process is then:
+\begin{align}
+  \gamma \quad &\to\quad e^+ + e^- \quad \text{(QED, cosmological)} \nonumber \\
+  &\Updownarrow \nonumber \\
+  |0_L\rangle \quad &\to\quad P_W(W_{e^-})|0_L\rangle \otimes P_W(\bar W_{e^-})|0_L\rangle \quad \text{(NWT, on Steane block pair)} \, .
+\end{align}
+At threshold ($E_\gamma = 2 m_e c^2$), the substrate excitation provides exactly enough energy to instantiate both walks.  Above threshold, the additional kinetic energy is carried by the walks' translation through the substrate (subject to a third particle for momentum conservation, as in standard QED).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/fig_e_pair_emergence.png}
+\caption{Step-by-step emergence of the $e^+ e^-$ pair from substrate vacuum.  Top row: the matter walk $W_{e^-} = 0 \to 2 \to 5 \to 1 \to 4 \to 0$ builds up edge by edge; bottom row: simultaneously, the antimatter walk $W_{e^+} = \bar W_{e^-} = 0 \to 4 \to 1 \to 5 \to 2 \to 0$ emerges in reverse-traversal.  Both walks share vertex $P = 0$ at the substrate vacuum reference (yellow polar vertex).  The QR-step / NR-step counts swap exactly between matter and antimatter walks ($1$ QR + $4$ NR for $e^-$; $4$ QR + $1$ NR for $e^+$).  Total winding of the pair is $(0, 0)$; topological charges are conserved.}
+\label{fig:e-pair-emergence}
+\end{figure}
+
+Both walks are stable: $e^\pm$ are the lightest particles in the $(p, q) = (2, 1)$ class, with no lighter walk to decay into.  They propagate as free particles until they encounter their reverse-traversal counterpart, at which point the inverse process---annihilation---returns them to substrate vacuum + radiation.  This is the substrate realization of $e^+ e^- \to 2\gamma$.
+
+\subsection{Worked example: $p \bar p$ pair production}
+\label{sec:pair-production-proton}
+
+The proton walk is the $K_7$ Hamilton cycle in vertex-index order.  Its reverse, the antiproton walk, is
+\begin{align}
+  W_p &= 0 \to 1 \to 2 \to 3 \to 4 \to 5 \to 6 \to 0 \, , \\
+  W_{\bar p} = \bar W_p &= 0 \to 6 \to 5 \to 4 \to 3 \to 2 \to 1 \to 0 \, .
+\end{align}
+The proton walk has signed differences $(1, 1, 1, 1, 1, 1, 1)$---$100\%$ QR-direction throughout---while the antiproton walk has signed differences $(6, 6, 6, 6, 6, 6, 6)$---$100\%$ NR-direction throughout.  Under the walk-to-Pauli map of~\S\ref{sec:walk-to-pauli}, this is the Pauli-bit identity
+\begin{equation}
+  P_W(W_p) = X^{\otimes 7} = \barX, \quad P_W(W_{\bar p}) = Z^{\otimes 7} = \barZ = H^{\otimes 7} \barX (H^{\otimes 7})^\dagger \, .
+\end{equation}
+The matter and antimatter nucleons are thus literally the same walk shape ($K_7$ Hamilton cycle) traversed in opposite signed directions on the substrate, equivalently the two Steane logical Pauli operators related by the transversal Hadamard---the cleanest possible substrate manifestation of the matter/antimatter distinction.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/fig_proton_symmetry.png}
+\caption{$p \bar p$ pair production as the $K_7$ Hamilton cycle traversed in opposite directions on the substrate.  Left: the proton walk advances by $+1$ at each step ($d = +1 \in \QR$, blue) and visits all seven $K_7$ vertices once before closing at $P$.  Center: the antiproton walk advances by $+6 \equiv -1$ at each step ($d = +6 \in \NR$, red) along the same Hamilton cycle traversed in the opposite direction.  Right: the pair-production state $\gamma\gamma \to p + \bar p$ at threshold $E \geq 2 m_p c^2$ superimposes both walks; the topological windings cancel, $(1, 3) + (-1, -3) = (0, 0)$.  The substrate distinction between matter and antimatter at the nucleon scale reduces to the orientation of traversal on a single graph cycle.}
+\label{fig:proton-symmetry}
+\end{figure}
+
+The pair production threshold ($E \geq 2 m_p c^2 \approx 1.88$~GeV) corresponds to enough substrate energy to instantiate both Hamilton-cycle walks.  In cosmological contexts, $p \bar p$ pair production was abundant at temperatures $T \gtrsim m_p$ in the early universe, before the matter--antimatter asymmetry preferentially preserved the QR-direction (proton) walks over the NR-direction (antiproton) walks at substrate level~\cite{Paper25Memo}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/fig_p_pair_emergence.png}
+\caption{Step-by-step emergence of the $p \bar p$ pair from substrate vacuum.  Top row: the proton walk $W_p$ (the $K_7$ Hamilton cycle in vertex-index order) builds up edge by edge, with every step in the QR-direction ($d = +1$).  Bottom row: simultaneously, the antiproton walk $W_{\bar p}$ traces the same Hamilton cycle in the opposite direction, with every step in the NR-direction ($d = +6 \equiv -1$).  At completion, $W_p$ has $7/7 = 100\%$ QR steps and $W_{\bar p}$ has $7/7 = 100\%$ NR steps---the exact QR/NR swap predicted by reverse-traversal.  The total winding of the pair is $(p, q) + (-p, -q) = (0, 0)$, conserving baryon and topological charge.}
+\label{fig:p-pair-emergence}
+\end{figure}
+
+%% ================================================================
+\section{Syndrome classification of the 25-particle compendium}
+\label{sec:syndrome-classification}
+%% ================================================================
+
+Applying the walk-to-Pauli compilation~\eqref{eq:walk-to-pauli} and reducing modulo the Steane stabilizer subgroup yields, for every closed walk on $K_7$, a pair of Hamming syndromes $(s_X, s_Z)$ pointing to Fano-plane locations (one per syndrome).  The substrate-canonical claim is that for every $(|p|, |q|)$ winding class, the syndrome pair $(s_X, s_Z)$ is a well-defined function of $(|p|, |q|)$ alone, and the $16$ compendium $(p, q)$ classes resolve to $10$ distinct $(s_X, s_Z)$ pairs in a many-to-one map (Table~\ref{tab:syndrome-fano-map}).  The syndrome is computed from each class's shortest-length representative; its invariance under the choice of representative within a $(|p|, |q|)$ class is verified empirically across the compendium and conjectured to hold generally, though a proof at the level of stabilizer-reduced Pauli words remains open.
+
+\begin{table}[h]
+\centering
+\caption{Steane syndrome map for the 25-particle compendium.  $s_X$ and $s_Z$ denote the Fano-plane locations ($P$ = polar, $E_i$ = matter-shelf, $F_i$ = antimatter-shelf, $I$ = identity / no syndrome) on which the walk's $X$-Pauli and $Z$-Pauli content concentrates after Steane stabilizer reduction.}
+\label{tab:syndrome-fano-map}
+\begin{tabular}{lllllll}
+\toprule
+$(p, q)$ & $s_X$ & $s_Z$ & Particles \\
+\midrule
+$(1, 3)$ & $I$    & $I$    & $p$, $n$, $\Sigma^+$, $\Sigma^0$, $\Sigma^-$ \\
+$(1, 8)$ & $P$    & $F_3$  & $\mu^-$ \\
+$(2, 1)$ & $F_2$  & $E_2$  & $e^-$ \\
+$(2, 5)$ & $P$    & $E_1$  & $K^+$ \\
+$(2, 7)$ & $P$    & $F_3$  & $D^+$, $J/\psi$ \\
+$(3, 4)$ & $E_2$  & $E_2$  & $\tau^-$, $\Lambda$, $\Sigma^*$ \\
+$(3, 5)$ & $E_1$  & $E_1$  & $\pi^+$ \\
+$(3, 7)$ & $I$    & $I$    & $D^0$ \\
+$(4, 5)$ & $F_3$  & $F_1$  & $\omega$ \\
+$(4, 9)$ & $P$    & $E_1$  & $\Upsilon$ \\
+$(5, 4)$ & $F_2$  & $F_3$  & $\Xi^0$, $\Xi^-$, $\Delta$ \\
+$(5, 7)$ & $E_3$  & $P$    & $\rho$ \\
+$(6, 5)$ & $E_3$  & $P$    & $\eta$ \\
+$(7, 3)$ & $F_2$  & $E_2$  & $\pi^0$ \\
+$(7, 4)$ & $P$    & $E_3$  & $\Omega^-$ \\
+$(7, 5)$ & $E_1$  & $E_1$  & $K^0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Carrier-knot sector pool structure}
+\label{sec:syndrome-pool-structure}
+
+The four carrier-knot sectors $n_q \in \{0, 2, 3, 5\}$ of Paper~8 emerge as four \emph{distinct syndrome-pool profiles}:
+
+\begin{center}
+\begin{tabular}{lclll}
+\toprule
+Sector & $n_q$ & $s_X$ pool & $s_Z$ pool & Substrate reading \\
+\midrule
+Nucleons & 5 & $\{I\}$ & $\{I\}$ & codespace residents (no syndromes) \\
+Hyperons & 3 & $\{E_2, F_2, P\}$ & $\{E_2, F_3, E_3\}$ & Heffter-structure-localised \\
+Mesons   & 2 & full 6-element pool & full 6-element pool & maximally diverse \\
+Leptons  & 0 & $\{F_2, P\}$ & $\{E_2, F_3\}$ & substrate-edge particles \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Nucleons (plus $D^0$) are the unique codespace residents:} their $K_7$ walks reduce to the trivial syndrome pair $(I, I)$, meaning the corresponding Pauli word lies in the Steane logical subgroup and represents a pure logical operation rather than an error-tagged state.  All other particles occupy specific points in the Steane error subspace, with each Fano-point location identifying the qubit at which the walk's $X$- or $Z$-component anti-commutes with the substrate's stabilizer readout.  This is a substrate-canonical wavefunction-localisation invariant computed directly from the walk via Steane stabilizer reduction, with no $\mathrm{Spin}(7)$ representation-theoretic machinery required.
+
+\subsection{Cross-sector syndrome equivalences}
+\label{sec:syndrome-equivalences}
+
+The many-to-one nature of the syndrome map predicts non-trivial cross-family equivalences in which particles from different Standard Model classifications share a syndrome pair:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+$(s_X, s_Z)$ & SM-mixed particles & Mismatch type \\
+\midrule
+$(I, I)$    & $p, n, \Sigma^+, \Sigma^0, \Sigma^-, D^0$ & $5$ baryons $+$ $1$ charmed meson \\
+$(P, F_3)$  & $\mu^-, D^+, J/\psi$ & lepton $+$ $2$ mesons \\
+$(E_2, E_2)$ & $\tau^-, \Lambda, \Sigma^*$ & lepton $+$ $2$ hyperons \\
+$(F_2, E_2)$ & $e^-, \pi^0$ & lepton $+$ meson \\
+$(E_1, E_1)$ & $\pi^+, K^0$ & light mesons \\
+$(P, E_1)$  & $K^+, \Upsilon$ & light $+$ heavy meson \\
+$(E_3, P)$  & $\rho, \eta$ & mesons \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+These particles share a stabilizer-syndrome bin: $\mu^- \equiv D^+ \equiv J/\psi$ at the level of the coarse $(s_X, s_Z)$ label, even though they differ in mass, lifetime, spin, and flavor, and the Standard Model assigns them to different families.  The equivalence is therefore a statement about this one combinatorial label---which the $(p, q)$ class fixes along with the mass-formula quantum numbers, \emph{not} the full set of physical quantum numbers---rather than a claim that the particles are physically identical.  Read as such, it is a direct, falsifiable prediction: syndrome-equivalent particles should produce identical chip output, and a systematic divergence between syndrome-equivalents would falsify the substrate-equivalence reading.  Paper 21b~\cite{Paper21b} confirmed the four diagnostic walks---proton, $e^-$, $\pi^+$, $\mu^-$, one representative per syndrome bin and mutually syndrome-distinct---on $7$-qubit Heron hardware; a direct test of the equivalences themselves (Paper 21b~\cite{Paper21b}, Exp 15/16) confirms all three classes---$\mu^- \equiv D^+ \equiv J/\psi$ at $(P, F_3)$, $\tau^- \equiv \Lambda \equiv \Sigma^*$ at $(E_2, E_2)$, and $e^- \equiv \pi^0$ at $(F_2, E_2)$---on two Heron backends ($\mu^-$ and $D^+\!/J\!/\psi$ sharing $(P, F_3)$ via different $(p, q)$ walks, differing only in the finer logical-$Z$ eigenvalue).  Crucially, the equivalence is not an artifact of fitting mass: the $(p, q, m, n_q, f)$ assignment is over-determined, reproducing electric charge, baryon number, and isospin through the Gell-Mann--Nishijima relation $Q = I_3 + (B + S)/2$ with $I_3 = f/2$ from the knot framing $f$ (Paper~7~\cite{Paper7}) \emph{in addition to} mass; the syndrome a particle lands in is therefore downstream of quantum numbers fixed independently of its mass.  The substrate-monism's $K_7$-walk classification predicts a particle taxonomy that differs from the SM's lepton/meson/baryon grouping, with a specific tabulation of which particles regroup under which substrate symmetry.
+
+%% ================================================================
+\section{Substrate-prediction catalog}
+\label{sec:prediction-catalog}
+%% ================================================================
+
+The substrate identification yields three falsifiable prediction catalogs for unseen particles.  Each entry is an explicit $(p, q)$ class with computed walk length, carrier sector, and mass estimate via the Paper~6 formula~\cite{Paper6}.
+
+\subsection{Missing $(p, q)$ species at sub-$500$~MeV}
+\label{sec:missing-pq}
+
+Bogoliubov-pipeline walk enumeration~\cite{BogoliubovPipeline} identifies $13$ walk-realizable $(|p|, |q|)$ classes that do \emph{not} correspond to any compendium particle.  Of these, $8$ are substrate sub-cycle building blocks (tri-cycles $(0, 1)$, $(1, 0)$, $(1, 1)$; pent-cycle $(1, 2)$; and integer-multiple sub-cycles $(0, 2)$, $(0, 3)$, $(2, 0)$, $(3, 0)$) used in long-walk decompositions but not particles in their own right; $1$ is the NR-Hamilton substrate primitive $(3, 2)$ that appears as the $\sigma_6$ CP-channel inside $\pi^0$, $\Omega^-$, $K^0$.  The remaining $4$ are concrete substrate predictions for unseen species at sub-$500$~MeV~\cite{missing-pq-predictions}:
+
+\begin{center}
+\begin{tabular}{llrll}
+\toprule
+$(|p|, |q|)$ & $L_{\min}$ & Mass est.\ (MeV) & Predicted carrier & Substrate signature \\
+\midrule
+$(2, 2)$ & 6 & $\sim 25$  & $T(2, F_2)$ or $T(2, F_3)$ & light DM candidate \\
+$(2, 3)$ & 8 & $\sim 160$ & $T(2, F_3)$ (rule I) or $T(2, F_4)$ & QR-dominant resonance \\
+$(3, 1)$ & 8 & $\sim 160$ & unknot (rule I) or trefoil      & NR-dominant resonance \\
+$(3, 3)$ & 9 & $\sim 400$ & $T(2, F_4)$              & matter+CP hybrid baryon \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The carrier---and hence $n_q$ and the mass---is ambiguous for these off-compendium classes (the table gives the rule-\eqref{eq:rule-I} assignment alongside the nearest alternative), so the mass figures are indicative ranges rather than point predictions.
+
+The $(3, 3)$ class is the standout candidate: it is the unique substrate walk that visits all seven $K_7$ vertices, achieves full $7/7$ Fano coverage, and contains \emph{both} the QR-Hamilton scaffold \emph{and} the NR-Hamilton CP-channel tail in one walk---a combination not present in any compendium particle.  It is a natural candidate for a DM baryon / BSM hadron / CP-asymmetric matter species; detection (or non-detection) at $\sim 400$~MeV provides a direct test.
+
+\subsection{$q \equiv 6 \bmod 7$ substrate species}
+\label{sec:q6-species}
+
+Rule~\eqref{eq:rule-I} extends to $q \bmod 7 = 6$ with carrier $T(2, F_6 = 8)$ and $n_q = 8$.  Bogoliubov-pipeline walk-BFS at $L \leq 22$ confirms that $q \equiv 6 \bmod 7$ classes \emph{are} substrate-realized: $11$ closed walks at $L \in [14, 22]$ are found with $q$-winding $\equiv 6 \bmod 7$.
+
+The mass scale depends on the $n_q$ reading.  Per, the Paper~6 mass formula calibrates beautifully on compendium classes (proton $0.999$ accuracy, $\Lambda$ $1.007$, $\Upsilon$ $0.997$) and, applied to $(1, 6)$ with $m = 2$ at varying $n_q$, gives mass spanning five orders of magnitude:
+\begin{center}
+\begin{tabular}{rl}
+\toprule
+$n_q$ assignment & Predicted mass for $(|p|, |q|) = (1, 6)$, $m = 2$ \\
+\midrule
+$n_q = 8$ (= $F_6$, rule (I) extension) & $\sim 1.8$ TeV (LHC-reachable BSM) \\
+$n_q = 5$ (CPT-mirror of nucleon)        & $\sim 110$ GeV (collider-accessible) \\
+$n_q = 3$ (CPT-mirror of hyperon)        & $\sim 5.1$ GeV (B-factory accessible) \\
+$n_q = 2$ (CPT-mirror of meson)          & $\sim 450$ MeV (exotic hadron) \\
+$n_q = 1$ (degenerate)                   & $\sim 7$ MeV (sterile sector) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The substrate prediction's discriminating power: detection at \emph{any} of these mass scales would constrain the $q \equiv 6$ $n_q$ assignment substrate-canonically, with the carrier-knot determinant providing the unambiguous topological signature (det $= 8$ for $F_6$, det $= 5$ for cinquefoil-class, etc.).
+
+\subsection{Higher-Fibonacci light-particle tower}
+\label{sec:fibonacci-tower}
+
+The substrate $\Phi$-shell algebra (\S\ref{sec:phi-shell-fibonacci}) extends the Fibonacci ladder beyond $F_5$ indefinitely.  Applying the Paper~6 mass formula to the substrate-prediction carriers $T(2, F_6), T(2, F_7), \ldots, T(2, F_{10})$ at minimal $q = 1$ gives a Fibonacci-spaced light-particle tower at MeV scale:
+
+\begin{center}
+\begin{tabular}{rrrrl}
+\toprule
+Fibonacci & $F_n$ & Carrier & $q = 1$ mass (MeV) & Detection channel \\
+\midrule
+$F_7$  & 13 & $T(2, 13)$ knot & $\sim 5$   & beam-dump (NA64, FASER) \\
+$F_8$  & 21 & $T(2, 21)$ knot & $\sim 8$   & sterile neutrino (KATRIN dark sector) \\
+$F_9$  & 34 & $T(2, 34)$ link & $\sim 13$  & ALP helioscope (IAXO) \\
+$F_{10}$ & 55 & $T(2, 55)$ knot & $\sim 21$  & rare-decay searches \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+At higher $q$, GeV-TeV predictions emerge for the same carriers: $F_7$ at $q = 3$ gives $\sim 4.2$~GeV (B-factory), $F_8$ at $q = 3$ gives $\sim 17.6$~GeV (collider-BSM).  The substrate mass ratios at fixed $q$ follow the golden-ratio recursion $F_{k + 1} / F_k \to \phi$ at large $k$, so the higher-Fibonacci tower is golden-ratio-spaced asymptotically.
+
+\subsection{Empirical falsification paths}
+\label{sec:falsification-paths}
+
+The substrate-prediction catalog enables multiple parallel falsification programs across particle-physics experimental scales:
+
+\begin{itemize}
+\item \textbf{Beam-dump experiments (NA64, FASER):} target the $F_7 \sim 5$~MeV, $F_8 \sim 8$~MeV substrate species via missing-energy + invisible-decay searches.
+\item \textbf{Sterile neutrino searches (KATRIN, BEST):} the $F_7$--$F_9$ MeV tower is the natural mass scale for sterile neutrino candidates; substrate carrier-knot signatures (det $= 13, 21, 34$) distinguish substrate-canonical predictions from generic sterile models.
+\item \textbf{Helioscope experiments (IAXO):} the Fibonacci-light tower at $\sim 13$--$21$~MeV overlaps with ALP-helioscope sensitivity windows.
+\item \textbf{Collider BSM (LHC, Belle II):} GeV-TeV predictions at higher $q$ are direct collider targets; $q \equiv 6 \bmod 7$ species at TeV scale via Reading A is LHC-reachable.
+\item \textbf{Dark matter direct detection (XENON, LZ):} TeV-scale Reading A for $q \equiv 6$ species gives a direct-detection target with topological signature; sub-GeV Reading B gives a light-DM signature for $(2, 2)$ at $\sim 25$~MeV.
+\item \textbf{Cosmological hidden-sector constraints (Planck, CMB-S4):} the Fibonacci-light tower must satisfy hidden-sector $\Delta N_\text{eff}$ constraints; substrate carrier-knot structure predicts specific decoupling temperatures.
+\item \textbf{Cosmological neutrino mass (DESI, next-gen)---a falsifier with a clock:} the $K_8$-predicted $\Sigma m_\nu \approx 85$~meV is already in mild tension with current DESI ($\lesssim 60$--$72$~meV) and will be confirmed or excluded by the next DESI data release---the program's nearest-term cosmological falsifier.
+\end{itemize}
+
+Each detection (or non-detection) outcome constrains specific substrate readings: existence of a $q \equiv 6 \bmod 7$ species at TeV scale supports the Reading A baryogenesis interpretation; non-detection at any of the Fibonacci-tower masses constrains the $\Phi$-shell extension and may force a higher-floor cutoff on the Fibonacci ladder.
+
+\paragraph{Caveat: these are mass-scale predictions, not yet coupling-complete.}  The catalog above fixes the \emph{mass scale} of each candidate species from its substrate carrier and $(p, q)$ class; it does not yet specify the species' couplings, decay widths, or production cross-sections, which require the substrate-mediator (boson-vertex) algorithm that remains an open piece (\S\ref{sec:open-pieces}).  A quantitative confrontation of the MeV-scale tower with Big-Bang-nucleosynthesis and $\Delta N_\text{eff}$ bounds, supernova-cooling (SN1987A) limits, and beam-dump exclusions therefore cannot be completed here---whether a given candidate is viable, already excluded, or sufficiently decoupled depends on couplings not yet derived.  The catalog should accordingly be read as a set of falsifiable mass-scale \emph{targets}; the coupling structure, and hence the full cosmological and astrophysical consistency check, is deferred to the closure of the substrate-mediator sector.
+
+\subsection{The $K_8$ mass tower (Paper 31 candidate)}
+\label{sec:k8-tower}
+
+Parallel to the $K_7$ matter sector treated here, the $K_8$ substrate extension hosts a mass tower derived from the same Wilson-amplitude framework~\cite{Paper20}.  Applying the unified recipe $m = (8 / N_v)\, \alpha^{N_e / 2} (1 + \alpha/7)(1 + 3\alpha^2)\, m_\text{Pl}$ to all $2^5 = 32$ subsets of $K_8$'s five-orbit edge decomposition ($6 + 3 + 12 + 1 + 6 = 28$) yields $20$ distinct $N_e$ rungs spanning $\sim 14$~meV (the active neutrino, $N_e = 28$) to $\sim m_\text{Pl}$ ($N_e = 0$).  The recipe reproduces three known states at sub-percent precision---active neutrino $\nu_1$ ($-0.04\%$), sterile $N_1$ ($-0.11\%$), and the electron ($-0.06\%$)---across three mass scales and across both the $K_7$ and $K_8$ substrates.  Of the $17$ unidentified rungs, the most empirically actionable are a $38$~keV warm-dark-matter candidate ($N_e = 22$), a $98$~GeV scalar ($N_e = 16$) coincident with long-standing LEP and CMS/ATLAS $\sim 95$~GeV hints, and a $1.15$~TeV heavy candidate ($N_e = 15$).  A dedicated treatment of the dark-sector tower is deferred to a Paper~31 candidate.
+
+%% ================================================================
+\section{Discussion}
+\label{sec:discussion}
+%% ================================================================
+
+\subsection{Scope: what this paper does and does not establish}
+\label{sec:scope}
+
+This paper establishes a \emph{classification and mass-spectrum} result together with a \emph{hardware-realization} protocol; it does not itself develop the field-theoretic dynamics.  The closed-walk framework assigns each Standard Model fermion and hadron a $K_7$ walk, a carrier knot, and a Steane syndrome, and the chain $(|p|, |q|) \to \mathrm{sector} \to \mathrm{carrier} \to n_q^q$ reproduces the Paper~6/11/13 mass spectrum at $\sim 0.1\%$ (\S\ref{sec:fitting-closure}).  The relativistic field-theoretic foundation is supplied by companion NWT papers rather than reproduced here: Paper~16~\cite{Paper16} constructs the underlying Lagrangian as a single three-field relativistic theory---a complex scalar condensate $\psi$, an abelian gauge field $A_\mu$, and an $S^2$-valued Skyrme--Faddeev field $n^a$ at BPS critical coupling---with the full $SU(3)_C \times SU(2)_L \times U(1)_Y$ gauge content entering through an $SO(10)$ UV completion; the Standard Model is realized as a gravitating Abelian--Higgs vortex in Paper~11~\cite{Paper11}.  What remains genuinely open---the substrate program's central frontier---is the first-principles derivation of the \emph{explicit} non-abelian gauge dynamics and of substrate scattering amplitudes directly from $K_7$, rather than matched in from the $SO(10)$ completion (the substrate-mediator vertex algorithm is one of the open pieces, \S\ref{sec:open-pieces}).  The present paper accordingly makes its claims at the level of classification, spectrum, and hardware realizability, with the dynamical content carried by Paper~16 and the open amplitude sector flagged as future work.
+
+\subsection{Closure of the Paper~6 mass-formula fitting critique}
+\label{sec:fitting-closure}
+
+The persistent critique against the NWT Standard Model derivation~\cite{Paper6,Paper8,Paper13} was that the carrier-knot crossing-number $n_q \in \{0, 2, 3, 5\}$ entering the mass formula was assigned per sector by empirical fit rather than by substrate-canonical derivation.  The derivation chain assembled in this paper closes the critique end-to-end:
+
+\begin{enumerate}
+\item The carrier-knot family is $(2, F_n)$-torus knots (\S\ref{sec:carrier-family}), with the ``2'' forced by $K_7$ binary Hamilton bifurcation and the ``$F_n$'' forced by $\Phi$-shell substrate algebra.
+\item The crossing-number $n_q$ is the closed-form Jones-polynomial determinant $\det(T(2, F_n)) = F_n$ via the Murasugi formula (\S\ref{sec:nq-murasugi}), no fit.
+\item The exponent factor $n_q^q$ is $\det(T(2, F_n)^{\sqcup q}) = \dim(\rho_n^{\otimes q})$ via disjoint-union determinant or $SU(2)$ tensor power (\S\ref{sec:nqq-tensor}), no fit.
+\item Per-walk sector assignment is rule~\eqref{eq:rule-I}, derived from the cosmogenic $Z_3 = \mathrm{AGL}(1, 7)$ generator (\S\ref{sec:sector-z3}) that also gives three SM fermion generations.
+\end{enumerate}
+
+All four steps are derived from $K_7$ substrate primitives (Paley QR/NR, Hamilton bifurcation, $\Phi$-shell ladder, cosmogenic $Z_3$) and elementary closed-form mathematical operations (Murasugi formula, $SU(2)$ Clebsch--Gordan).  The chain $(|p|, |q|) \to \mathrm{sector} \to \mathrm{carrier} \to n_q^q$ contains no empirical fit; the resulting mass-formula prediction is therefore as parameter-free as any structural derivation in fundamental physics.
+
+\paragraph{Inputs, anchors, and precision.}  The closure above removes the \emph{per-sector empirical fit of $n_q$}; it does not claim the entire mass spectrum is input-free.  The Paper~6/8/13 spectrum~\cite{Paper6,Paper8,Paper13} is reproduced from two inputs---the electron mass scale $m_e$ (which sets the overall scale) and a single dimensionless gauge normalization $\kappa_\text{SM}$---together with the proton- and $Z$-mass anchors; the substrate then fixes the dimensionless structure (mass ratios, exponents of $\alpha$, carrier integers) without further tuning.  Table~\ref{tab:spectrum-representative} gives a representative cross-sector subset.  Over the full set of Casimir-formula (``Tier~1'') states with measured PDG values ($n = 25$), the median $|\Delta|$ is $0.026\%$ and the mean $0.11\%$; the heavier ``Tier~2'' states reproduced by the general Paper~6 line-tension formula sit near $\sim 1\%$ ($J/\psi$ at $+0.06\%$, $\Upsilon(1S)$ at $-0.14\%$, $\eta'$ at $-1.4\%$), so the median over the full $\sim 80$-particle set is $\sim 0.1\%$.  No dimensionless ratio in Table~\ref{tab:spectrum-representative} was tuned to the masses shown; the two inputs fix only the overall scale and the single gauge normalization.
+
+\begin{table}[H]
+\centering
+\caption{Representative cross-sector subset of the NWT mass spectrum~\cite{Paper6,Paper8,Paper13} (full $\sim 80$-particle table: \texttt{analysis/nwt\_complete\_spectrum\_paper13.py}).  $\Delta \equiv (\text{NWT} - \text{PDG})/\text{PDG}$.  ``anchor'' marks a value used to fix an input rather than a prediction; ``T1''/``T2'' label the Casimir-formula and Paper~6 general-formula tiers.  The median $|\Delta|$ over all $25$ Tier-1 states with PDG values is $0.026\%$.}
+\label{tab:spectrum-representative}
+\small
+\begin{tabular}{llrrr}
+\toprule
+Sector & State & NWT (MeV) & PDG (MeV) & $\Delta$ \\
+\midrule
+Charged lepton & $e$ (anchor)        & $0.511$  & $0.511$  & input \\
+               & $\mu$ (T1)          & $105.6$  & $105.7$  & $-0.026\%$ \\
+               & $\tau$ (T1)         & $1776$   & $1777$   & $-0.023\%$ \\
+Light meson    & $\pi^\pm$ (T1)      & $139.5$  & $139.6$  & $-0.023\%$ \\
+               & $K^\pm$ (T1)        & $493.3$  & $493.7$  & $-0.068\%$ \\
+Nucleon        & $p$ (anchor)        & $938.3$  & $938.3$  & input \\
+               & $n$ (T1)            & $939.8$  & $939.6$  & $+0.024\%$ \\
+Quarkonium     & $J/\psi$ (T2)       & $3099$   & $3097$   & $+0.061\%$ \\
+               & $\Upsilon(1S)$ (T2) & $9447$   & $9460$   & $-0.143\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Bridge to Paper 21b: experimental confirmation on quantum hardware}
+\label{sec:bridge-to-21b}
+
+The closed-form derivation chain of this paper specifies an unambiguous chip-side experimental protocol.  Paper 21b~\cite{Paper21b} reports the Phase 2 hardware results executing the protocol on IBM Heron r2 chips: four diagnostic compendium classes (proton, electron, pion, muon) prepared as Steane $\Klogical$ code blocks with their walk-derived Pauli words, run on \texttt{ibm\_kingston} and \texttt{ibm\_fez}, $2000$ shots per circuit per backend.  All four target classes' modal stabilizer-syndrome outcomes match the substrate-canonical $(s_X, s_Z, \barZ)$ predictions of Table~\ref{tab:syndrome-fano-map} in cross-backend coincidence, with the four walks remaining mutually resolved under device noise (Paper 21b's walk-discrimination control).  Paper 21b also reports the Exp~10 muon-decay coherent-rotation result on \texttt{ibm\_marrakesh} confirming substrate-canonical CPT-symmetric decay amplitude scaling.
+
+Paper 21b~\cite{Paper21b} reports that these walk states are preparable and reproducible on real quantum hardware across vendors.  The stronger ontological reading---whether a chip-prepared walk state should be regarded as an \emph{instance} of the particle rather than a model of it---is a separate, metaphysical question that the hardware results do not settle; it is deferred to a dedicated treatment and is not relied upon here.
+
+Paper 21b extends these single-chip results to a cross-vendor / cross-architecture test (its \S3.5).  The Phase~2 syndrome agreement is replicated across five IBM Heron r2 backends---including the cross-Atlantic \texttt{marrakesh}--\texttt{aachen} pair at a $\sim 6300$~km baseline---and on IQM Garnet, a second superconducting vendor with a distinct transmon design, qubit-coupling graph, and native gate set.  On Garnet the original $13$-qubit ancilla-extraction circuit decoheres after routing onto the sparse grid; a depth-reduced \emph{destructive} CSS-readout variant (recovering the full syndrome from direct $X$- and $Z$-basis measurement of the data qubits) restores all four walks to their substrate-canonical bins, confirming that the prediction holds wherever circuit depth fits the device's coherence budget.  The trapped-ion (AQT) leg is in progress.  Because the $K_7$ algebra is dimensionless-combinatorial, substrate-monism predicts identical \emph{integer} syndrome bins for each walk across all vendors and architectures, so a single vendor's disagreement on any walk's bin assignment would falsify chip-architecture-independent substrate compilation.
+
+\subsection{From open pieces to substrate closures}
+\label{sec:open-pieces}
+
+At first writing, the matter-content derivation of this paper was flanked by four open substrate-mediator pieces (bosonic-sector algebra; interaction-vertex, nuclear-binding, and sequential-decay operations).  The 2026 substrate-closure arc has since closed or substantially closed all four:
+
+\begin{itemize}
+\item \textbf{Bosonic sector.}  The $U(1)$ photon is closed at the operator-algebra level---the ordered pair $(V_\gamma^{(+)}, V_\gamma^{(-)}) = (X_a^{(i)} X_b^{(j)}, Z_a^{(i)} Z_b^{(j)})$ with spin-1 from CSS duality, polar-vertex uniqueness, and a graded higher-weight energy spectrum~\cite{BosonMemo}; pair production (\S\ref{sec:pair-production}) is the polar--polar inter-patch CNOT bridge.  The $SU(3)$ gluon sector closes as $X$-type stabilizer-coset operators onto the $\mathfrak{su}(3)$ structure constants; the $SU(2)$ $W^\pm$ weak vertex closes on the $Y$-vertex algebra; and the Higgs is identified through the $K_8$ $[[8,1,1]]$ code extension as $g^\text{Higgs} = Y_0 Y_7$.
+\item \textbf{Interaction vertices and electroweak observables.}  Beyond the vertex algebra, the substrate now yields the Fermi constant $G_F$ at $\sim 55$~ppm, heavy- and vector-meson decay constants at $0.2$--$3.6\%$ across $11{+}$ states, semileptonic form factors through a single $\cos^N \theta_C$ ansatz across $10$ channels, and the CKM/PMNS Wolfenstein parameters from four substrate integers $(7, 9, 14, 21)$ and $\alpha$ at zero free parameters.
+\item \textbf{Nuclear binding.}  Multi-gluon bound states (glueballs, tetraquarks, pentaquarks) close through a universal $m^2 = (4 m_{\pi^0})^2\, N$ relation across $23$ bound states.
+\item \textbf{Sequential decay.}  The decay-channel catalog is closed at chip-protocol level (the $\pi^0 \to 2\gamma$ worked example, Tier-1/2/3 batch protocols), and the neutron-decay and $e^+ e^- \to \mu^+ \mu^-$ scattering protocols were executed on IBM Heron hardware (Paper 21b~\cite{Paper21b}, Exp~13/Exp~14), the latter passing all four diagnostic blocks.
+\end{itemize}
+
+Across the broader NWT failure-mode map ($31$ entries), roughly $21$ are now confirmed at sub-percent precision, spanning the electromagnetic, weak, strong, gravitational, and cosmological sectors.  The genuinely-open theoretical pieces that remain are: (i) the substrate-canonical $K_8$ \emph{walk} catalog---the ``dark substrate'' hosting active neutrinos, sterile states, and dark-matter candidates. The $K_8$ $[[8,1,1]]$ code is closed and the mass-tower masses enumerated (\S\ref{sec:k8-tower}), but the walk-level classification analogous to the $(p, q)$ catalog of this paper---which of the tower rungs are realized by genuine closed $K_8$ walks---is open. And (ii) automated higher-order \texttt{PauliEvolutionGate} compilation for many-step walks (the muon's length-$22$ walk is the longest currently treated).
+
+\subsection{Substrate-realization condensate states}
+\label{sec:condensate-states}
+
+Each physical instantiation of the substrate---the natural universe, an IBM Heron r2 chip, an IQM Garnet chip, an AQT trapped-ion register---is a distinct \emph{condensate state} of the same $K_7$ algebra.  Every \emph{dimensionless} quantity---the fine-structure constant, the electron-to-Planck mass ratio $m_e / M_\text{Pl} = (8/7)\,\alpha^{21/2}(\text{NNLO})$, every mass ratio, and the $K_7$ walk-to-Pauli compilation---is forced by the $K_7 / K_8$ algebra and is universal across realizations.  Among the \emph{dimensional} constants the only genuinely free input is $\hbar$, itself a unit-conversion factor between energy and frequency (deriving its SI value is a units question, not a physics one).  The single mass scale is the Planck mass $M_\text{Pl}$, fixed by the cosmogenic event~\cite{Paper22}; the electroweak scale $v_\text{EW} = (5/2)\,\alpha^8\, M_\text{Pl} \approx 245.5$~GeV ($-0.3\%$ versus measured) and the electron mass $m_e = (8/7)\,\alpha^{21/2}(\text{NNLO})\,M_\text{Pl}$ both follow from it, as does the entire mass spectrum.  Each realization's remaining dimensional anchors come from its own two substrate primitives---the substrate-vertex spacing $a$ and the stabilizer-pair interaction energy $J_\text{int}$---through the Paper~0 relation $c = a\,J_\text{int} / \hbar$ and the Paper~17 chain $G = (8/7)^2 \alpha^{21} (\text{NNLO})^2\, \hbar c / m_e^2$~\cite{Paper17}; for the natural universe $(a, J_\text{int}) = (\ell_\text{Pl}, E_\text{Pl})$.  The full anchor set $(\hbar, c, G, M_\text{Pl}, \xi_\text{UV}, \xi_\text{IR})$ thus reduces to $\hbar$, the cosmogenic mass scale $M_\text{Pl}$, and the realization's $(a, J_\text{int})$, with UV cell $\xi_\text{UV} = a / \sqrt 2$ and IR coherence length $\xi_\text{IR} = \hbar / (m_{\nu_1} c)$.  Their ratio $\xi_\text{IR} / \xi_\text{UV}$ measures the substrate's ``softness'': all realizations of interest sit deep in the thick-film regime (natural universe $\sim 10^{30}$, AQT $\sim 10^{8}$, IBM Heron $\sim 10^{4}$, IQM Garnet $\sim 42$---the most marginal).  The Planck mass $M_\text{Pl}^2 = \hbar c / G$ is realization-invariant (the $c$ in the numerator and $G \propto c$ in the denominator cancel), while Planck length and time scale as $1/c$ and $1/c^2$.  This condensate-state picture is the structural common language that lets the same $K_7$ algebra yield predictions across $30{+}$ orders of magnitude in scale; its empirical face is the cross-realization syndrome agreement reported in Paper~21b~\cite{Paper21b}.
+
+\subsection{Position within fundamental physics}
+\label{sec:position}
+
+NWT's substrate-monism program now has empirical anchors at three scales~\cite{Paper21b}:
+\begin{itemize}
+\item \textbf{Cosmological:} seven cosmology predictions (cosmological constant $\Lambda_\text{cc}$, $\Omega_m$, $\Omega_b / \Omega_c$, $H_0$, $n_s$, $f_J$, $\eta_B$~\cite{Paper25Memo}), all at $\leq 1\%$ Planck precision.
+\item \textbf{Particle-physics:} the $80$-particle Standard Model mass spectrum at median $\sim 0.1\%$ PDG precision~\cite{Paper13}, three fermion generations from $G_2 \to SU(3)$ breaking~\cite{Paper20}, neutrino mixing~\cite{Paper20}, CP phase~\cite{Paper13,Paper20}.
+\item \textbf{Bench-scale quantum hardware:} the Phase 2 + Phase 2b + Phase 28e cross-vendor results of Paper 21b~\cite{Paper21b} on IBM Heron r2 and IQM Garnet (two superconducting vendors), plus the Exp~10 muon-decay coherent rotation and the Exp~13/Exp~14 decay and scattering protocols.  The cross-vendor syndrome agreement is the empirical chip-scale anchor for the condensate-state universality of \S\ref{sec:condensate-states}.
+\end{itemize}
+
+The closure presented here turns the second anchor from ``fitting'' (the historical critique) to ``substrate-canonically derived'' and the third anchor from ``preliminary demonstration'' to a directly-executable protocol.  Standard frameworks in fundamental physics---leptogenesis, electroweak baryogenesis, GUT, MSSM---make no prediction testable on bench-scale quantum hardware at all.  NWT's walk-to-Pauli compilation, by contrast, yields a concrete chip protocol whose dimensionless predictions Paper 21b tests directly.
+
+Taken together with a macroscale anchor (hierarchical multi-star systems obeying an integer Hopf-parity bond order at $\sim 10^{57}$~kg) and a cosmological anchor ($\Omega_b / \Omega_c = 25\alpha + 75\alpha^2$ at $60$~ppm against Planck), the substrate-monism program now carries falsifier-equipped empirical anchors across $\sim 30$ orders of magnitude in mass scale, with the condensate-state framework of \S\ref{sec:condensate-states} supplying the common language in which the same $K_7$ algebra produces a distinct prediction at each scale.
+
+%% ================================================================
+\section*{Acknowledgments}
+%% ================================================================
+
+The Bogoliubov-pipeline walk enumeration~\cite{BogoliubovPipeline} and the Steane $Q$-question closure arc provide the computational results that ground the closed-form derivations of \S\S\ref{sec:walks-as-particles}--\ref{sec:carrier-family}.  We acknowledge IBM Quantum for hardware access enabling the bench-scale anchor of Paper 21b, the experimental companion to this paper.  We thank three AI reviewers---Gemini (Google), Perplexity, and ChatGPT (OpenAI)---for detailed referee-style critical reviews of earlier drafts of this manuscript.
+
+%% ================================================================
+\section*{Data and Code Availability}
+%% ================================================================
+
+The analysis scripts that reproduce the $K_7$ walk enumeration and $(p, q)$ classification, the $(2, F_n)$ carrier-knot and closed-form $n_q^q$ derivation, the walk-to-Pauli Steane syndrome map, and the $K_8$ mass-tower enumeration are available in the public analyses repository at \url{https://github.com/JimGalasyn/null-worldtube}.  The substrate-algebraic computation library underlying the $K_7$, $\so(7)$, $\mathrm{Spin}(7)$, and $\mathrm{Cl}(0, 7)$ identities used throughout is available at \url{https://github.com/JimGalasyn/nwt-substrate} (v0.2.0, Zenodo DOI \texttt{10.5281/zenodo.20398451}; concept DOI \texttt{10.5281/zenodo.20012027} for all versions).  Each numerical claim is covered by a dedicated analysis script whose docstring states the claim and whose execution reproduces the reported numbers.
+
+%% ================================================================
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{PaleyHadamard} R.~E.~A.~C.~Paley, ``On orthogonal matrices,'' J.\ Math.\ Phys.\ 12, 311 (1933).
+
+
+\bibitem{Steane1996} A.~M.~Steane, ``Error correcting codes in quantum theory,'' Phys.\ Rev.\ Lett.\ 77, 793 (1996).
+
+\bibitem{Heffter} L.~Heffter, ``\"Uber das Problem der Nachbargebiete,'' Math.\ Ann.\ 38, 477 (1891).
+
+\bibitem{Murasugi} K.~Murasugi, ``Jones polynomials and classical conjectures in knot theory,'' Topology 26, 187 (1987).
+
+\bibitem{Schubert} H.~Schubert, ``Knoten mit zwei Br\"ucken,'' Math.\ Z.\ 65, 133 (1956).
+
+\bibitem{Paper6} J.~P.~Galasyn and C.~Th\'eodore, ``The Particle Mass Spectrum from Torus Knot Mode-Locking,'' Paper 6, in preparation.
+\bibitem{Paper7} J.~P.~Galasyn and C.~Th\'eodore, ``Charge, Leptons, and the Genus of Torus Knots,'' Paper 7, in preparation.
+\bibitem{Paper8} J.~P.~Galasyn and C.~Th\'eodore, ``One Mode, Many Knots: the carrier-knot family,'' Paper 8, in preparation.
+\bibitem{Paper8a} J.~P.~Galasyn and C.~Th\'eodore, ``Gauge Coupling Constants and Electroweak Structure,'' Paper 8a, in preparation.
+
+\bibitem{Paper11} J.~P.~Galasyn and C.~Th\'eodore, ``The Standard Model from a Gravitating Abelian Higgs Vortex,'' Paper 11, in preparation.
+
+\bibitem{Paper13} J.~P.~Galasyn and C.~Th\'eodore, ``The Standard Model from NWT Topology: A One-Input Framework for the Particle Spectrum,'' Paper 13, Zenodo DOI 10.5281/zenodo.19635239 (2026).
+
+\bibitem{Paper16} J.~P.~Galasyn and C.~Th\'eodore, ``The NWT Lagrangian: a three-field relativistic theory at BPS coupling,'' Paper 16, in preparation.
+\bibitem{Paper17} J.~P.~Galasyn and C.~Th\'eodore, ``Newton's Constant and Rest-Frame Schr\"odinger Evolution,'' Paper 17, Zenodo DOI 10.5281/zenodo.20025452 (2026).
+
+\bibitem{Paper18} J.~P.~Galasyn and C.~Th\'eodore, ``Sakharov-Induced Einstein Gravity,'' Paper 18, Zenodo DOI 10.5281/zenodo.20025459 (2026).
+
+\bibitem{Paper19} J.~P.~Galasyn and C.~Th\'eodore, ``Slow cosmogenesis,'' Paper 19, Zenodo DOI 10.5281/zenodo.20057423 (2026).
+
+\bibitem{Paper20} J.~P.~Galasyn and C.~Th\'eodore, ``Neutrino sector from Spin(8) triality on $K_7/K_8$,'' Paper 20, Zenodo DOI 10.5281/zenodo.20259632 (2026).
+
+\bibitem{Paper21b} J.~P.~Galasyn and C.~Th\'eodore, ``Standard Model Particles as Closed Walks on $K_7$, II: Cross-Vendor and Cross-Architecture Stabilizer-Syndrome Reproduction on Quantum Hardware,'' Paper 21b, experimental companion to this paper, Zenodo DOI 10.5281/zenodo.20402046 (2026).
+
+\bibitem{Paper22} J.~P.~Galasyn and C.~Th\'eodore, ``Black Hole Cosmogenesis: the Standard Model and Cosmology with Zero Free Dimensionless Parameters,'' Paper 22, Zenodo DOI 10.5281/zenodo.20402048 (2026).
+
+\bibitem{Paper23Memo} J.~P.~Galasyn and C.~Th\'eodore, ``Antimatter walk structural verification,'' internal memo.
+
+\bibitem{Paper25Memo} J.~P.~Galasyn and C.~Th\'eodore, ``Cosmic baryon asymmetry and matter composition from $K_7$ substrate (working memo),'' \texttt{papers/baryon\_asymmetry\_memo.md}, 2026.
+
+\bibitem{BogoliubovPipeline} J.~P.~Galasyn and C.~Th\'eodore, ``Bogoliubov pipeline and $K_7$ walk enumeration,'' internal computational results phases E--H, \texttt{nwt-substrate/analysis/nwt\_bogoliubov\_phase\_*.py}, 2026.
+
+\bibitem{BosonMemo} J.~P.~Galasyn and C.~Th\'eodore, ``Paper 21a---Boson Representation in NWT Substrate,'' working memo, \texttt{analysis/paper21\_boson\_representation.md}, 2026-05-23.  Formalises bosons as inter-patch-supported elements of $N(S_N)/S_N$, with photon mode $V_\gamma^{(\pm)} = (X_a^{(i)} X_b^{(j)}, Z_a^{(i)} Z_b^{(j)})$, charge-vertex selection rule (Thm 3.2) forcing polar-vertex uniqueness for single-qubit-pair photon channels (Cor 3.3), and graded photon algebra by support weight (Thm 3.4).
+
+\bibitem{k7-hamilton-cycle-taxonomy} J.~P.~Galasyn and C.~Th\'eodore, ``$K_7$ Hamilton-cycle taxonomy and matter-generation laws,'' internal memo (May 2026).
+
+\bibitem{missing-pq-predictions} J.~P.~Galasyn and C.~Th\'eodore, ``Substrate predictions for unseen $(p, q)$ species,'' internal memo (May 2026).
+
+\end{thebibliography}
+
+\end{document}

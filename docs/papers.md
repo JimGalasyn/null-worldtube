@@ -434,3 +434,28 @@ python3 simulations/nwt_gpe_knots_3d.py hopf     # Paper 9: Hopf link dynamics
 ---
 
 [Home](index.html) &#183; [The Predictions](results.html) &#183; [History](history.html) &#183; [About](about.html)
+
+
+## Paper 21a: Standard Model Particles as Closed Walks on K<sub>7</sub> (I)
+
+**Full title:** *Standard Model Particles as Closed Walks on K<sub>7</sub>, I: Torus-Knot Carriers, the Steane [[7,1,3]] Code, and a Closed-Form Mass Spectrum*
+
+Theory companion of the bundle. Every Standard Model fermion and hadron is a closed walk on the Heffter embedding of the complete graph K<sub>7</sub>; the walk's (p,q) torus-homology class labels the Paper 6/7 mass, charge, isospin, and baryon-number quantum numbers. The carrier-knot family is the Fibonacci-indexed (2,F<sub>n</sub>) torus-knot family, with n<sub>q</sub> = det = F<sub>n</sub> via Murasugi and n<sub>q</sub><sup>q</sup> via SU(2) tensor power; the Paley/Fano decomposition of K<sub>7</sub> *is* the Steane [[7,1,3]] stabilizer code, giving a direction-sensitive walk→Pauli map and a 7-qubit hardware-executable protocol; the per-walk sector rule follows the cosmogenic Z<sub>3</sub> = AGL(1,7) generator (the same Z<sub>3</sub> that gives three generations). No free dimensionless parameters — the (p,q) assignment is over-determined by mass *and* charge/isospin/baryon number via Gell-Mann–Nishijima. Companion to Paper 21b (hardware) and Paper 22 (cosmogenesis).
+
+**DOI:** [10.5281/zenodo.20402044](https://doi.org/10.5281/zenodo.20402044)
+
+## Paper 21b: Standard Model Particles as Closed Walks on K<sub>7</sub> (II)
+
+**Full title:** *Standard Model Particles as Closed Walks on K<sub>7</sub>, II: Cross-Vendor and Cross-Architecture Stabilizer-Syndrome Reproduction on Quantum Hardware*
+
+Experimental companion. The substrate-canonical Steane [[7,1,3]] preparation circuits are executed on real quantum hardware — IBM Heron r2 (five backends, incl. a cross-Atlantic pair), IQM Garnet (a second superconducting vendor), and AQT Ibex-Q1 (trapped-ion) — reproducing the predicted integer stabilizer-syndrome bins cross-vendor and cross-architecture, together with the cross-sector syndrome equivalences (μ⁻ ≡ D⁺ ≡ J/ψ, etc.) and muon-decay / neutron-decay / e⁺e⁻→μ⁺μ⁻ protocols. Honest scope: the experiments establish that the predicted syndrome structure is *preparable, mutually distinguishable, and architecture-independent on real hardware* (realizability), not framework validation — the circuits are Clifford and the syndromes classically computable. Companion to Papers 21a and 22.
+
+**DOI:** [10.5281/zenodo.20402046](https://doi.org/10.5281/zenodo.20402046)
+
+## Paper 22: Black Hole Cosmogenesis
+
+**Full title:** *Black Hole Cosmogenesis: the Standard Model and Cosmology with Zero Free Dimensionless Parameters*
+
+Cosmogenic companion. A daughter universe nucleates from a near-extremal Kerr black hole and inherits a *no-hair tuple* — the parent's mass-hair (fixing the Planck scale M<sub>Pl</sub>), spin axis, so(7) substrate algebra, and a Z<sub>2</sub> chirality sign. From the single dimensional anchor M<sub>Pl</sub> plus the inherited algebra, Standard-Model and cosmological observables follow with **zero free continuously-adjustable dimensionless parameters**: η<sub>B</sub> = (3/14)α⁴ (0.38%), Ω<sub>b</sub>/Ω<sub>c</sub> = 25α + 75α² (60 ppm), n<sub>s</sub> = 1 − h<sub>v</sub>α, r = 48α² (~5σ CMB-S4 detection target), the electroweak/Higgs sector, gauge unification at α<sub>GUT</sub>⁻¹ = h<sub>v</sub>² = 25, and a discrete K<sub>8</sub> dark-matter tower (98 GeV WIMP). The bridge is the inter-horizon Carter-1968 toroidal causal structure; inflation is an α-attractor forced by the K<sub>7</sub> Teichmüller moduli. Honest demarcation of the irreducible inflaton-disk radius and the astrophysical event rate. Companion to Papers 21a and 21b.
+
+**DOI:** [10.5281/zenodo.20402048](https://doi.org/10.5281/zenodo.20402048)

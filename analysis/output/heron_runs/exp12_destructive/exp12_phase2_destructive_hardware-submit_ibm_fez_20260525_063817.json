@@ -1,0 +1,1157 @@
+{
+  "mode": "hardware-submit",
+  "backend": "ibm_fez",
+  "shots_per_circuit": 2000,
+  "timestamp": "20260525_063817",
+  "variant": "ancilla-free destructive CSS readout",
+  "phase2_targets": [
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      1,
+      8
+    ]
+  ],
+  "circuits": [
+    {
+      "label": "class_p1_q3",
+      "p": 1,
+      "q": 3,
+      "particles": [
+        "p",
+        "n",
+        "Sigma+",
+        "Sigma0",
+        "Sigma-"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.793,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.793,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1586
+            ],
+            [
+              "E3",
+              105
+            ],
+            [
+              "E2",
+              95
+            ],
+            [
+              "E1",
+              66
+            ],
+            [
+              "F1",
+              64
+            ],
+            [
+              "F3",
+              44
+            ],
+            [
+              "F2",
+              22
+            ],
+            [
+              "P",
+              18
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": -1,
+          "modal_prob": 0.8295,
+          "predicted_fano": "I",
+          "predicted_lz": -1,
+          "pred_bin_prob": 0.8295,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "I",
+                -1
+              ],
+              1659
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              87
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              50
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              43
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              43
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              30
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              18
+            ],
+            [
+              [
+                "F3",
+                1
+              ],
+              14
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              12
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              11
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    },
+    {
+      "label": "class_p2_q1",
+      "p": 2,
+      "q": 1,
+      "particles": [
+        "e-"
+      ],
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "x_half": {
+          "modal_fano": "F2",
+          "modal_prob": 0.823,
+          "predicted_fano": "F2",
+          "pred_bin_prob": 0.823,
+          "pass": true,
+          "distribution": [
+            [
+              "F2",
+              1646
+            ],
+            [
+              "E1",
+              92
+            ],
+            [
+              "P",
+              64
+            ],
+            [
+              "E3",
+              62
+            ],
+            [
+              "F3",
+              58
+            ],
+            [
+              "I",
+              31
+            ],
+            [
+              "E2",
+              28
+            ],
+            [
+              "F1",
+              19
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "E2",
+          "modal_lz": -1,
+          "modal_prob": 0.8,
+          "predicted_fano": "E2",
+          "predicted_lz": -1,
+          "pred_bin_prob": 0.8,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "E2",
+                -1
+              ],
+              1600
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              57
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              56
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              55
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              48
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              41
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              33
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              19
+            ],
+            [
+              [
+                "I",
+                1
+              ],
+              18
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              15
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    },
+    {
+      "label": "class_p3_q5",
+      "p": 3,
+      "q": 5,
+      "particles": [
+        "pi+"
+      ],
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "E1",
+          "modal_prob": 0.798,
+          "predicted_fano": "E1",
+          "pred_bin_prob": 0.798,
+          "pass": true,
+          "distribution": [
+            [
+              "E1",
+              1596
+            ],
+            [
+              "F2",
+              136
+            ],
+            [
+              "F3",
+              58
+            ],
+            [
+              "E3",
+              52
+            ],
+            [
+              "P",
+              48
+            ],
+            [
+              "I",
+              41
+            ],
+            [
+              "E2",
+              39
+            ],
+            [
+              "F1",
+              30
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "E1",
+          "modal_lz": 1,
+          "modal_prob": 0.7645,
+          "predicted_fano": "E1",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.7645,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "E1",
+                1
+              ],
+              1529
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              106
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              64
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              61
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              42
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              41
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              30
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              23
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              18
+            ],
+            [
+              [
+                "I",
+                1
+              ],
+              17
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    },
+    {
+      "label": "class_p1_q8",
+      "p": 1,
+      "q": 8,
+      "particles": [
+        "mu-"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "P",
+          "modal_prob": 0.8085,
+          "predicted_fano": "P",
+          "pred_bin_prob": 0.8085,
+          "pass": true,
+          "distribution": [
+            [
+              "P",
+              1617
+            ],
+            [
+              "F3",
+              100
+            ],
+            [
+              "F2",
+              74
+            ],
+            [
+              "E1",
+              68
+            ],
+            [
+              "F1",
+              48
+            ],
+            [
+              "E2",
+              34
+            ],
+            [
+              "E3",
+              30
+            ],
+            [
+              "I",
+              29
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "F3",
+          "modal_lz": 1,
+          "modal_prob": 0.794,
+          "predicted_fano": "F3",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.794,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "F3",
+                1
+              ],
+              1588
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              106
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              63
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              51
+            ],
+            [
+              [
+                "I",
+                1
+              ],
+              44
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              27
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              26
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              21
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              20
+            ],
+            [
+              [
+                "I",
+                -1
+              ],
+              13
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    },
+    {
+      "label": "control_identity",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_identity"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.8155,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.8155,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1631
+            ],
+            [
+              "E3",
+              103
+            ],
+            [
+              "E2",
+              60
+            ],
+            [
+              "E1",
+              53
+            ],
+            [
+              "F2",
+              52
+            ],
+            [
+              "F3",
+              43
+            ],
+            [
+              "F1",
+              35
+            ],
+            [
+              "P",
+              23
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": 1,
+          "modal_prob": 0.8145,
+          "predicted_fano": "I",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.8145,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "I",
+                1
+              ],
+              1629
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              69
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              65
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              47
+            ],
+            [
+              [
+                "F3",
+                1
+              ],
+              44
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              44
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              27
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              21
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              17
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              10
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    },
+    {
+      "label": "control_x7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_x7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.824,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.824,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1648
+            ],
+            [
+              "E3",
+              72
+            ],
+            [
+              "E2",
+              69
+            ],
+            [
+              "F1",
+              61
+            ],
+            [
+              "F2",
+              55
+            ],
+            [
+              "E1",
+              47
+            ],
+            [
+              "P",
+              28
+            ],
+            [
+              "F3",
+              20
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": -1,
+          "modal_prob": 0.7845,
+          "predicted_fano": "I",
+          "predicted_lz": -1,
+          "pred_bin_prob": 0.7845,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "I",
+                -1
+              ],
+              1569
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              72
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              67
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              58
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              48
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              41
+            ],
+            [
+              [
+                "F3",
+                1
+              ],
+              39
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              17
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              15
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              14
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    },
+    {
+      "label": "control_z7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_z7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.8225,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.8225,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1645
+            ],
+            [
+              "E3",
+              96
+            ],
+            [
+              "E2",
+              74
+            ],
+            [
+              "F1",
+              71
+            ],
+            [
+              "E1",
+              36
+            ],
+            [
+              "F2",
+              34
+            ],
+            [
+              "P",
+              27
+            ],
+            [
+              "F3",
+              17
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": 1,
+          "modal_prob": 0.7965,
+          "predicted_fano": "I",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.7965,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "I",
+                1
+              ],
+              1593
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              68
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              66
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              63
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              52
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              37
+            ],
+            [
+              [
+                "F3",
+                1
+              ],
+              35
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              15
+            ],
+            [
+              [
+                "I",
+                -1
+              ],
+              14
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              12
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    },
+    {
+      "label": "control_h7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_h7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 0,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.817,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.817,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1634
+            ],
+            [
+              "F2",
+              80
+            ],
+            [
+              "F3",
+              76
+            ],
+            [
+              "F1",
+              69
+            ],
+            [
+              "E3",
+              51
+            ],
+            [
+              "P",
+              35
+            ],
+            [
+              "E1",
+              28
+            ],
+            [
+              "E2",
+              27
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": 1,
+          "modal_prob": 0.4135,
+          "predicted_fano": "I",
+          "predicted_lz": 0,
+          "pred_bin_prob": null,
+          "pass": true,
+          "lz_note": {
+            "n_plus": 827,
+            "n_minus": 813,
+            "pct_plus": 0.5042682926829268
+          },
+          "distribution": [
+            [
+              [
+                "I",
+                1
+              ],
+              827
+            ],
+            [
+              [
+                "I",
+                -1
+              ],
+              813
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              56
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              49
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              31
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              31
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              27
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              25
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              24
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              22
+            ]
+          ]
+        },
+        "pass": true,
+        "job_id": "d8a51etg7okc73epedu0"
+      }
+    }
+  ],
+  "n_pass": 8,
+  "n_total": 8
+}

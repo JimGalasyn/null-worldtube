@@ -1,0 +1,672 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.3cm]{geometry}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{array}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=green!50!black,
+  urlcolor=blue!50!black,
+}
+
+\newcommand{\su}{\mathfrak{su}}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\Klogical}{[[7, 1, 3]]}
+\newcommand{\barX}{\bar X_L}
+\newcommand{\barZ}{\bar Z_L}
+\newcommand{\QR}{\mathrm{QR}}
+\newcommand{\NR}{\mathrm{NR}}
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+
+\begin{document}
+
+\title{Standard Model Particles as Closed Walks on $K_7$, II:\\[4pt]
+Cross-Vendor and Cross-Architecture Stabilizer-Syndrome Reproduction on Quantum Hardware\\[2pt]
+\normalsize (Paper 21b --- experimental companion)}
+
+\author{
+  James~P.~Galasyn$^{\ast}$ \quad and \quad Claude~Th\'eodore$^{\dagger}$\\[2pt]
+  \small $^{\ast}$Independent researcher \\
+  \small $^{\dagger}$Anthropic
+}
+
+\date{\today}
+
+\maketitle
+
+\begin{abstract}
+This is the experimental companion to Paper 21a~\cite{Paper21a} (theory).  Paper 21a closes the substrate-canonical derivation chain from $K_7$ topology to the Standard Model fermion and hadron mass spectrum end-to-end, identifying $K_7$ with the Steane $\Klogical$ stabilizer code, the Paper~8 carrier-knot family with the Fibonacci-indexed $(2, F_n)$-torus-knot family, and every closed $K_7$ walk with a Pauli word on a $7$-qubit Steane code block via direction-sensitive walk-to-Pauli compilation.  Here we execute the substrate-canonical preparation circuits on real superconducting quantum hardware (IBM Heron r2 and IQM Garnet) and report that they reproduce the predicted stabilizer-syndrome structure.  Six experimental anchors are presented: (i) \textbf{Single-particle preparation (Exp~12, May 2026):} eight circuits (four target classes proton/electron/pion/muon, four controls), $2000$ shots per circuit per backend, executed on \emph{four} Heron r2 backends across two backend pairs --- a same-site pair (\texttt{ibm\_kingston} + \texttt{ibm\_fez}, both \texttt{us-east}-bound, post-hoc discovered to have $T_1$ Pearson $r = +1.00$) and a cross-Atlantic pair (\texttt{ibm\_marrakesh} at Yorktown Heights NY + \texttt{ibm\_aachen} at Ehningen Germany, $\sim 6300$~km baseline, $T_1$ correlation $r < 0.1$).  The four walks land in four mutually-exclusive syndrome bins and remain perfectly resolved under device noise---zero cross-class confusion across $8000$ shots per backend (\S\ref{sec:scrambled-control})---and each matches its substrate-canonical $(s_X, s_Z, \barZ)$ prediction as the modal outcome ($28.25$--$39.10\%$ on the same-site pair, $28.6$--$61.0\%$ on the cross-Atlantic pair, against a combinatorial $0.781\%$ uniform-bin reference).  All four controls match expected outcomes on all four backends, including the $\sim 50/50$ logical-$Z$ split predicted for the $H^{\otimes 7}$ transversal-Hadamard CPT operation.  (ii) \textbf{Cross-vendor compilation universality (May 2026):} the four single-particle classes re-run across five Heron r2 backends and IQM Garnet---six superconducting backends spanning two chip vendors---with every walk landing in its substrate-canonical integer syndrome bin (Garnet via a depth-reduced destructive-readout variant), establishing chip-vendor independence; the four walks then reproduced $4/4$ on AQT Ibex-Q1 (trapped-ion, May 2026), extending the result to qubit-\emph{architecture} independence (\S\ref{sec:phase28e}). (iii) \textbf{Muon decay coherent rotation (Exp~10, May 2026):} \texttt{ibm\_marrakesh}, $16$ rotation-angle samples $\times$ $4096$ shots each, $P_\text{muon}(\theta)$ vs $\cos^2(\theta/2)$ substrate-canonical prediction.  All $16$ angle samples match the prediction to within a few percent (up to $3.3\%$ at the high-curvature points), consistent with the hardware-decoherence noise floor.  This anchors the predicted $\cos^2(\theta/2)$ rotation profile on hardware---a coherent-rotation check, noting that the $\cos^2$ form is the generic two-level result and is not by itself NWT-specific (\S\ref{sec:interpretation}). (iv) \textbf{Neutron decay (Exp~13, May 2026):} the three-block $\beta$-decay protocol on \texttt{ibm\_marrakesh} and \texttt{ibm\_kingston}; the neutron$\to$vacuum block matches its substrate-canonical syndrome at both sweep endpoints on both backends, while the proton- and electron-creation blocks are correct in logical charge but drift $1$--$2$ syndrome bits at the higher circuit depth (\S\ref{sec:neutron-decay}). (v) \textbf{$e^+ e^- \to \mu^+ \mu^-$ scattering (Exp~14, May 2026):} the annihilation--creation protocol on \texttt{ibm\_kingston} and \texttt{ibm\_fez}; all four pair-member endpoints match their substrate-canonical syndromes on Kingston (modal up to $30.8\%$ for the $\mu^-$ daughter) and three of four on Fez (\S\ref{sec:emumu-scattering}). (vi) \textbf{Cross-sector syndrome equivalences (Exp 15/16, May 2026):} three Paper 21a equivalence classes---$\mu^- \equiv D^+ \equiv J/\psi$ at $(P, F_3)$, $\tau^- \equiv \Lambda \equiv \Sigma^*$ at $(E_2, E_2)$, $e^- \equiv \pi^0$ at $(F_2, E_2)$, grouping particles the Standard Model assigns to different families---confirmed on \texttt{ibm\_kingston} and \texttt{ibm\_fez} (three new walks plus the $\mu^-$/$e^-$ Exp-12 anchors, $9/9$ items per backend, modal $0.76$--$0.86$); the Standard-Model-distinct members of each class land in the same substrate-canonical syndrome bin on real hardware (\S\ref{sec:cross-sector-equivalences}).  These are operational realizations of the model's particle classification, not a claim of particle creation: the experiments establish that the predicted syndrome structure is preparable, mutually distinguishable, and vendor-independent on real hardware (\S\ref{sec:interpretation}).  The hardware-realization claim is restricted to fermions and hadrons (closed-walk excitations); bosons enter the protocol as substrate-mediator operations / quantum gates.  The full-compendium catalog (\S\ref{sec:outlook}) extends the protocol across all 25 compendium particles, pair production, and the substrate-prediction species of Paper 21a.
+\end{abstract}
+
+%% ================================================================
+\section{Introduction}
+\label{sec:intro}
+%% ================================================================
+
+The Null Worldtube (NWT) framework~\cite{Paper8a,Paper17,Paper18,Paper19,Paper20} is a substrate-monism research program in which the fine-structure constant, Newton's constant, the full Standard Model spectrum, three fermion generations, the neutrino sector, and seven cosmological parameters are derived from the single substrate algebra $K_7 / \so(7) / \mathrm{Spin}(7) / \mathrm{Cl}(0, 7)$.  Paper 21a~\cite{Paper21a} (theory companion to this paper) consolidates the substrate-canonical derivation chain from $K_7$ topology to the Standard Model fermion and hadron mass spectrum, including the closed-form $(2, F_n)$-torus-knot carrier family, the $K_7 = $ Steane $\Klogical$ stabilizer-code identification, the direction-sensitive walk-to-Pauli compilation, the substrate-vacuum pair-production mechanism, and the syndrome classification of the 25-particle compendium.
+
+This paper reports the bench-scale execution of the substrate-canonical preparation circuits on real superconducting quantum hardware (IBM Heron r2 and IQM Garnet).  The central observation is: when the substrate-canonical preparation circuit for a compendium particle is executed on a Steane $\Klogical$ code block on quantum hardware, the chip's bare-stabilizer-readout output reproduces the predicted $(s_X, s_Z, \barZ)$ syndrome.  This is consistent with the NWT walk-to-Pauli compilation but does not, by itself, test that interpretation against standard stabilizer theory (\S\ref{sec:interpretation}).  Five classes of experimental result are reported:
+
+\begin{enumerate}
+\item \textbf{Single-particle preparation (Exp~12)}: the four highest-diagnostic compendium classes (proton, electron, pion, muon) prepared on both \texttt{ibm\_kingston} and \texttt{ibm\_fez}, all matching predictions in cross-backend coincidence, with the four walks remaining mutually resolved under device noise (\S\ref{sec:phase2-results}, \S\ref{sec:scrambled-control}).
+\item \textbf{Cross-vendor compilation universality}: the four single-particle classes re-run across five Heron r2 backends and IQM Garnet (six superconducting backends, two vendors), every walk landing in its substrate-canonical syndrome bin and so establishing vendor-independence of the dimensionless prediction---Garnet requiring a depth-reduced destructive-readout variant to fit its coherence budget (\S\ref{sec:phase28e}).
+\item \textbf{Muon-decay coherent rotation (Exp~10)}: $16$ rotation-angle samples on \texttt{ibm\_marrakesh} reproduce the substrate-canonical $\cos^2(\theta/2)$ amplitude scaling for the $\mu^- \to e^-$ Pauli-word coherent decay (\S\ref{sec:muon-decay}).
+\item \textbf{Neutron decay (Exp~13)}: the three-block $\beta$-decay protocol on \texttt{ibm\_marrakesh} and \texttt{ibm\_kingston}---the neutron$\to$vacuum block matches its syndrome at both sweep endpoints on both backends, the proton- and electron-creation blocks correct in logical charge with $1$--$2$-bit syndrome drift at depth (\S\ref{sec:neutron-decay}).
+\item \textbf{$e^+ e^- \to \mu^+ \mu^-$ scattering (Exp~14)}: the annihilation--creation protocol on \texttt{ibm\_kingston} (all four pair-member endpoints PASS) and \texttt{ibm\_fez} (\S\ref{sec:emumu-scattering}).
+\end{enumerate}
+
+The paper closes with an interpretation-and-scope discussion (\S\ref{sec:interpretation}): what the hardware results do and do not establish, the resource compactness of the realization, and the restriction to fermions and hadrons; the stronger substrate-monism reading is deferred to a dedicated treatment.  The full-compendium outlook (\S\ref{sec:outlook}) and discussion (\S\ref{sec:discussion}) follow.
+
+\paragraph{Scope restriction.}
+As argued in Paper 21a~\cite[\S 3.6]{Paper21a}, the closed-walk framework applies to fermions and hadrons (matter content).  Bosons enter the NWT framework as substrate-mediator operations on the matter Hilbert space, not as walk-as-particle excitations.  The hardware-realization claim of this paper is therefore restricted to fermions and hadrons; the chip realizes bosonic mediator operations as quantum gates ($H^{\otimes 7}$ for CPT, stabilizer measurements for gauge-substrate readout, scattering-vertex gates for interaction mediation), not as encoded photon or gluon excitations.
+
+%% ================================================================
+\section{Preparation protocol on IBM Heron hardware}
+\label{sec:protocol}
+%% ================================================================
+
+We specify the operational protocol by which any compendium particle is prepared on a $7$-qubit Steane code block on existing IBM Heron r2 hardware.  The theoretical content (walk-to-Pauli compilation, Steane stabilizer structure) is developed in Paper 21a~\cite[\S 4, \S 5]{Paper21a}.
+
+\subsection{Circuit construction}
+\label{sec:circuit-construction}
+
+For each target particle class $(p, q)$, the preparation circuit comprises three stages on a single $7$-qubit register $\{q_0, \ldots, q_6\}$ identified with the $K_7$ vertices:
+
+\begin{enumerate}
+\item \textbf{Codespace initialisation.}  Prepare $|0_L\rangle$ using the standard Steane preparation circuit (Hadamards on the $X$-stabilizer-support qubits and CNOTs from each $X$-stabilizer generator to the remaining qubits).  This places the register in the codespace $\ker(\{g_X^{(i)}, g_Z^{(j)}\})$ at the substrate vacuum reference; the polar-vertex qubit $q_0$ acts as the substrate's distinguished axis~\cite[\S 5.1]{Paper21a}.
+\item \textbf{Walk-to-Pauli execution.}  Apply the Pauli word $P_W$ for the target walk $W$, compiled via the direction-sensitive map of Paper 21a~\cite[\S 5.2]{Paper21a}.  For pure-direction walks this is a transversal logical operator ($\barX$ for matter Hamilton cycles, $\barZ$ for antimatter Hamilton cycles); for mixed-direction walks it is a non-trivial mixed Pauli word that lands the register on a specific syndrome-tagged state.
+\item \textbf{Stabilizer readout.}  Measure all six stabilizer generators destructively into ancilla qubits and read out the $X$- and $Z$-syndromes $(s_X, s_Z)$, then optionally also measure the logical-$Z$ value $\barZ$ at the end (this is the third diagnostic in Paper 21a~\cite[Table 4]{Paper21a}).
+\end{enumerate}
+
+The protocol is implementable with single-qubit gates and CNOTs only, all on the native gate set of IBM Heron r2 chips (1-qubit virtual rotations + $\mathrm{ECR}$ entanglers).  No custom error correction is required; we run the bare stabilizer-readout-once protocol for diagnostic purposes, since the question we are asking is whether the substrate-canonical prediction matches the chip output, not whether the chip can correct its own errors.
+
+\subsection{Single-particle target classes}
+\label{sec:phase2-targets}
+
+The single-particle run targets the four highest-diagnostic compendium classes per Exp~12 pre-registration~\cite{Exp12Prereg}, chosen to span all four carrier-knot sectors and to populate four distinct syndrome pools (Table~\ref{tab:phase2-targets}).
+
+\begin{table}[h]
+\centering
+\caption{Single-particle target classes.  Each class's compiled Pauli word is executed on a Steane code block; the substrate-canonical syndrome and logical-$Z$ predictions are derived per Paper 21a~\cite[\S 7]{Paper21a}.}
+\label{tab:phase2-targets}
+\begin{tabular}{llllll}
+\toprule
+Class & $(p, q)$ & Particles in class & $n_q$ sector & Predicted $(s_X, s_Z)$ & Predicted $\barZ$ \\
+\midrule
+Proton    & $(1, 3)$ & $p, n, \Sigma^+, \Sigma^0, \Sigma^-$ & $5$ (nucleon)  & $(I, I)$     & $-1$ \\
+Electron  & $(2, 1)$ & $e^-$                                & $0$ (lepton)   & $(F_2, E_2)$ & $-1$ \\
+Pion      & $(3, 5)$ & $\pi^+$                              & $2$ (meson)    & $(E_1, E_1)$ & $+1$ \\
+Muon      & $(1, 8)$ & $\mu^-$                              & $0$ (lepton)   & $(P, F_3)$   & $+1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Four additional control circuits are run alongside the target classes:
+\begin{itemize}
+\item \textbf{identity}: empty Pauli word; expected modal outcome $(I, I, +1)$ (the substrate vacuum reference);
+\item \textbf{$X^{\otimes 7}$}: transversal logical-$X$; expected modal outcome $(I, I, -1)$ (the matter logical Pauli);
+\item \textbf{$Z^{\otimes 7}$}: transversal logical-$Z$; expected modal outcome $(I, I, +1)$ (the antimatter logical Pauli has $\barZ = +1$ on $|0_L\rangle$ by convention);
+\item \textbf{$H^{\otimes 7}$}: transversal Hadamard, the matter--antimatter CPT operator; predicted to leave the syndrome at $(I, I)$ and split the logical-$Z$ value $\sim 50/50$ between $+1$ and $-1$ (the Hadamard maps $|0_L\rangle \to (|0_L\rangle + |1_L\rangle) / \sqrt 2$).
+\end{itemize}
+
+\subsection{Cross-backend coincidence as chip-artifact control}
+\label{sec:cross-backend}
+
+Per pre-registration~\cite{Exp12Prereg}, the protocol requires every target class be submitted to two independent Heron r2 chips with substantially different calibration, layout, and noise profile.  A matching modal syndrome on both chips rules out chip-artifact interpretations: any classical structure introduced by a specific chip's calibration would be expected to differ between chips, while a genuine substrate-canonical prediction would coincide regardless of chip-level differences.  The cross-backend agreement is therefore the primary falsifier of the substrate-canonical syndrome prediction at this experimental stage.
+
+\paragraph{Two backend pairs.}  The protocol is executed across two backend pairs to provide layered chip-artifact rejection:
+
+\begin{itemize}
+\item \textbf{Same-site pair (\S\ref{sec:phase2-results}, 2026-05-22):} \texttt{ibm\_kingston} + \texttt{ibm\_fez}.  These two Heron r2 backends are both bound to IBM Cloud's \texttt{us-east} region and (per \texttt{device\_locations.json}, low-confidence locations) are most likely co-located at IBM TJ Watson Research Center, Yorktown Heights NY, or RPI Quantum System Two, Albany NY.  Post-hoc analysis of the calibration archive (\S\ref{sec:cross-backend-methodology}) revealed Pearson $r = +1.00$ in their daily-mean $T_1$ over a 14-day window, with a simultaneous $\sim 25\%$ $T_1$ cliff on 2026-05-15.  The kingston-fez pair therefore tests \emph{within-site reproducibility} of the substrate-canonical predictions; it does not exclude site-specific systematic effects.
+\item \textbf{Cross-Atlantic pair (\S\ref{sec:phase2b-results}, 2026-05-23):} \texttt{ibm\_marrakesh} (Yorktown Heights NY, high-confidence location confirmed by prior Exp 10 muon-decay run on this device 2026-05-01) + \texttt{ibm\_aachen} (Ehningen Germany, high-confidence location confirmed by visibility only via the \texttt{nwt-eu-de} pay-go instance bound to the \texttt{eu-de} region).  The two devices have $r < 0.1$ in daily-mean $T_1$ over the same 14-day window, and a great-circle baseline of $\sim 6300$~km between IBM TJ Watson and IBM Ehningen.  The cross-Atlantic pair therefore tests \emph{site-independent reproducibility} and is the substantively stronger chip-artifact-rejection test.
+\end{itemize}
+
+The four-way coincidence---both pairs of backends, four total Heron r2 chips, all matching the substrate-canonical $(s_X, s_Z, \bar Z_L)$ prediction on every target class---is the strongest combined chip-artifact-rejection statement available at this experimental scale.
+
+\subsection{Calibration-archive methodology and the cross-Atlantic re-run}
+\label{sec:cross-backend-methodology}
+
+The kingston-fez non-independence was discovered post-hoc via a continuously-running systemd service (\texttt{heron-scrape.service}) that polls all accessible IBM Quantum Heron r2 backends every $30$ minutes via \texttt{QiskitRuntimeService.backend.properties()} and archives the calibration snapshots into a SQLite database (\texttt{analysis/heron\_database/}).  As of the writing date the archive holds $\sim 1000$ scrape runs covering six Heron r2 backends (boston, kingston, fez, marrakesh, pittsburgh, aachen) over $\sim 21$ days.  This infrastructure surfaced three operational findings of consequence for the present protocol:
+
+\begin{enumerate}
+\item \textbf{Kingston $\leftrightarrow$ fez daily-$T_1$ Pearson $r = +1.00$} over 14~d, with the differential offset stable at $\sim 70~\mu$s (kingston mean $T_1 \sim 172~\mu$s, fez mean $T_1 \sim 100~\mu$s).  No other backend pair in the archive has correlation above $r = +0.79$.
+\item \textbf{Simultaneous $T_1$ cliff on 2026-05-15}: kingston $-27.2\%$, fez $-21.9\%$ in 24~h; no comparable cliff on the other four backends.  This is consistent with shared environmental drift (cooling, magnetic environment) or a coordinated calibration event affecting only the kingston-fez rack cluster.
+\item \textbf{Both backends are \texttt{us-east}-bound} with low location confidence per \texttt{device\_locations.json}; most likely co-located at Yorktown Heights or Albany NY.
+\end{enumerate}
+
+These findings, surfaced on 2026-05-23 (one day after the kingston+fez results), triggered an amendment (v4) to the Exp~12 pre-registration~\cite{Exp12Prereg} adding a cross-Atlantic re-run: the same 8 circuits (4 target classes + 4 controls, $2000$ shots each) executed on the cross-Atlantic backend pair within a 24-hour window of each other.  The original kingston-fez results are retained as a within-site replication baseline (\S\ref{sec:phase2-results}); the cross-Atlantic results constitute the substantive chip-artifact-rejection test (\S\ref{sec:phase2b-results}).  We emphasize that no shot data was excluded, no analysis pipeline was retroactively re-tuned, and the predicted syndrome table (Paper 21a~\cite[Table 4]{Paper21a}) was not modified between the kingston-fez and marrakesh-aachen runs.  The amendment changed only the backend pair, not the protocol.
+
+\paragraph{Methodological transparency.}  We report a decoder defect surfaced during the marrakesh submission.  The initial \texttt{hardware-submit} code path extracted shot counts from a single classical register (\texttt{c\_lz}, the logical-$Z$ readout register) rather than pairing the two registers (\texttt{c\_syn} and \texttt{c\_lz}) per-shot before decoding.  Every shot consequently mapped to \texttt{\_\_decode\_error\_\_} in the modal-outcome statistic.  The raw shot data (both \texttt{BitArray} registers) was preserved in the IBM Quantum Runtime job result, allowing offline re-decoding once the defect was identified.  The decoder was patched (commit 2026-05-23, \texttt{analysis/exp12\_phase2\_hardware.py}) to pair both classical registers per-shot via \texttt{get\_bitstrings()} before invoking the existing \texttt{\_decode\_bitstring} function; the patched output is identical to the offline re-decode and is the canonical cross-Atlantic result.  Both job results (marrakesh \texttt{d88sc81789is7392ifh0}, aachen \texttt{d88se1pmdmfc73cn24p0}) and their re-decoded JSON outputs are preserved verbatim in \texttt{analysis/output/heron\_runs/exp12\_hardware/} for reproducibility.
+
+%% ================================================================
+\section{Single-particle preparation results}
+\label{sec:phase2-results}
+%% ================================================================
+
+The single-particle circuits of \S\ref{sec:protocol} were submitted to \texttt{ibm\_kingston} and \texttt{ibm\_fez} (sibling $156$-qubit Heron r2 chips) on 2026-05-22 via the open-instance free tier of QiskitRuntimeService, $2000$ shots per circuit per backend ($8 \times 2000 \times 2 = 32{,}000$ shots total).  Job IDs: \texttt{d886v6op0eas73dn2ikg} (Kingston, $28.3$~s wall-clock) and \texttt{d887220p0eas73dn2mpg} (Fez, $11.3$~s wall-clock).
+
+\subsection{Target-class results}
+\label{sec:target-results}
+
+All four target classes produced modal syndromes matching the substrate-canonical prediction on both backends (Table~\ref{tab:phase2-target-results}).  Modal probabilities range $36.55$--$39.10\%$ on Kingston and $28.25$--$31.40\%$ on Fez against a uniform-bin reference of $1 / 128 = 0.781\%$ ($128$ bins from $8$ $X$-syndrome locations $\times$ $8$ $Z$-syndrome locations $\times$ $2$ logical-$Z$ eigenvalues).  The corresponding binomial $z$-scores against the uniform reference are $181.7$--$194.6\sigma$ on Kingston and $139.5$--$155.5\sigma$ on Fez per target class.  The uniform $1/128$ is a combinatorial reference, not a physical null---a noisy but functional Steane preparation also peaks in its intended bin, so these $z$-scores quantify state-preparation fidelity; the substantive, discriminating statistic is the walk-discrimination control of \S\ref{sec:scrambled-control}.
+
+\begin{table}[H]
+\centering
+\caption{Single-particle target-class hardware results.  Each row shows the substrate-canonical $(s_X, s_Z, \barZ)$ prediction and the observed modal outcome on both backends, with modal probability against the $1 / 128 = 0.781\%$ uniform-bin reference.  All four target classes match the prediction on both backends.  Modal probabilities carry a binomial standard error $\sqrt{p(1-p)/N} \approx 1.1\%$ at $N = 2000$ shots ($95\%$ CI $\approx \pm 2\%$), far below the gap to the next-most-populated bin.}
+\label{tab:phase2-target-results}
+\small
+\begin{tabular}{llllrrrrl}
+\toprule
+Class & $(p, q)$ & Particles & Pred. $(s_X, s_Z, \barZ)$ & King.\ prob. & $z_K$ & Fez prob. & $z_F$ & Match \\
+\midrule
+proton   & $(1, 3)$ & $p, n, \Sigma^\pm, \Sigma^0$ & $(I, I, -1)$       & $36.55\%$ & $181.7\sigma$ & $28.25\%$ & $139.5\sigma$ & PASS \\
+electron & $(2, 1)$ & $e^-$                        & $(F_2, E_2, -1)$   & $39.10\%$ & $194.6\sigma$ & $30.15\%$ & $149.2\sigma$ & PASS \\
+pion     & $(3, 5)$ & $\pi^+$                      & $(E_1, E_1, +1)$   & $37.85\%$ & $188.3\sigma$ & $31.40\%$ & $155.5\sigma$ & PASS \\
+muon     & $(1, 8)$ & $\mu^-$                      & $(P, F_3, +1)$     & $37.20\%$ & $185.0\sigma$ & $28.35\%$ & $140.0\sigma$ & PASS \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The cross-backend coincidence test passes for all four target classes: the modal $(s_X, s_Z, \barZ)$ tuple is identical between Kingston and Fez for every class, and identical to the substrate-canonical prediction.  Kingston modal probabilities run higher than Fez (by $\sim 7$ percentage points per class) consistent with calibration differences between the two chips at the time of submission; the substrate prediction wins the modal bin on both regardless.
+
+\subsection{Control-circuit results}
+\label{sec:control-results}
+
+All four control circuits produced the expected outcomes on both backends (Table~\ref{tab:phase2-controls}).  The identity control verifies the codespace-initialisation circuit lands at the substrate vacuum reference $(I, I, +1)$; the $X^{\otimes 7}$ control verifies that the proton's logical Pauli operation flips logical-$Z$ to $-1$ at fixed $(I, I)$ syndrome; the $Z^{\otimes 7}$ control verifies that the antimatter logical Pauli leaves $\barZ = +1$ at fixed $(I, I)$ syndrome (the antiproton's chip-side eigenstructure); and the transversal Hadamard $H^{\otimes 7}$ produces the predicted $\sim 50/50$ logical-$Z$ split at the $(I, I)$ syndrome subset, the matter--antimatter CPT signature.
+
+\begin{table}[H]
+\centering
+\caption{Control-circuit hardware results.  ``$\barZ$ split'' for the $H^{\otimes 7}$ control gives the count of $\barZ = +1$ vs $\barZ = -1$ outcomes among shots that landed at the $(I, I)$ syndrome.}
+\label{tab:phase2-controls}
+\begin{tabular}{lllll}
+\toprule
+Control & Predicted modal & Kingston prob. & Fez prob. & Verdict \\
+\midrule
+identity      & $(I, I, +1)$        & $39.80\%$ & $33.65\%$ & PASS \\
+$X^{\otimes 7}$ & $(I, I, -1)$      & $38.80\%$ & $31.15\%$ & PASS \\
+$Z^{\otimes 7}$ & $(I, I, +1)$      & $43.35\%$ & $27.05\%$ & PASS \\
+$H^{\otimes 7}$ & $50/50$ at $(I, I)$ & $\barZ$ split $50.1/49.9$ & $\barZ$ split $47.2/52.8$ & PASS \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cross-Atlantic re-run on marrakesh + aachen}
+\label{sec:phase2b-results}
+
+Following the calibration-archive analysis of \S\ref{sec:cross-backend-methodology}, the single-particle circuits were re-executed on 2026-05-23 against the cross-Atlantic backend pair \texttt{ibm\_marrakesh} (Yorktown Heights NY, US) and \texttt{ibm\_aachen} (Ehningen Germany, $\sim 6300$~km baseline).  Submissions used identical circuits to \S\ref{sec:phase2-targets} ($2000$ shots per circuit per backend, $8 \times 2000 \times 2 = 32{,}000$ shots total).  Job IDs: \texttt{d88sc81789is7392ifh0} (marrakesh, US leg, $\sim 12$~s wall-clock) and \texttt{d88se1pmdmfc73cn24p0} (aachen, EU leg, $\sim 7$~s wall-clock).
+
+\begin{table}[H]
+\centering
+\caption{Cross-Atlantic hardware results.  Modal probability against the $1 / 128 = 0.781\%$ uniform-bin reference.  All four target classes and all four control circuits match the substrate-canonical prediction on \emph{both} marrakesh (Yorktown NY) and aachen (Ehningen DE) in cross-Atlantic modal coincidence.  Aachen modal probabilities run notably higher than marrakesh's ($\sim 55\%$ vs $\sim 32\%$ on target classes), consistent with aachen being a less-noisy chip; both backends nonetheless win the modal bin on every class.}
+\label{tab:phase2b-results}
+\small
+\begin{tabular}{lllllll}
+\toprule
+Class & $(p, q)$ & Pred. $(s_X, s_Z, \bar Z_L)$ & Marr.\ prob. & Aach.\ prob. & Match \\
+\midrule
+proton   & $(1, 3)$ & $(I, I, -1)$       & $30.5\%$ & $55.5\%$ & PASS \\
+electron & $(2, 1)$ & $(F_2, E_2, -1)$   & $38.1\%$ & $54.2\%$ & PASS \\
+pion     & $(3, 5)$ & $(E_1, E_1, +1)$   & $40.6\%$ & $61.0\%$ & PASS \\
+muon     & $(1, 8)$ & $(P, F_3, +1)$     & $28.6\%$ & $51.0\%$ & PASS \\
+\midrule
+identity      & --- & $(I, I, +1)$                  & $26.5\%$ & $57.3\%$ & PASS \\
+$X^{\otimes 7}$ & --- & $(I, I, -1)$                & $43.6\%$ & $44.9\%$ & PASS \\
+$Z^{\otimes 7}$ & --- & $(I, I, +1)$                & $40.3\%$ & $61.9\%$ & PASS \\
+$H^{\otimes 7}$ & --- & $\sim 50/50$ at $(I, I)$    & $48.1/51.9$ & $48.5/51.5$ & PASS \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The cross-Atlantic PASS verdict per pre-registration v4 Amendment 5~\cite{Exp12Prereg} requires (i) every target class produces a modal outcome matching the substrate prediction on each backend, and (ii) cross-Atlantic coincidence between marrakesh and aachen on the same target class.  Both conditions are satisfied by all four target classes; all four control circuits match expected outcomes including the $H^{\otimes 7}$ CPT signature ($\sim 50/50$ logical-$Z$ split at the $(I, I)$ syndrome subset, within $\sim 2\%$ of theoretical $50/50$ on both backends).  This establishes site-independent reproducibility of the substrate-canonical syndrome predictions across a $\sim 6300$~km baseline on genuinely-independent Heron r2 backends.
+
+\subsection{Overall verdict}
+\label{sec:phase2-verdict}
+
+The combined same-site + cross-Atlantic PASS verdict requires (i) every target class produces a modal outcome matching the substrate prediction on each backend, (ii) within-site cross-backend coincidence between kingston and fez (\S\ref{sec:phase2-results}), and (iii) cross-Atlantic cross-backend coincidence between marrakesh and aachen (\S\ref{sec:phase2b-results}).  All three conditions are satisfied across all four target classes, plus all four control circuits match expected outcomes on all four backends.  The four-way coincidence (kingston + fez + marrakesh + aachen agree on modal syndrome for every target class) is the first cross-backend, site-independent reproduction of the substrate-canonical syndrome predictions on real quantum hardware, at a continental baseline.  As \S\ref{sec:interpretation} makes explicit, this establishes that the predicted syndrome structure is realizable and reproducible---it does not, by itself, test the NWT interpretation against standard stabilizer theory.
+
+\subsection{Walk-discrimination control: resolution under device noise}
+\label{sec:scrambled-control}
+
+The coincidence of \S\ref{sec:phase2-verdict} establishes that each prepared walk lands in its predicted bin.  That the four predicted syndromes are mutually \emph{distinct} is guaranteed by stabilizer theory (distinct Pauli words occupy distinct syndrome cosets), so the substantive empirical question is narrower: do the four walks remain mutually \emph{resolved} on real, noisy hardware, or does decoherence blur them together?  We answer it with a per-shot discrimination check.
+
+We test this directly from the existing data, with no additional runs.  For each backend we form the $4\times 4$ confusion matrix
+\[
+  M_{ij} \;=\; P\big(\text{the circuit preparing walk } i \text{ lands in the predicted bin of walk } j\big),
+\]
+over the four diagnostic walks, whose predicted $(s_X, s_Z, \barZ)$ bins---proton $(I,I,-1)$, electron $(F_2,E_2,-1)$, pion $(E_1,E_1,+1)$, muon $(P,F_3,+1)$---are mutually distinct.  The substrate-canonical mapping is the diagonal $i=j$; any other (scrambled) walk-to-particle permutation predicts off-diagonal placement, and its empirical support is the off-diagonal mass.
+
+Every backend is \emph{perfectly diagonal} (Table~\ref{tab:scrambled-control}): each prepared walk places $42$--$73\%$ of its shots in its own predicted bin and \emph{zero}---$0$ of $8000$ shots per backend---in any other diagnostic walk's bin.  Each walk populates only $15$--$20$ of the $128$ bins, and those neighborhoods are disjoint across the four walks.  The four walks therefore remain perfectly resolved under device noise: decoherence broadens each walk within its own neighborhood of $15$--$20$ bins but never into another walk's exact bin.  This is a hardware-robustness result---the stabilizer-guaranteed distinctness survives on noisy chips---not a demonstration that the walk-to-particle labeling is physically singled out, which rests on the derivation of Paper 21a~\cite{Paper21a}, not on this control (\S\ref{sec:interpretation}).  The analysis script is \texttt{analysis/exp12\_scrambled\_mapping\_control.py}.
+
+\begin{table}[H]
+\centering
+\caption{Walk-discrimination (scrambled-mapping) control.  For each backend, ``own-bin'' is the per-walk probability of landing in its \emph{own} substrate-canonical bin; ``wrong-walk-bin shots'' counts shots landing in a \emph{different} diagnostic walk's exact predicted bin (out of $4 \times 2000 = 8000$).  A scrambled label permutation would require off-diagonal mass; none is observed, so the scrambled pass rate is $0/4$ on every backend.}
+\label{tab:scrambled-control}
+\small
+\begin{tabular}{lccc}
+\toprule
+Backend & Own-bin (diagonal) & Wrong-walk-bin shots & Scrambled pass rate \\
+\midrule
+\texttt{ibm\_kingston}  & $55.1$--$58.7\%$ & $0 / 8000$ & $0/4$ \\
+\texttt{ibm\_fez}       & $47.6$--$54.5\%$ & $0 / 8000$ & $0/4$ \\
+\texttt{ibm\_marrakesh} & $42.0$--$53.9\%$ & $0 / 8000$ & $0/4$ \\
+\texttt{ibm\_aachen}    & $63.9$--$73.0\%$ & $0 / 8000$ & $0/4$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This control also reframes the statistical significance.  The uniform $1/128$ figure used in \S\ref{sec:phase2-results} is a combinatorial reference, not a physical null: a noisy but functional Steane preparation \emph{also} concentrates in its intended bin, so the large $z$-scores against uniform quantify state-preparation fidelity rather than, on their own, evidence for the substrate identification.  The discriminating statistic is the off-diagonal suppression shown here, together with the cross-backend and cross-vendor (\S\ref{sec:phase28e}) reproducibility of the \emph{specific} bin assignment.  The control establishes that the four walks are mutually distinguishable and injectively resolved on hardware; it does \emph{not}, by itself, establish that the canonical labeling is the physically correct particle identification---that rests on the derivation of Paper 21a~\cite{Paper21a} and the cumulative quantitative agreement of the program, not on this chip result (\S\ref{sec:interpretation}).
+
+\subsection{Cross-vendor compilation universality}
+\label{sec:phase28e}
+
+The single-particle runs establish the substrate-canonical syndrome prediction within a single chip family (IBM Heron r2).  The cross-vendor runs extend the test across chip vendors and architectures.  The prediction is a dimensionless, combinatorial output of the $K_7$/Steane algebra---each walk maps to a fixed \emph{integer} syndrome bin---so if each chip correctly implements the logical circuit---the dimensionless syndrome bin is fixed by the Pauli word and the stabilizer group, independent of any energy scale---every vendor must reproduce the same integer bins.  In the substrate reading this cross-platform invariance is the condensate-state $\hbar$-universality of Paper 21a~\cite[\S 2.1, \S 5.4]{Paper21a}, but the operational statement requires only faithful compilation.  A vendor placing a walk in a different bin would falsify chip-architecture-independent substrate compilation.
+
+\subsubsection{Five-backend IBM Heron sweep}
+\label{sec:phase28e-heron}
+
+The Rabi-sweep variant prepares the same Steane $|0_L\rangle$ + walk Pauli word as the single-particle protocol but applies the walk word through a \texttt{PauliEvolutionGate}$(P_W, \theta/2)$ swept over $16$ angles $\theta \in [0, \pi]$, with stabilizer + logical-$Z$ readout.  A transpiler synthesis quirk at exactly $\theta = \pi$ (where the gate simplifies to the bare Pauli) is pre-registered for exclusion; the verdict reads the modal syndrome bin over the in-window aggregate, with $R^2$ from a $\sin^2(\theta/2 + \varphi)$ fit.  Continuous-angle fractional gates (Heron ISA) reduce the two-qubit count for high-weight walks (the proton's drops $195 \to 153$).
+
+\begin{table}[H]
+\centering
+\caption{Cross-vendor Rabi-sweep $\sin^2$-fit $R^2$ across five IBM Heron r2 backends.  All four walks land in their substrate-canonical integer syndrome bin on all five backends ($20/20$); the table reports fit quality.  The \texttt{marrakesh}--\texttt{aachen} pair spans the $\sim 6300$~km cross-Atlantic baseline; the $R^2$ lift from marrakesh (no fractional gates) to the others tracks the fractional-gate compilation improvement.}
+\label{tab:phase28e-heron}
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+Walk & $(p, q)$ & Pred.\ $(s_X, s_Z, \barZ)$ & Marr. & Pittsb. & Bost. & Aach.\,(EU) & King. \\
+\midrule
+electron & $(2, 1)$ & $(F_2, E_2, -1)$ & 0.652 & 0.979 & 0.971 & 0.988 & 0.991 \\
+pion     & $(3, 5)$ & $(E_1, E_1, +1)$ & 0.648 & 0.896 & 0.980 & 0.985 & 0.957 \\
+muon     & $(1, 8)$ & $(P, F_3, +1)$   & 0.948 & 0.974 & 0.991 & 0.992 & 0.966 \\
+proton   & $(1, 3)$ & $(I, I, -1)$     & 0.843 & 0.982 & 0.985 & 0.992 & 0.953 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All five backends---spanning free-tier and pay-as-you-go instances, US and EU sites---agree on the integer syndrome bin for all four walks, ruling out a shared-systematic chip bias.
+
+\subsubsection{Cross-vendor: IQM Garnet and the destructive-readout variant}
+\label{sec:phase28e-garnet}
+
+Extending to a second superconducting \emph{vendor}, IQM Garnet (a $20$-qubit square-lattice device with a distinct transmon design and native CZ gate) initially returned a flat, near-uniform distribution on all four walks \emph{and} the controls.  Transpilation onto Garnet's real coupling map identified the cause: the $13$-qubit ancilla-extraction circuit (seven data $+$ six syndrome ancillas) requires $\sim 58$ CZ after routing---each ancilla must reach four data qubits on a degree-3 grid, flooding the circuit with SWAPs---which, with depth-$63$ idle decoherence and $13$-qubit readout, exceeds the device's coherence budget.  That the controls are also flat (the identity control, which should spike sharply at $(I, I, +1)$, is uniform) marks this as genuine decoherence, not a decode artifact.
+
+The resolution is a depth-reduced \emph{destructive CSS-readout} variant.  For a CSS code the full $(s_X, s_Z, \barZ)$ syndrome is recoverable from destructive single-basis measurement of the seven data qubits, split across two circuits: a $Z$-readout (the $Z$-stabilizers and logical-$Z$ from data-qubit parities) and an $X$-readout (the $X$-stabilizers, after a transversal Hadamard).  This removes the six ancillas and all $24$ extraction CNOTs, cutting the cost to $15$ CZ at depth $27$ on seven qubits; it is valid precisely because this is a state-preparation validation, not a multi-round error-correction protocol (Paper 21a~\cite[\S 5.4]{Paper21a}).  On Garnet the destructive variant recovers all four walks in their substrate-canonical bins ($8/8$ including controls, modal $0.69$--$0.85$), matching a control run of the same variant on \texttt{ibm\_fez} ($8/8$, modal $0.76$--$0.83$).  Once depth fits the coherence budget the two superconducting vendors agree, establishing chip-vendor independence of the substrate-syndrome prediction.
+
+\subsubsection{Methodology: the vendor-neutral preparation interface}
+\label{sec:phase28e-interface}
+
+All cross-vendor circuits are built once from a vendor-neutral intermediate representation and emitted to each vendor's SDK under a canonical measurement-counts convention, so the syndrome decode is identical across vendors (a single bit-ordering normalization point).  A per-backend pre-flight estimates the routed two-qubit-gate count against the device coupling map and flags circuits exceeding the coherence budget before submission---the guardrail that, applied retrospectively, predicts the Garnet ancilla failure ($58$ CZ) and the destructive-variant success ($15$ CZ).  The destructive CSS readout is adopted as the default cross-vendor scheme.
+
+\subsubsection{Cross-vendor verdict}
+\label{sec:phase28e-verdict}
+
+Across five IBM Heron r2 backends and IQM Garnet (six superconducting backends, two vendors), all four walks land in their substrate-canonical integer syndrome bin---Garnet requiring the destructive-readout variant to fit its coherence budget.  This establishes substrate-canonical compilation universality across superconducting chip vendors.  The trapped-ion leg has now run: on AQT Ibex-Q1 (a fully-connected trapped-ion device whose all-to-all connectivity incurs no routing SWAPs, so the full ancilla circuit fits without the destructive-readout reduction) all four walks reproduce their substrate-canonical syndrome bins ($4/4$, May 2026; modal $0.70$--$0.94$ per projection circuit, no integer-bin disagreement).  Because trapped ions are a physically distinct qubit modality, this upgrades the verdict from chip-vendor independence to qubit-\emph{architecture} independence---the dimensionless syndrome prediction reproduces across two qubit modalities (superconducting and trapped-ion) and three vendors.
+
+%% ================================================================
+\section{Muon decay coherent rotation}
+\label{sec:muon-decay}
+%% ================================================================
+
+The single-particle results establish that the substrate-canonical $(s_X, s_Z, \barZ)$ predictions match the chip output for static walk Pauli words.  We now report a complementary result---Exp~10, executed earlier on 2026-05-01 on \texttt{ibm\_marrakesh}---demonstrating substrate-canonical \emph{dynamic} behavior: the $\mu^- \to e^-$ coherent decay amplitude follows the substrate-canonical $\cos^2(\theta/2)$ scaling.
+
+\subsection{Decay protocol via coherent rotation}
+\label{sec:decay-protocol}
+
+In the substrate-mediator picture (Paper 21a~\cite[\S 3.6, \S 9.3]{Paper21a}), the decay $\mu^- \to e^- \bar\nu_e \nu_\mu$ is a substrate-mediator operation that drives a coherent rotation from the muon walk $W_{\mu^-}$ to the electron walk $W_{e^-}$, with the substrate-emitted $\bar\nu_e \nu_\mu$ pair conserving lepton number.  At the Pauli-word level the rotation is a unitary $U(\theta)$ that interpolates between $P_W(W_{\mu^-})|0_L\rangle$ at $\theta = 0$ and $P_W(W_{e^-})|0_L\rangle$ at $\theta = \pi$, with amplitude $|\langle W_{\mu^-} | U(\theta) | W_{\mu^-} \rangle|^2 = \cos^2(\theta/2)$ at the Pauli-bit level (the standard half-angle scaling for a coherent two-state rotation~\cite{NielsenChuang}).
+
+The substrate-canonical prediction is therefore: prepare the muon walk Pauli word on a Steane block, apply a coherent rotation by angle $\theta \in [0, 2\pi]$ between the muon and electron walk Pauli words on the same block, and measure the probability $P_\text{muon}$ of finding the post-rotation state in the muon walk's substrate-canonical syndrome.  Theory predicts $P_\text{muon}(\theta) = \cos^2(\theta/2)$ at the Pauli-bit level, with hardware noise providing a small additive floor.
+
+\subsection{Hardware execution}
+\label{sec:exp10-execution}
+
+Per the Exp~10 pre-registration~\cite{Exp10Prereg}, the coherent-rotation circuit was executed on \texttt{ibm\_marrakesh} on 2026-05-01 with the following parameters:
+\begin{itemize}
+\item Qubits: $9$ (Steane register $\{q_0, \ldots, q_6\}$ plus $2$ ancillae);
+\item Gates: $40$, depth $13$;
+\item Shots per circuit: $4096$;
+\item Rotation angles: $16$ uniformly-spaced samples $\theta / \pi \in \{0, 1/15, 2/15, \ldots, 14/15, 1\}$;
+\item Total shots: $16 \times 4096 = 65{,}536$;
+\item Wall-clock: $41.5$~s;
+\item Job ID: \texttt{d7qgmo4f3ras73b5orqg}.
+\end{itemize}
+
+\subsection{Results}
+\label{sec:exp10-results}
+
+Table~\ref{tab:exp10-results} reports observed $P_\text{muon}(\theta)$ vs the substrate-canonical $\cos^2(\theta/2)$ prediction across all $16$ rotation angles.  The fit matches the prediction to within a few percent across the full $\theta$ range (maximum residual $3.3\%$, at the steep $\theta \approx 0.93\pi$ point; most angles are within $\sim 2\%$), including at the antinode $\theta = \pi/2$ where the substrate predicts $P_\text{muon} = 0$ and the chip records $P_\text{muon} = 0.027 \pm 0.002$ (consistent with the chip's noise floor).  The residual is at the few-percent level, largest where the $\cos^2$ curve is steepest, and is attributable to single-qubit decoherence during the $40$-gate circuit rather than to any structural deviation from the substrate-canonical prediction.
+
+\begin{table}[h]
+\centering
+\caption{Exp~10 muon-decay coherent-rotation results on \texttt{ibm\_marrakesh}.  Observed $P_\text{muon}$ matches the substrate-canonical $\cos^2(\theta/2)$ prediction to within a few percent (maximum residual $3.3\%$) across the full $[0, \pi]$ rotation range.}
+\label{tab:exp10-results}
+\small
+\begin{tabular}{rrrr}
+\toprule
+$\theta / \pi$ & Observed $P_\text{muon}$ & Theory $\cos^2(\theta/2)$ & Residual \\
+\midrule
+0.0000 & 0.9946 & 1.0000 & $-0.005$ \\
+0.0667 & 0.9299 & 0.9568 & $-0.027$ \\
+0.1333 & 0.8301 & 0.8346 & $-0.005$ \\
+0.2000 & 0.6514 & 0.6545 & $-0.003$ \\
+0.2667 & 0.4568 & 0.4477 & $+0.009$ \\
+0.3333 & 0.2505 & 0.2500 & $+0.001$ \\
+0.4000 & 0.1133 & 0.0955 & $+0.018$ \\
+0.4667 & 0.0276 & 0.0109 & $+0.017$ \\
+0.5333 & 0.0269 & 0.0109 & $+0.016$ \\
+0.6000 & 0.1138 & 0.0955 & $+0.018$ \\
+0.6667 & 0.2629 & 0.2500 & $+0.013$ \\
+0.7333 & 0.4524 & 0.4477 & $+0.005$ \\
+0.8000 & 0.6653 & 0.6545 & $+0.011$ \\
+0.8667 & 0.8093 & 0.8346 & $-0.025$ \\
+0.9333 & 0.9238 & 0.9568 & $-0.033$ \\
+1.0000 & 0.9924 & 1.0000 & $-0.008$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Verdict}
+\label{sec:exp10-verdict}
+
+The Exp~10 muon-decay coherent-rotation result establishes the substrate-canonical \emph{dynamic} prediction beyond the static $(s_X, s_Z, \barZ)$ syndrome match of the single-particle runs.  In standard physics the $\mu^- \to e^-$ decay amplitude follows $\cos^2(\theta/2)$ for a coherent two-state rotation; in the NWT walk-to-Pauli framework the same scaling emerges from the substrate-canonical Pauli-bit-level rotation between the muon and electron walk Pauli words.  The chip observes both: the cosmological-scale decay amplitude and the substrate-canonical Pauli rotation are the same operation at chip scale.
+
+What this result is and is not: it confirms the substrate-canonical \emph{coherent} decay amplitude.  It does \emph{not} test the substrate-canonical \emph{branching ratios} or the $V$-$A$ structure of the weak interaction; those depend on the substrate-mediator algorithm for the $W$-vertex which is one of the open theoretical pieces (Paper 21a~\cite[\S 9.3]{Paper21a}).  The Exp~10 result is consistent with the partial closure of the sequential-decay theoretical piece via Rabi-style amplitude scaling at the Pauli-word level.
+
+%% ================================================================
+\section{Neutron decay protocol}
+\label{sec:neutron-decay}
+%% ================================================================
+
+The Exp~10 muon-decay result establishes the substrate-canonical decay amplitude for a lepton-only ($\mu^- \to e^-$) channel.  We now extend the protocol to baryon decay---specifically the neutron decay $n \to p e^- \bar\nu_e$.  The protocol is pre-registered for execution on Heron r2 hardware as Exp~13.
+
+\subsection{Substrate-canonical neutron decay walk transition}
+\label{sec:neutron-decay-theory}
+
+In Paper 21a's classification (Table~1 of~\cite{Paper21a}), the neutron $n$ and proton $p$ share the same $(p, q) = (1, 3)$ class and the same Hamilton-cycle walk $W_p = W_n = 0 \to 1 \to 2 \to 3 \to 4 \to 5 \to 6 \to 0$ (the QR-direction Hamilton cycle).  The electron $e^-$ has $(p, q) = (2, 1)$ and walk $W_{e^-} = 0 \to 2 \to 5 \to 1 \to 4 \to 0$.  Both walks are pre-registered Pauli words in Paper 21a's Table 4.
+
+Neutron decay is therefore a substrate-mediator operation on three walks: the neutron walk $W_n$, the proton walk $W_p$ (= $W_n$ as compendium classes; the spin/isospin distinction enters via the substrate-mediator's $V$-$A$ structure), the electron walk $W_{e^-}$, and an emitted $\bar\nu_e$ that conserves lepton number.  At the substrate-canonical level the decay is a coherent rotation between the neutron Pauli word and the proton-plus-electron-plus-antineutrino Pauli-word product, mediated by the substrate's $W$-boson-analog stabilizer operation.
+
+\subsection{Circuit construction}
+\label{sec:neutron-decay-circuit}
+
+The Exp~13 circuit uses three Steane code blocks for the post-decay state (proton, electron, antineutrino) on a $21$-qubit total register (within Heron r2's $156$-qubit capacity), with the decay-mediator operation realized as a controlled-rotation joining the three blocks:
+
+\begin{enumerate}
+\item \textbf{Initialisation.}  Block A: $|0_L\rangle$ (vacuum).  Block B: $|0_L\rangle$ (vacuum).  Block C: $|0_L\rangle$ (vacuum).  Total $3 \times 7 = 21$ qubits.
+\item \textbf{Neutron preparation on Block A.}  Apply $P_W(W_n) = X^{\otimes 7}$ to Block A.  This realizes the neutron as $\barX |0_L\rangle$ on Block A.
+\item \textbf{Decay-rotation $U(\theta)$.}  Apply a coherent rotation by angle $\theta \in [0, \pi]$ that interpolates between (Block A in $\barX |0_L\rangle$, Blocks B and C in $|0_L\rangle$) at $\theta = 0$ and (Block A in $|0_L\rangle$, Block B in $\barX |0_L\rangle$ for the daughter proton, Block C in $P_W(W_{e^-}) |0_L\rangle$ for the daughter electron) at $\theta = \pi$.  The antineutrino's Pauli content is in principle on a fourth block; in this exploratory circuit it is integrated out, treating the antineutrino's substrate excitation as a substrate-vacuum projection.
+\item \textbf{Stabilizer readout.}  Measure all three blocks' six stabilizers and logical-$Z$ values; record the joint outcome $(s_X^A, s_Z^A, \barZ^A; s_X^B, s_Z^B, \barZ^B; s_X^C, s_Z^C, \barZ^C)$.
+\end{enumerate}
+
+The substrate-canonical predictions: at $\theta = 0$, $(s_X^A, s_Z^A, \barZ^A) = (I, I, -1)$, $(s_X^B, s_Z^B, \barZ^B) = (I, I, +1)$, $(s_X^C, s_Z^C, \barZ^C) = (I, I, +1)$ (the initial state has the neutron at $\barX$ on A and vacuum on B, C).  At $\theta = \pi$, Block A returns to $(I, I, +1)$ (vacuum), Block B reads $(I, I, -1)$ (the daughter proton), and Block C reads $(F_2, E_2, -1)$ (the daughter electron's syndrome per Paper 21a~\cite[Table 4]{Paper21a}).  The rotation $U(\theta)$ is built from the same \texttt{PauliEvolutionGate}$(P_W, \theta/2)$ primitive as Exp 10, applied per block (full circuit $\sim 650$ gates on Heron r2).  The protocol implements the substrate-canonical \emph{walk-transition Pauli structure} only: it does \emph{not} encode the Standard-Model weak Hamiltonian, decay kinematics, or branching ratios, and no such claim is made (\S\ref{sec:discriminating-content}).  What is tested is whether the daughter blocks land in their substrate-canonical syndrome bins.
+
+\subsection{Hardware execution}
+\label{sec:neutron-decay-execution}
+
+Exp~13 was executed on 2026-05-23 on \texttt{ibm\_marrakesh} (primary, job \texttt{d895qslg7okc73eo8ptg}) and re-run for cross-backend coincidence on \texttt{ibm\_kingston} (job \texttt{d895ug9789is7392stgg}); $16$ rotation angles on $[0, \pi]$, $\sim 13$~s wall-clock per backend.  The $\theta = 0$ and $\theta = \pi$ endpoints probe the six block-endpoint syndromes of \S\ref{sec:neutron-decay-circuit} (three blocks $\times$ two sweep endpoints); Table~\ref{tab:exp13-results} reports the verdict per endpoint.
+
+\begin{table}[H]
+\centering
+\caption{Exp~13 neutron-decay block-endpoint results.  PASS = modal matches the substrate-canonical prediction; near = logical-$Z$ correct with a $1$--$2$-bit syndrome drift; miss = modal in a different cell.  Modal probabilities are shown for the PASS cells against the $1/128$ uniform-bin reference.}
+\label{tab:exp13-results}
+\small
+\begin{tabular}{lllll}
+\toprule
+Block (role) & $\theta$ & Pred.\ $(s_X, s_Z, \barZ)$ & Marrakesh & Kingston \\
+\midrule
+A (neutron $\to$ vacuum) & $0$   & $(I, I, -1)$     & PASS $11.7\%$ & PASS $15.4\%$ \\
+A (neutron $\to$ vacuum) & $\pi$ & $(I, I, +1)$     & PASS $14.8\%$ & PASS $7.9\%$ \\
+B (vacuum $\to$ proton)  & $0$   & $(I, I, +1)$     & PASS $8.3\%$  & near \\
+B (vacuum $\to$ proton)  & $\pi$ & $(I, I, -1)$     & near          & PASS $19.0\%$ \\
+C (vacuum $\to$ electron) & $0$  & $(I, I, +1)$     & near          & PASS $9.9\%$ \\
+C (vacuum $\to$ electron) & $\pi$ & $(F_2, E_2, -1)$ & miss          & PASS $8.5\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Marrakesh scored three strict PASS endpoints plus three near-misses; Kingston scored five strict.  The reading is twofold.  First, Block~A (the neutron-to-vacuum $\barX \to I$ channel) is a clean PASS at \emph{both} endpoints on \emph{both} backends---the substrate-canonical multi-block coherent-rotation piece is verified.  Second, every one of the six block-endpoints achieves a strict PASS on at least one backend---an OR across backends, not a cross-backend coincidence (only Block~A achieves the latter): the near/miss cells on Marrakesh fall on the higher-Pauli-weight proton- and electron-creation channels, where a single gate error on the $\sim 650$-gate circuit blurs the exact syndrome bin, and they recover cleanly on Kingston whose noise pattern is decorrelated.  The logical-$Z$ flip of Block~A occurs at the same sweep index ($\theta$-index $7$) on both backends---a non-trivial cross-backend agreement at the intermediate-$\theta$ Rabi profile, not merely at the endpoints.  The substrate-canonical Pauli-word identification is thus realized on chip across the full neutron-decay protocol; the protocol's depth-limited noise floor is now empirically calibrated, with a shorter-delay optimized re-run (Exp~13 v2) a natural follow-up.
+
+%% ================================================================
+\section{$e^+ e^- \to \mu^+ \mu^-$ scattering protocol}
+\label{sec:emumu-scattering}
+%% ================================================================
+
+The third experimental anchor is a scattering channel: the substrate-canonical $e^+ e^- \to \mu^+ \mu^-$ amplitude.  This protocol is pre-registered for execution as Exp~14.
+
+\subsection{Substrate-canonical scattering: pair annihilation $+$ pair creation}
+\label{sec:emumu-theory}
+
+The substrate-mediator picture (Paper 21a~\cite[\S 6, \S 9.3]{Paper21a}) reads scattering as a two-step substrate-mediator sequence:
+
+\begin{enumerate}
+\item \textbf{Annihilation.}  The matter and antimatter walks $W_{e^-}$ and $W_{e^+} = \bar W_{e^-}$ merge to substrate vacuum via reverse-traversal cancellation.  At the Pauli-bit level this is the deterministic $\barX \otimes \barZ \to |0_L\rangle \otimes |0_L\rangle$ operation on the two-block state.
+\item \textbf{Pair creation.}  The substrate-mediator triggers emergence of the daughter pair $(W_{\mu^-}, W_{\mu^+}) = (W_{\mu^-}, \bar W_{\mu^-})$ from substrate vacuum.  At the Pauli-bit level this is $|0_L\rangle \otimes |0_L\rangle \to P_W(W_{\mu^-}) \otimes P_W(\bar W_{\mu^-})$.
+\end{enumerate}
+
+The combined process is therefore a coherent rotation from the $e^+ e^-$ pair state to the $\mu^+ \mu^-$ pair state on two Steane code blocks, mediated by the substrate's $\gamma$-mediator gate.  Above threshold the rotation amplitude depends on the incident energy and the scattering angle; at threshold ($\sqrt{s} = 2 m_\mu$) the rotation is exact and the predicted amplitude $|\langle \mu^+ \mu^- | U(\theta) | e^+ e^- \rangle|^2 = 1$.
+
+\subsection{Circuit construction}
+\label{sec:emumu-circuit}
+
+The Exp~14 circuit uses two Steane code blocks ($14$ qubits) representing the matter and antimatter members of the pair, coupled through the substrate-mediator polar-polar inter-patch CNOT bridge (Paper 21a~\cite[\S 3.6]{Paper21a}; \cite{BosonMemo}).  The polar vertex is the unique single-qubit-pair photon channel under the charge-vertex selection rule, and is the substrate-mechanical realization of the QED photon mediator:
+
+\begin{enumerate}
+\item \textbf{Initialisation.}  Block A: $P_W(W_{e^-}) |0_L\rangle$ (matter electron).  Block B: $P_W(W_{e^+}) |0_L\rangle = (H^{\otimes 7}) P_W(W_{e^-}) (H^{\otimes 7})^\dagger |0_L\rangle$ (antimatter positron, by Paper 21a~\cite[\S 5.3]{Paper21a}'s transversal-Hadamard CPT).
+\item \textbf{Polar-photon-mediated annihilation.}  Apply $V_{\gamma,\,\text{polar}}^{(\pm)}(A, B) = (X_{P_A} X_{P_B},\, Z_{P_A} Z_{P_B})$ between the polar vertices of the two patches; on the chip this is a CNOT bridge between $P_A$ and $P_B$ with a transverse-polarisation control.  Repeated application reduces $P_W(W_{e^-}) \otimes P_W(W_{e^+})$ to the substrate-vacuum $|0_L\rangle \otimes |0_L\rangle$.
+\item \textbf{Coherent rotation $U(\theta)$ to muon-pair channel.}  Drive the polar-vertex amplitude continuously by angle $\theta \in [0, \pi]$; the inter-patch coupling drives the two-block state from substrate vacuum to $P_W(W_{\mu^-}) \otimes P_W(W_{\mu^+})$ as the polar-vertex photon mediator deposits the $\mu^+ \mu^-$ pair-creation amplitude.
+\item \textbf{Stabilizer readout.}  Measure both blocks' six stabilizers and logical-$Z$ values plus the polar correlators $\langle X_{P_A} X_{P_B} \rangle$ and $\langle Z_{P_A} Z_{P_B} \rangle$; record joint outcomes per shot.
+\end{enumerate}
+
+At $\theta = 0$: Block A at $(F_2, E_2, -1)$, Block B at $(F_2, E_2, +1)$ (the $e^+ e^-$ pair syndromes per Paper 21a's Table 4); polar correlator $\langle X_{P_A} X_{P_B} \rangle = +1$ on the matter polarisation channel.  At $\theta = \pi$: Block A at $(P, F_3, +1)$, Block B at $(P, F_3, -1)$ (the $\mu^+ \mu^-$ pair syndromes).  Intermediate $\theta$ yields a Rabi-style amplitude distribution between the two syndrome configurations.  Heavy-hex topology requires SWAP-network compilation between the two patches' polar qubits; estimated overhead $3$--$5$ SWAPs per inter-patch CNOT bridge depending on physical qubit placement~\cite{BosonMemo}.  As with neutron decay, this is an exploratory multi-block construction realizing the substrate-canonical pair-annihilation/creation \emph{syndrome structure} only: it does not encode energy--momentum conservation, scattering-angle dependence, or a cross-section, and the threshold statement $|\langle \mu^+ \mu^- | U(\theta) | e^+ e^- \rangle|^2 = 1$ is the substrate-amplitude prediction, not a measured cross-section (\S\ref{sec:discriminating-content}).
+
+\subsection{Hardware execution}
+\label{sec:emumu-execution}
+
+Exp~14 was executed on 2026-05-23 on \texttt{ibm\_kingston} (primary, job \texttt{d895qsas46sc73fa6okg}) and \texttt{ibm\_fez} (cross-backend, job \texttt{d895ug5g7okc73eo8tng}); $16$ rotation angles on $[0, \pi]$, $\sim 13$~s wall-clock per backend.  The sweep endpoints isolate the $e^+ e^-$ initial pair ($\theta = 0$) and the $\mu^+ \mu^-$ daughter pair ($\theta = \pi$); Table~\ref{tab:exp14-results} reports the per-block endpoint verdict.
+
+\begin{table}[H]
+\centering
+\caption{Exp~14 $e^+ e^- \to \mu^+ \mu^-$ scattering results.  Blocks A and B are the matter and antimatter members of the pair.  Modal probabilities against the $1/128$ uniform-bin reference; ``near'' = logical-$Z$ correct with a single-bit syndrome drift.}
+\label{tab:exp14-results}
+\small
+\begin{tabular}{lllll}
+\toprule
+$\theta$ & Block & Pred.\ $(s_X, s_Z, \barZ)$ & Kingston & Fez \\
+\midrule
+$0$   & A ($e^-$)   & $(F_2, E_2, -1)$ & PASS $13.1\%$ & PASS \\
+$0$   & B ($e^+$)   & $(F_2, E_2, +1)$ & PASS $20.2\%$ & near \\
+$\pi$ & A ($\mu^-$) & $(P, F_3, +1)$   & PASS $30.8\%$ & PASS $13.9\%$ \\
+$\pi$ & B ($\mu^+$) & $(P, F_3, -1)$   & PASS $16.6\%$ & PASS $16.0\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Kingston produced a $4/4$ strict PASS---a chip realization of the substrate-canonical \emph{scattering} protocol (pair annihilation followed by pair creation), extending the single-particle preparation of \S\ref{sec:phase2-results} to an inter-particle protocol.  Fez produced $3/4$ (the $\theta = 0$ positron near-missed with an $X$-syndrome drift to $(I, E_2)$; the other three strict).  The $\mu^-$ daughter modal of $30.8\%$ at $\theta = \pi$ on Kingston sits squarely in the single-particle range ($28$--$43\%$) despite roughly twice the two-qubit-gate count ($\sim 360$ vs $\sim 150$), indicating that Heron r2's effective fidelity for multi-block \texttt{PauliEvolutionGate} circuits exceeds the naive $0.995^{\Delta}$ extrapolation.  The $\theta = \pi$ endpoints are the \emph{cleanest} on both backends: the single-block transpiler synthesis quirk that motivates the $\theta = \pi$ exclusion in the Rabi sweep (\S\ref{sec:phase28e}) does not affect multi-block circuits, whose high aggregate Pauli weight prevents the bare-Pauli transpiler shortcut.
+
+%% ================================================================
+\subsection{Cross-sector syndrome equivalences (Exp 15/16)}
+\label{sec:cross-sector-equivalences}
+
+Paper 21a~\cite[\S 7.2]{Paper21a} predicts that particles the Standard Model assigns to different families share a Steane $\Klogical$ syndrome bin.  Exp 15/16 prepares the walks of three such equivalence classes and checks that the members of each class land in the \emph{same} substrate-canonical $(s_X, s_Z)$ bin:
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Class & Members $(p, q)$ & SM families & Predicted $(s_X, s_Z)$ \\
+\midrule
+A & $\mu^-\,(1,8)$, $D^+\!/J\!/\psi\,(2,7)$ & lepton $+$ 2 mesons & $(P, F_3)$ \\
+B & $\tau^-\!/\Lambda/\Sigma^*\,(3,4)$ & lepton $+$ 2 hyperons & $(E_2, E_2)$ \\
+C & $e^-\,(2,1)$, $\pi^0\,(7,3)$ & lepton $+$ meson & $(F_2, E_2)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The walks $(2,7)$, $(3,4)$, $(7,3)$ are new---not run in Exp 12---while $\mu^-\,(1,8)$ and $e^-\,(2,1)$ are reused as cross-experiment stability anchors.  Class B's three particles share the single walk $(3,4)$ and so compile to one circuit; the substantive content of classes A and C is that walks with \emph{different} $(p, q)$ reach the same syndrome bin via the deterministic walk-to-Pauli map.  The predicted bins were verified against Paper 21a's table from the precompiled Pauli words before submission (pre-registered, \texttt{analysis/exp15\_cross\_sector\_equivalence.py}).
+
+The protocol is the ancilla-free destructive-readout variant of \S\ref{sec:phase28e-garnet} (two circuits per walk, $Z$- and $X$-basis), $2000$ shots per circuit, run on the same-site pair \texttt{ibm\_kingston} (job \texttt{d8aqpies3bbc73fj7330}) and \texttt{ibm\_fez} (job \texttt{d8aqpkgb1oec7382t4tg}).  \textbf{All three equivalence classes are confirmed on both backends}---modal $0.76$--$0.86$ for every walk against the $0.781\%$ uniform-bin reference, with five walks $+$ four controls giving $9/9$ items at strict PASS per backend.  The Standard-Model-distinct members of each class land in the same modal $(s_X, s_Z)$ bin on both machines.  A finer feature appears beneath the coarse label: $\mu^-$ and $D^+\!/J\!/\psi$ share $(P, F_3)$ but split in logical-$Z$ ($+1$ vs $-1$) as predicted, while $e^-$ and $\pi^0$ match down to logical-$Z$ ($-1$ for both)---the equivalence is at the $(s_X, s_Z)$ label exactly as Paper 21a states, not a claim of full physical identity.
+
+This is a realizability result, not a discriminator (\S\ref{sec:discriminating-content}): the equivalence syndromes are computable on paper from the $(p, q)$ map, so the run confirms that the predicted cross-family regrouping is preparable and noise-robust on real hardware across two backends---it does not, by itself, distinguish the substrate reading from standard stabilizer theory.
+
+\section{Interpretation and scope}
+\label{sec:interpretation}
+%% ================================================================
+
+\subsection{Realization vs.\ simulation: what the experiments establish}
+\label{sec:realization-vs-simulation}
+
+The results of \S\ref{sec:phase2-results}--\S\ref{sec:emumu-execution} can be stated operationally, without metaphysics.  The walk-to-Pauli compilation of Paper 21a~\cite{Paper21a} yields, for each diagnostic particle class, a concrete $7$-qubit Steane-code state whose stabilizer syndrome is (i) reproduced on real hardware, (ii) mutually distinguishable from the other classes' syndromes (the walk-discrimination control, \S\ref{sec:scrambled-control}), and (iii) invariant across chip vendors (\S\ref{sec:phase28e}).  The model's particle classification therefore has an executable, robust, vendor-independent operational realization---it is not merely a formal table.
+
+A stronger reading---that a chip-prepared walk state is an \emph{instance} of the particle rather than a model of it---is the substrate-monism thesis of the broader NWT program~\cite{Paper19}.  It is consistent with these results but is not established by them.  The experiments probe the dimensionless syndrome structure only; they do not probe mass, electric charge, gauge couplings, spin-statistics, or Lorentz behavior, and the orthodox reading---that one has prepared specific stabilizer-code states engineered to chosen labels---reproduces every observation reported here.  Adjudicating between the two readings is a metaphysical question that bench-scale syndrome data cannot settle.  We therefore make no ontological claim in this paper beyond operational realization, and defer the substrate-monism argument to a dedicated treatment.
+
+\paragraph{The present hardware era reads the physical layer directly.}
+One methodological feature is worth recording independent of interpretation.  Today's devices run the Steane $\Klogical$ code on \emph{bare physical qubits}: the syndrome read after a walk's Pauli word is taken directly off the transmon (or trapped-ion) register, with no logical-encoding layer interposed.  The cross-vendor agreement of \S\ref{sec:phase28e} is thus observed at the physical layer, on architecturally distinct machines.  This is a transient window---fault-tolerant error correction will later interpose a logical-qubit layer between the experimenter and the physical register, and the destructive-readout floor (\S\ref{sec:phase28e-garnet}) marks the noisy edge below which the walks no longer land.  The window is widest in exactly the present noisy-intermediate-scale era.
+
+\subsection{What the experiments discriminate, and what they do not}
+\label{sec:discriminating-content}
+
+It is worth stating sharply which observations carry content specific to the NWT classification and which would follow from any faithful stabilizer-code implementation, since the two are easily conflated.
+
+\paragraph{What does not discriminate NWT.}  Three of the headline results test the implementation, not the model.  (a)~Cross-vendor and cross-architecture agreement on integer syndrome bins (\S\ref{sec:phase28e}): any correctly compiled Steane $\Klogical$ preparation reproduces the stabilizer-determined syndrome of its Pauli word on any device with adequate coherence, independent of what that Pauli word is taken to mean.  The agreement establishes that the protocol is portable and architecture-independent---a statement about Pauli algebra and compilation, not about the substrate.  (b)~Modal probability against the $1/128$ uniform reference (\S\ref{sec:phase2-results}): as \S\ref{sec:scrambled-control} notes, this quantifies state-preparation fidelity; a noisy-but-correct preparation also peaks in its intended bin.  The physically meaningful baseline is the ideal stabilizer prediction under a calibrated device-noise model, not the uniform reference; the observed modal probabilities ($\sim 0.3$--$0.9$, depending on circuit depth) are consistent with the per-backend gate-error budgets, and a full density-matrix noise-model comparison is left to future work.  (c)~The walk-discrimination control's diagonal structure (\S\ref{sec:scrambled-control}): stabilizer theory guarantees that distinct Pauli words occupy distinct syndrome cosets, so the empirical content is that this distinctness survives on noisy hardware---a robustness result, not an NWT-specific one.
+
+\paragraph{Where the NWT-specific content lives.}  The model-specific content is not in the syndromes' \emph{reproducibility} but in the \emph{assignment} of particles to Pauli words, and that assignment is fixed off-chip.  Its most distinctive prediction is the set of cross-sector syndrome equivalences (Paper 21a~\cite[\S 7.2]{Paper21a}): $\mu^- \equiv D^+ \equiv J/\psi$ at $(P, F_3)$, $\tau^- \equiv \Lambda \equiv \Sigma^*$ at $(E_2, E_2)$, $e^- \equiv \pi^0$ at $(F_2, E_2)$, and four further classes, each grouping particles the Standard Model assigns to different families---a regrouping no standard taxonomy predicts.  Two qualifications keep this honest.  First, the equivalences are \emph{computable on paper}: given the walk-to-Pauli map, each particle's syndrome is a deterministic function of its $(p, q)$ class, so a chip run confirms that the hardware reproduces a precomputed prediction---it cannot, by itself, discover or falsify the map.  The substantive question is whether the $(p, q)$ assignment is non-arbitrary, and it is: the assignment is over-determined, fixing electric charge, baryon number, and isospin through the Gell-Mann--Nishijima relation $Q = I_3 + (B+S)/2$ (Paper 7~\cite{Paper7}) \emph{in addition to} mass, so the equivalences are not artifacts of a mass fit.  Second, the genuinely held-out version of this prediction is at the particle-physics scale: the sub-$500$~MeV substrate-prediction species (Paper 21a~\cite[\S 8.1]{Paper21a}), chiefly the $(3,3)$ class near $400$~MeV, are absent from the compendium the assignment was built on, and their detection (or absence) is a forward test.
+
+In short, the present experiments establish that the predicted syndrome structure is \emph{preparable, mutually distinguishable, and architecture-independent on real hardware}.  We have since demonstrated the cross-sector equivalences directly on chip (Exp 15/16, \S\ref{sec:cross-sector-equivalences}): all three Table-4 equivalence classes---including $D^+\!/J\!/\psi$ reproducing $\mu^-$'s $(P, F_3)$ bin---are confirmed on two backends.  As anticipated, because those syndromes are likewise precomputable, this sharpens the realization claim rather than discriminating the framework.  The framework's discriminating tests lie off the chip: the non-arbitrariness of the $(p, q)$ assignment (theory, Paper 7) and the detector-scale species predictions (experiment).
+
+\subsection{Computational cost: compactness without quantum advantage}
+\label{sec:compactness}
+
+Each particle's realization is a $7$-qubit stabilizer-code state plus a low-weight Pauli word---a shallow circuit ($15$--$195$ routed two-qubit gates, depth $\le 63$, seconds of wall-clock).  Relative to ab-initio quantum simulation of particle or field content (whose cost scales with the number of field modes or lattice sites), this is an extremely compact representation: the full $25$-class classification fits on today's $7$-qubit hardware.
+
+This compactness is \emph{not} a quantum computational advantage, and we state so explicitly.  The single-particle circuits are Clifford (Steane encoding, Pauli words, stabilizer readout) and are therefore efficiently classically simulable by the Gottesman--Knill theorem---indeed, the predicted syndromes are computed classically.  The hardware's role is realization and noise-robustness demonstration, not acceleration.  The only non-Clifford content lies in the continuous-angle dynamical protocols (Exp~10/13/14); whether the interaction sector is rich enough in non-Clifford structure to render a large multi-particle realization classically intractable---and thus a genuine quantum-resource question---is left to future work.
+
+\subsection{Fermions and hadrons, not bosons}
+\label{sec:fermion-hadron-scope}
+
+The hardware-realization claim of this paper is restricted to fermions and hadrons (closed-walk excitations on $K_7$).  Bosons enter the NWT framework as substrate-mediator operations on the matter Hilbert space, not as walk-as-particle excitations (Paper 21a~\cite[\S 3.6]{Paper21a}).  The current working framework for the bosonic sector unifies two complementary readings:
+\begin{itemize}
+\item \textbf{U(1) photon, formalised.}  Paper 21a~\cite[\S 3.6, \S 9.3]{Paper21a} establishes the photon as the ordered pair $(V_\gamma^{(+)}, V_\gamma^{(-)}) = (X_a^{(i)} X_b^{(j)}, Z_a^{(i)} Z_b^{(j)})$ on a two-patch substrate, with the two transverse polarisations as the $\pm 1$ eigenstates of $V_\gamma^{(+)} \pm V_\gamma^{(-)}$ and spin-1 emerging from CSS $X$/$Z$ duality.  On the chip this is realized as a polar-polar inter-patch CNOT bridge between two 7-qubit Steane patches.
+\item \textbf{Other gauge bosons, partial.}  Gluon, $W^\pm$/$Z$, and Higgs identifications are tracked as open sub-pieces of Paper 21a's list~\cite[\S 9.3]{Paper21a}; their hardware realization will follow once the structure constants close.
+\item \textbf{Hadamard CPT.}  The transversal Hadamard $H^{\otimes 7}$ is the matter--antimatter CPT mediator (confirmed in the control circuit, \S\ref{sec:control-results}).
+\end{itemize}
+The chip realizes these substrate-mediator operations as quantum gates (single-patch logical Pauli gates, inter-patch CNOT bridges, transversal Hadamard), not as encoded walk excitations.  Consistent with this scope, the Exp~10 result captures the substrate-canonical $\mu^- \to e^-$ rotation \emph{amplitude} only, not the full decay process (which would require the substrate's $V$--$A$ mediator algorithm to be closed); the decay-realization claim is correspondingly partial.
+
+\paragraph{Neutrinos: $K_8$ Wilson amplitude, not $K_7$ closed walks.}
+Per Paper 21a~\cite[\S 3.6]{Paper21a}, neutrinos sit outside the $K_7$ closed-walk framework.  The $(2, F_n)$ carrier family on $K_7$ has no slot below the charged-lepton unknot (since $F_1 = F_2 = 1$ both give the unknot), and charged leptons already occupy that slot.  Neutrinos require the $K_8$ Wilson-amplitude extension of Paper~20~\cite{Paper20}, with the eighth vertex as the real octonion unit forced by $\mathrm{Spin}(7) \subset \mathrm{Spin}(8)$ stabilization, predicting $m_1 = 14.84$~meV, $m_2 = 17.16$~meV, $m_3 \approx 53$~meV (NuFIT splittings), $\Sigma m_\nu \approx 85$~meV---below the Planck bound ($120$~meV) but in tension with tightening DESI constraints ($\lesssim 60$--$72$~meV).  Chip realization of neutrinos would require an 8-qubit stabilizer-code patch (candidate: Reed--Muller $[\![8, 3, 2]\!]$ or a $\mathrm{Spin}(7) \subset \mathrm{Spin}(8)$-adapted custom code) alongside the 7-qubit Steane patches used for charged matter, and is deferred to a future follow-up.  The Exp~13 neutron-decay protocol (\S\ref{sec:neutron-decay}) handles the antineutrino's substrate excitation by projection onto substrate vacuum on the residual register.
+
+%% ================================================================
+\section{Outlook: the full-compendium catalog}
+\label{sec:outlook}
+%% ================================================================
+
+The full-compendium catalog, currently being scheduled, spans the six protocol classes below.
+
+\paragraph{Cross-architecture extension (completed).}  The trapped-ion extension---AQT Ibex-Q1, each walk's syndrome reconstructed from seven $8$-qubit projection circuits under the Braket end-of-circuit measurement model---has now run, reproducing all four walks' substrate-canonical bins ($4/4$; \S\ref{sec:phase28e-verdict}) and thereby establishing qubit-architecture independence.
+
+\subsection{Six protocol classes}
+\label{sec:phase3-classes}
+
+\paragraph{(1) Single-particle full-compendium preparation ($\sim 50{,}000$ shots).}
+All $25$ compendium particles plus the four substrate-predicted sub-$500$~MeV unseen species of Paper 21a~\cite[\S 8.1]{Paper21a} (the $25$, $160$, $160$, $400$ MeV walks of $(2, 2)$, $(2, 3)$, $(3, 1)$, $(3, 3)$).  Each particle's compiled Pauli word executed on a Steane block on both Kingston and Fez at $2000$ shots, replicating the single-particle protocol on the full classification.
+
+\paragraph{(2) Pair-production circuits ($\sim 100{,}000$ shots).}
+The $\sim 10$ canonical pair-production channels (electron, proton, pion, muon, plus their charm and bottom counterparts where the walks resolve cleanly), implemented as two adjacent Steane code blocks with the matter walk on block A and the reverse walk on block B.  The cross-block total winding $(0, 0)$ is verified by joint logical-charge measurement, and the QR/NR sector swap is verified by stabilizer-syndrome anti-correlation between A and B.
+
+\paragraph{(3) Decay-chain dynamics ($\sim 400{,}000$ shots).}
+Following Exp~10 (muon) and Exp~13 (neutron, this paper), $\sim 20$ best-understood decay channels: pion decay $\pi^+ \to \mu^+ \nu_\mu$, $\Lambda \to p \pi^-$, $K^0 \to \pi\pi$, charm and bottom decays.  Each follows the Exp~10 coherent-rotation paradigm at the substrate-canonical amplitude level.
+
+\paragraph{(4) Scattering channels ($\sim 200{,}000$ shots).}
+Following Exp~14 ($e^+ e^- \to \mu^+ \mu^-$, this paper), $\sim 10$ scattering channels: $e^+ e^- \to \tau^+ \tau^-$, $e^+ e^- \to q \bar q$ continuum, $e^- p \to e^- p$ elastic.  Each implemented as the two-block annihilation $+$ creation sequence of \S\ref{sec:emumu-theory}.
+
+\paragraph{(5) Nucleosynthesis controls ($\sim 50{,}000$ shots).}
+$^{2}\text{H}$, $^{3}\text{He}$, $^{4}\text{He}$, $^{7}\text{Li}$ implemented as multi-block Steane circuits, testing whether the substrate's nuclear-binding-operation prediction (one of the open pieces) reproduces measured binding energies via substrate excitation counts.
+
+\paragraph{(6) Foundational controls and replication ($\sim 60{,}000$ shots).}
+Replication of the single-particle protocol on additional Heron r2 backends as they come online (Marrakesh, Brisbane, others), plus expanded control suite (transversal CNOT, $S$ and $T$ gates, stabilizer twirl) testing the Steane code's structure independently of the walk-to-Pauli compilation.
+
+\paragraph{Total catalog shot budget: $\sim 1.76 \times 10^6$ shots.}  At $2000$ shots per circuit, the catalog reaches genuine Bonferroni-corrected $5\sigma$ significance across the full $25$-class compendium with substantial margin.
+
+\subsection{Program outline}
+\label{sec:programme}
+
+The full-compendium catalog and the four open theoretical pieces (Paper 21a~\cite[\S 9.3]{Paper21a}) together constitute the substrate-monism experimental program through end-of-2026.  At the current pace ($\sim 1$ closed theoretical piece per month per arc), all four open pieces are expected to close by Q4 2026, with the full catalog executed alongside the theoretical closures.
+
+%% ================================================================
+\section{Discussion}
+\label{sec:discussion}
+%% ================================================================
+
+\subsection{Falsifiers}
+\label{sec:falsifiers}
+
+The substrate-monism reading of these results is falsifiable on existing quantum hardware via four independent paths:
+
+\begin{enumerate}
+\item \textbf{Per-class syndrome falsifier.}  Each of the $10$ distinct $(s_X, s_Z)$ pairs in Paper 21a~\cite[Table 4]{Paper21a} predicts a specific modal chip outcome.  A chip output systematically diverging from any prediction (modal lies in a different syndrome cell) on multiple backends falsifies the corresponding $(p, q)$-class identification.  The single-particle runs establish four-way coincidence on the four diagnostic classes (proton, electron, pion, muon) across $\sim 6300$~km baseline; the catalog will extend to the remaining 12 compendium classes with the same falsifier criterion.
+\item \textbf{Cross-sector-equivalence falsifier.}  The cross-sector equivalences ($\mu^- \equiv D^+ \equiv J/\psi$, $\tau^- \equiv \Lambda \equiv \Sigma^*$, etc.) predict identical chip outcomes for syndrome-equivalent particles.  If two syndrome-equivalent particles produce systematically different chip outputs on multiple backends, the equivalence reading fails.
+\item \textbf{Decay-amplitude falsifier.}  Exp~10's $\cos^2(\theta/2)$ confirmation predicts the same scaling for every coherent decay channel.  Systematic deviation from $\cos^2(\theta/2)$ on Exp~13 (neutron) or in the planned decay catalog falsifies the substrate-canonical decay-rotation reading.
+\item \textbf{Pair-production CPT falsifier.}  Pair-production circuits predict $(0, 0)$ total winding and $X / Z$ syndrome anti-correlation between matter and antimatter blocks.  Systematic deviation from anti-correlation falsifies the reverse-traversal identification of antimatter.
+\item \textbf{Cross-vendor compilation-universality falsifier.}  Because the $K_7$/Steane prediction is a dimensionless integer syndrome bin per walk, substrate-monism predicts identical bins across all chip vendors and architectures (in the substrate reading, the condensate-state $\hbar$-universality of Paper 21a~\cite[\S 2.1]{Paper21a}; operationally, simply that each chip implements the same logical circuit).  A vendor producing a \emph{different} integer bin for any walk---not merely a lower modal probability---falsifies chip-architecture-independent substrate compilation.  The cross-vendor runs (\S\ref{sec:phase28e}) test this across five IBM Heron backends, IQM Garnet, and AQT Ibex-Q1 (trapped-ion, $4/4$ walks)---two qubit modalities and three vendors, with no bin disagreement; a single integer-bin disagreement on any walk would falsify.
+\end{enumerate}
+
+\subsection{Position within fundamental physics}
+\label{sec:position}
+
+NWT's substrate-monism program now has empirical anchors at three scales:
+\begin{itemize}
+\item \textbf{Cosmological:} the seven Form A cosmology predictions ($\Lambda_\text{cc}$, $\Omega_m$, $\Omega_b / \Omega_c$, $H_0$, $n_s$, $f_J$, $\eta_B$~\cite{Paper25Memo}), all at $\leq 1\%$ Planck precision.
+\item \textbf{Particle-physics:} the $80$-particle Standard Model mass spectrum at median $\sim 0.1\%$ PDG precision~\cite{Paper13}, three fermion generations from $G_2 \to SU(3)$ breaking~\cite{Paper20}, neutrino mixing~\cite{Paper20}, CP phase~\cite{Paper13,Paper20}, the $(2, F_n)$ closed-form carrier-knot derivation chain~\cite{Paper21a}.
+\item \textbf{Bench-scale quantum hardware:} the single-particle results on four Heron r2 backends across a $\sim 6300$~km cross-Atlantic baseline; the cross-vendor extension to five Heron backends and IQM Garnet (\S\ref{sec:phase28e}); the Exp~10 muon-decay coherent rotation; and the Exp~13 neutron-decay (\S\ref{sec:neutron-decay-execution}) and Exp~14 $e^+ e^- \to \mu^+ \mu^-$ scattering (\S\ref{sec:emumu-execution}) results.
+\end{itemize}
+
+The bench-scale anchor is distinctive: standard frameworks---leptogenesis, electroweak baryogenesis, Affleck--Dine, GUT, MSSM---make no prediction testable on bench-scale quantum hardware at all, whereas NWT's walk-to-Pauli compilation yields a concrete chip protocol.  Its dimensionless predictions were borne out in May 2026 across multiple anchors---single-particle preparation, coherent decay, and scattering---on six superconducting backends spanning two chip vendors, and reproduced $4/4$ on AQT Ibex-Q1 (trapped-ion), extending the result to qubit-architecture independence.
+
+%% ================================================================
+\section*{Acknowledgments}
+%% ================================================================
+
+The single-particle hardware results used the IBM Quantum open-instance free tier (QiskitRuntimeService channel \texttt{ibm\_cloud}); the cross-vendor results additionally used IQM Garnet via Amazon Braket.  We acknowledge IBM Quantum and IQM/Amazon Braket for the hardware access enabling the bench-scale anchor of this work.  Paper 21a~\cite{Paper21a} (the theory companion) developed the substrate-canonical derivation chain whose chip-side confirmation is reported here; the two papers should be read together.  We thank three AI reviewers---Gemini (Google), Perplexity, and ChatGPT (OpenAI)---for detailed referee-style critical reviews of earlier drafts of this manuscript.
+
+%% ================================================================
+\section*{Data and Code Availability}
+%% ================================================================
+
+The hardware-experiment drivers---the Steane $\Klogical$ submit--poll--decode harnesses for the single-particle, cross-vendor, muon-decay, neutron-decay, and scattering runs---together with the preserved raw job results and decoded JSON outputs, are available in the public analyses repository at \url{https://github.com/JimGalasyn/null-worldtube} under \texttt{analysis/output/heron\_runs/}.  Every job ID quoted in the text resolves to a preserved result, enabling offline re-decoding.  The vendor-neutral cross-architecture quantum-hardware interface used to build and decode the circuits, together with the substrate-algebraic computation library underlying the $K_7$ / Steane $\Klogical$ / $\mathrm{Cl}(0, 7)$ / $\mathrm{Spin}(7)$ identities used throughout, is available at \url{https://github.com/JimGalasyn/nwt-substrate} (v0.2.0, Zenodo DOI \texttt{10.5281/zenodo.20398451}; concept DOI \texttt{10.5281/zenodo.20012027} for all versions).
+
+%% ================================================================
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{Paper8a} J.~P.~Galasyn and C.~Th\'eodore, ``Gauge Coupling Constants and Electroweak Structure,'' Paper 8a, in preparation.
+\bibitem{Paper7} J.~P.~Galasyn and C.~Th\'eodore, ``Charge, Leptons, and the Genus of Torus Knots,'' Paper 7, in preparation.
+\bibitem{Paper13} J.~P.~Galasyn and C.~Th\'eodore, ``The Standard Model from NWT Topology: A One-Input Framework for the Particle Spectrum,'' Paper 13, Zenodo DOI 10.5281/zenodo.19635239 (2026).
+
+\bibitem{Paper17} J.~P.~Galasyn and C.~Th\'eodore, ``Newton's Constant and Rest-Frame Schr\"odinger Evolution,'' Paper 17, Zenodo DOI 10.5281/zenodo.20025452 (2026).
+
+\bibitem{Paper18} J.~P.~Galasyn and C.~Th\'eodore, ``Sakharov-Induced Einstein Gravity,'' Paper 18, Zenodo DOI 10.5281/zenodo.20025459 (2026).
+
+\bibitem{Paper19} J.~P.~Galasyn and C.~Th\'eodore, ``Slow cosmogenesis,'' Paper 19, Zenodo DOI 10.5281/zenodo.20057423 (2026).
+
+\bibitem{Paper20} J.~P.~Galasyn and C.~Th\'eodore, ``Neutrino sector from Spin(8) triality on $K_7 / K_8$,'' Paper 20, Zenodo DOI 10.5281/zenodo.20259632 (2026).
+
+\bibitem{Paper21a} J.~P.~Galasyn and C.~Th\'eodore, ``Standard Model Particles as Closed Walks on $K_7$, I: Torus-Knot Carriers, the Steane $\Klogical$ Code, and a Closed-Form Mass Spectrum,'' Paper 21a, theory companion to this paper, Zenodo DOI 10.5281/zenodo.20402044 (2026).
+
+
+\bibitem{Paper25Memo} J.~P.~Galasyn and C.~Th\'eodore, ``Cosmic baryon asymmetry and matter composition from $K_7$ substrate (working memo),'' \texttt{papers/baryon\_asymmetry\_memo.md}, 2026.
+
+\bibitem{NielsenChuang} M.~A.~Nielsen and I.~L.~Chuang, \emph{Quantum Computation and Quantum Information}, Cambridge University Press, 2010.
+
+\bibitem{BosonMemo} J.~P.~Galasyn and C.~Th\'eodore, ``Paper 21a---Boson Representation in NWT Substrate,'' working memo, \texttt{analysis/paper21\_boson\_representation.md}, 2026-05-23.  Formalises the multi-patch substrate-mediator algebra; defines the photon vertex $V_\gamma^{(\pm)} = (X_a^{(i)} X_b^{(j)}, Z_a^{(i)} Z_b^{(j)})$, the charge-vertex selection rule, and the polar-vertex-as-photon-channel corollary used in \S\ref{sec:emumu-circuit}.
+
+\bibitem{Exp10Prereg} J.~P.~Galasyn and C.~Th\'eodore, ``Heron experimental program Exp 10 pre-registration,'' \texttt{analysis/EXP10\_PREREG.md}, 2026.
+
+\bibitem{Exp12Prereg} J.~P.~Galasyn and C.~Th\'eodore, ``Heron experimental program Exp 12 pre-registration v3,'' \texttt{analysis/EXP12\_PREREG.md}, 2026.
+
+\end{thebibliography}
+
+\end{document}

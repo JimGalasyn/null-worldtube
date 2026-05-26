@@ -1,0 +1,25 @@
+{
+  "mode": "hardware-stage",
+  "backend": "iqm/Garnet",
+  "shots_per_circuit": 100,
+  "timestamp": "20260523_140356",
+  "phase2_targets": [
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      1,
+      8
+    ]
+  ],
+  "circuits": null
+}

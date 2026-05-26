@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.3cm]{geometry}
+\setlength{\emergencystretch}{3em}  % absorb the few long \texttt/\url tokens without overfull margins
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{array}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=green!50!black,
+  urlcolor=blue!50!black,
+}
+
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\HV}{h_v}
+\newcommand{\hcox}{h_{\mathrm{Cox}}}
+\newcommand{\Klogical}{[[7, 1, 3]]}
+\newcommand{\Mpl}{M_{\mathrm{Pl}}}
+\newcommand{\vEW}{v_{\mathrm{EW}}}
+\newcommand{\Lcc}{\Lambda_{\mathrm{cc}}}
+\newcommand{\sgn}{\mathrm{sgn}}
+
+\begin{document}
+
+\title{Black Hole Cosmogenesis:\\[4pt]
+the Standard Model and Cosmology with\\
+Zero Free Dimensionless Parameters\\[6pt]
+\large (Paper 22)}
+\author{James P.~Galasyn \and Claude Th\'eodore}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+We present a cosmogenesis scenario in which a daughter universe nucleates from a near-extremal Kerr black hole and inherits a \emph{no-hair tuple}---its parent's mass-hair (fixing the Planck scale $\Mpl$), spin axis, substrate algebra, and a chirality sign. From this \emph{single dimensional anchor} together with the inherited \emph{dimensionless} substrate algebra $\so(7)$, the Standard-Model and cosmological observables follow at percent-level precision with \textbf{zero free continuously-adjustable dimensionless parameters}: the baryon asymmetry $\eta_B = \tfrac{3}{14}\alpha^4$, the cosmological constant $\Lcc$, the baryon-to-dark-matter ratio $\Omega_b/\Omega_c = 25\alpha + 75\alpha^2$, the scalar spectral index $n_s = 1 - \HV\alpha$ and tensor ratio $r = 48\alpha^2$, the electroweak vacuum and Higgs mass, gauge-coupling unification at $\alpha_{\mathrm{GUT}}^{-1} = \HV^2$, and a discrete dark-matter mass tower. The framework's \emph{discrete} structural commitments---the closed form $\alpha = 1/(25\pi\sqrt{3} + 1)$, the algebra $\so(7) = B_3$, the disk curvature $\alpha_{\mathrm{KL}} = 16/25$, and the prefactor integers ($3/14$, $8/7$, $18$, $25$)---are fixed by the substrate construction rather than fitted to data, but are theoretical choices, not consequences of a deeper dynamical principle established here. The lone dimensional input, $\Mpl$, \emph{cancels from every dimensionless prediction} (verified identically at $\Mpl$ and at $10^6\,\Mpl$). We give the inheritance mechanism, the derived observable ledger, and the sharp falsifiers---$r = 48\alpha^2 = 2.56\times10^{-3}$ ($\sim\!5\sigma$ detection by CMB-S4 at design sensitivity, $2$--$3\sigma$ discrimination from the Starobinsky benchmark) and a $98$~GeV dark-matter state (LZ-G3/DARWIN)---and we demarcate honestly the one quantity that is fixed but not derived (the inflaton-disk radius) and the one that is astrophysical (the event rate). This is the cosmogenic companion to Papers 21a/21b~\cite{Paper21a,Paper21b}, supplying the $\Mpl$-fixing mechanism those papers forward-reference.
+\end{abstract}
+
+\section{The cosmogenic bridge and no-hair inheritance}
+\label{sec:bridge}
+
+\paragraph{The bridge.} A parent black hole driven by accretion to near-extremal spin ($a^*_{\mathrm{eq}} = 0.998052$, the Thorne photon-capture equilibrium~\cite{Thorne1974}, which coincides with the substrate $K_7$-viability spin) develops an Aretakis instability~\cite{Aretakis} at its horizon. At saturation a transient \textbf{bridge} forms in the \emph{inter-horizon region}: a toroidal $T^2$ substrate vortex whose toroidal topology is forced from both sides. From the substrate side, $K_7$ has graph genus $1$ (Ringel--Youngs~\cite{RingelYoungs}), so its carrier surface must be a torus; from the gravitational side, the Kerr interior supplies exactly one toroidal structure---the region of closed timelike curves around the ring singularity~\cite{Carter1968}---which is \emph{neither} the ergosurface (topologically $S^2$) \emph{nor} the near-horizon extremal-Kerr (NHEK) throat's transverse $S^2$~\cite{BardeenHorowitz} where the Aretakis mode operates. The substrate vortex and the Kerr causal torus are \emph{not coincident but co-supported}: the inter-horizon geometric width $r_{\mathrm{gap}} = (r_+ - r_-)/2 = M\sqrt{1 - a^{*2}}$ (a gravitational scale) and the substrate vortex core $r_{\mathrm{core}} = \sqrt{\alpha}\,M$ (the $K_7$ coupling scale) are two features of the one bridge, algebraically linked through the impedance match below to the fixed ratio $r_{\mathrm{gap}}/r_{\mathrm{core}} = \sqrt{4\sqrt{2}/9}\,/(1+\sqrt{\alpha}) = 0.7304$. Its Israel junction to the parent fixes the dimensionless product
+\[ H \times M = \hcox(\so(7)) = 6, \]
+with the rotational-energy fraction transmitted to the daughter $f_J = (1 - \sqrt{\alpha})^3 \approx 0.765$---the per-edge Wilson transmission $(1 - \sqrt{\alpha})$ (Paper 17~\cite{Paper17}) over the $3$ bridging edges of the polar-vertex $Z_3$ $\sigma$-orbit, the exponent $3 = \mathrm{rank}(\so(7))$ being the same structural $3$ as the $\eta_B$ numerator and the three generations. The bridge is the locus of a single measurement-like event (the $H^{\otimes 7}$ polarity selection of \S\ref{sec:matter}) that commits the daughter's matter content. The cosmogenic spin is itself substrate-fixed: combining the $K_7$-viability ratio $\kappa_{\mathrm{parent}}/\kappa_{\mathrm{daughter}} = 3(1+\sqrt{\alpha})$ with the Macken impedance $\kappa_{\mathrm{daughter}} = 1/\sqrt{\sqrt{2}\,\alpha}$ closes to a function of $\alpha$ alone,
+\[ a^*_{\mathrm{eq}} = \sqrt{1 - \tfrac{4\sqrt{2}}{9}\,\frac{\alpha}{(1+\sqrt{\alpha})^2}} = 0.998052, \]
+coincident with the canonical Thorne thin-disk photon-capture equilibrium $a^* = 0.998$ (model-dependent at the $\sim\!10^{-3}$ level); the same impedance match pins the ratio of the two bridge radii above.
+
+\paragraph{No-hair inheritance.} Just as a Kerr--Newman black hole carries only $(M, Q, J)$ externally regardless of its infall history, a daughter universe carries only a small fixed tuple through inflation, which thermalizes all sub-horizon substrate detail. The inherited set is
+\[ \big(\,\Mpl,\ \hat{J}_{\mathrm{parent}},\ \text{algebra}\ \so(7)/Z_3,\ Z_2\ \text{sign}\,\big), \]
+mapping onto the three classical Kerr hairs plus the substrate algebra: $J \to$ the CMB Axis-of-Evil direction; $Q \approx 0 \to$ charge neutrality; $M \to$ the Planck scale $\Mpl$; the order-3 cyclic subgroup $Z_3 \subset G_2 = \Aut(\mathbb{O})$ $\to$ three fermion generations and a faint $\ell = 3$ CMB residue; the $Z_2$ chirality sign $\to$ matter-over-antimatter (and a cross-arc of sign observables). The action quantum $\hbar$ and the light speed $c$ are likewise inherited as universal unit conventions (identical across daughters; we set $\hbar = c = 1$): $c$ is realized as $a/\tau_{\mathrm{clock}}$ with the voxel spacing $a$ and clock-tick $\tau_{\mathrm{clock}}$ themselves set by the $\Mpl$ anchor (Paper 21a~\cite[\S 9.5]{Paper21a}), so it is fixed by $\Mpl$ and the substrate, not a separate free input. Exactly one free \emph{dimensional} scale---$\Mpl$---remains.
+
+\paragraph{The $\Mpl$ anchor (the load-bearing claim).} That anchor is the parent's \textbf{mass-hair}. Because $M$ is a \emph{gravitational} mass, the daughter's dimensional anchor is its Planck mass $\Mpl$. Every other scale is then $\Mpl$ times a dimensionless substrate factor. In particular, the entire fermion and boson spectrum is a set of \emph{derived} rungs of the $K_7/K_8$ Wilson tower,
+\[ m = \frac{8}{N_v}\,\alpha^{N_e/2}\,(1 + \alpha/7)(1 + 3\alpha^2)\,\Mpl, \]
+with the electron the $(N_e = 21,\ N_v = 7)$ rung, reproducing $m_e$ to $-5.5$~ppm at NNLO (Paper 17~\cite{Paper17}). The electroweak vacuum is $\vEW = (\HV/2)\,\alpha^8\,\Mpl = 245.5$~GeV ($-0.3\%$). The electron mass is thus \emph{predicted from} $\Mpl$, not an input.
+
+\paragraph{One scale, zero dimensionless parameters.} Since every scale is $\Mpl \times (\alpha\text{-power})$, $\Mpl$ \textbf{cancels from every dimensionless observable}---$m_e/\Mpl$, $\vEW/\Mpl$, $\Lcc/\Mpl^4$, $m_H/\vEW$, $\Omega_b/\Omega_c$, $\eta_B$, $n_s$, $r$---which we verify identically at $\Mpl$ and at $10^6\,\Mpl$. The daughter therefore has \textbf{one free scale and zero free dimensionless parameters}. The role of $\Mpl$ (the anchor) is inherited; its numerical value (which parent) is contingent and, because it cancels from all ratios, unobservable in any dimensionless test. This is the precise content of the loose ``one free parameter'' statement of earlier work.  The count is of \emph{continuously-adjustable} parameters: the framework still makes discrete structural commitments---the closed form of $\alpha$, the algebra $\so(7) = B_3$, and the disk curvature $\alpha_{\mathrm{KL}} = 16/25$---which are fixed by the construction rather than fitted to data, but are choices of theory, not consequences of a deeper dynamical principle established here.
+
+\section{Substrate primitives}
+\label{sec:primitives}
+
+The framework rests on a single dimensionless constant, the trefoil-residue fine-structure value
+\[ \alpha = \frac{1}{25\pi\sqrt{3} + 1} = 7.2974\times10^{-3}, \]
+equal to the Thomson-limit $\alpha_{\mathrm{em}}$ to $7.6$~ppm (a closed-form leading-order value, not an exactness claim). The substrate algebra is $\so(7) = B_3$ (rank $3$, dual Coxeter $\HV = 5$ (the same substrate invariant as Paper 21a's $K_7$ Hopf-vacuum closure-2 vertex count~\cite[\S 2]{Paper21a}, since $K_7$'s $21$ edges $= \dim\so(7)$), Coxeter $\hcox = 6$, $\dim 21$, $N_{\mathrm{pos}} = 9$ positive roots). Its physical carrier is the complete graph $K_7$, identified with the Steane $\Klogical$ code, the Fano plane, and the octonion imaginaries---one seven-point object---an identification whose Steane-code realization reproduces the predicted stabilizer syndromes on IBM Heron r2 and across architectures (Paper 21b~\cite{Paper21b}).  As Paper 21b emphasizes, this is evidence that the walk-to-Pauli mapping is correctly implemented and noise-robust on hardware, \emph{not} independent confirmation that the Standard Model \emph{is} encoded as $K_7$ walks; the identification remains a theoretical ansatz. Two integers thread the whole observable set: the ``DNA'' pair $18 = \text{rank}\cdot\hcox$ and $25 = \HV^2$.
+
+\section{Matter genesis: $\eta_B = \tfrac{3}{14}\alpha^4$}
+\label{sec:matter}
+
+The $H^{\otimes 7}$ polarity-selection event at the bridge (the measurement-like commitment of \S\ref{sec:bridge}) is what fixes the daughter's matter content. Under the $K_7 \equiv$ Steane $\Klogical$ identification (\S\ref{sec:primitives}; Paper 21a~\cite{Paper21a}), matter and antimatter are not two condensate species but the two readout-basis selections of a single self-dual code, exchanged by the transversal Hadamard $H^{\otimes 7}$---the substrate CPT operation. The cosmogenic asymmetry is the bias of that basis selection:
+\[ \eta_B = \frac{\text{rank}(\so(7))}{\dim(G_2)}\,\alpha^4 = \frac{3}{14}\,\alpha^4 = 6.08\times10^{-10}, \]
+agreeing with the Planck/BBN value $(6.10 \pm 0.10)\times10^{-10}$ at $0.38\%$, well inside the $1.6\%$ experimental error, with $\sgn(\eta_B) = \sgn(J_{\mathrm{parent}})$---the matter-over-antimatter sign is the inherited $Z_2$ chirality (\S\ref{sec:bridge}).
+
+\paragraph{The prefactor is structural, not fitted.} The numerator $3 = \text{rank}(\so(7))$ is the number of fermion generations, which contribute additively to the CP-asymmetric amplitude; the denominator $14 = \dim(G_2) = \dim\Aut(\mathbb{O})$ is the substrate-automorphism phase space over which that amplitude is distributed. The power $\alpha^4$ is NLO$^2$: two NR-Hamilton CP-violating vertices, each carrying an $\alpha^2$ loop suppression. The $\alpha^4$ scaling is tightly constrained: $\alpha^3$ over-predicts $\eta_B$ by $\sim\!10^4$ while QED-loop-natural prefactors ($\alpha^4/4\pi$, $\alpha^4/16\pi$) under-predict by $60$--$95\%$, so the substrate (non-$\pi$) prefactor $3/14$ at $\alpha^4$ is forced rather than fitted.
+
+\paragraph{Two presentations of one mechanism.} The result admits two formal presentations converging on identical numerics by construction: a \emph{bridge-event} reading, in which $\eta_B$ is the $H^{\otimes 7}$ stabilizer-basis-selection bias at the cosmogenic phase transition; and a \emph{carrier-knot} reading, in which the asymmetry is a walk-population imbalance sourced by the NR-Hamilton ($d = 3$, non-quadratic-residue Hamilton-cycle) substructure of $K_7$ walks (the same Law-2 Hamilton bifurcation that fixes the mass-formula sectors, Paper 21a~\cite{Paper21a}, \S 4). These are dual descriptions of the same QR/NR substrate asymmetry---operator-side and state-side, related by the Pauli-bit-level QR/NR\,$\leftrightarrow$\,$X$/$Z$ duality (Paper 21a~\cite{Paper21a}, \S 5.3)---\emph{not} independent derivations; a genuinely independent route via the $K_8$ sector (e.g.\ the Paper 20~\cite{Paper20} neutrino CP phase) would constitute substantive cross-confirmation and is the natural follow-up. The CP-violating channel is distinct from the CKM Jarlskog invariant, which alone gives $\eta_B \sim 10^{-20}$ at $\alpha^{5/2}$; the substrate channel operates ten orders of magnitude higher, at $\alpha^4$, matching observation without beyond-Standard-Model fields. All three Sakharov conditions are met structurally: baryon-number violation by the discrete change of walk-homology $(p,q)$ under transduction, CP-violation by the NR-Hamilton phase, and the out-of-equilibrium condition by the cosmogenic bridge itself (\S\ref{sec:bridge}). The $K_7 \equiv$ Steane identification underwriting both routes is hardware-anchored (\S\ref{sec:primitives}; Paper 21b~\cite{Paper21b}).
+
+\section{Cosmological partition: $\Omega_b/\Omega_c$ and $\Lcc$}
+\label{sec:partition}
+
+The bridge condensate partitions between a $K_7$-Steane-active (baryonic) channel and a $K_8$-extension-only (cold dark matter) channel. The leading Wilson-amplitude ratio gives
+\[ \Omega_b/\Omega_c = 25\alpha + 75\alpha^2 = 0.1864, \]
+within $60$~ppm of the Planck 2018 ratio $\Omega_b h^2 / \Omega_c h^2 = 0.02237/0.1200 = 0.18642$~\cite{Planck2018}, where $25 = q_{\mathrm{cinq}}^2$ (the cinquefoil determinant) at leading order and $75 = 3 \times 25$ (three generations) at next-to-leading order. The cosmological constant is set by the same anchor and algebra,
+\[ \Lcc/\Mpl^4 = (m_e/\Mpl)^4\,\alpha^{16}\,\hcox, \]
+reproducing the observed dark-energy density to three digits---and, since $m_e/\Mpl$ is itself an $\alpha$-power (\S\ref{sec:bridge}), this is a pure substrate number times $\Mpl^4$.
+
+\section{Inflation: an $\alpha$-attractor forced by the bridge}
+\label{sec:inflation}
+
+\paragraph{The type is a theorem.} The inflaton is a modulus of the substrate surface---the $K_7$ Heffter torus $T^2$, which becomes the genus-2 surface $\Sigma_2$ at the cosmogenic topology change $T^2 \# T^2 = \Sigma_2$. The Teichm\"uller space of the torus \emph{is} the Poincar\'e disk $SL(2,\mathbb{R})/SO(2)$ with the constant-curvature Weil--Petersson metric, so the inflaton field space is a hyperbolic disk and inflation is an \textbf{$\alpha$-attractor}~\cite{KalloshLinde} as a theorem of Riemann-surface moduli, not an ad-hoc potential choice. (The same $SL(2,\mathbb{R})$ is the NHEK bridge isometry.) Genus-2 carries three moduli, matching the three substrate dynamical fields (inflaton, Higgs, $Z_2$).
+
+\paragraph{The observables.} Equating the $\alpha$-attractor relation $n_s = 1 - 2/N_e$ with the substrate value $n_s = 1 - \HV\alpha$ fixes the e-fold count in closed form, $N_e = 2/(\HV\alpha) = 10\pi\sqrt{3} + 2/5 \approx 54.81$ (an independent $V_0 = \bar\lambda_C^3$ bookkeeping route agrees at $2.7\%$); the $\alpha$-attractor relations then give
+\begin{align*}
+n_s &= 1 - 2/N_e = 1 - \HV\alpha = 0.9635 \quad (\text{Planck } 0.9649 \pm 0.0042), \\
+r &= 12\,\alpha_{\mathrm{KL}}/N_e^2 = 48\alpha^2 = 2.56\times10^{-3},
+\end{align*}
+where the single shape parameter is the disk curvature $\alpha_{\mathrm{KL}} = ((\text{rank}+1)/\HV)^2 = 16/25$ (the K\"ahler-manifold curvature of the $\alpha$-attractor, a distinct quantity from the fine-structure $\alpha$ of \S\ref{sec:primitives}; the $B_3$ substrate fixes both). \textbf{Honest demarcation:} $\alpha_{\mathrm{KL}}$ is \emph{fixed} by the $B_3$ substrate with zero free parameters---the $\alpha$-attractor \emph{type} is derived (above), and $n_s$, $r$, and the K\"ahler curvature $R_K = -25/24$ all follow---but the disk \emph{radius} $\sqrt{\alpha_{\mathrm{KL}}} = 4/5$ is an \textbf{irreducible substrate datum}: seven independent derivation routes (coherent-state, spinor coadjoint, Potts $c^2$, multi-node, gauged-WZW, JT/Schwarzian, and the sugra/moduli reduction) are exhausted, unified by the observation that each supplies a single linear/integer handle while $\alpha_{\mathrm{KL}}$ is a ratio of two squared affine integers. The prediction $r = 48\alpha^2 = 2.56\times10^{-3}$ is falsifiable regardless of the radius's origin: at the CMB-S4 design sensitivity $\sigma(r) = 5\times10^{-4}$ it is a $\sim\!5\sigma$ \emph{detection} (matching CMB-S4's $r > 0.003$ target), with LiteBIRD ($\delta r \lesssim 10^{-3}$) an independent probe. The Starobinsky limit of the same $\alpha$-attractor family ($\alpha_{\mathrm{KL}} = 1$) gives $r = 12/N_e^2 = 75\alpha^2$ at the substrate $N_e$, so the substrate--Starobinsky separation is $\Delta r = 27\alpha^2 = 1.4\times10^{-3}$, i.e.\ $2$--$3\sigma$ at design sensitivity; $>5\sigma$ discrimination requires post-CMB-S4 (PICO/PIXIE-class) instruments.
+
+\section{Dark and electroweak sectors: the $K_8$ tower}
+\label{sec:dark-ew}
+
+The Higgs sector follows from the $\Mpl$ anchor: $\vEW = (\HV/2)\,\alpha^8\,\Mpl = 245.5$~GeV ($-0.3\%$), quartic $\lambda_H = 2 N_{\mathrm{pos}}\,\alpha = 18\alpha$, and $m_H = \sqrt{2\lambda_H}\,\vEW = 125.8$~GeV ($+0.4\%$)---the same DNA integer $18 = \text{rank}\cdot\hcox$ appearing in $\lambda_H$ and in $H_0$. Gauge couplings unify at $\alpha_{\mathrm{GUT}}^{-1} = \HV^2 = 25$ (MSSM range $24$--$26$) without low-energy supersymmetry: the $K_8$ mass tower's dark-matter states play the role of the threshold corrections.
+
+The $K_8$ edge-orbit tower yields a discrete multi-species dark sector---a $38$~keV warm state, a \textbf{$98$~GeV WIMP} ($N_e = 16$, i.e.\ $\alpha^8\,\Mpl$), and a $1.15$~TeV heavy state---the WIMP being the most testable substrate prediction. Dark matter is described by the $K_8$ tower alone (this supersedes earlier condensate-species treatments).
+
+\section{Falsifiable predictions}
+\label{sec:falsifiers}
+
+\begin{enumerate}
+\item \textbf{$r = 48\alpha^2 = 2.56\times10^{-3}$}---a single point in the $(n_s, r)$ plane at $(0.9635,\ 2.56\times10^{-3})$.  First-decade falsifier: CMB-S4 \emph{detects} this value at $\sim\!5\sigma$ at design sensitivity $\sigma(r) = 5\times10^{-4}$, with LiteBIRD independent confirmation; discrimination from the Starobinsky limit ($r = 75\alpha^2$) is $2$--$3\sigma$, with higher-$\sigma$ discrimination requiring post-CMB-S4 instruments.
+\item \textbf{$98$~GeV $K_8$ WIMP}---substrate-fixed at $\alpha^8\,\Mpl$; LZ-G3 (2026--28) probes most of the $\sigma_{\mathrm{SI}}$ bracket, DARWIN/XLZD (2030+) the whole of it.
+\item \textbf{Multi-species DM tower} ($38$~keV $+$ $98$~GeV $+$ $1.15$~TeV)---a distinguishing signature versus single-component WIMP/axion scenarios.
+\item \textbf{$\Sigma m_\nu$ tower}---the active-neutrino rung ($N_e = 28$) gives a DESI ``clock'' falsifier (Paper 20~\cite{Paper20}).
+\item \textbf{No low-energy SUSY}---the substrate predicts MSSM-like unification \emph{without} superpartners. Current LHC Run-3 null results on natural SUSY are consistent with this; HL-LHC will probe substantially more parameter space, and an LHC SUSY discovery would falsify the $K_8$-as-thresholds picture.
+\item \textbf{Cosmogenic-parent AGN population}---the substrate fixes the parent \emph{selection} (mass band $M^*\!\cdot[1/\sqrt{2}, \sqrt{2}]$, spin $a^* \approx 0.998$), predicting a candidate density $n_{\mathrm{cand}} \approx 3.3\times10^{-6}$~Mpc$^{-3}$ ($\sim\!10^3$ within $z < 0.1$). This is a population-level prediction, not a parent identification: no present observable distinguishes ``the'' parent from generic high-spin AGN, so we include it as a structural consequence rather than a near-term falsifier (sharpening needs a population statistic---spin distribution or mass-band fraction---separating substrate-canonical parents from generic populations).
+\item \textbf{Axis of Evil}---the inherited spin axis, correlated with the cross-arc $Z_2$ sign.  We treat this as suggestive rather than decisive: the statistical significance of the CMB low-$\ell$ alignments remains debated.
+\end{enumerate}
+
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Versus Cosmological Natural Selection.} Like Smolin's CNS~\cite{Smolin1992}, universes are born inside black holes; unlike CNS, the daughter's \emph{dimensionless} constants are \textbf{substrate-fixed and do not drift}: they are set by the inherited $\so(7)$ algebra rather than by the parent's particular history, so daughters reproduce them up to the usual renormalization-group running and quantum corrections, not by Darwinian tuning. There is no selection pressure on the dimensionless constants; the genealogy is \emph{algebraic}, not evolutionary. The cousins-per-parent number is $O(1)$ (shallow genealogy), so cousin-clustering does not lift the no-hair degeneracy.
+
+\paragraph{What is and is not derived.} The framework derives $>40$ dimensionless observables at percent precision from $\alpha$ and the inherited algebra, with one free scale ($\Mpl$) that cancels from all of them. Three honest limits: (i) the inflaton-disk \emph{radius} $\sqrt{\alpha_{\mathrm{KL}}} = 4/5$ is fixed by the $B_3$ substrate but not reducible to a more primitive dynamical quantity (\S\ref{sec:inflation})---the remaining derivation avenue is a full string compactification computing the Weil--Petersson $\so(7)$-dressing from substrate fluxes; (ii) the cosmogenic \emph{event rate} normalization is astrophysical, though its \emph{selection} (parent mass $+$ spin) is substrate-fixed (\S\ref{sec:falsifiers}); (iii) the \emph{bridge} is an \emph{assumed} saturation endpoint of the Aretakis instability---a linear-level theorem on extremal horizons whose nonlinear endpoint we posit (not derive) to be the substrate-mediating $T^2$ vortex, with a controlled extremal-Kerr saturation analysis the key missing dynamical step.
+
+\section{Observable ledger}
+\label{sec:ledger}
+
+All entries are $\Mpl$-independent (dimensionless, or ratios to $\Mpl$); one free scale, zero free dimensionless parameters.
+
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+Observable & Substrate form & Predicted & Observed & $\Delta$ \\
+\midrule
+$\eta_B$ & $\tfrac{3}{14}\alpha^4$ & $6.08\times10^{-10}$ & $6.10\times10^{-10}$ & $0.38\%$ \\
+$\Omega_b/\Omega_c$ & $25\alpha + 75\alpha^2$ & $0.1864$ & $0.1864$ & $60$~ppm \\
+$n_s$ & $1 - \HV\alpha$ & $0.9635$ & $0.9649 \pm 0.0042$ & $0.3\sigma$ \\
+$r$ & $48\alpha^2$ & $2.56\times10^{-3}$ & $< 0.036$ & (target) \\
+$a^*_{\mathrm{eq}}$ & $\sqrt{1 - \tfrac{4\sqrt{2}}{9}\,\alpha/(1+\sqrt{\alpha})^2}$ & $0.998052$ & $\approx 0.998$ (Thorne) & within model unc. \\
+$m_e$ & $(8/7)\alpha^{21/2}(\text{NNLO})\,\Mpl$ & $0.5110$~MeV & $0.5110$~MeV & $-5.5$~ppm \\
+$\vEW$ & $(\HV/2)\alpha^8\,\Mpl$ & $245.5$~GeV & $246.22$~GeV & $-0.3\%$ \\
+$m_H$ & $\sqrt{2\cdot18\alpha}\,\vEW$ & $125.8$~GeV & $125.25$~GeV & $+0.4\%$ \\
+$\alpha_{\mathrm{GUT}}^{-1}$ & $\HV^2$ & $25$ & $24$--$26$ (MSSM) & in range \\
+$\Lcc/\Mpl^4$ & $(m_e/\Mpl)^4\alpha^{16}\hcox$ & $1.19\times10^{-123}$ & $1.2\times10^{-123}$ & $-0.7\%$ \\
+$M_{\mathrm{WIMP}}$ & $\alpha^8\,\Mpl$ ($N_e = 16$) & $98.2$~GeV & (LZ-G3 target) & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Data and code availability}
+
+The cosmogenesis and inheritance computations---the $\Mpl$-anchor cancellation check (\texttt{cosmogenesis\_\allowbreak M\_\allowbreak Pl\_\allowbreak anchor\_\allowbreak inheritance.py}), the NHEK bridge setup, the $\alpha$-attractor radius routes, the $\eta_B$ candidate sweep (\texttt{baryon\_asymmetry\_memo.md}, \texttt{nwt\_baryogenesis\_chirality.py}), and the cosmogenic-AGN rate density---are available in the public analyses repositories at \url{https://github.com/JimGalasyn/null-worldtube} and \url{https://github.com/JimGalasyn/vortex-vision}. The substrate-algebraic computation library underlying the $\alpha$, $\so(7)$, and $K_8$ identities used throughout is \texttt{nwt-substrate} v0.2.0 (Zenodo DOI \texttt{10.5281/\allowbreak zenodo.20398451}; concept DOI \texttt{10.5281/\allowbreak zenodo.20012027} for all versions), importing the canonical constants from \texttt{isa.constants}.
+
+\section*{Acknowledgments}
+
+This paper is the cosmogenic companion to Papers 21a and 21b~\cite{Paper21a,Paper21b}; the three form a single bundle and are intended to be read together.  We thank three AI reviewers---Gemini (Google), Perplexity, and ChatGPT (OpenAI)---for detailed referee-style critical reviews of earlier drafts of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{Paper21a} J.~P.~Galasyn and C.~Th\'eodore, ``Standard Model Particles as Closed Walks on $K_7$, I: Torus-Knot Carriers, the Steane $\Klogical$ Code, and a Closed-Form Mass Spectrum,'' Paper 21a, Zenodo DOI 10.5281/zenodo.20402044 (2026).
+\bibitem{Paper21b} J.~P.~Galasyn and C.~Th\'eodore, ``Standard Model Particles as Closed Walks on $K_7$, II: Cross-Vendor and Cross-Architecture Stabilizer-Syndrome Reproduction on Quantum Hardware,'' Paper 21b, Zenodo DOI 10.5281/zenodo.20402046 (2026).
+\bibitem{Paper17} J.~P.~Galasyn and C.~Th\'eodore, ``Newton's Constant and Rest-Frame Schr\"odinger Evolution,'' Paper 17, Zenodo DOI 10.5281/zenodo.20025452 (2026).
+\bibitem{Paper18} J.~P.~Galasyn and C.~Th\'eodore, ``Sakharov-Induced Einstein Gravity,'' Paper 18, Zenodo DOI 10.5281/zenodo.20025459 (2026).
+\bibitem{Paper19} J.~P.~Galasyn and C.~Th\'eodore, ``Slow cosmogenesis,'' Paper 19, Zenodo DOI 10.5281/zenodo.20057423 (2026).
+\bibitem{Paper20} J.~P.~Galasyn and C.~Th\'eodore, ``Neutrino sector from Spin(8) triality on $K_7/K_8$,'' Paper 20, Zenodo DOI 10.5281/zenodo.20259632 (2026).
+\bibitem{NWTsubstrate} J.~P.~Galasyn, ``nwt-substrate: a substrate-algebraic computation library for Null Worldtube Theory,'' v0.2.0, Zenodo (2026), version DOI 10.5281/zenodo.20398451, concept DOI 10.5281/zenodo.20012027.
+
+\bibitem{Smolin1992} L.~Smolin, ``Did the Universe evolve?,'' Class.\ Quantum Grav.\ \textbf{9}, 173--191 (1992).
+\bibitem{Thorne1974} K.~S.~Thorne, ``Disk-accretion onto a black hole. II. Evolution of the hole,'' Astrophys.\ J.\ \textbf{191}, 507--519 (1974).
+\bibitem{BardeenHorowitz} J.~M.~Bardeen and G.~T.~Horowitz, ``The extreme Kerr throat geometry: a vacuum analog of $AdS_2 \times S^2$,'' Phys.\ Rev.\ D \textbf{60}, 104030 (1999).
+\bibitem{Carter1968} B.~Carter, ``Global structure of the Kerr family of gravitational fields,'' Phys.\ Rev.\ \textbf{174}, 1559--1571 (1968).
+\bibitem{Aretakis} S.~Aretakis, ``Horizon instability of extremal black holes,'' Adv.\ Theor.\ Math.\ Phys.\ \textbf{19}, 507--530 (2015).
+\bibitem{KalloshLinde} R.~Kallosh and A.~Linde, ``Universality class in conformal inflation,'' JCAP \textbf{07}, 002 (2013).
+\bibitem{Planck2018} Planck Collaboration, ``Planck 2018 results. VI. Cosmological parameters,'' Astron.\ Astrophys.\ \textbf{641}, A6 (2020).
+
+\bibitem{RingelYoungs} G.~Ringel and J.~W.~T.~Youngs, ``Solution of the Heawood map-coloring problem,'' Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{60}, 438--445 (1968).
+
+\end{thebibliography}
+
+\end{document}

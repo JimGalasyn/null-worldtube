@@ -1,0 +1,1314 @@
+{
+  "experiment": "exp15_16_cross_sector_equivalence",
+  "mode": "dry-run",
+  "backend": "dry-run-fake-marrakesh",
+  "shots_per_circuit": 2000,
+  "timestamp": "20260526_072109",
+  "variant": "ancilla-free destructive CSS readout",
+  "equiv_classes": {
+    "A_(P,F3)": {
+      "syndrome": [
+        "P",
+        "F3"
+      ],
+      "members": [
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          7
+        ]
+      ],
+      "names": {
+        "(1, 8)": "mu-",
+        "(2, 7)": "D+ / J/psi"
+      }
+    },
+    "B_(E2,E2)": {
+      "syndrome": [
+        "E2",
+        "E2"
+      ],
+      "members": [
+        [
+          3,
+          4
+        ]
+      ],
+      "names": {
+        "(3, 4)": "tau- / Lambda / Sigma*"
+      }
+    },
+    "C_(F2,E2)": {
+      "syndrome": [
+        "F2",
+        "E2"
+      ],
+      "members": [
+        [
+          2,
+          1
+        ],
+        [
+          7,
+          3
+        ]
+      ],
+      "names": {
+        "(2, 1)": "e-",
+        "(7, 3)": "pi0"
+      }
+    }
+  },
+  "n_equiv_classes_confirmed": 3,
+  "n_equiv_classes": 3,
+  "n_walks_pass": 5,
+  "circuits": [
+    {
+      "label": "class_p1_q8",
+      "p": 1,
+      "q": 8,
+      "particles": [
+        "mu-"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "P",
+          "modal_prob": 0.9295,
+          "predicted_fano": "P",
+          "pred_bin_prob": 0.9295,
+          "pass": true,
+          "distribution": [
+            [
+              "P",
+              1859
+            ],
+            [
+              "E2",
+              46
+            ],
+            [
+              "F3",
+              37
+            ],
+            [
+              "F1",
+              22
+            ],
+            [
+              "E3",
+              13
+            ],
+            [
+              "E1",
+              8
+            ],
+            [
+              "I",
+              8
+            ],
+            [
+              "F2",
+              7
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "F3",
+          "modal_lz": 1,
+          "modal_prob": 0.9275,
+          "predicted_fano": "F3",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.9275,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "F3",
+                1
+              ],
+              1855
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              60
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              27
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              17
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              12
+            ],
+            [
+              [
+                "I",
+                1
+              ],
+              12
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              8
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              4
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              3
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              2
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "class_p2_q7",
+      "p": 2,
+      "q": 7,
+      "particles": [
+        "D+",
+        "J/psi"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "x_half": {
+          "modal_fano": "P",
+          "modal_prob": 0.93,
+          "predicted_fano": "P",
+          "pred_bin_prob": 0.93,
+          "pass": true,
+          "distribution": [
+            [
+              "P",
+              1860
+            ],
+            [
+              "E2",
+              57
+            ],
+            [
+              "F3",
+              21
+            ],
+            [
+              "F1",
+              20
+            ],
+            [
+              "F2",
+              13
+            ],
+            [
+              "I",
+              11
+            ],
+            [
+              "E3",
+              11
+            ],
+            [
+              "E1",
+              7
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "F3",
+          "modal_lz": -1,
+          "modal_prob": 0.928,
+          "predicted_fano": "F3",
+          "predicted_lz": -1,
+          "pred_bin_prob": 0.928,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "F3",
+                -1
+              ],
+              1856
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              48
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              26
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              22
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              16
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              14
+            ],
+            [
+              [
+                "I",
+                -1
+              ],
+              9
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              5
+            ],
+            [
+              [
+                "I",
+                1
+              ],
+              2
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              1
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "class_p3_q4",
+      "p": 3,
+      "q": 4,
+      "particles": [
+        "tau-",
+        "Lambda",
+        "Sigma*"
+      ],
+      "predicted_syndrome": [
+        "E2",
+        "E2"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "E2",
+          "modal_prob": 0.935,
+          "predicted_fano": "E2",
+          "pred_bin_prob": 0.935,
+          "pass": true,
+          "distribution": [
+            [
+              "E2",
+              1870
+            ],
+            [
+              "P",
+              49
+            ],
+            [
+              "F1",
+              21
+            ],
+            [
+              "I",
+              18
+            ],
+            [
+              "F3",
+              16
+            ],
+            [
+              "F2",
+              9
+            ],
+            [
+              "E1",
+              9
+            ],
+            [
+              "E3",
+              8
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "E2",
+          "modal_lz": 1,
+          "modal_prob": 0.9415,
+          "predicted_fano": "E2",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.9415,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "E2",
+                1
+              ],
+              1883
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              36
+            ],
+            [
+              [
+                "F3",
+                1
+              ],
+              28
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              20
+            ],
+            [
+              [
+                "I",
+                -1
+              ],
+              11
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              11
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              5
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              3
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              1
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              1
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "class_p2_q1",
+      "p": 2,
+      "q": 1,
+      "particles": [
+        "e-"
+      ],
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "x_half": {
+          "modal_fano": "F2",
+          "modal_prob": 0.9325,
+          "predicted_fano": "F2",
+          "pred_bin_prob": 0.9325,
+          "pass": true,
+          "distribution": [
+            [
+              "F2",
+              1865
+            ],
+            [
+              "I",
+              49
+            ],
+            [
+              "E1",
+              27
+            ],
+            [
+              "F1",
+              20
+            ],
+            [
+              "E3",
+              15
+            ],
+            [
+              "P",
+              10
+            ],
+            [
+              "E2",
+              7
+            ],
+            [
+              "F3",
+              7
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "E2",
+          "modal_lz": -1,
+          "modal_prob": 0.9355,
+          "predicted_fano": "E2",
+          "predicted_lz": -1,
+          "pred_bin_prob": 0.9355,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "E2",
+                -1
+              ],
+              1871
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              46
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              19
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              18
+            ],
+            [
+              [
+                "I",
+                1
+              ],
+              14
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              14
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              7
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              5
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              2
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              1
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "class_p7_q3",
+      "p": 7,
+      "q": 3,
+      "particles": [
+        "pi0"
+      ],
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "x_half": {
+          "modal_fano": "F2",
+          "modal_prob": 0.94,
+          "predicted_fano": "F2",
+          "pred_bin_prob": 0.94,
+          "pass": true,
+          "distribution": [
+            [
+              "F2",
+              1880
+            ],
+            [
+              "E3",
+              28
+            ],
+            [
+              "I",
+              26
+            ],
+            [
+              "E1",
+              25
+            ],
+            [
+              "F3",
+              15
+            ],
+            [
+              "F1",
+              14
+            ],
+            [
+              "P",
+              8
+            ],
+            [
+              "E2",
+              4
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "E2",
+          "modal_lz": -1,
+          "modal_prob": 0.9465,
+          "predicted_fano": "E2",
+          "predicted_lz": -1,
+          "pred_bin_prob": 0.9465,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "E2",
+                -1
+              ],
+              1893
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              41
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              19
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              11
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              10
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              9
+            ],
+            [
+              [
+                "I",
+                1
+              ],
+              9
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              5
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              2
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              1
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "control_identity",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_identity"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.93,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.93,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1860
+            ],
+            [
+              "E3",
+              35
+            ],
+            [
+              "E1",
+              28
+            ],
+            [
+              "F2",
+              28
+            ],
+            [
+              "E2",
+              18
+            ],
+            [
+              "P",
+              12
+            ],
+            [
+              "F3",
+              10
+            ],
+            [
+              "F1",
+              9
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": 1,
+          "modal_prob": 0.944,
+          "predicted_fano": "I",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.944,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "I",
+                1
+              ],
+              1888
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              40
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              24
+            ],
+            [
+              [
+                "F3",
+                1
+              ],
+              12
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              11
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              10
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              8
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              4
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              1
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              1
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "control_x7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_x7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.937,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.937,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1874
+            ],
+            [
+              "F2",
+              40
+            ],
+            [
+              "E3",
+              26
+            ],
+            [
+              "E1",
+              16
+            ],
+            [
+              "F1",
+              14
+            ],
+            [
+              "E2",
+              13
+            ],
+            [
+              "F3",
+              11
+            ],
+            [
+              "P",
+              6
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": -1,
+          "modal_prob": 0.936,
+          "predicted_fano": "I",
+          "predicted_lz": -1,
+          "pred_bin_prob": 0.936,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "I",
+                -1
+              ],
+              1872
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              50
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              25
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              18
+            ],
+            [
+              [
+                "F1",
+                1
+              ],
+              10
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              9
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              8
+            ],
+            [
+              [
+                "P",
+                -1
+              ],
+              6
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              2
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "control_z7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_z7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.946,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.946,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1892
+            ],
+            [
+              "F2",
+              45
+            ],
+            [
+              "E1",
+              19
+            ],
+            [
+              "E3",
+              18
+            ],
+            [
+              "E2",
+              12
+            ],
+            [
+              "F1",
+              7
+            ],
+            [
+              "P",
+              4
+            ],
+            [
+              "F3",
+              3
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": 1,
+          "modal_prob": 0.9485,
+          "predicted_fano": "I",
+          "predicted_lz": 1,
+          "pred_bin_prob": 0.9485,
+          "pass": true,
+          "lz_note": null,
+          "distribution": [
+            [
+              [
+                "I",
+                1
+              ],
+              1897
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              41
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              23
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              12
+            ],
+            [
+              [
+                "F3",
+                1
+              ],
+              8
+            ],
+            [
+              [
+                "F1",
+                -1
+              ],
+              7
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              6
+            ],
+            [
+              [
+                "P",
+                1
+              ],
+              5
+            ],
+            [
+              [
+                "E2",
+                1
+              ],
+              1
+            ]
+          ]
+        },
+        "pass": true
+      }
+    },
+    {
+      "label": "control_h7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_h7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 0,
+      "result": {
+        "x_half": {
+          "modal_fano": "I",
+          "modal_prob": 0.9355,
+          "predicted_fano": "I",
+          "pred_bin_prob": 0.9355,
+          "pass": true,
+          "distribution": [
+            [
+              "I",
+              1871
+            ],
+            [
+              "F2",
+              41
+            ],
+            [
+              "E3",
+              23
+            ],
+            [
+              "E1",
+              21
+            ],
+            [
+              "F1",
+              14
+            ],
+            [
+              "E2",
+              12
+            ],
+            [
+              "F3",
+              11
+            ],
+            [
+              "P",
+              7
+            ]
+          ]
+        },
+        "z_half": {
+          "modal_fano": "I",
+          "modal_lz": 1,
+          "modal_prob": 0.4665,
+          "predicted_fano": "I",
+          "predicted_lz": 0,
+          "pred_bin_prob": null,
+          "pass": true,
+          "lz_note": {
+            "n_plus": 933,
+            "n_minus": 918,
+            "pct_plus": 0.5040518638573744
+          },
+          "distribution": [
+            [
+              [
+                "I",
+                1
+              ],
+              933
+            ],
+            [
+              [
+                "I",
+                -1
+              ],
+              918
+            ],
+            [
+              [
+                "F2",
+                1
+              ],
+              28
+            ],
+            [
+              [
+                "F2",
+                -1
+              ],
+              26
+            ],
+            [
+              [
+                "E1",
+                1
+              ],
+              17
+            ],
+            [
+              [
+                "E1",
+                -1
+              ],
+              13
+            ],
+            [
+              [
+                "E3",
+                -1
+              ],
+              13
+            ],
+            [
+              [
+                "E3",
+                1
+              ],
+              12
+            ],
+            [
+              [
+                "E2",
+                -1
+              ],
+              11
+            ],
+            [
+              [
+                "F3",
+                -1
+              ],
+              7
+            ]
+          ]
+        },
+        "pass": true
+      }
+    }
+  ]
+}

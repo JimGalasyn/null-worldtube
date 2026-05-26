@@ -1,0 +1,959 @@
+{
+  "mode": "hardware-submit",
+  "backend": "aqt/Ibex-Q1",
+  "shots": 100,
+  "timestamp": "20260526_062426",
+  "results": [
+    {
+      "label": "exp28_electron_stab0",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 0,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 1,
+      "n_z": 4,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 29,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 0,
+        "modal_bit": 1,
+        "modal_prob": 0.84,
+        "predicted_bit": 1,
+        "predicted_prob": 0.84,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 84,
+          "0": 16
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/853f256b-de39-4692-b308-300dc8bb7989",
+        "elapsed_s": 1.5561408996582031
+      }
+    },
+    {
+      "label": "exp28_electron_stab1",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 1,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 1,
+      "n_z": 4,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 29,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 1,
+        "modal_bit": 0,
+        "modal_prob": 0.89,
+        "predicted_bit": 0,
+        "predicted_prob": 0.89,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 89,
+          "1": 11
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/d2104933-36bb-4406-9255-f5ec3f5bd290",
+        "elapsed_s": 1.5232458114624023
+      }
+    },
+    {
+      "label": "exp28_electron_stab2",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 2,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 1,
+      "n_z": 4,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 29,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 2,
+        "modal_bit": 1,
+        "modal_prob": 0.88,
+        "predicted_bit": 1,
+        "predicted_prob": 0.88,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 88,
+          "0": 12
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/9ab44c1e-a626-4c82-bab5-3cd93fe3b5b8",
+        "elapsed_s": 1.8092505931854248
+      }
+    },
+    {
+      "label": "exp28_electron_stab3",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 3,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 1,
+      "n_z": 4,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 27,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 3,
+        "modal_bit": 0,
+        "modal_prob": 0.84,
+        "predicted_bit": 0,
+        "predicted_prob": 0.84,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 84,
+          "1": 16
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/f8ce87e6-d017-4bb4-a129-da9657c06d23",
+        "elapsed_s": 1.4948809146881104
+      }
+    },
+    {
+      "label": "exp28_electron_stab4",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 4,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 1,
+      "n_z": 4,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 27,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 4,
+        "modal_bit": 1,
+        "modal_prob": 0.8,
+        "predicted_bit": 1,
+        "predicted_prob": 0.8,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 80,
+          "0": 20
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/0bd40944-da10-49c4-b684-a3d29cd7ac91",
+        "elapsed_s": 1.5479800701141357
+      }
+    },
+    {
+      "label": "exp28_electron_stab5",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 5,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 1,
+      "n_z": 4,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 27,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 5,
+        "modal_bit": 0,
+        "modal_prob": 0.92,
+        "predicted_bit": 0,
+        "predicted_prob": 0.92,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 92,
+          "1": 8
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/c08a6f49-0bac-485e-b45f-e2d08ecf7ced",
+        "elapsed_s": 1.5772020816802979
+      }
+    },
+    {
+      "label": "exp28_electron_lz",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta": 3.141592653589793,
+      "subcircuit": "logical-Z",
+      "stab_idx": null,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 1,
+      "n_z": 4,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 24,
+      "result": {
+        "subcircuit": "logical-Z",
+        "modal_lz": -1,
+        "modal_prob": 0.97,
+        "predicted_lz": -1,
+        "predicted_prob": 0.97,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "-1": 97,
+          "1": 3
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/3466d1bb-aefb-42a8-9a0f-9c22257c3873",
+        "elapsed_s": 1.5023036003112793
+      }
+    },
+    {
+      "label": "exp28_pion_stab0",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 0,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 1,
+      "n_z": 2,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 25,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 0,
+        "modal_bit": 0,
+        "modal_prob": 0.8,
+        "predicted_bit": 0,
+        "predicted_prob": 0.8,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 80,
+          "1": 20
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/1dd6ce15-61b9-4a2f-b496-7947dcd70d2b",
+        "elapsed_s": 1.4741790294647217
+      }
+    },
+    {
+      "label": "exp28_pion_stab1",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 1,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 1,
+      "n_z": 2,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 25,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 1,
+        "modal_bit": 0,
+        "modal_prob": 0.86,
+        "predicted_bit": 0,
+        "predicted_prob": 0.86,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 86,
+          "1": 14
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/5e4efe40-0619-4a98-9cfb-3ead3592f50b",
+        "elapsed_s": 1.5708489418029785
+      }
+    },
+    {
+      "label": "exp28_pion_stab2",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 2,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 1,
+      "n_z": 2,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 25,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 2,
+        "modal_bit": 1,
+        "modal_prob": 0.9,
+        "predicted_bit": 1,
+        "predicted_prob": 0.9,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 90,
+          "0": 10
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/5c18bb1e-d7cd-4f7c-a075-afc519735fa6",
+        "elapsed_s": 1.620241403579712
+      }
+    },
+    {
+      "label": "exp28_pion_stab3",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 3,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 1,
+      "n_z": 2,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 23,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 3,
+        "modal_bit": 0,
+        "modal_prob": 0.7,
+        "predicted_bit": 0,
+        "predicted_prob": 0.7,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 70,
+          "1": 30
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/a09a5c9e-69cc-4d31-b9b4-278ba80e2535",
+        "elapsed_s": 1.5200071334838867
+      }
+    },
+    {
+      "label": "exp28_pion_stab4",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 4,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 1,
+      "n_z": 2,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 23,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 4,
+        "modal_bit": 0,
+        "modal_prob": 0.8,
+        "predicted_bit": 0,
+        "predicted_prob": 0.8,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 80,
+          "1": 20
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/17aa3c07-11d7-43e4-afc3-52fc9c1856f6",
+        "elapsed_s": 1.6123926639556885
+      }
+    },
+    {
+      "label": "exp28_pion_stab5",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 5,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 1,
+      "n_z": 2,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 23,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 5,
+        "modal_bit": 1,
+        "modal_prob": 0.89,
+        "predicted_bit": 1,
+        "predicted_prob": 0.89,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 89,
+          "0": 11
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/0b0508bc-6ff1-4a76-8a24-2b5fa8a32907",
+        "elapsed_s": 1.672820806503296
+      }
+    },
+    {
+      "label": "exp28_pion_lz",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta": 3.141592653589793,
+      "subcircuit": "logical-Z",
+      "stab_idx": null,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 1,
+      "n_z": 2,
+      "n_qubits": 8,
+      "n_2q_gates": 13,
+      "depth": 20,
+      "result": null,
+      "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/9a7e0af9-8c11-4ae5-9568-a1f3a73ff8a0",
+      "error": "'NoneType' object has no attribute 'measurement_counts'"
+    },
+    {
+      "label": "exp28_muon_stab0",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 0,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 5,
+      "n_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 39,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 0,
+        "modal_bit": 1,
+        "modal_prob": 0.86,
+        "predicted_bit": 1,
+        "predicted_prob": 0.86,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 86,
+          "0": 14
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/02c9a2da-d723-46b2-b980-cf0e8f772e48",
+        "elapsed_s": 1.5134222507476807
+      }
+    },
+    {
+      "label": "exp28_muon_stab1",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 1,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 5,
+      "n_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 39,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 1,
+        "modal_bit": 1,
+        "modal_prob": 0.88,
+        "predicted_bit": 1,
+        "predicted_prob": 0.88,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 88,
+          "0": 12
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/d2d72916-c1a8-4075-a80d-c66ee3787f0f",
+        "elapsed_s": 1.5349154472351074
+      }
+    },
+    {
+      "label": "exp28_muon_stab2",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 2,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 5,
+      "n_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 39,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 2,
+        "modal_bit": 1,
+        "modal_prob": 0.89,
+        "predicted_bit": 1,
+        "predicted_prob": 0.89,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 89,
+          "0": 11
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/23bf8400-5559-4e06-a57e-c921b0a45f20",
+        "elapsed_s": 1.5783717632293701
+      }
+    },
+    {
+      "label": "exp28_muon_stab3",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 3,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 5,
+      "n_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 37,
+      "result": null,
+      "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/d7e3cb51-4806-4794-bcaa-ca1f6fa76131",
+      "error": "'NoneType' object has no attribute 'measurement_counts'"
+    },
+    {
+      "label": "exp28_muon_stab4",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 4,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 5,
+      "n_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 37,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 4,
+        "modal_bit": 1,
+        "modal_prob": 0.87,
+        "predicted_bit": 1,
+        "predicted_prob": 0.87,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 87,
+          "0": 13
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/8efba75d-6dcf-48f8-bd11-7a78bd6f345e",
+        "elapsed_s": 1.4976203441619873
+      }
+    },
+    {
+      "label": "exp28_muon_stab5",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 5,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 5,
+      "n_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 37,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 5,
+        "modal_bit": 1,
+        "modal_prob": 0.88,
+        "predicted_bit": 1,
+        "predicted_prob": 0.88,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 88,
+          "0": 12
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/dd3e6c82-6a40-4805-81e8-80e033853557",
+        "elapsed_s": 1.5575261116027832
+      }
+    },
+    {
+      "label": "exp28_muon_lz",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta": 3.141592653589793,
+      "subcircuit": "logical-Z",
+      "stab_idx": null,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_x": 5,
+      "n_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 17,
+      "depth": 34,
+      "result": {
+        "subcircuit": "logical-Z",
+        "modal_lz": 1,
+        "modal_prob": 0.94,
+        "predicted_lz": 1,
+        "predicted_prob": 0.94,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "1": 94,
+          "-1": 6
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/69b1a8c3-bbf4-4ad8-a028-83b8f6899ec9",
+        "elapsed_s": 1.5101637840270996
+      }
+    },
+    {
+      "label": "exp28_proton_stab0",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 0,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 7,
+      "n_z": 0,
+      "n_qubits": 8,
+      "n_2q_gates": 25,
+      "depth": 45,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 0,
+        "modal_bit": 0,
+        "modal_prob": 0.85,
+        "predicted_bit": 0,
+        "predicted_prob": 0.85,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 85,
+          "1": 15
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/692f90a8-ccf6-41d1-ab38-79e2de921325",
+        "elapsed_s": 1.4627227783203125
+      }
+    },
+    {
+      "label": "exp28_proton_stab1",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 1,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 7,
+      "n_z": 0,
+      "n_qubits": 8,
+      "n_2q_gates": 25,
+      "depth": 45,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 1,
+        "modal_bit": 0,
+        "modal_prob": 0.86,
+        "predicted_bit": 0,
+        "predicted_prob": 0.86,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 86,
+          "1": 14
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/767dc2b4-5847-4f74-9b9e-847b63a55d27",
+        "elapsed_s": 1.4997313022613525
+      }
+    },
+    {
+      "label": "exp28_proton_stab2",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta": 3.141592653589793,
+      "subcircuit": "X-stab",
+      "stab_idx": 2,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 7,
+      "n_z": 0,
+      "n_qubits": 8,
+      "n_2q_gates": 25,
+      "depth": 45,
+      "result": {
+        "subcircuit": "X-stab",
+        "stab_idx": 2,
+        "modal_bit": 0,
+        "modal_prob": 0.93,
+        "predicted_bit": 0,
+        "predicted_prob": 0.93,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 93,
+          "1": 7
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/92a6235e-fd2a-4fa6-890a-0ba231091c4c",
+        "elapsed_s": 1.5414903163909912
+      }
+    },
+    {
+      "label": "exp28_proton_stab3",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 3,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 7,
+      "n_z": 0,
+      "n_qubits": 8,
+      "n_2q_gates": 25,
+      "depth": 43,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 3,
+        "modal_bit": 0,
+        "modal_prob": 0.72,
+        "predicted_bit": 0,
+        "predicted_prob": 0.72,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 72,
+          "1": 28
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/eeece5a4-c004-417a-bf24-72b4a971665c",
+        "elapsed_s": 1.539937973022461
+      }
+    },
+    {
+      "label": "exp28_proton_stab4",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 4,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 7,
+      "n_z": 0,
+      "n_qubits": 8,
+      "n_2q_gates": 25,
+      "depth": 43,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 4,
+        "modal_bit": 0,
+        "modal_prob": 0.87,
+        "predicted_bit": 0,
+        "predicted_prob": 0.87,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 87,
+          "1": 13
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/4aa9088e-3587-4bac-8d14-462e66b620f2",
+        "elapsed_s": 1.590062141418457
+      }
+    },
+    {
+      "label": "exp28_proton_stab5",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta": 3.141592653589793,
+      "subcircuit": "Z-stab",
+      "stab_idx": 5,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 7,
+      "n_z": 0,
+      "n_qubits": 8,
+      "n_2q_gates": 25,
+      "depth": 43,
+      "result": {
+        "subcircuit": "Z-stab",
+        "stab_idx": 5,
+        "modal_bit": 0,
+        "modal_prob": 0.9,
+        "predicted_bit": 0,
+        "predicted_prob": 0.9,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "0": 90,
+          "1": 10
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/b61a6b6a-386c-4c6d-b449-5f26248215d6",
+        "elapsed_s": 1.536487340927124
+      }
+    },
+    {
+      "label": "exp28_proton_lz",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta": 3.141592653589793,
+      "subcircuit": "logical-Z",
+      "stab_idx": null,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_x": 7,
+      "n_z": 0,
+      "n_qubits": 8,
+      "n_2q_gates": 21,
+      "depth": 40,
+      "result": {
+        "subcircuit": "logical-Z",
+        "modal_lz": -1,
+        "modal_prob": 0.94,
+        "predicted_lz": -1,
+        "predicted_prob": 0.94,
+        "n_decoded": 100,
+        "decode_errors": 0,
+        "distribution": {
+          "-1": 94,
+          "1": 6
+        },
+        "task_id": "arn:aws:braket:eu-north-1:233763244971:quantum-task/44d142b5-8ef0-4e59-b539-af5ae11b0df0",
+        "elapsed_s": 1.6645314693450928
+      }
+    }
+  ]
+}

@@ -1,0 +1,552 @@
+{
+  "mode": "dry-run",
+  "backend": "local-simulator",
+  "shots": 200,
+  "timestamp": "20260524_075304",
+  "results": [
+    {
+      "label": "exp28_electron_th00",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 57,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "F2",
+            "E2"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.34908342361450195
+      }
+    },
+    {
+      "label": "exp28_electron_th01",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 57,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "F2",
+            "E2"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.4493575096130371
+      }
+    },
+    {
+      "label": "exp28_electron_th02",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 57,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "F2",
+            "E2"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.4707491397857666
+      }
+    },
+    {
+      "label": "exp28_electron_th03",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 57,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "F2",
+            "E2"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.2687511444091797
+      }
+    },
+    {
+      "label": "exp28_pion_th00",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 37,
+      "depth": 55,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "E1",
+            "E1"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.2505326271057129
+      }
+    },
+    {
+      "label": "exp28_pion_th01",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 37,
+      "depth": 55,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "E1",
+            "E1"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.4519226551055908
+      }
+    },
+    {
+      "label": "exp28_pion_th02",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 37,
+      "depth": 55,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "E1",
+            "E1"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.4460577964782715
+      }
+    },
+    {
+      "label": "exp28_pion_th03",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 37,
+      "depth": 55,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "E1",
+            "E1"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.26034069061279297
+      }
+    },
+    {
+      "label": "exp28_muon_th00",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "P",
+            "F3"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.3157222270965576
+      }
+    },
+    {
+      "label": "exp28_muon_th01",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "P",
+            "F3"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.4882543087005615
+      }
+    },
+    {
+      "label": "exp28_muon_th02",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "P",
+            "F3"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.49530458450317383
+      }
+    },
+    {
+      "label": "exp28_muon_th03",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "n_qubits": 8,
+      "n_2q_gates": 41,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "P",
+            "F3"
+          ],
+          1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.39481663703918457
+      }
+    },
+    {
+      "label": "exp28_proton_th00",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 45,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.3268163204193115
+      }
+    },
+    {
+      "label": "exp28_proton_th01",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 45,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.47533321380615234
+      }
+    },
+    {
+      "label": "exp28_proton_th02",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 45,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.5234849452972412
+      }
+    },
+    {
+      "label": "exp28_proton_th03",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "n_qubits": 8,
+      "n_2q_gates": 45,
+      "depth": 63,
+      "result": {
+        "modal_bin": null,
+        "modal_prob": 0.0,
+        "predicted_bin": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "predicted_prob": 0.0,
+        "n_decoded": 0,
+        "decode_errors": 200,
+        "distribution": {},
+        "elapsed_s": 0.3212916851043701
+      }
+    }
+  ]
+}

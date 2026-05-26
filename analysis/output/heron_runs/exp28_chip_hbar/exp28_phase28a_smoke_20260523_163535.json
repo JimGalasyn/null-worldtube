@@ -1,0 +1,596 @@
+{
+  "experiment": "exp28_phase28a_rabi",
+  "label": "smoke",
+  "timestamp": "20260523_163535",
+  "n_circuits": 16,
+  "predictions": {
+    "electron": {
+      "p": 2,
+      "q": 1,
+      "n_x": 1,
+      "predicted_ratio": 1.0
+    },
+    "pion": {
+      "p": 3,
+      "q": 5,
+      "n_x": 1,
+      "predicted_ratio": 1.0
+    },
+    "muon": {
+      "p": 1,
+      "q": 8,
+      "n_x": 5,
+      "predicted_ratio": 5.0
+    },
+    "proton": {
+      "p": 1,
+      "q": 3,
+      "n_x": 7,
+      "predicted_ratio": 7.0
+    }
+  },
+  "analysis": {
+    "electron": {
+      "thetas": [
+        0.0,
+        1.0471975511965976,
+        2.0943951023931953,
+        3.141592653589793
+      ],
+      "predicted_probs": [
+        0.0,
+        0.215,
+        0.755,
+        1.0
+      ],
+      "amplitude": 0.9999999999988621,
+      "phase": -0.016858005037978453,
+      "baseline": 2.224595953000874e-15,
+      "r2": 0.998743247085226,
+      "p_at_pi": 1.0,
+      "verdict": "PASS",
+      "n_x": 1,
+      "n_z": 4
+    },
+    "pion": {
+      "thetas": [
+        0.0,
+        1.0471975511965976,
+        2.0943951023931953,
+        3.141592653589793
+      ],
+      "predicted_probs": [
+        0.0,
+        0.275,
+        0.795,
+        1.0
+      ],
+      "amplitude": 0.9999999999999999,
+      "phase": 0.03901505401001105,
+      "baseline": 0.0006231245877302298,
+      "r2": 0.99962640084183,
+      "p_at_pi": 1.0,
+      "verdict": "PASS",
+      "n_x": 1,
+      "n_z": 2
+    },
+    "muon": {
+      "thetas": [
+        0.0,
+        1.0471975511965976,
+        2.0943951023931953,
+        3.141592653589793
+      ],
+      "predicted_probs": [
+        0.0,
+        0.255,
+        0.72,
+        1.0
+      ],
+      "amplitude": 0.9864224820165003,
+      "phase": -0.014634513762657519,
+      "baseline": 0.00678875694562406,
+      "r2": 0.9991944350256362,
+      "p_at_pi": 1.0,
+      "verdict": "PASS",
+      "n_x": 5,
+      "n_z": 1
+    },
+    "proton": {
+      "thetas": [
+        0.0,
+        1.0471975511965976,
+        2.0943951023931953,
+        3.141592653589793
+      ],
+      "predicted_probs": [
+        0.0,
+        0.265,
+        0.78,
+        1.0
+      ],
+      "amplitude": 0.9999999999999999,
+      "phase": 0.025374743588302714,
+      "baseline": 0.00026712955222304866,
+      "r2": 0.9998049694067698,
+      "p_at_pi": 1.0,
+      "verdict": "PASS",
+      "n_x": 7,
+      "n_z": 0
+    }
+  },
+  "results": [
+    {
+      "label": "exp28_electron_th00",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_bin": [
+        [
+          "F2",
+          "E2"
+        ],
+        -1
+      ],
+      "predicted_prob": 0.0,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('I', 'I'), 1)": 200
+      }
+    },
+    {
+      "label": "exp28_electron_th01",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_bin": [
+        [
+          "F2",
+          "E2"
+        ],
+        -1
+      ],
+      "predicted_prob": 0.215,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 0.785,
+      "distribution": {
+        "(('F2', 'E2'), -1)": 43,
+        "(('I', 'I'), 1)": 157
+      }
+    },
+    {
+      "label": "exp28_electron_th02",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_bin": [
+        [
+          "F2",
+          "E2"
+        ],
+        -1
+      ],
+      "predicted_prob": 0.755,
+      "modal_bin": [
+        [
+          "F2",
+          "E2"
+        ],
+        -1
+      ],
+      "modal_prob": 0.755,
+      "distribution": {
+        "(('I', 'I'), 1)": 49,
+        "(('F2', 'E2'), -1)": 151
+      }
+    },
+    {
+      "label": "exp28_electron_th03",
+      "walk_name": "electron",
+      "p": 2,
+      "q": 1,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 1,
+      "n_z": 4,
+      "predicted_bin": [
+        [
+          "F2",
+          "E2"
+        ],
+        -1
+      ],
+      "predicted_prob": 1.0,
+      "modal_bin": [
+        [
+          "F2",
+          "E2"
+        ],
+        -1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('F2', 'E2'), -1)": 200
+      }
+    },
+    {
+      "label": "exp28_pion_th00",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_bin": [
+        [
+          "E1",
+          "E1"
+        ],
+        1
+      ],
+      "predicted_prob": 0.0,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('I', 'I'), 1)": 200
+      }
+    },
+    {
+      "label": "exp28_pion_th01",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_bin": [
+        [
+          "E1",
+          "E1"
+        ],
+        1
+      ],
+      "predicted_prob": 0.275,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 0.725,
+      "distribution": {
+        "(('E1', 'E1'), 1)": 55,
+        "(('I', 'I'), 1)": 145
+      }
+    },
+    {
+      "label": "exp28_pion_th02",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_bin": [
+        [
+          "E1",
+          "E1"
+        ],
+        1
+      ],
+      "predicted_prob": 0.795,
+      "modal_bin": [
+        [
+          "E1",
+          "E1"
+        ],
+        1
+      ],
+      "modal_prob": 0.795,
+      "distribution": {
+        "(('I', 'I'), 1)": 41,
+        "(('E1', 'E1'), 1)": 159
+      }
+    },
+    {
+      "label": "exp28_pion_th03",
+      "walk_name": "pion",
+      "p": 3,
+      "q": 5,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 1,
+      "n_z": 2,
+      "predicted_bin": [
+        [
+          "E1",
+          "E1"
+        ],
+        1
+      ],
+      "predicted_prob": 1.0,
+      "modal_bin": [
+        [
+          "E1",
+          "E1"
+        ],
+        1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('E1', 'E1'), 1)": 200
+      }
+    },
+    {
+      "label": "exp28_muon_th00",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_bin": [
+        [
+          "P",
+          "F3"
+        ],
+        1
+      ],
+      "predicted_prob": 0.0,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('I', 'I'), 1)": 200
+      }
+    },
+    {
+      "label": "exp28_muon_th01",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_bin": [
+        [
+          "P",
+          "F3"
+        ],
+        1
+      ],
+      "predicted_prob": 0.255,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 0.745,
+      "distribution": {
+        "(('I', 'I'), 1)": 149,
+        "(('P', 'F3'), 1)": 51
+      }
+    },
+    {
+      "label": "exp28_muon_th02",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_bin": [
+        [
+          "P",
+          "F3"
+        ],
+        1
+      ],
+      "predicted_prob": 0.72,
+      "modal_bin": [
+        [
+          "P",
+          "F3"
+        ],
+        1
+      ],
+      "modal_prob": 0.72,
+      "distribution": {
+        "(('I', 'I'), 1)": 56,
+        "(('P', 'F3'), 1)": 144
+      }
+    },
+    {
+      "label": "exp28_muon_th03",
+      "walk_name": "muon",
+      "p": 1,
+      "q": 8,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 5,
+      "n_z": 1,
+      "predicted_bin": [
+        [
+          "P",
+          "F3"
+        ],
+        1
+      ],
+      "predicted_prob": 1.0,
+      "modal_bin": [
+        [
+          "P",
+          "F3"
+        ],
+        1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('P', 'F3'), 1)": 200
+      }
+    },
+    {
+      "label": "exp28_proton_th00",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 0,
+      "theta": 0.0,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_bin": [
+        [
+          "I",
+          "I"
+        ],
+        -1
+      ],
+      "predicted_prob": 0.0,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('I', 'I'), 1)": 200
+      }
+    },
+    {
+      "label": "exp28_proton_th01",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 1,
+      "theta": 1.0471975511965976,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_bin": [
+        [
+          "I",
+          "I"
+        ],
+        -1
+      ],
+      "predicted_prob": 0.265,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        1
+      ],
+      "modal_prob": 0.735,
+      "distribution": {
+        "(('I', 'I'), -1)": 53,
+        "(('I', 'I'), 1)": 147
+      }
+    },
+    {
+      "label": "exp28_proton_th02",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 2,
+      "theta": 2.0943951023931953,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_bin": [
+        [
+          "I",
+          "I"
+        ],
+        -1
+      ],
+      "predicted_prob": 0.78,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        -1
+      ],
+      "modal_prob": 0.78,
+      "distribution": {
+        "(('I', 'I'), 1)": 44,
+        "(('I', 'I'), -1)": 156
+      }
+    },
+    {
+      "label": "exp28_proton_th03",
+      "walk_name": "proton",
+      "p": 1,
+      "q": 3,
+      "theta_idx": 3,
+      "theta": 3.141592653589793,
+      "n_x": 7,
+      "n_z": 0,
+      "predicted_bin": [
+        [
+          "I",
+          "I"
+        ],
+        -1
+      ],
+      "predicted_prob": 1.0,
+      "modal_bin": [
+        [
+          "I",
+          "I"
+        ],
+        -1
+      ],
+      "modal_prob": 1.0,
+      "distribution": {
+        "(('I', 'I'), -1)": 200
+      }
+    }
+  ]
+}

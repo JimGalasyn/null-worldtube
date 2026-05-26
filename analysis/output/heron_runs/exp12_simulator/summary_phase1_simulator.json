@@ -1,0 +1,456 @@
+{
+  "shots_per_circuit_per_backend": 100000,
+  "total_time_s": 951.5032737255096,
+  "n_classes": 16,
+  "n_controls": 4,
+  "backends": [
+    "noiseless",
+    "marrakesh_noise",
+    "fez_noise",
+    "marrakesh_topology",
+    "fez_topology"
+  ],
+  "class_summary": [
+    {
+      "p": 1,
+      "q": 3,
+      "particles": [
+        "p",
+        "n",
+        "Sigma+",
+        "Sigma0",
+        "Sigma-"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92558,
+      "modal_prob_fez_noise": 0.87924,
+      "modal_prob_marrakesh_topology": 0.68531,
+      "modal_prob_fez_topology": 0.8755,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92558,
+      "pred_bin_prob_fez_noise": 0.87924,
+      "pred_bin_prob_marrakesh_topology": 0.68531,
+      "pred_bin_prob_fez_topology": 0.8755
+    },
+    {
+      "p": 1,
+      "q": 8,
+      "particles": [
+        "mu-"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92476,
+      "modal_prob_fez_noise": 0.87994,
+      "modal_prob_marrakesh_topology": 0.68687,
+      "modal_prob_fez_topology": 0.87618,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92476,
+      "pred_bin_prob_fez_noise": 0.87994,
+      "pred_bin_prob_marrakesh_topology": 0.68687,
+      "pred_bin_prob_fez_topology": 0.87618
+    },
+    {
+      "p": 2,
+      "q": 1,
+      "particles": [
+        "e-"
+      ],
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92826,
+      "modal_prob_fez_noise": 0.88339,
+      "modal_prob_marrakesh_topology": 0.68904,
+      "modal_prob_fez_topology": 0.87874,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92826,
+      "pred_bin_prob_fez_noise": 0.88339,
+      "pred_bin_prob_marrakesh_topology": 0.68904,
+      "pred_bin_prob_fez_topology": 0.87874
+    },
+    {
+      "p": 2,
+      "q": 5,
+      "particles": [
+        "K+"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92618,
+      "modal_prob_fez_noise": 0.88141,
+      "modal_prob_marrakesh_topology": 0.68976,
+      "modal_prob_fez_topology": 0.87639,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92618,
+      "pred_bin_prob_fez_noise": 0.88141,
+      "pred_bin_prob_marrakesh_topology": 0.68976,
+      "pred_bin_prob_fez_topology": 0.87639
+    },
+    {
+      "p": 2,
+      "q": 7,
+      "particles": [
+        "D+",
+        "J/psi"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": -1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92699,
+      "modal_prob_fez_noise": 0.88385,
+      "modal_prob_marrakesh_topology": 0.68875,
+      "modal_prob_fez_topology": 0.87802,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92699,
+      "pred_bin_prob_fez_noise": 0.88385,
+      "pred_bin_prob_marrakesh_topology": 0.68875,
+      "pred_bin_prob_fez_topology": 0.87802
+    },
+    {
+      "p": 3,
+      "q": 4,
+      "particles": [
+        "tau-",
+        "Lambda",
+        "Sigma*"
+      ],
+      "predicted_syndrome": [
+        "E2",
+        "E2"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92747,
+      "modal_prob_fez_noise": 0.88237,
+      "modal_prob_marrakesh_topology": 0.68704,
+      "modal_prob_fez_topology": 0.87761,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92747,
+      "pred_bin_prob_fez_noise": 0.88237,
+      "pred_bin_prob_marrakesh_topology": 0.68704,
+      "pred_bin_prob_fez_topology": 0.87761
+    },
+    {
+      "p": 3,
+      "q": 5,
+      "particles": [
+        "pi+"
+      ],
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92707,
+      "modal_prob_fez_noise": 0.88288,
+      "modal_prob_marrakesh_topology": 0.68778,
+      "modal_prob_fez_topology": 0.87665,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92707,
+      "pred_bin_prob_fez_noise": 0.88288,
+      "pred_bin_prob_marrakesh_topology": 0.68778,
+      "pred_bin_prob_fez_topology": 0.87665
+    },
+    {
+      "p": 3,
+      "q": 7,
+      "particles": [
+        "D0"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92726,
+      "modal_prob_fez_noise": 0.88041,
+      "modal_prob_marrakesh_topology": 0.68663,
+      "modal_prob_fez_topology": 0.8751,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92726,
+      "pred_bin_prob_fez_noise": 0.88041,
+      "pred_bin_prob_marrakesh_topology": 0.68663,
+      "pred_bin_prob_fez_topology": 0.8751
+    },
+    {
+      "p": 4,
+      "q": 5,
+      "particles": [
+        "omega"
+      ],
+      "predicted_syndrome": [
+        "F3",
+        "F1"
+      ],
+      "predicted_logical_z": -1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92718,
+      "modal_prob_fez_noise": 0.88268,
+      "modal_prob_marrakesh_topology": 0.68687,
+      "modal_prob_fez_topology": 0.87801,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92718,
+      "pred_bin_prob_fez_noise": 0.88268,
+      "pred_bin_prob_marrakesh_topology": 0.68687,
+      "pred_bin_prob_fez_topology": 0.87801
+    },
+    {
+      "p": 4,
+      "q": 9,
+      "particles": [
+        "Upsilon"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92758,
+      "modal_prob_fez_noise": 0.88062,
+      "modal_prob_marrakesh_topology": 0.68718,
+      "modal_prob_fez_topology": 0.87708,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92758,
+      "pred_bin_prob_fez_noise": 0.88062,
+      "pred_bin_prob_marrakesh_topology": 0.68718,
+      "pred_bin_prob_fez_topology": 0.87708
+    },
+    {
+      "p": 5,
+      "q": 4,
+      "particles": [
+        "Xi0",
+        "Xi-",
+        "Delta"
+      ],
+      "predicted_syndrome": [
+        "F2",
+        "F3"
+      ],
+      "predicted_logical_z": -1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92761,
+      "modal_prob_fez_noise": 0.88364,
+      "modal_prob_marrakesh_topology": 0.68489,
+      "modal_prob_fez_topology": 0.87829,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92761,
+      "pred_bin_prob_fez_noise": 0.88364,
+      "pred_bin_prob_marrakesh_topology": 0.68489,
+      "pred_bin_prob_fez_topology": 0.87829
+    },
+    {
+      "p": 5,
+      "q": 7,
+      "particles": [
+        "rho"
+      ],
+      "predicted_syndrome": [
+        "E3",
+        "P"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92558,
+      "modal_prob_fez_noise": 0.88126,
+      "modal_prob_marrakesh_topology": 0.68643,
+      "modal_prob_fez_topology": 0.87701,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92558,
+      "pred_bin_prob_fez_noise": 0.88126,
+      "pred_bin_prob_marrakesh_topology": 0.68643,
+      "pred_bin_prob_fez_topology": 0.87701
+    },
+    {
+      "p": 6,
+      "q": 5,
+      "particles": [
+        "eta"
+      ],
+      "predicted_syndrome": [
+        "E3",
+        "P"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92659,
+      "modal_prob_fez_noise": 0.87978,
+      "modal_prob_marrakesh_topology": 0.68639,
+      "modal_prob_fez_topology": 0.8762,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92659,
+      "pred_bin_prob_fez_noise": 0.87978,
+      "pred_bin_prob_marrakesh_topology": 0.68639,
+      "pred_bin_prob_fez_topology": 0.8762
+    },
+    {
+      "p": 7,
+      "q": 3,
+      "particles": [
+        "pi0"
+      ],
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92738,
+      "modal_prob_fez_noise": 0.88292,
+      "modal_prob_marrakesh_topology": 0.68812,
+      "modal_prob_fez_topology": 0.87723,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92738,
+      "pred_bin_prob_fez_noise": 0.88292,
+      "pred_bin_prob_marrakesh_topology": 0.68812,
+      "pred_bin_prob_fez_topology": 0.87723
+    },
+    {
+      "p": 7,
+      "q": 4,
+      "particles": [
+        "Omega-"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "E3"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92683,
+      "modal_prob_fez_noise": 0.88302,
+      "modal_prob_marrakesh_topology": 0.68631,
+      "modal_prob_fez_topology": 0.87766,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92683,
+      "pred_bin_prob_fez_noise": 0.88302,
+      "pred_bin_prob_marrakesh_topology": 0.68631,
+      "pred_bin_prob_fez_topology": 0.87766
+    },
+    {
+      "p": 7,
+      "q": 5,
+      "particles": [
+        "K0"
+      ],
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "modal_match_noiseless": true,
+      "modal_match_marrakesh_noise": true,
+      "modal_match_fez_noise": true,
+      "modal_match_marrakesh_topology": true,
+      "modal_match_fez_topology": true,
+      "modal_prob_noiseless": 1.0,
+      "modal_prob_marrakesh_noise": 0.92796,
+      "modal_prob_fez_noise": 0.88275,
+      "modal_prob_marrakesh_topology": 0.68949,
+      "modal_prob_fez_topology": 0.87713,
+      "pred_bin_prob_noiseless": 1.0,
+      "pred_bin_prob_marrakesh_noise": 0.92796,
+      "pred_bin_prob_fez_noise": 0.88275,
+      "pred_bin_prob_marrakesh_topology": 0.68949,
+      "pred_bin_prob_fez_topology": 0.87713
+    }
+  ]
+}

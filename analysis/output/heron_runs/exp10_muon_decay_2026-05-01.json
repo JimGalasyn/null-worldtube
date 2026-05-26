@@ -1,0 +1,30 @@
+{
+  "experiment": "Exp 10 — muon decay on K_7 vacuum",
+  "backend": "ibm_marrakesh",
+  "job_id": "d7qgmo4f3ras73b5orqg",
+  "date": "2026-05-01",
+  "qubits": 9,
+  "gates": 40,
+  "depth": 13,
+  "shots_per_circuit": 4096,
+  "n_angles": 16,
+  "wall_clock_seconds": 41.5,
+  "data": [
+    {"theta_over_pi": 0.0000, "P_muon": 0.9946, "cos2_theory": 1.000000},
+    {"theta_over_pi": 0.0667, "P_muon": 0.9299, "cos2_theory": 0.956773},
+    {"theta_over_pi": 0.1333, "P_muon": 0.8301, "cos2_theory": 0.834565},
+    {"theta_over_pi": 0.2000, "P_muon": 0.6514, "cos2_theory": 0.654508},
+    {"theta_over_pi": 0.2667, "P_muon": 0.4568, "cos2_theory": 0.447736},
+    {"theta_over_pi": 0.3333, "P_muon": 0.2505, "cos2_theory": 0.250000},
+    {"theta_over_pi": 0.4000, "P_muon": 0.1133, "cos2_theory": 0.095492},
+    {"theta_over_pi": 0.4667, "P_muon": 0.0276, "cos2_theory": 0.010926},
+    {"theta_over_pi": 0.5333, "P_muon": 0.0269, "cos2_theory": 0.010926},
+    {"theta_over_pi": 0.6000, "P_muon": 0.1138, "cos2_theory": 0.095492},
+    {"theta_over_pi": 0.6667, "P_muon": 0.2629, "cos2_theory": 0.250000},
+    {"theta_over_pi": 0.7333, "P_muon": 0.4524, "cos2_theory": 0.447736},
+    {"theta_over_pi": 0.8000, "P_muon": 0.6653, "cos2_theory": 0.654508},
+    {"theta_over_pi": 0.8667, "P_muon": 0.8093, "cos2_theory": 0.834565},
+    {"theta_over_pi": 0.9333, "P_muon": 0.9238, "cos2_theory": 0.956773},
+    {"theta_over_pi": 1.0000, "P_muon": 0.9924, "cos2_theory": 1.000000}
+  ]
+}

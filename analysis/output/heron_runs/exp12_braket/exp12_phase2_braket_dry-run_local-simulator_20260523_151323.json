@@ -1,0 +1,404 @@
+{
+  "mode": "dry-run",
+  "backend": "local-simulator",
+  "shots_per_circuit": 200,
+  "timestamp": "20260523_151323",
+  "phase2_targets": [
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      1,
+      8
+    ]
+  ],
+  "circuits": [
+    {
+      "label": "class_p1_q3",
+      "p": 1,
+      "q": 3,
+      "particles": [
+        "p",
+        "n",
+        "Sigma+",
+        "Sigma0",
+        "Sigma-"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "modal_prob": 1.0,
+        "predicted_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "predicted_bin_prob": 1.0,
+        "modal_matches_predicted": true,
+        "cpt_split": null,
+        "distribution": [
+          [
+            [
+              "I",
+              "I"
+            ],
+            -1,
+            200
+          ]
+        ],
+        "elapsed_s": 0.32674074172973633
+      }
+    },
+    {
+      "label": "class_p2_q1",
+      "p": 2,
+      "q": 1,
+      "particles": [
+        "e-"
+      ],
+      "predicted_syndrome": [
+        "F2",
+        "E2"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "F2",
+            "E2"
+          ],
+          -1
+        ],
+        "modal_prob": 1.0,
+        "predicted_outcome": [
+          [
+            "F2",
+            "E2"
+          ],
+          -1
+        ],
+        "predicted_bin_prob": 1.0,
+        "modal_matches_predicted": true,
+        "cpt_split": null,
+        "distribution": [
+          [
+            [
+              "F2",
+              "E2"
+            ],
+            -1,
+            200
+          ]
+        ],
+        "elapsed_s": 0.06804895401000977
+      }
+    },
+    {
+      "label": "class_p3_q5",
+      "p": 3,
+      "q": 5,
+      "particles": [
+        "pi+"
+      ],
+      "predicted_syndrome": [
+        "E1",
+        "E1"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "E1",
+            "E1"
+          ],
+          1
+        ],
+        "modal_prob": 1.0,
+        "predicted_outcome": [
+          [
+            "E1",
+            "E1"
+          ],
+          1
+        ],
+        "predicted_bin_prob": 1.0,
+        "modal_matches_predicted": true,
+        "cpt_split": null,
+        "distribution": [
+          [
+            [
+              "E1",
+              "E1"
+            ],
+            1,
+            200
+          ]
+        ],
+        "elapsed_s": 0.06356096267700195
+      }
+    },
+    {
+      "label": "class_p1_q8",
+      "p": 1,
+      "q": 8,
+      "particles": [
+        "mu-"
+      ],
+      "predicted_syndrome": [
+        "P",
+        "F3"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "P",
+            "F3"
+          ],
+          1
+        ],
+        "modal_prob": 1.0,
+        "predicted_outcome": [
+          [
+            "P",
+            "F3"
+          ],
+          1
+        ],
+        "predicted_bin_prob": 1.0,
+        "modal_matches_predicted": true,
+        "cpt_split": null,
+        "distribution": [
+          [
+            [
+              "P",
+              "F3"
+            ],
+            1,
+            200
+          ]
+        ],
+        "elapsed_s": 0.05834627151489258
+      }
+    },
+    {
+      "label": "control_identity",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_identity"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          1
+        ],
+        "modal_prob": 1.0,
+        "predicted_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          1
+        ],
+        "predicted_bin_prob": 1.0,
+        "modal_matches_predicted": true,
+        "cpt_split": null,
+        "distribution": [
+          [
+            [
+              "I",
+              "I"
+            ],
+            1,
+            200
+          ]
+        ],
+        "elapsed_s": 0.05922889709472656
+      }
+    },
+    {
+      "label": "control_x7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_x7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": -1,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "modal_prob": 1.0,
+        "predicted_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          -1
+        ],
+        "predicted_bin_prob": 1.0,
+        "modal_matches_predicted": true,
+        "cpt_split": null,
+        "distribution": [
+          [
+            [
+              "I",
+              "I"
+            ],
+            -1,
+            200
+          ]
+        ],
+        "elapsed_s": 0.06211972236633301
+      }
+    },
+    {
+      "label": "control_z7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_z7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 1,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          1
+        ],
+        "modal_prob": 1.0,
+        "predicted_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          1
+        ],
+        "predicted_bin_prob": 1.0,
+        "modal_matches_predicted": true,
+        "cpt_split": null,
+        "distribution": [
+          [
+            [
+              "I",
+              "I"
+            ],
+            1,
+            200
+          ]
+        ],
+        "elapsed_s": 0.06908655166625977
+      }
+    },
+    {
+      "label": "control_h7",
+      "p": null,
+      "q": null,
+      "particles": [
+        "control_h7"
+      ],
+      "predicted_syndrome": [
+        "I",
+        "I"
+      ],
+      "predicted_logical_z": 0,
+      "result": {
+        "shots": 200,
+        "modal_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          1
+        ],
+        "modal_prob": 0.505,
+        "predicted_outcome": [
+          [
+            "I",
+            "I"
+          ],
+          0
+        ],
+        "predicted_bin_prob": 0.0,
+        "modal_matches_predicted": true,
+        "cpt_split": {
+          "n_plus_at_pred_syn": 101,
+          "n_minus_at_pred_syn": 99,
+          "pct_plus": 0.505
+        },
+        "distribution": [
+          [
+            [
+              "I",
+              "I"
+            ],
+            1,
+            101
+          ],
+          [
+            [
+              "I",
+              "I"
+            ],
+            -1,
+            99
+          ]
+        ],
+        "elapsed_s": 0.0678708553314209
+      }
+    }
+  ],
+  "n_pass": 8,
+  "n_total": 8
+}

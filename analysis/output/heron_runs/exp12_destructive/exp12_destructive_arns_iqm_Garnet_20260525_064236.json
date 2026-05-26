@@ -1,0 +1,114 @@
+[
+  {
+    "order": 0,
+    "tag": "class_p1_q3_z",
+    "item_idx": 0,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/64b5bd36-52a4-489d-a705-686bc8d8ea89"
+  },
+  {
+    "order": 1,
+    "tag": "class_p1_q3_x",
+    "item_idx": 0,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/19c2b13d-80c0-4016-97e6-be8580a7764c"
+  },
+  {
+    "order": 2,
+    "tag": "class_p2_q1_z",
+    "item_idx": 1,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/64af6171-9b59-48c7-b68f-f7a69fa5b3ef"
+  },
+  {
+    "order": 3,
+    "tag": "class_p2_q1_x",
+    "item_idx": 1,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/6d56fed7-8502-4bf0-abeb-4aced98dadce"
+  },
+  {
+    "order": 4,
+    "tag": "class_p3_q5_z",
+    "item_idx": 2,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/ae5d022f-eb6a-4598-baa1-466b235bf1bb"
+  },
+  {
+    "order": 5,
+    "tag": "class_p3_q5_x",
+    "item_idx": 2,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/56f3f0c8-a8d7-421c-8c25-76f0303197de"
+  },
+  {
+    "order": 6,
+    "tag": "class_p1_q8_z",
+    "item_idx": 3,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/175e92f8-031a-4428-8a00-b7edcb68062a"
+  },
+  {
+    "order": 7,
+    "tag": "class_p1_q8_x",
+    "item_idx": 3,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/cab2af2f-686f-4c21-b7ab-64a14b9e448e"
+  },
+  {
+    "order": 8,
+    "tag": "control_identity_z",
+    "item_idx": 4,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/e1d68d79-fa1b-4b8c-ad5b-272c2f6249a8"
+  },
+  {
+    "order": 9,
+    "tag": "control_identity_x",
+    "item_idx": 4,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/44462b7e-4c86-4554-a4b0-dbb84870e7c4"
+  },
+  {
+    "order": 10,
+    "tag": "control_x7_z",
+    "item_idx": 5,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/e22d0d65-b79f-40c5-bad0-4b25a4ca4901"
+  },
+  {
+    "order": 11,
+    "tag": "control_x7_x",
+    "item_idx": 5,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/281a45b5-7d5a-4900-9388-cebef88814ca"
+  },
+  {
+    "order": 12,
+    "tag": "control_z7_z",
+    "item_idx": 6,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/deb308c8-7aec-4405-aef9-26eed8780ef7"
+  },
+  {
+    "order": 13,
+    "tag": "control_z7_x",
+    "item_idx": 6,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/65fe66e0-9014-4547-b11b-65913aac262f"
+  },
+  {
+    "order": 14,
+    "tag": "control_h7_z",
+    "item_idx": 7,
+    "basis": "z",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/92ade799-0e4f-4cdc-bca2-85babcad00a7"
+  },
+  {
+    "order": 15,
+    "tag": "control_h7_x",
+    "item_idx": 7,
+    "basis": "x",
+    "task_arn": "arn:aws:braket:eu-north-1:233763244971:quantum-task/ac6d627a-424c-4fe8-a1ec-abfaa406f2dd"
+  }
+]
