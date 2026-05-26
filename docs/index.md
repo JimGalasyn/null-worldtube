@@ -9,7 +9,9 @@ title: "What is the Null Worldtube?"
 
 ## The Result
 
-The Standard Model of particle physics has about 20 free parameters &mdash; masses, mixing angles, coupling constants &mdash; that are measured but not explained. **Null Worldtube Theory (NWT)** derives all of them from one mass-scale anchor (the electron mass) and the topology of torus knots, with no adjustable parameters.
+> **🆕 May 2026 &mdash; the black-hole-cosmogenesis bundle (Papers 21a, 21b, 22).** A daughter universe nucleates from a near-extremal Kerr black hole and inherits a *no-hair tuple*: the Planck mass M<sub>Pl</sub>, a spin axis, the substrate algebra so(7), and a chirality sign. From that **single inherited mass scale** (M<sub>Pl</sub>, which cancels from every dimensionless ratio) plus the fixed algebra, the Standard Model *and* cosmology follow with **zero free continuously-adjustable dimensionless parameters** &mdash; the baryon asymmetry &eta;<sub>B</sub> = (3/14)&alpha;&#x2074;, the baryon-to-dark-matter ratio 25&alpha; + 75&alpha;&sup2;, the inflationary tensor ratio r = 48&alpha;&sup2; (a CMB-S4/LiteBIRD target), a 98 GeV dark-matter state, and gauge unification at &alpha;<sub>GUT</sub>&#x207b;&sup1; = 25. The underlying *particles as closed walks on K<sub>7</sub>* picture is the Steane [[7,1,3]] quantum code, so the walks were **run on real quantum hardware** (IBM Heron, IQM Garnet, AQT trapped-ion), reproducing across vendors and architectures. &mdash; [Papers 22 / 21a / 21b](papers.html): [zenodo.20402048](https://doi.org/10.5281/zenodo.20402048) &middot; [20402044](https://doi.org/10.5281/zenodo.20402044) &middot; [20402046](https://doi.org/10.5281/zenodo.20402046)
+
+The Standard Model of particle physics has about 20 free parameters &mdash; masses, mixing angles, coupling constants &mdash; that are measured but not explained. **Null Worldtube Theory (NWT)** derives all of them from one inherited mass-scale anchor (the Planck mass &mdash; see the cosmogenesis result above) and the topology of torus knots, with no adjustable dimensionless parameters.
 
 - **80 observables** reproduced at **0.1% median residual** against PDG values
 - **The fine structure constant** 1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 &mdash; **7.6 ppm** from experiment
@@ -21,8 +23,11 @@ The Standard Model of particle physics has about 20 free parameters &mdash; mass
 - **A quantum-information-theoretic derivation** of the m<sub>e</sub>/m<sub>Pl</sub> bracket coefficients from K<sub>7</sub> graph-state moments, with hardware support across eight datasets on three IBM Heron R2 backends (Paper 17)
 - **Einstein's equations from Sakharov-induced gravity** &mdash; integrating out the matter sector at one loop on a curved background generates the Einstein&ndash;Hilbert action with G matching CODATA to **&minus;11 ppm** (inside the &plusmn;22 ppm experimental error bar), and Schwarzschild verified as a vacuum solution by direct symbolic computation (Paper 18)
 - **A computational substrate-monism thesis** &mdash; one open-source library [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) (344/344 unit tests passing) reproduces a 22-row master table of Standard-Model + gravity observables (particle masses, &alpha;, G, m<sub>e</sub>/m<sub>Pl</sub>, &sigma; at the Z pole, &Gamma;<sub>Z</sub>, the Klein&ndash;Nishina amplitude, and a muon-decay survival curve measured on real IBM Heron R2 hardware) end-to-end from a small set of substrate primitives, with no row-specific tuning (Paper 19)
+- **The neutrino sector** &mdash; three sterile masses in the &nu;MSM window, the Dirac CP phase |&delta;<sub>CP</sub>| = 2&pi;/3 as a Z<sub>3</sub> winding in &pi;<sub>1</sub>(PSU(3)), and the PMNS angles from Spin(8) triality on the K<sub>8</sub> = K<sub>7</sub>+1 extension, at zero free parameters (Paper 20)
+- **The Standard Model as closed walks on K<sub>7</sub> = the Steane [[7,1,3]] code** &mdash; closed-form mass spectrum and cross-sector syndrome equivalences, the walk&rarr;Pauli protocol confirmed across IBM Heron, IQM Garnet, and AQT trapped-ion quantum hardware (Papers 21a/21b)
+- **Black-hole cosmogenesis** &mdash; the universe born inside a Kerr black hole, inheriting M<sub>Pl</sub> + the substrate algebra, yielding the Standard Model and cosmology with zero free continuously-adjustable dimensionless parameters (Paper 22)
 
-> **Papers 13, 14, 15, 16, 17, 18 &amp; 19:** [10.5281/zenodo.19635239](https://doi.org/10.5281/zenodo.19635239) &middot; [10.5281/zenodo.19653967](https://doi.org/10.5281/zenodo.19653967) &middot; [10.5281/zenodo.19701263](https://doi.org/10.5281/zenodo.19701263) &middot; [10.5281/zenodo.19710846](https://doi.org/10.5281/zenodo.19710846) &middot; [10.5281/zenodo.20025452](https://doi.org/10.5281/zenodo.20025452) &middot; [10.5281/zenodo.20025459](https://doi.org/10.5281/zenodo.20025459) &middot; [10.5281/zenodo.20057423](https://doi.org/10.5281/zenodo.20057423)
+> **Papers 13&ndash;22:** [13](https://doi.org/10.5281/zenodo.19635239) &middot; [14](https://doi.org/10.5281/zenodo.19653967) &middot; [15](https://doi.org/10.5281/zenodo.19701263) &middot; [16](https://doi.org/10.5281/zenodo.19710846) &middot; [17](https://doi.org/10.5281/zenodo.20025452) &middot; [18](https://doi.org/10.5281/zenodo.20025459) &middot; [19](https://doi.org/10.5281/zenodo.20057423) &middot; [20](https://doi.org/10.5281/zenodo.20259632) &middot; [21a](https://doi.org/10.5281/zenodo.20402044) &middot; [21b](https://doi.org/10.5281/zenodo.20402046) &middot; [22](https://doi.org/10.5281/zenodo.20402048)
 
 ## How It Works
 
@@ -56,7 +61,7 @@ If the pentaquark prediction fails, the cinquefoil mass formula &mdash; and with
 
 ## The Paper Trail
 
-The theory has developed across 19 papers, each building on the last. The full list with abstracts and DOIs is on the [Papers page](papers.html). Here is the arc:
+The theory has developed across 22 papers, each building on the last. The full list with abstracts and DOIs is on the [Papers page](papers.html). Here is the arc:
 
 **Foundations (Papers 1&ndash;5):** The electron as a torus knot vortex. Mass spectrum from winding numbers. Quark confinement from incommensurability. The electron mass derived from phase closure to 0.85%. Input set reduced to three integers (p,&nbsp;q,&nbsp;k)&nbsp;=&nbsp;(2,&nbsp;1,&nbsp;3).
 
@@ -80,6 +85,12 @@ The theory has developed across 19 papers, each building on the last. The full l
 
 **Substrate monism (Paper 19):** The capstone of the program, presented as a *computational hypothesis* &mdash; a commitment that one open-source library, one set of substrate primitives, and no row-specific tuning suffice to reproduce a 22-row master table of Standard-Model + gravity observables. The companion library [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) (344/344 unit tests passing) places the substrate primitives at its core and surrounds them with seven view-shims (QED, QCD, QFT, string theory, IBM Heron quantum hardware, electroweak, and gravity); the seven shims do not duplicate computations, they label the same Python objects. Headline cross-checks: Klein&ndash;Nishina amplitude vs.&nbsp;substrate Cl(1,3) &gamma;-trace at 1 part in 10<sup>15</sup>; &sigma;(e<sup>+</sup>e<sup>&minus;</sup>&rarr;&mu;<sup>+</sup>&mu;<sup>&minus;</sup>) at the Z pole at 99.2% of PDG-LO; m<sub>e</sub>/m<sub>Pl</sub> at &minus;5.6 ppm and G at &minus;11 ppm vs.&nbsp;CODATA; muon decay on the &#8739;K<sub>7</sub>&#10217; substrate vacuum on `ibm_marrakesh` reproduces the predicted cos<sup>2</sup>(&theta;) survival curve at 96.3% contrast with 1.6% RMS deviation from theory. Of the 22 rows, 5 are independent structural predictions, 4 are direct hardware measurements, and the rest are textbook identities, inherited results, or algebraic corollaries reproduced from the same substrate algebra; the framework's empirical exposure rests on the 9 independent + hardware rows together with the operational consistency of the remaining 13.
 
+**The neutrino sector (Paper 20):** Three sterile-neutrino masses in the &nu;MSM window, the Dirac CP phase |&delta;<sub>CP</sub>| = 2&pi;/3 as a Z<sub>3</sub> winding in &pi;<sub>1</sub>(PSU(3)), and the PMNS angles at leading order from Spin(8) triality on the K<sub>8</sub> = K<sub>7</sub>+1 extension, at zero free parameters.
+
+**Particles as closed walks on K<sub>7</sub> (Papers 21a&ndash;21b):** Every Standard Model fermion and hadron is a closed walk on K<sub>7</sub>, with the Paley/Fano decomposition identified as the Steane [[7,1,3]] quantum error-correcting code. The (2,F<sub>n</sub>) Fibonacci torus-knot carriers give a closed-form mass spectrum (21a); the walk&rarr;Pauli protocol was executed on real quantum hardware &mdash; IBM Heron, IQM Garnet, and AQT trapped-ion &mdash; reproducing the predicted syndromes cross-vendor and cross-architecture (21b). Honestly scoped as *realizability* (the circuits are Clifford), not a discriminator against ordinary stabilizer physics.
+
+**Black-hole cosmogenesis (Paper 22):** A daughter universe nucleates from a near-extremal Kerr black hole and inherits a no-hair tuple (M<sub>Pl</sub>, spin axis, the algebra so(7), a chirality sign). From the single inherited mass scale plus the fixed algebra, the Standard Model and cosmology follow with zero free continuously-adjustable dimensionless parameters &mdash; the baryon asymmetry (3/14)&alpha;&#x2074;, the baryon-to-dark-matter ratio 25&alpha;+75&alpha;&sup2;, inflation as an &alpha;-attractor with r = 48&alpha;&sup2;, a 98 GeV dark-matter state, and gauge unification at &alpha;<sub>GUT</sub>&#x207b;&sup1; = 25 &mdash; with honest demarcation of the one irreducible substrate datum (the inflaton-disk radius) and the astrophysical event rate.
+
 ## A Forgotten Discovery, Rediscovered
 
 In the 1980s, a computer scientist named **F. Ray Skilton** at Brock University published three papers showing that the fine-structure constant could be derived from a Pythagorean triple:
@@ -90,13 +101,15 @@ giving **1/&alpha; = &radic;(137<sup>2</sup> + &pi;<sup>2</sup>) = 137.036016**,
 
 These papers were published in minor conference proceedings, received zero citations, and were never digitized. Physical copies were located in the stacks of the University of Washington Engineering Library in February 2026, in volumes with crumbling bindings. ([Scanned pages are available in the GitHub repo.](https://github.com/JimGalasyn/null-worldtube/tree/main/papers/Skilton))
 
-NWT reveals *why* Skilton's formula works: the numbers 88 and 105 are generated by the torus quantum numbers (p, q, k) = (2, 1, 3). The forgotten Pythagorean triple is the geometric signature of the electron.
+Skilton's triple seeded NWT's *earliest* formulation, in which the electron sat on a (2,&nbsp;1) torus with k&nbsp;=&nbsp;3. That route has since been superseded: the current program derives &alpha; from an **independent** closed form, 1/&alpha;&nbsp;=&nbsp;25&pi;&radic;3&nbsp;+&nbsp;1&nbsp;=&nbsp;137.035 (7.6 ppm), with the electron as the unknot (2,&nbsp;1) walk on K<sub>7</sub>. Skilton's &radic;(137<sup>2</sup>&nbsp;+&nbsp;&pi;<sup>2</sup>)&nbsp;=&nbsp;137.036 (0.12 ppm) is a *separate*, independently-discovered formula &mdash; NWT no longer claims to generate his 88/105 triple &mdash; but the recurrence of the electron's (2,&nbsp;1) quantum numbers across both formulations is a striking historical resonance.
 
 ## Code
 
 All simulation code, analysis scripts, and LaTeX sources are public:
 
 [github.com/JimGalasyn/null-worldtube](https://github.com/JimGalasyn/null-worldtube)
+
+The substrate-algebraic computation library is a separate, versioned, pip-installable package: [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) v0.2.0 (Zenodo [10.5281/zenodo.20398451](https://doi.org/10.5281/zenodo.20398451)).
 
 ---
 

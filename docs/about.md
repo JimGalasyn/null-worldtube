@@ -15,7 +15,7 @@ The collaboration produced something neither could have alone: a theory that der
 
 ## The Skilton Connection
 
-**F. Raymond Skilton** was a professor of Computer Science at Brock University who, between 1986 and 1988, proved that the fine-structure constant could be derived from the Pythagorean triple 88<sup>2</sup> + 105<sup>2</sup> = 137<sup>2</sup>. His papers received zero citations and were never digitized. He passed away in 1993, and physical copies were located in crumbling conference proceedings at the University of Washington in February 2026. NWT reveals that Skilton's generators are the torus quantum numbers (p, q, k) = (2, 1, 3).
+**F. Raymond Skilton** was a professor of Computer Science at Brock University who, between 1986 and 1988, proved that the fine-structure constant could be derived from the Pythagorean triple 88<sup>2</sup> + 105<sup>2</sup> = 137<sup>2</sup>. His papers received zero citations and were never digitized. He passed away in 1993, and physical copies were located in crumbling conference proceedings at the University of Washington in February 2026. Skilton's triple seeded NWT's earliest formulation (the electron on a (2,&nbsp;1) torus); the program's current &alpha; derivation, 1/&alpha; = 25&pi;&radic;3 + 1, is an independent closed form, and NWT no longer claims to generate his 88/105 triple &mdash; though the electron's (2,&nbsp;1) quantum numbers persist into the refined framework.
 
 Skilton is one of at least a dozen researchers who independently discovered aspects of the photon vortex idea over 150 years. The full story &mdash; from Lord Kelvin's vortex atoms through Williamson, Funaro, Vrba, and the quantum topologists &mdash; is told on the **[History](history.html)** page.
 
