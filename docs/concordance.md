@@ -47,7 +47,7 @@ below).
 | # | Structure | Appears in | As |
 |---|---|---|---|
 | U1 | **The trefoil Pythagorean 13 = (p<sup>2</sup> + q<sup>2</sup>) for T(2,3)** | Paper 13 **and** Paper 20 | the charged-lepton mass ratio m<sub>&tau;</sub>/m<sub>&mu;</sub> = 13 + 4 &minus; 25&alpha; (Paper 13) **and** the PMNS NLO rotation U<sub>&ell;</sub> = R(13&alpha;/2) (Paper 20 &sect;7.6). One trefoil, two independent observables &mdash; a substrate-monism signature. |
-| U2 | **The denominator-7 / so(7) thread** | Paper 1 &rarr; 7&ndash;22 | the 7 first surfacing in Paper 1's &tau;-anchor (R1) recurs as k+2 = 7 (SU(2)<sub>5</sub> level), |V(K<sub>7</sub>)| = 7, &nu;<sub>RR</sub> = 5/7 filling, and &pi;/7 per-face flux &mdash; all forced by so(7) &rarr; k = 5. |
+| U2 | **The denominator-7 / so(7) thread** | Paper 1 &rarr; 7&ndash;22 | the 7 first surfacing in Paper 1's &tau;-anchor (R1) recurs as k+2 = 7 (SU(2)<sub>5</sub> level), &#124;V(K<sub>7</sub>)&#124; = 7, &nu;<sub>RR</sub> = 5/7 filling, and &pi;/7 per-face flux &mdash; all forced by so(7) &rarr; k = 5. |
 
 ---
 
