@@ -113,4 +113,4 @@ The substrate-algebraic computation library is a separate, versioned, pip-instal
 
 ---
 
-[The Predictions](results.html) &#183; [Papers](papers.html) &#183; [History](history.html) &#183; [About](about.html)
+[The Predictions](results.html) &#183; [Papers](papers.html) &#183; [Concordance](concordance.html) &#183; [History](history.html) &#183; [About](about.html)
