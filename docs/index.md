@@ -15,7 +15,7 @@ The Standard Model of particle physics has about 20 free parameters &mdash; mass
 
 - **80 observables** reproduced at **0.1% median residual** against PDG values
 - **The fine structure constant** 1/&alpha; = 25&pi;&radic;3 + 1 = 137.035 &mdash; **7.6 ppm** from experiment
-- **The gravitational constant** G = (8/7)&sup2;(1 + &alpha;/7)&sup2; &alpha;&sup2;&#x00b9; &#x210F;c/m<sub>e</sub>&sup2; &mdash; **0.013%** from CODATA (Paper 15)
+- **The gravitational constant** G = (8/7)&sup2;(1 + &alpha;/7)&sup2; &alpha;&sup2;&#x00b9; &#x210F;c/m<sub>e</sub>&sup2; &mdash; **0.013%** from CODATA (Paper 15), sharpened to **&minus;11 ppm** by the K<sub>7</sub> graph-state derivation (Papers 17&ndash;18)
 - **The gauge group** SU(3) &times; SU(2) &times; U(1) derived from crossing algebra, not imposed
 - **15 topological integers** &mdash; every one computed from knot geometry, none fitted
 - **The BPS self-dual condition** derived from the requirement that mass = topology
@@ -54,7 +54,7 @@ The framework makes falsifiable predictions:
 - **Pentaquark P<sub>c</sub>(4397)** at k&nbsp;=&nbsp;8&nbsp;=&nbsp;dim(adj&nbsp;SU(3)) &mdash; a direct target for LHCb
 - **Additional pentaquark states** at k&nbsp;=&nbsp;5,&nbsp;4,&nbsp;3
 - **Lightest neutrino mass** m<sub>&nu;,1</sub>&nbsp;&asymp;&nbsp;1.48&nbsp;meV
-- **Proton decay** &tau;<sub>p</sub>&nbsp;&isin;&nbsp;[2.4,&nbsp;5.5]&nbsp;&times;&nbsp;10<sup>34</sup>&nbsp;yr &mdash; within Hyper-Kamiokande&rsquo;s reach
+- **Proton decay** &tau;<sub>p</sub>&nbsp;&sim;&nbsp;10<sup>35</sup>&nbsp;yr (p&nbsp;&rarr;&nbsp;e<sup>+</sup>&pi;<sup>0</sup>, order-of-magnitude from the &SOpen;(10) UV completion) &mdash; near Super-Kamiokande&rsquo;s limit, within Hyper-Kamiokande / DUNE reach
 - **Dark-matter WIMP** at 98&nbsp;GeV (m<sub>&chi;</sub>&nbsp;=&nbsp;&alpha;&#x2078;&nbsp;M<sub>Pl</sub>) &mdash; a Higgs-portal direct-detection + LHC target
 
 If the pentaquark prediction fails, the cinquefoil mass formula &mdash; and with it, the entire topological edifice &mdash; collapses.
@@ -109,7 +109,7 @@ All simulation code, analysis scripts, and LaTeX sources are public:
 
 [github.com/JimGalasyn/null-worldtube](https://github.com/JimGalasyn/null-worldtube)
 
-The substrate-algebraic computation library is a separate, versioned, pip-installable package: [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) v0.2.0 (Zenodo [10.5281/zenodo.20398451](https://doi.org/10.5281/zenodo.20398451)).
+The substrate-algebraic computation library is a separate, versioned, pip-installable package: [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) v0.4.2 (Zenodo [10.5281/zenodo.20012027](https://doi.org/10.5281/zenodo.20012027), resolves to latest).
 
 ---
 
