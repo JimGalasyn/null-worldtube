@@ -5,7 +5,7 @@ title: "Resolved-Mysteries Concordance"
 
 # Resolved-Mysteries Concordance
 
-A navigational companion to the NWT paper series (Papers 1&ndash;22): it maps
+A navigational companion to the NWT paper series (Papers 1&ndash;23): it maps
 open problems and "mysteries" *posed* in earlier papers to where they were
 later *resolved*, in both directions (forward: early &rarr; late; backward:
 late &rarr; the problem it closed).
@@ -21,7 +21,7 @@ early paper and *solved* later **from the same substrate algebra** is evidence
 of the program's progressive coherence &mdash; closure, not ad-hoc patching.
 
 **Provenance.** Compiled from a cross-paper self-consistency review of
-Papers 1&ndash;22, anchored on the open-source [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate)
+Papers 1&ndash;23, anchored on the open-source [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate)
 library. Cited at paper granularity; a deeper per-paper "future-work /
 conjecture" extraction would extend it (see *Extending this concordance*
 below).
