@@ -71,6 +71,23 @@ papers stand as published.
 
 ---
 
+## 3b. By paper &mdash; stale-value index (check before citing a paper's value)
+
+Per-paper view of &sect;3 (&rarr; = current value; see &sect;3 for detail).
+
+- **Paper 1** &mdash; &alpha; &radic;(137<sup>2</sup>+&pi;<sup>2</sup>) &rarr; 1/(25&pi;&radic;3+1); sin<sup>2</sup>&theta;<sub>W</sub> 3/13 &rarr; (2+&alpha;)/9; &alpha;<sub>s</sub> 16&alpha; (derived) &rarr; PDG input.
+- **Paper 2** &mdash; sin<sup>2</sup>&theta;<sub>W</sub> 3/13; &tau;-lepton topology unknot T(2,1) &rarr; stealth-baryon T(3,4); &alpha; 1/(&radic;2&middot;&pi;<sup>4</sup>).
+- **Paper 4** &mdash; &alpha; 1/(&radic;2&middot;&pi;<sup>4</sup>); torus aspect &kappa;=&pi;<sup>2</sup> (9.870) &rarr; &kappa;<sub>Macken</sub>=9.844.
+- **Paper 5** &mdash; torus aspect &kappa;=12/&radic;7 &rarr; &kappa;<sub>Macken</sub>=9.844.
+- **Paper 6** &mdash; n<sub>q</sub> meaning (&ldquo;3 lobes = 3 quarks&rdquo;) &rarr; knot **determinant** (n<sub>q</sub>=det T(2,F<sub>n</sub>)=F<sub>n</sub>); &tau;-topology hedge.
+- **Papers 8 / 8a** &mdash; n<sub>q</sub> meaning; &tau; topology; sin<sup>2</sup>&theta;<sub>W</sub> 0.222; &alpha; 1/(&radic;2&middot;&pi;<sup>4</sup>).
+- **Papers 9 / 10** &mdash; &alpha; 1/(&radic;2&middot;&pi;<sup>4</sup>); (P9) sin<sup>2</sup>&theta;<sub>W</sub> 0.222, &kappa;=&pi;<sup>2</sup>.
+- **Paper 14 &sect;5.3** &mdash; m<sub>p</sub>/m<sub>e</sub> = 9/(2&alpha;)&middot;n<sub>q</sub><sup>3</sup> off ~9&times; (frozen-paper erratum; correct 6&pi;<sup>5</sup>, Paper 1).
+- **Papers 15 / 20** &mdash; nucleon carrier trefoil n<sub>q</sub>=3 &rarr; cinquefoil n<sub>q</sub>=5.
+- **Paper 16** &mdash; BPS self-dual coupling &lambda;=e<sup>2</sup>/2, &mu;=&pi; &rarr; &lambda;=2e<sup>2</sup>, &mu;=2&pi;v<sup>2</sup>. **Corrected in v2 (2026-06-13)** (Tier-2 re-publish; v1 archived at its DOI).
+
+---
+
 ## 4. Still open &mdash; flagged, not yet resolved
 
 Honest record of mysteries the corpus poses that remain open (so the
