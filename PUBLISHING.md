@@ -1,9 +1,16 @@
-# Publishing papers to Zenodo — maintainer runbook
+# Publishing to Zenodo — maintainer runbook
 
-How to publish a **new** paper or an **updated** version of an existing one. Papers
-are archived on Zenodo (one record per paper) and are **not** duplicated in this
-repo — `docs/papers.md` links each paper's **concept DOI**. (Library releases are a
-separate process: `nwt-substrate/docs/RELEASING.md`.)
+How to publish a **new** paper, an **updated** paper, or a release of the
+**`nwt-analysis`** reproduction-code library. Papers and the reproduction library
+are archived on Zenodo (one record each) and are **not** duplicated in this repo —
+`docs/papers.md` links each artifact's **concept DOI**. (Field-theory library
+releases are separate: `nwt-substrate/docs/RELEASING.md`,
+`jax-solitons` release process.)
+
+- New/updated **paper** → sections A / B.
+- A **reproduction-code** release (`nwt-analysis`) → section C.
+- Before publishing a paper, make sure its cited scripts actually exist in
+  `nwt-analysis` (section C tie-in below).
 
 ## Key facts (read once)
 
@@ -28,6 +35,15 @@ separate process: `nwt-substrate/docs/RELEASING.md`.)
 
 ## A. New paper (first publication)
 
+0. **Reproduction-code gate.** A paper's data-availability must point at code that
+   exists. Confirm every script the paper cites is in `nwt-analysis`:
+   ```bash
+   cd null-worldtube-private && python scripts/reconcile.py --only cited
+   ```
+   If `cited:nwt-analysis` WARNs, promote the missing scripts into
+   `nwt-analysis/src/nwt_analysis/paperNN_*/` (and release per section C) **before**
+   publishing the paper. Cite the library in the paper's data-availability:
+   `pip install nwt-analysis` + the nwt-analysis **concept** DOI.
 1. Build the PDF from `null-worldtube-private/papers/paperNN_*.tex`.
 2. Copy/adapt a `scripts/zenodo_upload_paperNN.py` (title, description, creators,
    keywords, `related_identifiers`, license `cc-by-4.0`). Point `PDF_PATH` at the
@@ -77,6 +93,47 @@ publishes. The concept DOI is unchanged, so **`docs/papers.md` needs no edit**.
    `resolved_mysteries_concordance.md` §3 + By-paper index and the paper's `.tex`
    carries a rendered erratum box + `% SUPERSEDED` header. No `docs/papers.md` change
    (concept DOI is stable). Optionally note the new version DOI in the concordance row.
+
+---
+
+## C. Reproduction-code release (`nwt-analysis`)
+
+The per-paper reproduction drivers live in the `nwt-analysis` repo (a sibling of
+this one), **not** as loose scripts here. It is published two ways that move
+together: **PyPI** (so `pip install nwt-analysis` works) and a **Zenodo software
+record** (so papers can cite an immutable concept DOI). The concept DOI is stable,
+so `docs/papers.md` links it once and never edits it again.
+
+### C.1 First release (mints the concept DOI — run ONCE)
+1. From `nwt-analysis/`: bump `version` in `pyproject.toml`, ensure CI is green
+   (`pytest` — every driver compiles + is discoverable), tag the commit.
+2. Build the artifact: `python -m build` → `dist/nwt_analysis-<ver>.tar.gz`.
+3. **Zenodo (draft first):**
+   `python3 scripts/zenodo_upload_nwt_analysis.py --file ../nwt-analysis/dist/nwt_analysis-<ver>.tar.gz`
+   — review the draft, then re-run with `--publish`.
+4. Look up the **concept** DOI (the script prints the command) and add a
+   `## Reproduction code` entry to `docs/papers.md` linking it + the PyPI page.
+5. **PyPI:** `python -m twine upload dist/*`.
+
+### C.2 Later releases (new version — keeps the concept DOI)
+1. Bump `version`, CI green, tag, `python -m build`.
+2. Find the latest version's record id from the concept DOI (same lookup as
+   section B step 2), then **draft → publish** with the generalized uploader:
+   ```bash
+   python3 scripts/zenodo_newversion.py --record-id <latest_recid> \
+     --file ../nwt-analysis/dist/nwt_analysis-<ver>.tar.gz \
+     --version <ver> --note "<changelog: which papers' scripts were added/fixed>"
+   python3 scripts/zenodo_newversion.py --publish-existing <draft_dep_id>
+   ```
+   (`--file` is the software-artifact form of `--pdf`; the flow is identical.)
+3. `python -m twine upload dist/*`. No `docs/papers.md` edit (concept DOI stable).
+
+### When to cut an `nwt-analysis` release
+- A **new paper** is being published whose cited scripts were just promoted in
+  (section A step 0) — release the code *before/with* the paper.
+- The `reconcile.py --only cited` gate WARNs (a published paper cites a script not
+  yet in the library).
+- A driver was fixed for bit rot (an upstream API moved).
 
 ---
 

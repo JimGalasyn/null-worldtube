@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Publish an UPDATED version of an existing Zenodo paper (a new version under the
+"""Publish an UPDATED version of an existing Zenodo record (a new version under the
 SAME concept DOI), so the concept-DOI link in docs/papers.md auto-resolves to it.
 
-For the FIRST publication of a NEW paper, use the per-paper fresh-deposition
-scripts (scripts/zenodo_upload_paperNN.py) instead — those mint a new concept DOI.
+Works for any record type: a paper PDF (--pdf) OR a software artifact such as an
+nwt-analysis release sdist/zip (--file). The flow is identical — only the uploaded
+file differs.
+
+For the FIRST publication of a NEW record, use a fresh-deposition script
+(scripts/zenodo_upload_paperNN.py for papers, scripts/zenodo_upload_nwt_analysis.py
+for the reproduction library) instead — those mint a new concept DOI.
 See PUBLISHING.md for the full runbook and the new-vs-updated decision.
 
 Recommended two-step (review what you publish):
@@ -49,7 +54,11 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--record-id", type=int,
                     help="latest published version's record id (not the concept)")
-    ap.add_argument("--pdf", help="path to the updated PDF")
+    ap.add_argument("--file", dest="artifact",
+                    help="path to the updated artifact (PDF for a paper, or an "
+                         "sdist/wheel/zip for a software record e.g. nwt-analysis)")
+    ap.add_argument("--pdf", dest="artifact",
+                    help="alias for --file (kept for paper-publishing back-compat)")
     ap.add_argument("--version", help="new version label, e.g. 2")
     ap.add_argument("--publish-existing", type=int, metavar="DEP_ID",
                     help="publish an existing draft you already reviewed (IRREVERSIBLE) "
@@ -81,12 +90,12 @@ def main():
         print("  (concept DOI unchanged; now resolves to this version.)")
         return
 
-    if not (a.record_id and a.pdf and a.version):
-        sys.exit("Error: --record-id, --pdf, and --version are required "
+    if not (a.record_id and a.artifact and a.version):
+        sys.exit("Error: --record-id, --file/--pdf, and --version are required "
                  "(unless using --publish-existing).")
-    pdf = os.path.abspath(a.pdf)
+    pdf = os.path.abspath(a.artifact)
     if not os.path.exists(pdf):
-        sys.exit(f"Error: PDF not found at {pdf}")
+        sys.exit(f"Error: artifact not found at {pdf}")
 
     # 1. open a new-version draft from the existing record (inherits files + metadata)
     print(f"Opening new-version draft from record {a.record_id} ...")
