@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+# ============================================================================
+# LEGACY / FIRST-PUBLICATION ONLY. This paper is already published on Zenodo --
+# re-running this mints a DUPLICATE concept DOI. The papers now live in
+# ../../null-worldtube-private/papers/ (not this repo). To publish an UPDATED
+# version use scripts/zenodo_newversion.py instead. See ../PUBLISHING.md.
+# ============================================================================
 """Upload paper16_nwt_lagrangian.pdf to Zenodo and publish with DOI.
 
 Usage:
@@ -14,7 +20,7 @@ import requests
 
 TOKEN_FILE = os.path.expanduser("~/.zenodo_token")
 PDF_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "papers",
+    os.path.dirname(__file__), "..", "..", "null-worldtube-private", "papers",
     "paper16_nwt_lagrangian.pdf",
 )
 
