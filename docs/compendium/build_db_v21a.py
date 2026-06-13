@@ -7,7 +7,8 @@ analysis/nwt_lagrangian_L4_paper6_mass_spectrum.py (paper6_mass + its parameter
 table) — nothing transcribed by hand. Also includes the 21a substrate-prediction
 species (status='predicted').
 
-Writes a NEW file, nwt_particles_v21a.db — does NOT touch nwt_particles.db.
+Writes (overwrites) the canonical nwt_particles.db — this is the Option-B swap.
+OUT is set below; running this script replaces the served compendium DB in place.
 
 KNOWN CROSS-SOURCE DISCREPANCY (flagged in notes, not silently resolved):
 the Paper-6 mass calibration places nucleons at (1,4)/n_q=3; Paper 21a's walk
