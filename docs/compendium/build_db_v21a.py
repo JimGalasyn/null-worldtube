@@ -26,11 +26,14 @@ ROOT = HERE.parent.parent
 OUT = HERE / "nwt_particles.db"     # canonical DB (Option B rebuild swaps it in)
 
 # -- import the Paper-6 mass formula + its parameter table ----------------
-p6_path = ROOT / "analysis/nwt_lagrangian_L4_paper6_mass_spectrum.py"
-_spec = importlib.util.spec_from_file_location("p6", p6_path)
-_p6 = importlib.util.module_from_spec(_spec)
-sys.modules["p6"] = _p6
-_spec.loader.exec_module(_p6)
+# The reproduction scripts now live in the nwt-analysis package (the old
+# null-worldtube/analysis directory was retired): `pip install nwt-analysis`.
+try:
+    from nwt_analysis.supporting import nwt_lagrangian_L4_paper6_mass_spectrum as _p6
+except ImportError as e:  # pragma: no cover
+    raise SystemExit(
+        "build_db needs the Paper-6 mass formula from nwt-analysis: "
+        "pip install nwt-analysis (or pip install -e ../nwt-analysis)") from e
 paper6_mass, ME_MEV = _p6.paper6_mass, _p6.ME_MEV
 LAGR = {n: (mx, p, q, m, nq) for (n, mx, p, q, m, nq) in _p6.PARTICLES}
 

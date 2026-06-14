@@ -267,24 +267,24 @@ python3 -m simulations.nwt --skilton     # Skilton's alpha derivation
 python3 -m simulations.nwt --proton-mass # Proton mass from Cornell potential
 ```
 
-Reproduce paper figures and analyses:
+Reproduce paper figures and analyses (reproduction code: `pip install nwt-analysis`, then `nwt-repro run <name>`):
 ```
 python3 papers/paper6_figures.py         # Paper 6: all 56 mass predictions + 5 figures
 python3 papers/paper7_figures.py         # Paper 7: genus classification figure
-python3 analysis/nwt_charge_from_framing.py  # Paper 7: charge from framing verification
-python3 analysis/nwt_jones_polynomial.py     # Paper 7: Jones polynomial for all particles
-python3 analysis/nwt_surgery_network.py      # Paper 7: decay surgery network + string tensions
-python3 analysis/nwt_conservation_laws.py    # Paper 7: conservation law search
-python3 analysis/nwt_alpha_ladder.py     # Paper 4: 1/α energy ladder
-python3 analysis/nwt_self_consistent_knot_v3.py  # Paper 5: phase closure
-python3 analysis/nwt_surface_balance.py  # Paper 5: tube radius derivation
+nwt-repro run nwt_charge_from_framing  # Paper 7: charge from framing verification
+nwt-repro run nwt_jones_polynomial     # Paper 7: Jones polynomial for all particles
+nwt-repro run nwt_surgery_network      # Paper 7: decay surgery network + string tensions
+nwt-repro run nwt_conservation_laws    # Paper 7: conservation law search
+nwt-repro run nwt_alpha_ladder     # Paper 4: 1/α energy ladder
+nwt-repro run nwt_self_consistent_knot_v3  # Paper 5: phase closure
+nwt-repro run nwt_surface_balance  # Paper 5: tube radius derivation
 ```
 
 Paper 13 analyses (SM capstone + simulation):
 ```
-python3 analysis/nwt_sensitivity_analysis.py         # Paper 13: integer perturbation sensitivity
-python3 analysis/nwt_residual_histogram.py            # Paper 13: residual distribution figure
-python3 analysis/nwt_complete_spectrum_paper13.py     # Paper 13: 84-particle master spectrum
+nwt-repro run nwt_sensitivity_analysis         # Paper 13: integer perturbation sensitivity
+nwt-repro run nwt_residual_histogram            # Paper 13: residual distribution figure
+nwt-repro run nwt_complete_spectrum_paper13     # Paper 13: 84-particle master spectrum
 python3 simulations/helmholtz_eigenvalue/bps_profile.py           # BPS profile solver
 python3 simulations/helmholtz_eigenvalue/straight_tube_eigenvalue.py  # Radial eigenvalue
 python3 simulations/helmholtz_eigenvalue/ab_phase_verification.py # 7-step AB verification
@@ -310,127 +310,127 @@ python3 simulations/level2_abelian_higgs/bps_necessity.py          # BPS self-du
 Paper 15 analyses (gravity hierarchy + Spin(7)/Cl(0,7) chain + Lagrangian):
 ```
 # b1 -- one-loop BPS pipeline (flat-R² benchmark, Alonso-Izquierdo et al. 2016)
-python3 analysis/nwt_vortex_gravity_flat.py                   # Stage 0 BPS profile
-python3 analysis/nwt_vortex_fluctuations_b1_2.py              # 4x4 H+ fluctuation operator
-python3 analysis/nwt_vortex_fluctuations_b1_3.py              # Faddeev-Popov ghost sector
-python3 analysis/nwt_vortex_fluctuations_b1_4.py              # zeta-regularisation
-python3 analysis/nwt_vortex_fluctuations_b1_5.py              # 2-DOF Grassmann ghost convention
+nwt-repro run nwt_vortex_gravity_flat                   # Stage 0 BPS profile
+nwt-repro run nwt_vortex_fluctuations_b1_2              # 4x4 H+ fluctuation operator
+nwt-repro run nwt_vortex_fluctuations_b1_3              # Faddeev-Popov ghost sector
+nwt-repro run nwt_vortex_fluctuations_b1_4              # zeta-regularisation
+nwt-repro run nwt_vortex_fluctuations_b1_5              # 2-DOF Grassmann ghost convention
 
 # b2 -- Spin(7)/Cl(0,7)/2T structural chain on S^3/2I
-python3 analysis/nwt_poincare_sphere_b2_0.py                  # lambda_1 = 168 eigenvalue
-python3 analysis/nwt_2T_character_7dim_b2_4.py                # 2T character table, Lambda^2 decomp
-python3 analysis/nwt_spin7_chain_b2_5.py                      # Spin(7) = B_3 dims (7, 8, 21)
-python3 analysis/nwt_eulerian_amplitude_b2_7.py               # K_7 Eulerian circuit -> alpha^(21/2)
-python3 analysis/nwt_2T_spin7_clifford_b2_12.py               # 2T in Spin(7) via Cl(0,7) octonions
-python3 analysis/nwt_k7_so7_wilson_b2_13.py                   # 21 bivectors span so(7), Lie closure
-python3 analysis/nwt_87_prefactor_b2_14.py                    # 8/7 as Casimir ratio
-python3 analysis/nwt_nlo_alpha7_b2_15.py                      # (1 + alpha/7) NLO pattern
+nwt-repro run nwt_poincare_sphere_b2_0                  # lambda_1 = 168 eigenvalue
+nwt-repro run nwt_2T_character_7dim_b2_4                # 2T character table, Lambda^2 decomp
+nwt-repro run nwt_spin7_chain_b2_5                      # Spin(7) = B_3 dims (7, 8, 21)
+nwt-repro run nwt_eulerian_amplitude_b2_7               # K_7 Eulerian circuit -> alpha^(21/2)
+nwt-repro run nwt_2T_spin7_clifford_b2_12               # 2T in Spin(7) via Cl(0,7) octonions
+nwt-repro run nwt_k7_so7_wilson_b2_13                   # 21 bivectors span so(7), Lie closure
+nwt-repro run nwt_87_prefactor_b2_14                    # 8/7 as Casimir ratio
+nwt-repro run nwt_nlo_alpha7_b2_15                      # (1 + alpha/7) NLO pattern
 
 # NWT Lagrangian L1-L5 (structural decomposition: Paper 16 companion)
-python3 analysis/nwt_lagrangian_L1_fields.py                  # minimal 3-field content
-python3 analysis/nwt_lagrangian_L1b_uv_completion.py          # SO(10) UV + 3 falsifiers
-python3 analysis/nwt_lagrangian_L2_kinetic_bps.py             # Bogomolny mu = pi to 0.0005%
-python3 analysis/nwt_lagrangian_L3_skyrme_hopf.py             # Q_H = p*m quantisation
-python3 analysis/nwt_lagrangian_L4_paper6_mass_spectrum.py    # 24 particles, 1.06% median
-python3 analysis/nwt_lagrangian_L5_gravity_hierarchy.py       # G to -0.029% NLO
+nwt-repro run nwt_lagrangian_L1_fields                  # minimal 3-field content
+nwt-repro run nwt_lagrangian_L1b_uv_completion          # SO(10) UV + 3 falsifiers
+nwt-repro run nwt_lagrangian_L2_kinetic_bps             # Bogomolny mu = pi to 0.0005%
+nwt-repro run nwt_lagrangian_L3_skyrme_hopf             # Q_H = p*m quantisation
+nwt-repro run nwt_lagrangian_L4_paper6_mass_spectrum    # 24 particles, 1.06% median
+nwt-repro run nwt_lagrangian_L5_gravity_hierarchy       # G to -0.029% NLO
 ```
 
 Paper 16 analyses (one-loop Casimir on S^3/2I, Phases 0-5):
 ```
 # Phase 0 -- heat-kernel scaffold, matches Seeley-DeWitt to 6 decimals
-python3 analysis/nwt_zeta_phase0_scaffold.py
+nwt-repro run nwt_zeta_phase0_scaffold
 
 # Phase 1 -- free scalar zeta(s) via Jorgenson-Lang on S^3/2I
-python3 analysis/nwt_zeta_phase1_free_scalar.py
+nwt-repro run nwt_zeta_phase1_free_scalar
 
 # Phase 2 -- BPS trefoil geometry on the Clifford/Heegaard torus of S^3
-python3 analysis/nwt_zeta_phase2_trefoil_bps.py
+nwt-repro run nwt_zeta_phase2_trefoil_bps
 
 # Phase 3 -- tubular Casimir shift (bulk + finite-size)
-python3 analysis/nwt_zeta_phase3_trefoil_casimir.py
+nwt-repro run nwt_zeta_phase3_trefoil_casimir
 
 # Phase 4 -- curvature corrections + 2I-orbit scheme analysis
-python3 analysis/nwt_zeta_phase4_curvature_corrections.py
+nwt-repro run nwt_zeta_phase4_curvature_corrections
 
 # Phase 5 -- extract 1/G from S_eff, localise the alpha^-21 suppression
-python3 analysis/nwt_zeta_phase5_1overG.py
+nwt-repro run nwt_zeta_phase5_1overG
 ```
 
 Paper 17 analyses (K_7 graph-state information theory + IBM Heron R2 experiments):
 ```
 # K_N graph-state moment identities (so(2n+1) family at N=7, 9, 11)
-python3 analysis/nwt_qec_bracket_test.py             # K_7 stabiliser, <H_YY^n> = 21^n
-python3 analysis/nwt_qec_KN_generalization.py        # K_9, K_11 cross-group verification
+nwt-repro run nwt_qec_bracket_test             # K_7 stabiliser, <H_YY^n> = 21^n
+nwt-repro run nwt_qec_KN_generalization        # K_9, K_11 cross-group verification
 
 # Bracket-truncation probes (3-body, Casimir hierarchy, channel mixing)
-python3 analysis/nwt_truncation_mechanism.py         # Casimir + Furry + 3-body probes
-python3 analysis/nwt_truncation_qdef.py              # q-deformed dim and G_2 branching
-python3 analysis/nwt_truncation_channel_mixing.py    # Bracket factorisation discovery
+nwt-repro run nwt_truncation_mechanism         # Casimir + Furry + 3-body probes
+nwt-repro run nwt_truncation_qdef              # q-deformed dim and G_2 branching
+nwt-repro run nwt_truncation_channel_mixing    # Bracket factorisation discovery
 
 # IBM Heron R2 hardware submission and analysis (qiskit-ibm-runtime)
-python3 analysis/nwt_qec_heron_experiment.py        # Run 1/2/3 H_YY + S_v on |K_7>
-python3 analysis/nwt_qec_heron_KN.py                 # K_9 cross-group test on ibm_fez
-python3 analysis/nwt_qec_heron_exp4.py               # 3-body null test (4K and 12K shots)
-python3 analysis/nwt_qec_heron_exp5.py               # syndrome-attractor experiment
-python3 analysis/nwt_qec_heron_zne.py                # zero-noise extrapolation
-python3 analysis/nwt_qec_heron_fetch.py              # job-result fetcher
-python3 analysis/nwt_qec_psl27_edge_transitivity.py  # PSL(2,7) re-analysis (no QPU)
-python3 analysis/nwt_qec_forward_prediction.py       # forward-prediction from gate fidelities
-python3 analysis/nwt_qec_zne_continuation.py         # ZNE continuation analysis
-python3 analysis/nwt_qec_zne_ratio.py                # K_9/K_7 ZNE ratio test
-python3 analysis/nwt_qec_zne_reanalysis.py           # ZNE re-analysis on existing data
+nwt-repro run nwt_qec_heron_experiment        # Run 1/2/3 H_YY + S_v on |K_7>
+nwt-repro run nwt_qec_heron_KN                 # K_9 cross-group test on ibm_fez
+nwt-repro run nwt_qec_heron_exp4               # 3-body null test (4K and 12K shots)
+nwt-repro run nwt_qec_heron_exp5               # syndrome-attractor experiment
+nwt-repro run nwt_qec_heron_zne                # zero-noise extrapolation
+nwt-repro run nwt_qec_heron_fetch              # job-result fetcher
+nwt-repro run nwt_qec_psl27_edge_transitivity  # PSL(2,7) re-analysis (no QPU)
+nwt-repro run nwt_qec_forward_prediction       # forward-prediction from gate fidelities
+nwt-repro run nwt_qec_zne_continuation         # ZNE continuation analysis
+nwt-repro run nwt_qec_zne_ratio                # K_9/K_7 ZNE ratio test
+nwt-repro run nwt_qec_zne_reanalysis           # ZNE re-analysis on existing data
 
 # Schrodinger derivation supports (Bremermann + b2.13 + PSL(2,7))
-python3 analysis/nwt_qec_bit_quantum_from_bremermann.py  # bit-quantum from Bremermann saturation
-python3 analysis/nwt_qec_bps_compton_bridge.py           # BPS μ=π action quantization (negative)
-python3 analysis/nwt_qec_proportionality_constant.py     # κ = m_e c^2 / dim(Adj)
-python3 analysis/nwt_qec_route_a_so7_lift.py             # Route A: so(7) lift via b2.13
-python3 analysis/nwt_qec_syndrome_attractor.py            # |K_7> as syndrome attractor
-python3 analysis/nwt_qec_time_evolution.py                # rest-frame Schrodinger evolution
-python3 analysis/nwt_qec_entanglement_structure.py        # |K_7> entanglement
-python3 analysis/nwt_qec_interpretation_b_test.py         # interpretation (B) test
+nwt-repro run nwt_qec_bit_quantum_from_bremermann  # bit-quantum from Bremermann saturation
+nwt-repro run nwt_qec_bps_compton_bridge           # BPS μ=π action quantization (negative)
+nwt-repro run nwt_qec_proportionality_constant     # κ = m_e c^2 / dim(Adj)
+nwt-repro run nwt_qec_route_a_so7_lift             # Route A: so(7) lift via b2.13
+nwt-repro run nwt_qec_syndrome_attractor            # |K_7> as syndrome attractor
+nwt-repro run nwt_qec_time_evolution                # rest-frame Schrodinger evolution
+nwt-repro run nwt_qec_entanglement_structure        # |K_7> entanglement
+nwt-repro run nwt_qec_interpretation_b_test         # interpretation (B) test
 
 # Information-theoretic bookkeeping (β-decay Landauer floor + hyperon survey)
-python3 analysis/nwt_beta_decay_landauer.py
-python3 analysis/nwt_hyperon_landauer_survey.py
+nwt-repro run nwt_beta_decay_landauer
+nwt-repro run nwt_hyperon_landauer_survey
 
 # Volovik direction (parked future-work, c emergence on the discrete medium)
-python3 analysis/nwt_emergent_c.py
-python3 analysis/nwt_volovik_c.py
-python3 analysis/nwt_volovik_bogoliubov.py
-python3 analysis/nwt_volovik_part_b.py
-python3 analysis/nwt_volovik_two_mode.py
-python3 analysis/nwt_volovik_closure.py
+nwt-repro run nwt_emergent_c
+nwt-repro run nwt_volovik_c
+nwt-repro run nwt_volovik_bogoliubov
+nwt-repro run nwt_volovik_part_b
+nwt-repro run nwt_volovik_two_mode
+nwt-repro run nwt_volovik_closure
 ```
 
 Raw IBM Heron R2 job outputs (2026-04-26, 8 datasets across ibm_kingston / ibm_marrakesh / ibm_fez) live in `analysis/heron_results/2026-04-26_*.txt`.
 
 Paper 12 analyses (fermion structure + gauge dynamics):
 ```
-python3 analysis/nwt_universality_argument.py          # Paper 12: mass formula universality
-python3 analysis/nwt_emergent_yang_mills.py             # Paper 12: Yang-Mills from crossing lattice
+nwt-repro run nwt_universality_argument          # Paper 12: mass formula universality
+nwt-repro run nwt_emergent_yang_mills             # Paper 12: Yang-Mills from crossing lattice
 ```
 
 Paper 11 analyses (abelian Higgs derivation):
 ```
-python3 analysis/nwt_mass_from_abelian_higgs.py   # Paper 11: full mass formula derivation
-python3 analysis/nwt_crossing_phase.py             # Paper 11: BPS crossing phases → α_GUT
-python3 analysis/nwt_rybakov_path_a.py             # Paper 11: exact integral analysis
-python3 analysis/nwt_null_worldtube_kappa.py       # Paper 11: null worldtube κ analysis
+nwt-repro run nwt_mass_from_abelian_higgs   # Paper 11: full mass formula derivation
+nwt-repro run nwt_crossing_phase             # Paper 11: BPS crossing phases → α_GUT
+nwt-repro run nwt_rybakov_path_a             # Paper 11: exact integral analysis
+nwt-repro run nwt_null_worldtube_kappa       # Paper 11: null worldtube κ analysis
 ```
 
 Papers 8 & 9 analyses:
 ```
-python3 analysis/nwt_reidemeister_couplings.py   # Paper 8/9: α, α_s from R-move operators
-python3 analysis/nwt_knot_eigensolver_v3.py      # Paper 8/9: Level-2 eigensolver (coupling constants)
-python3 analysis/nwt_crossing_geometry.py        # Paper 8: trefoil crossing coordinates
-python3 analysis/nwt_ewk_boson_scan.py           # Paper 9: W/Z/H as Hopf(2) mesons
-python3 analysis/nwt_hopf_component_analysis.py  # Paper 9: per-component coprimality
-python3 analysis/nwt_multimode_carrier_scan.py   # Paper 9: multi-mode × carrier scan
-python3 analysis/nwt_pmns_3d.py                  # Paper 9: PMNS from 3D GPE eigenstates
-python3 analysis/nwt_g_minus_2.py                # Paper 9: anomalous magnetic moment
-python3 analysis/nwt_ewk_decay_check.py          # Paper 9: EWK boson decay channels
-python3 analysis/nwt_lifetime_geometry.py        # Paper 9: geometric carrier sizes + lifetimes
+nwt-repro run nwt_reidemeister_couplings   # Paper 8/9: α, α_s from R-move operators
+nwt-repro run nwt_knot_eigensolver_v3      # Paper 8/9: Level-2 eigensolver (coupling constants)
+nwt-repro run nwt_crossing_geometry        # Paper 8: trefoil crossing coordinates
+nwt-repro run nwt_ewk_boson_scan           # Paper 9: W/Z/H as Hopf(2) mesons
+nwt-repro run nwt_hopf_component_analysis  # Paper 9: per-component coprimality
+nwt-repro run nwt_multimode_carrier_scan   # Paper 9: multi-mode × carrier scan
+nwt-repro run nwt_pmns_3d                  # Paper 9: PMNS from 3D GPE eigenstates
+nwt-repro run nwt_g_minus_2                # Paper 9: anomalous magnetic moment
+nwt-repro run nwt_ewk_decay_check          # Paper 9: EWK boson decay channels
+nwt-repro run nwt_lifetime_geometry        # Paper 9: geometric carrier sizes + lifetimes
 python3 simulations/nwt_gpe_knots_3d.py ring     # Paper 9: Level-3 GPE vortex dynamics
 python3 simulations/nwt_gpe_knots_3d.py trefoil  # Paper 9: trefoil knot evolution
 python3 simulations/nwt_gpe_knots_3d.py hopf     # Paper 9: Hopf link dynamics
