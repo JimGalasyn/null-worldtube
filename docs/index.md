@@ -5,9 +5,26 @@ title: "What is the Null Worldtube?"
 
 # Null Worldtube Theory
 
+> ## ⛔ Program retired — July 2026
+>
+> **The physical claims presented on this site did not survive precision
+> audit and are withdrawn.** Scored at experimental uncertainty, 31 of 36
+> registered dimensionless claims are excluded (α by ~50,000σ; m_p/m_e by
+> ~3.6×10⁶σ), and a measured look-elsewhere test shows the underlying
+> fitting procedure matches **random targets** inside Newton's-G's error
+> bar ~83% of the time. Two specific corrections: the "G inside the ±22 ppm
+> error bar" figure used the *measured* α as input (substrate-pure it is
+> ~7σ outside), and the "no row-specific tuning" claim is contradicted by
+> the library's own per-particle parameters.
+>
+> **[Read the full retrospective →](retrospective.html)** — the accounting,
+> the corrections, what survives, and the frozen conditions under which the
+> program would reopen. The pages below are preserved unmodified as the
+> record.
+
 ![A vortex defect on a torus knot — the geometric foundation of the electron](assets/images/figure1_torus_knot.png)
 
-## The Result
+## The claims as published (withdrawn — see the notice above)
 
 > **🆕 May 2026 &mdash; the black-hole-cosmogenesis bundle (Papers 21a, 21b, 22).** A daughter universe nucleates from a near-extremal Kerr black hole and inherits a *no-hair tuple*: the Planck mass M<sub>Pl</sub>, a spin axis, the substrate algebra so(7), and a chirality sign. From that **single inherited mass scale** (M<sub>Pl</sub>, which cancels from every dimensionless ratio) plus the fixed algebra, the Standard Model *and* cosmology follow with **zero free continuously-adjustable dimensionless parameters** &mdash; the baryon asymmetry &eta;<sub>B</sub> = (3/14)&alpha;&#x2074;, the baryon-to-dark-matter ratio 25&alpha; + 75&alpha;&sup2;, the inflationary tensor ratio r = 48&alpha;&sup2; (a CMB-S4/LiteBIRD target), a 98 GeV dark-matter state, and gauge unification at &alpha;<sub>GUT</sub>&#x207b;&sup1; = 25. The underlying *particles as closed walks on K<sub>7</sub>* picture is the Steane [[7,1,3]] quantum code, so the walks were **run on real quantum hardware** (IBM Heron, IQM Garnet, AQT trapped-ion), reproducing across vendors and architectures. &mdash; [Papers 22 / 21a / 21b](papers.html): [zenodo.20402048](https://doi.org/10.5281/zenodo.20402048) &middot; [20402044](https://doi.org/10.5281/zenodo.20402044) &middot; [20402046](https://doi.org/10.5281/zenodo.20402046)
 

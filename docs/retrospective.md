@@ -1,0 +1,179 @@
+---
+layout: default
+title: "Retirement retrospective (July 2026)"
+---
+
+
+**Status: PROGRAM RETIRED — July 2026.**
+**DRAFT — pending the independent audit verdict
+(`2026-07-12-constants-provenance-disputes`); slots marked
+`[VERDICT]` and `[DOI]` are filled at publication. Do not publish before.**
+
+## 1. Summary
+
+Null Worldtube Theory was a research program (2026) claiming that the
+Standard Model's dimensionless constants, particle masses, and Newton's
+constant follow from torus-knot topology and the K₇/Spin(7) structural
+algebra with zero free dimensionless parameters. Twenty-two papers were
+published on Zenodo; an open-source library (`nwt-substrate`) computed the
+claims; reproduction code was published (`nwt-analysis`).
+
+In July 2026 the program's own audit machinery — precision scoring at
+experimental uncertainty, value-provenance linting, a quantified
+look-elsewhere test, and an independent memory-blind audit protocol — was
+turned on the full claim set. **The claims did not survive.** The program is
+retired, the repositories are archived unmodified as the record, and this
+document plus the case-study publication `[DOI]` are the authoritative
+statement of what was found.
+
+The decision to retire was made by the author on the basis of the results
+below, not external criticism. Nothing has been deleted: every paper,
+commit, and dataset remains available, because the audit trail — a
+year-long, AI-amplified theory-building effort that constructed the
+instruments of its own falsification and then used them — is the program's
+actual contribution.
+
+## 2. What the audit found
+
+All results below are reproducible from the pinned code
+(`nwt-substrate`, branch `audit-dag-prereg-surface`, commit `a8f3335`;
+modules `benchmarks/surface.py`, `benchmarks/neighbouring_value.py`,
+`docs/BENCHMARK_TRIAGE_2026-07-12.md`).
+
+**2.1 Precision accounting (S-NOW).** Scored against each measurement's own
+1σ uncertainty rather than a percent-level tolerance, 31 of 36 registered
+dimensionless claims are excluded as exact statements:
+
+| claim | residual | experimental precision | exclusion |
+|---|---|---|---|
+| 1/α = 25π√3 + 1 | 7.6 ppm | 1.5 × 10⁻¹⁰ | ~50,000σ |
+| m_p/m_e (walk formula) | 0.11% | 6 × 10⁻¹¹ | ~3.6 × 10⁶σ |
+| v_EW/m_e | 27.7 ppm | 2.6 × 10⁻⁷ | ~107σ |
+| m_e/M_Pl (substrate-pure) | ~75 ppm | 11 ppm | ~7σ |
+
+The five claims that survive at 2σ do so either because their targets are
+loosely measured (Cabibbo λ, sin²θ₁₃, a broad resonance) or because they are
+the very claims whose provenance is under dispute as fitted or
+post-selected (η_B, Ω_b/Ω_c — the latter compatible at 0.006σ, the
+signature of a fit to the central value).
+
+**2.2 Look-elsewhere volume, measured.** The constants were assembled from
+a menu: a structural-integer prefactor × a half-integer power of α × up to
+two rational-coefficient correction stages. Running the same procedure
+against **random targets** (`neighbouring_value.py`) fits them to a median
+~2 ppm, with **~83% landing inside CODATA G's ±22 ppm error bar** (full
+menu; ~24% even on a minimal 6-integer menu). A ppm-scale match to any
+constant is therefore the expected outcome of the procedure and carries no
+information about nature.
+
+**2.3 Input-hygiene failure in the flagship claim.** The published
+statement that the derived G matches CODATA to **−11 ppm, "inside the ±22
+ppm experimental error bar"** (Paper 18; repeated in this repository's
+README and website) was produced with the **measured CODATA α as input**
+(`gravity/coupling.py` defaults to `ALPHA_QED`). Computed with the theory's
+own α = 1/(25π√3+1), the chain misses G by ~150 ppm — approximately 7σ
+**outside** the bar. This correction is issued regardless of any other
+finding.
+
+**2.4 The benchmark suite, classified.** A failure-mode triage of all 38
+public benchmarks (`docs/BENCHMARK_TRIAGE_2026-07-12.md`): 18 menu-fitted,
+13 standard textbook results with the substrate structure inert (e.g. C₆₀'s
+174 modes = 3N−6 + icosahedral group theory; magic numbers; Hückel
+counting), 3 self-comparisons that cannot fail (including the electron
+anomalous moment scored against its own Schwinger expression), 3 driven by
+measured inputs (including a hardcoded PDG α_s graded against itself and
+attributed to a "K₇ Wilson loop"), 1 untested forward claim. **The published
+statement that the master table is computed "with no row-specific tuning"
+(Paper 19) is contradicted by the library's own source** (per-particle walk
+integers, corrected post-hoc; per-state rational coefficients) and is
+likewise corrected.
+
+**2.5 Independent audit verdict.** `[VERDICT — filled at publication:
+per-row provenance adjudication for η_B, Ω_b/Ω_c, m_e/M_Pl, ρ_Λ by the
+memory-blind Auditor, audits/2026-07-12-constants-provenance-disputes.]`
+
+**2.6 Related retirements.** The black-hole-cosmogenesis branch (Paper 22
+and the AoE/Cold-Spot motivation) was retired separately on 2026-07-12
+after a pre-registered, blind-reviewed joint null found the anomaly
+constellation not established (the one provenance-clean external leg:
+p = 0.16; the apparent disk alignment was a 2-of-12 selection artifact).
+An earlier program (vortex-vision) was retired 2026-07-07. All three nulls
+are documented in the case study `[DOI]`.
+
+## 3. What is corrected, specifically
+
+1. **G "inside the error bar"** — withdrawn (§2.3). The honest figure is
+   ~150 ppm / ~7σ outside, substrate-pure.
+2. **"No row-specific tuning"** — withdrawn (§2.4).
+3. **"80 observables at 0.1% median residual"** and all similar aggregate
+   accuracy claims — reframed: the residuals are as reported, but they are
+   postdictions whose agreement is (a) excluded at experimental precision
+   where targets are sharp, and (b) expected under the measured
+   look-elsewhere volume where they are not. No claim in the series should
+   be cited as a confirmed prediction.
+4. **"Zero free parameters"** — withdrawn as an aggregate claim: the
+   per-particle integer assignments, per-state rationals, and staged
+   correction coefficients are free discrete parameters drawn from a menu
+   whose fitting power is quantified in §2.2.
+
+## 4. What survives
+
+- **The software.** `jax-solitons` is a general engine for classical
+  field-theory solitons, independent of any NWT claim, and remains
+  maintained. The reproduction of published soliton results (e.g. the
+  E≈6000 knot-binding benchmark of arXiv:2407.11731) stands on its own.
+- **The mathematics.** Knot-soliton stability results, the composition
+  algebra, and the computational infrastructure are model-internal results
+  and remain valid as mathematics.
+- **The negative results.** "Simple α-polynomials over K₇/Spin(7) integers
+  do not encode the fundamental constants at experimental precision" is
+  itself an empirical finding — established here with instruments and
+  receipts, across a claim family that has recurred in the literature for
+  a century.
+- **The method.** The audit architecture (σ-based scoring, provenance
+  disputes with default-deny, the neighbouring-value instrument, the
+  memory-blind auditor protocol, pre-registration with separate
+  freeze/run commits) is domain-general and documented in the case study.
+
+## 5. Reopen conditions (frozen)
+
+The program retires with its remaining forward claims frozen, not erased.
+NWT would warrant reopening if and only if:
+
+1. A **frozen K₈ dark-matter rung** is observed (the per-rung integers N_e
+   are pinned at retirement; any post-hoc integer choice voids this
+   clause) — e.g. a ~2 keV sterile-neutrino line (XRISM) or a ~98 GeV
+   direct-detection state (LZ-G3);
+2. A **forcing chain** is exhibited that derives a claimed constant
+   *exclusively* — with no menu of alternative integers/coefficients —
+   and demonstrably beats the measured noise-fit baseline of §2.2; or
+3. The **S-FORWARD register** (post-2018 measurement updates, append-only)
+   shows sustained convergence of new measurements toward a frozen
+   prediction. Its first entry (CODATA-2022 α) moved away.
+
+## 6. Record
+
+- Papers 1–22: Zenodo DOIs, unchanged, each annotated with a related-
+  identifier link to this retrospective's record `[DOI]`.
+- Code: this repository, `nwt-substrate`, and `nwt-analysis` are archived
+  read-only at their final states.
+- Audit trail: pre-registrations, audit deposits, and verdicts are
+  published with the case study `[DOI]`.
+
+## 7. Method note and acknowledgment
+
+This program was built in intensive collaboration with AI systems (Claude),
+which accelerated both the construction of the theory and — the case
+study's central subject — the construction of the machinery that killed it.
+The failure modes documented here (confirmation-amplification, fit-then-
+interpret, yardstick equivocation, selection-as-signal) were catalogued
+from the inside. Readers evaluating similar AI-amplified theory-building
+programs may find the countermeasures more transferable than the physics.
+
+The D12RG community's on-record cautions — in particular regarding the
+rigor of the Chern–Simons functional-integral step — were correct, and are
+acknowledged with thanks.
+
+— Jim Galasyn, July 2026
+
+*This page mirrors [`RETROSPECTIVE.md`](https://github.com/JimGalasyn/null-worldtube/blob/main/RETROSPECTIVE.md) in the repository, which is canonical.*

@@ -1,8 +1,28 @@
 # Null Worldtube Theory
 
-Fundamental particles are topological vortex defects — knotted flux tubes — in a BPS condensate described by the abelian Higgs model at its self-dual point. The trefoil knot T(2,3) determines the Standard Model gauge group, coupling constants, mass spectrum, and — through its Poincaré sphere spectral geometry — the gravitational constant.
+> ## ⛔ PROGRAM RETIRED — July 2026
+>
+> **The physical claims of this program did not survive precision audit and
+> are withdrawn.** Scored against experimental uncertainties (rather than
+> percent-level tolerances), 31 of 36 registered dimensionless claims are
+> excluded — 1/α = 25π√3+1 by ~50,000σ, the walk-formula m_p/m_e by
+> ~3.6×10⁶σ — and a measured look-elsewhere test shows the fitting
+> procedure lands inside Newton's-G's error bar for **~83% of random
+> targets**, so the surviving matches carry no information. Two published
+> statements are specifically corrected: the "G within the ±22 ppm error
+> bar" figure was computed with the *measured* α as input (substrate-pure
+> it is ~7σ outside), and the "no row-specific tuning" claim is
+> contradicted by the library's own per-particle parameters.
+>
+> **Read [RETROSPECTIVE.md](RETROSPECTIVE.md)** for the full accounting,
+> the specific corrections, what survives (the software, the mathematics,
+> the negative results, the audit method), and the frozen conditions under
+> which this program would reopen. The papers, code, and data below remain
+> available unmodified as the record of an AI-amplified theory-building
+> program that built — and then used — the instruments of its own
+> falsification.
 
-**Result:** 80 Standard Model observables at 0.1% median residual, with G predicted to 0.03%, using zero dimensionless free parameters. One mass-scale anchor (m_e). Everything else from topology.
+The program's hypothesis was: fundamental particles are topological vortex defects — knotted flux tubes — in a BPS condensate described by the abelian Higgs model at its self-dual point, with the trefoil knot T(2,3) determining the Standard Model gauge group, coupling constants, mass spectrum, and the gravitational constant.
 
 Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null-worldtube)
 
@@ -36,19 +56,37 @@ Website: [jimgalasyn.github.io/null-worldtube](https://jimgalasyn.github.io/null
 
 **Note on framework evolution:** Papers 1–5 used an earlier formulation (photon on a (2,1) torus with κ=3, Skilton's α formula). Papers 6–15 use the refined framework (BPS vortex on trefoil T(2,3), crossing algebra, 1/α = 25π√3+1). The later papers supersede the earlier derivations where they conflict. See the [website](https://jimgalasyn.github.io/null-worldtube) for the current summary.
 
-## Key Results (Papers 13–15)
+## Status of the claims (July 2026)
 
-- **80 SM observables** at 0.1% median residual (Paper 13)
-- **1/α = 25π√3 + 1 = 137.035** at 7.6 ppm (Paper 11, verified Paper 14)
-- **G = (8/7)²(1+α/7)² α²¹ ℏc/m_e²** at 0.03% (Paper 15)
-- **All 15 topological integers** derived from trefoil crossing algebra (Paper 14)
-- **Nuclear SEMF** at 1.66% RMS, zero free parameters (Paper 16)
-- **Newton's constant from Sakharov induction** matches CODATA G to **−11 ppm**, inside the ±22 ppm experimental error bar; Schwarzschild verified as a vacuum solution by symbolic computation (Paper 18)
-- **22-row substrate-monism master table** — particle masses, α, G, m_e/m_Pl, Z-pole cross section, Klein–Nishina amplitude, muon-decay survival on real IBM Heron R2 hardware — all computed end-to-end from a small set of substrate primitives by one open-source library [`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate) (606/606 unit tests passing) with no row-specific tuning (Paper 19)
-- **Three sterile-neutrino masses** {61.3, 70.8, 218.8} MeV in the νMSM window, universal active-sterile mixing |U<sub>α4</sub>|² ≈ α<sup>9/2</sup> ≈ 2.4×10⁻¹⁰, Dirac CP phase |δ<sub>CP</sub>| = 2π/3 = 120° as a Z<sub>3</sub> winding in π<sub>1</sub>(PSU(3)), PMNS angles at leading order from Spin(8) triality — all from the K<sub>8</sub> = K<sub>7</sub>+1 substrate extension at zero free parameters (Paper 20)
-- **Every Standard Model fermion and hadron as a closed walk on K<sub>7</sub> = the Steane [[7,1,3]] code** — (2,F<sub>n</sub>) torus-knot carriers, closed-form mass spectrum, and the walk→Pauli protocol reproduced **cross-vendor and cross-architecture** on IBM Heron r2, IQM Garnet, and AQT trapped-ion hardware (Papers 21a/21b)
-- **Black-hole cosmogenesis with zero free continuously-adjustable dimensionless parameters** — M<sub>Pl</sub> the single inherited anchor; η<sub>B</sub> = (3/14)α⁴, Ω<sub>b</sub>/Ω<sub>c</sub> = 25α+75α², r = 48α², a 98 GeV dark-matter state, gauge unification at α<sub>GUT</sub>⁻¹ = 25 (Paper 22)
-- **Zero dimensionless free parameters** — one mass-scale anchor (m_e)
+The headline claims formerly listed here ("80 SM observables at 0.1% median
+residual", "1/α = 25π√3+1 at 7.6 ppm", "G inside the ±22 ppm error bar",
+"no row-specific tuning", "zero dimensionless free parameters") are
+**withdrawn** — see [RETROSPECTIVE.md](RETROSPECTIVE.md) for the itemized
+accounting. In brief:
+
+- The reported residuals are accurate *as residuals*, but scored against
+  each measurement's own uncertainty they are excluded as exact claims
+  wherever the target is sharply measured (α by ~50,000σ; m_p/m_e by
+  ~3.6×10⁶σ), and where the target is loose, the agreement is the expected
+  outcome of the fitting procedure (measured look-elsewhere volume: ~83%
+  of random targets fit inside G's error bar).
+- Two statements are corrected outright: the **−11 ppm G figure** was
+  computed with the measured CODATA α as input (substrate-pure the chain
+  is ~7σ outside the bar), and the **"no row-specific tuning"** claim is
+  contradicted by the per-particle integers and per-state coefficients in
+  the library's own source.
+- The cosmogenesis branch (Paper 22) was retired separately after a
+  pre-registered joint null found its motivating CMB-anomaly constellation
+  not established (p = 0.16 on the one selection-clean leg).
+- What survives: the software, the model-internal mathematics, the negative
+  results, and the audit methodology. The frozen conditions under which the
+  program would reopen are stated in the retrospective §5.
+
+The classification of all 38 public benchmarks, the precision scoring, and
+the look-elsewhere instrument are reproducible from
+[`nwt-substrate`](https://github.com/JimGalasyn/nwt-substrate)
+(`benchmarks/surface.py`, `benchmarks/neighbouring_value.py`,
+`docs/BENCHMARK_TRIAGE_2026-07-12.md`).
 
 ## Simulation Code
 
