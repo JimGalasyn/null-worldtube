@@ -1,9 +1,10 @@
 # Null Worldtube Theory — retirement retrospective
 
 **Status: PROGRAM RETIRED — July 2026.**
-**DRAFT — pending the independent audit verdict
-(`2026-07-12-constants-provenance-disputes`); slots marked
-`[VERDICT]` and `[DOI]` are filled at publication. Do not publish before.**
+**DRAFT — the independent audit verdict
+(`2026-07-12-constants-provenance-disputes`, verdict `4032d04`) is now
+incorporated (§2.5); the remaining `[DOI]` slots are filled at publication once
+the records are minted. Do not publish before.**
 
 ## 1. Summary
 
@@ -84,9 +85,33 @@ statement that the master table is computed "with no row-specific tuning"
 integers, corrected post-hoc; per-state rational coefficients) and is
 likewise corrected.
 
-**2.5 Independent audit verdict.** `[VERDICT — filled at publication:
-per-row provenance adjudication for η_B, Ω_b/Ω_c, m_e/M_Pl, ρ_Λ by the
-memory-blind Auditor, audits/2026-07-12-constants-provenance-disputes.]`
+**2.5 Independent audit verdict.** The memory-blind Auditor (audit
+`2026-07-12-constants-provenance-disputes`, verdict `4032d04`; evidence: pinned
+clones only, SHA-256 manifest 13/13, no program memory or chat read) adjudicated
+the four disputed rows and **refuted the DERIVED self-tag on every one**:
+
+- **η_B (3α⁴/14) → POST_SELECTED** — the kept-closest survivor of a 17-formula
+  sweep against the observed value; the same menu pattern fits 54.9% of random
+  targets inside this row's own 2σ bar.
+- **Ω_b/Ω_c (25α + 75α²) → FITTED** — the leading term alone was already
+  compatible at 1.77σ, and the added 75α² lands 0.006σ from the Planck central
+  value (a ≈0.4%-by-luck over-compatibility, the fit-to-central signature).
+- **m_e/M_Pl → MOTIVATED** — factor by factor: the exponent counted, the
+  per-edge √α matched via the non-rigorous Chern–Simons step, 8/7 identified,
+  and the (1+α/7) bracket retained as an admitted empirical factor.
+- **ρ_Λ → MOTIVATED** (inherited through m_e/M_Pl) with its h_Cox and α¹⁶
+  factors **UNDERSPECIFIED** — no pinned provenance of either; the unique menu
+  integer that lands hits 100% of random targets at its stated bar.
+
+The Auditor also fixed the claimed order at **NLO**: the NNLO α² bracket is
+documented target-selection — its coefficient computed from CODATA, then rounded
+to "the nearest structural integer" — and is retired from claim status (it may
+remain as code, but may never be cited as the claim). Both dispute exhibits
+(§2.2 look-elsewhere, §2.3 the measured-α G chain) were reproduced independently
+and were seed- and menu-robust. The single vulnerability the Auditor disclosed
+on the record: the four replacement tags lean on the program's own retrospective
+admissions, so η_B's POST_SELECTED in particular is closed only by pinning the
+primary 17-formula sweep artifact — a dated appendix the retirement will supply.
 
 **2.6 Related retirements.** The black-hole-cosmogenesis branch (Paper 22
 and the AoE/Cold-Spot motivation) was retired separately on 2026-07-12
@@ -112,15 +137,25 @@ are documented in the case study `[DOI]`.
    correction coefficients are free discrete parameters drawn from a menu
    whose fitting power is quantified in §2.2.
 
-## 4. What survives
+## 4. What survives — and, explicitly, what does not
 
+A full salvage inventory was compiled at retirement under one rule of
+inclusion: **a result survives if and only if it would be true had NWT never
+been proposed** (`SALVAGE_INVENTORY.md`, published with the case study).
+In summary:
+
+**Salvaged:**
+
+- **Soliton physics of the Eto–Hamada–Nitta model.** The reproduction of the
+  published E≈6000 knot-binding benchmark (arXiv:2407.11731); the wrapped-∂a
+  flux/linking lock; and stable torus-knot solitons *below the published
+  N_link ≥ 4 floor* down to N_link = 1 (ring, trefoil, cinquefoil, septafoil,
+  T(3,4), T(3,5); SHA-pinned field configurations). These are properties of
+  the EHN model, true regardless of NWT.
 - **The software.** `jax-solitons` is a general engine for classical
   field-theory solitons, independent of any NWT claim, and remains
-  maintained. The reproduction of published soliton results (e.g. the
-  E≈6000 knot-binding benchmark of arXiv:2407.11731) stands on its own.
-- **The mathematics.** Knot-soliton stability results, the composition
-  algebra, and the computational infrastructure are model-internal results
-  and remain valid as mathematics.
+  maintained (DOI 10.5281/zenodo.20774254), along with the model-agnostic
+  numerical methods, certificate, and event-graph infrastructure.
 - **The negative results.** "Simple α-polynomials over K₇/Spin(7) integers
   do not encode the fundamental constants at experimental precision" is
   itself an empirical finding — established here with instruments and
@@ -129,12 +164,33 @@ are documented in the case study `[DOI]`.
 - **The method.** The audit architecture (σ-based scoring, provenance
   disputes with default-deny, the neighbouring-value instrument, the
   memory-blind auditor protocol, pre-registration with separate
-  freeze/run commits) is domain-general and documented in the case study.
+  freeze/run commits) is domain-general; its validation is precisely that
+  it falsified the program that built it.
+
+**NOT salvaged (explicit, so nothing is resurrected by ambiguity —
+mirroring `SALVAGE_INVENTORY.md` §F):**
+
+- All dimensionless-constant derivations and the substrate→observables
+  bridge (α, m_p/m_e, G ppm, n_s, r, N_e, …) — the 83%-of-random-targets
+  result means every past "match" is attributable to apparatus freedom.
+- The particle identifications (knot = hadron, det = n_q, framing = weak
+  isospin, unknot = lepton, twist ladder = β-decay, composition-law mass
+  additivity) — the *field configurations* survive; their particle names
+  do not.
+- The η_B / baryogenesis chain (μ₅→⟨Lk⟩ remains a true statement about
+  forced injection in the simulation; its cosmological reading is dead),
+  the K₇/CMB chirality claims, and all of cosmogenesis (retired separately
+  2026-07-12 by the AoE joint null).
+- The K₇/octonion/substrate algebra *as physics* — it survives only as the
+  combinatorial bookkeeping it always was.
 
 ## 5. Reopen conditions (frozen)
 
 The program retires with its remaining forward claims frozen, not erased.
-NWT would warrant reopening if and only if:
+To be precise about the relation to §4: these claims are **not salvaged** —
+per the inventory's rule they are not established truths about anything —
+they are the pre-registered conditions under which the retired claims would
+earn re-examination. NWT would warrant reopening if and only if:
 
 1. A **frozen K₈ dark-matter rung** is observed (the per-rung integers N_e
    are pinned at retirement; any post-hoc integer choice voids this
