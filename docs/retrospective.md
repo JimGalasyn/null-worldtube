@@ -5,11 +5,6 @@ title: "Retirement retrospective (July 2026)"
 
 
 **Status: PROGRAM RETIRED — July 2026.**
-**DRAFT — the independent audit verdict
-(`2026-07-12-constants-provenance-disputes`, verdict `4032d04`) is now
-incorporated (§2.5); the companion case study is decoupled (in preparation);
-the one remaining `[DOI]` slot (§6, this retrospective's Zenodo record) is
-filled once the record is minted. Do not publish before.**
 
 ## 1. Summary
 
@@ -31,7 +26,7 @@ authoritative statement of what was found.
 The decision to retire was made by the author on the basis of the results
 below, not external criticism. Nothing has been deleted: every paper,
 commit, and dataset remains available, because the audit trail — a
-year-long, AI-amplified theory-building effort that constructed the
+five-months-long, AI-amplified theory-building effort that constructed the
 instruments of its own falsification and then used them — is the program's
 actual contribution.
 
@@ -215,7 +210,8 @@ earn re-examination. NWT would warrant reopening if and only if:
 ## 6. Record
 
 - Papers 1–22: Zenodo DOIs, unchanged, each annotated with a related-
-  identifier link to this retrospective's record `[DOI]`.
+  identifier link to this retrospective's record
+  [10.5281/zenodo.21339662](https://doi.org/10.5281/zenodo.21339662).
 - Code: this repository, `nwt-substrate`, and `nwt-analysis` are archived
   read-only at their final states.
 - Audit trail: pre-registrations, audit deposits, and verdicts will be
@@ -252,7 +248,10 @@ our own conduct toward that lineage belong in the record:
    charge-overlap model of nuclear binding — is falsified by that test: the
    mechanism yields net *repulsion* for the deuteron (+0.64 MeV predicted
    vs −2.22 MeV measured; no parameter in the scanned range binds it).
-   The reproduction script is in the published analysis code. We report
+   The reproduction script
+   ([`nwt_robinson_nuclear.py`](https://github.com/JimGalasyn/nwt-analysis/blob/main/src/nwt_analysis/supporting/nwt_robinson_nuclear.py))
+   is in the published analysis code (`nwt-repro run nwt_robinson_nuclear`).
+   We report
    this as a result about a model we imported, not as commentary on any
    person or community.
 
