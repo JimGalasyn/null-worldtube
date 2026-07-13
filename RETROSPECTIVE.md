@@ -229,4 +229,31 @@ The D12RG community's on-record cautions — in particular regarding the
 rigor of the Chern–Simons functional-integral step — were correct, and are
 acknowledged with thanks.
 
+## 8. Lineage note
+
+NWT descended from the toroidal-electron family of models (Williamson &
+van der Mark's confined-photon electron and its successors). Two facts about
+our own conduct toward that lineage belong in the record:
+
+1. Our early survey treated the family's independent convergence on
+   α-as-geometric-ratio as support. Under this retrospective's accounting,
+   that convergence is what shared apparatus freedom predicts — several
+   researchers drawing small-integer/π/√ combinations near 137 from the same
+   menu is multiplicity, not independence (§2.2). Convergence-as-evidence
+   was one of our own catalogued failure modes, and it operated on us
+   through this lineage.
+2. The one family mechanism we tested quantitatively — the Robinson
+   charge-overlap model of nuclear binding — is falsified by that test: the
+   mechanism yields net *repulsion* for the deuteron (+0.64 MeV predicted
+   vs −2.22 MeV measured; no parameter in the scanned range binds it).
+   The reproduction script is in the published analysis code. We report
+   this as a result about a model we imported, not as commentary on any
+   person or community.
+
+We offer no verdicts on claims we have not tested. The instruments published
+with this retrospective — precision scoring at experimental uncertainty,
+input-hygiene checks, and the neighbouring-value look-elsewhere test — apply
+to any closed-form-fits-constants program, ours first of all. Anyone who
+wishes to audit a claims table, including their own, can.
+
 — Jim Galasyn, July 2026
