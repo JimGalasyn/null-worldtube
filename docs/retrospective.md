@@ -114,8 +114,11 @@ remain as code, but may never be cited as the claim). Both dispute exhibits
 (§2.2 look-elsewhere, §2.3 the measured-α G chain) were reproduced independently
 and were seed- and menu-robust. The single vulnerability the Auditor disclosed
 on the record: the four replacement tags lean on the program's own retrospective
-admissions, so η_B's POST_SELECTED in particular is closed only by pinning the
-primary 17-formula sweep artifact — a dated appendix the retirement will supply.
+admissions, so η_B's POST_SELECTED in particular is closed by pinning the primary
+17-formula sweep artifact — supplied as a dated appendix (audit deposit
+`CLAIM.md` Appendix A, 2026-07-12), which pins the memo and adds a reproducible
+enumeration (`eta_B_menu_density.py`) confirming the same menu fits ~55–63% of
+random targets at Planck precision.
 
 **2.6 Related retirements.** The black-hole-cosmogenesis branch (Paper 22
 and the AoE/Cold-Spot motivation) was retired separately on 2026-07-12
