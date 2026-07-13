@@ -7,8 +7,9 @@ title: "Retirement retrospective (July 2026)"
 **Status: PROGRAM RETIRED — July 2026.**
 **DRAFT — the independent audit verdict
 (`2026-07-12-constants-provenance-disputes`, verdict `4032d04`) is now
-incorporated (§2.5); the remaining `[DOI]` slots are filled at publication once
-the records are minted. Do not publish before.**
+incorporated (§2.5); the companion case study is decoupled (in preparation);
+the one remaining `[DOI]` slot (§6, this retrospective's Zenodo record) is
+filled once the record is minted. Do not publish before.**
 
 ## 1. Summary
 
@@ -24,8 +25,8 @@ experimental uncertainty, value-provenance linting, a quantified
 look-elsewhere test, and an independent memory-blind audit protocol — was
 turned on the full claim set. **The claims did not survive.** The program is
 retired, the repositories are archived unmodified as the record, and this
-document plus the case-study publication `[DOI]` are the authoritative
-statement of what was found.
+document plus the case-study publication (in preparation) are the
+authoritative statement of what was found.
 
 The decision to retire was made by the author on the basis of the results
 below, not external criticism. Nothing has been deleted: every paper,
@@ -126,7 +127,7 @@ after a pre-registered, blind-reviewed joint null found the anomaly
 constellation not established (the one provenance-clean external leg:
 p = 0.16; the apparent disk alignment was a 2-of-12 selection artifact).
 An earlier program (vortex-vision) was retired 2026-07-07. All three nulls
-are documented in the case study `[DOI]`.
+are documented in the case study (in preparation).
 
 ## 3. What is corrected, specifically
 
@@ -148,7 +149,8 @@ are documented in the case study `[DOI]`.
 
 A full salvage inventory was compiled at retirement under one rule of
 inclusion: **a result survives if and only if it would be true had NWT never
-been proposed** (`SALVAGE_INVENTORY.md`, published with the case study).
+been proposed** (`SALVAGE_INVENTORY.md`, to be published with the case
+study, in preparation).
 In summary:
 
 **Salvaged:**
@@ -216,8 +218,8 @@ earn re-examination. NWT would warrant reopening if and only if:
   identifier link to this retrospective's record `[DOI]`.
 - Code: this repository, `nwt-substrate`, and `nwt-analysis` are archived
   read-only at their final states.
-- Audit trail: pre-registrations, audit deposits, and verdicts are
-  published with the case study `[DOI]`.
+- Audit trail: pre-registrations, audit deposits, and verdicts will be
+  published with the case study (in preparation).
 
 ## 7. Method note and acknowledgment
 
